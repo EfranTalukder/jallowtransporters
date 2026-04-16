@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms & Conditions | BAH Travel ATOL Protected Hajj & Umrah</title>
+  <title>Terms & Conditions | BAH Travel ATOL Protected Travel Services</title>
   <meta name="description"
     content="Terms and conditions for BAH Travel. Read about our booking policies, cancellation terms, ATOL protection, and privacy practices.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -189,7 +189,7 @@
 
     .hamburger.open span:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
-      background: #1E1E1E;
+      background: #FAF7F2;
     }
 
     .hamburger.open span:nth-child(2) {
@@ -198,7 +198,7 @@
 
     .hamburger.open span:nth-child(3) {
       transform: translateY(-7px) rotate(-45deg);
-      background: #1E1E1E;
+      background: #FAF7F2;
     }
 
     @media (max-width: 768px) {
@@ -215,17 +215,41 @@
       position: fixed;
       inset: 0;
       z-index: 999;
-      background: rgba(250, 247, 242, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: linear-gradient(160deg, #0a1628 0%, #1B2D4F 55%, #0a1628 100%);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 7rem 2.75rem 3rem;
+      gap: 0;
       transform: translateX(100%);
       opacity: 0;
       transition: transform 0.5s var(--ease-out-expo), opacity 0.4s var(--smooth);
+      overflow: hidden;
+    }
+
+    .mobile-menu::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -15%;
+      width: 75vw;
+      height: 75vw;
+      background: radial-gradient(circle, rgba(232, 148, 26, 0.08) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mobile-menu::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .mobile-menu.open {
@@ -234,19 +258,73 @@
     }
 
     .mobile-menu a {
-      font-family: 'Montserrat', serif;
-      font-size: 2rem;
-      color: #1E1E1E;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: rgba(250, 247, 242, 0.82);
       text-decoration: none;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: color 0.3s var(--smooth), opacity 0.45s var(--smooth), transform 0.45s var(--ease-out-expo);
+      position: relative;
+      z-index: 1;
+    }
+
+    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open a:nth-of-type(1) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-of-type(2) { transition-delay: 0.17s; }
+    .mobile-menu.open a:nth-of-type(3) { transition-delay: 0.24s; }
+    .mobile-menu.open a:nth-of-type(4) { transition-delay: 0.31s; }
+
+    .mobile-menu a:hover { color: #E8941A; }
+    .mobile-menu a.active { color: #E8941A; }
+
+    .mm-num {
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: rgba(232, 148, 26, 0.45);
+      letter-spacing: 0.1em;
+      position: relative;
+      top: -0.55em;
       transition: color 0.3s var(--smooth);
     }
 
-    .mobile-menu a:hover {
-      color: #E8941A;
+    .mobile-menu a:hover .mm-num,
+    .mobile-menu a.active .mm-num {
+      color: rgba(232, 148, 26, 0.8);
     }
 
-    .mobile-menu a.active {
-      color: #E8941A;
+    .mm-footer {
+      margin-top: 2.5rem;
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(250, 247, 242, 0.22);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s var(--smooth) 0.38s;
+    }
+
+    .mobile-menu.open .mm-footer { opacity: 1; }
+
+    .nav-bar.menu-open {
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+    }
+
+    .nav-bar.menu-open .logo-travel-text {
+      color: #FAF7F2 !important;
     }
 
     @keyframes bounce-in {
@@ -611,7 +689,7 @@
       }
 
       .mobile-menu a {
-        font-size: 1.75rem !important;
+        font-size: 2rem !important;
       }
 
       .desktop-nav {
@@ -656,10 +734,11 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="terms.html" class="active">Terms</a>
+    <a href="index.html"><span class="mm-num">01</span><span>Home</span></a>
+    <a href="about.html"><span class="mm-num">02</span><span>About</span></a>
+    <a href="contact.html"><span class="mm-num">03</span><span>Contact</span></a>
+    <a href="terms.html" class="active"><span class="mm-num">04</span><span>Terms</span></a>
+    <div class="mm-footer" aria-hidden="true">Your trusted travel partner</div>
   </div>
 
   <!-- Hero Section -->
@@ -689,7 +768,7 @@
       </h1>
       <p class="hero-anim hero-anim-2 font-body text-lg md:text-xl"
         style="color:rgba(255,255,255,0.7);max-width:580px;line-height:1.7;">
-        Please read our terms and conditions carefully before booking your Hajj or Umrah package.
+        Please read our terms and conditions carefully before booking any of our services.
       </p>
     </div>
   </section>
@@ -713,6 +792,8 @@
         <h3>2.3 Currency</h3>
         <p>All prices are quoted in British pounds (GBP). Exchange rate fluctuations may result in price adjustments for
           bookings made more than 12 weeks in advance.</p>
+        <h3>2.4 Visa Service Fees</h3>
+        <p>Visa processing fees are payable in full at the time of application submission. These fees cover our processing service only and do not include embassy or consulate fees, which are payable separately as required.</p>
 
         <h2>3. Cancellation & Refunds</h2>
         <h3>3.1 Cancellation by Customer</h3>
@@ -727,15 +808,20 @@
           such cases, a full refund will be issued within 30 days.</p>
 
         <h2>4. Visa & Documentation</h2>
-        <p>We will assist with visa applications; however, responsibility for obtaining valid documentation remains with
-          the pilgrim. BAH Travel is not liable for visa rejections or delays. Passports must be valid for at least 6
-          months beyond your return date.</p>
+        <h3>4.1 Visa Processing Services</h3>
+        <p>BAH Travel acts as an agent to assist with visa applications for all destinations, including the UK, Schengen area, US, Canada, and others. We do not guarantee visa approval. Embassy and consulate decisions are final and outside our control.</p>
+        <h3>4.2 Client Responsibilities</h3>
+        <p>Clients must provide accurate and complete documentation as requested. Falsified or incomplete documents may result in application rejection. BAH Travel is not liable for rejections due to inaccurate or incomplete information provided by the client. Passports must be valid for at least 6 months beyond your intended travel date.</p>
+        <h3>4.3 Refund on Visa Rejection</h3>
+        <p>Visa service fees charged by BAH Travel are non-refundable regardless of the application outcome. Embassy and consulate fees may be refundable subject to the respective authority's own refund policy.</p>
+        <h3>4.4 Processing Times</h3>
+        <p>We provide estimated processing timelines based on experience; however, actual processing times are determined by embassies and consulates and cannot be guaranteed by BAH Travel.</p>
 
         <h2>5. Health & Insurance</h2>
-        <p>We strongly recommend travel and medical insurance covering Hajj/Umrah. While we cover certain medical
-          emergencies on our packages, comprehensive travel insurance is your responsibility and is not included in our
-          package price.</p>
-        <p>Pilgrims with pre-existing medical conditions must disclose these during booking. We cannot guarantee
+        <p>We strongly recommend travel and medical insurance covering your trip. While we cover certain medical
+          emergencies on our pilgrimage packages, comprehensive travel insurance is your responsibility and is not included in our
+          service fees or package prices.</p>
+        <p>Clients with pre-existing medical conditions must disclose these during booking. We cannot guarantee
           accommodation for mobility requirements.</p>
 
         <h2>6. Liability & Responsibility</h2>
@@ -751,7 +837,7 @@
         <p>Our liability is limited to the total amount paid for your package.</p>
 
         <h2>7. Behaviour & Code of Conduct</h2>
-        <p>Pilgrims must respect local laws, customs, and Islamic practices. Disruptive behaviour, substance abuse, or
+        <p>Clients must respect local laws, customs, and practices at their destination. Disruptive behaviour, substance abuse, or
           violation of hotel/transport policies may result in immediate removal from the group without refund. BAH
           Travel is not responsible for repatriation costs in such cases.</p>
 
@@ -774,26 +860,40 @@
           <li>Excess baggage fees</li>
         </ul>
 
-        <h2>9. Itinerary Changes</h2>
+        <h2>9. Flight Ticketing Services</h2>
+        <h3>9.1 Scope of Service</h3>
+        <p>BAH Travel acts as a booking agent for airline tickets. We source and issue tickets on behalf of clients but are not the operating airline.</p>
+        <h3>9.2 Ticketing Fees</h3>
+        <p>Our service and booking fees are non-refundable once a ticket has been issued, regardless of whether the client subsequently cancels or changes the booking.</p>
+        <h3>9.3 Changes & Cancellations</h3>
+        <p>Flight changes and cancellations are subject to the airline's own policies and fare rules. BAH Travel charges an administration fee for processing amendments or cancellations on your behalf, in addition to any airline-imposed charges.</p>
+        <h3>9.4 Baggage & Check-in</h3>
+        <p>Baggage allowances, check-in procedures, and boarding requirements are the client's responsibility and are governed by the airline's terms of carriage.</p>
+        <h3>9.5 Schedule Changes by Airlines</h3>
+        <p>BAH Travel will notify clients of any airline-initiated schedule changes as promptly as possible. However, we are not liable for delays, cancellations, or schedule changes imposed by the airline.</p>
+        <h3>9.6 No-Shows</h3>
+        <p>Clients who fail to check in or board their flight (no-shows) are not entitled to a refund from BAH Travel. Airline refund policies for no-shows vary by fare type.</p>
+
+        <h2>10. Itinerary Changes</h2>
         <p>We reserve the right to make changes to the itinerary due to circumstances beyond our control (flight
           changes, hotel unavailability, local restrictions). We will provide 48 hours' notice where possible and offer
           alternative arrangements of equal or greater value.</p>
 
-        <h2>10. Privacy & Data Protection</h2>
+        <h2>11. Privacy & Data Protection</h2>
         <p id="privacy">We collect and process personal data (name, passport details, contact information, medical
-          needs) solely for the purpose of providing pilgrimage services. Your data is stored securely and will not be
+          needs) solely for the purpose of providing our travel services. Your data is stored securely and will not be
           shared with third parties except where necessary (airlines, hotels, visa authorities). By booking with BAH
           Travel, you consent to this processing. For details, see our Privacy Policy.</p>
 
-        <h2>11. Complaints</h2>
+        <h2>12. Complaints</h2>
         <p>If you have a complaint, please contact us in writing within 30 days of return. We will respond within 14
           days. Unresolved complaints may be escalated to ATOL or relevant regulatory bodies.</p>
 
-        <h2>12. Governing Law</h2>
+        <h2>13. Governing Law</h2>
         <p>These terms are governed by English law. Any disputes shall be resolved through negotiation or, if necessary,
           through the courts of England and Wales.</p>
 
-        <h2>13. Contact</h2>
+        <h2>14. Contact</h2>
         <p>BAH Travel Ltd<br>
           Email: info@bahtravel.com<br>
           Phone: +44 7982 144203<br>
@@ -820,8 +920,7 @@
             <span class="font-display text-lg font-bold"><span style="color:#E8941A;">BAH</span><span
                 style="color:#FFFFFF;">TRAVEL</span></span>
           </div>
-          <p class="font-body text-sm mb-5" style="color:rgba(255,255,255,0.5);line-height:1.8;">Your trusted partner
-            for Hajj &amp; Umrah pilgrimages. ATOL protected.</p>
+          <p class="font-body text-sm mb-5" style="color:rgba(255,255,255,0.5);line-height:1.8;">Your trusted partner for visa services, flight bookings, and Hajj &amp; Umrah packages. ATOL protected.</p>
         </div>
         <div>
           <h4 class="font-display text-base font-semibold text-white mb-5">Quick Links</h4>
@@ -849,7 +948,7 @@
         </div>
       </div>
       <div class="pt-8" style="border-top: 1px solid rgba(255,255,255,0.06);">
-        <p class="font-body text-xs" style="color:rgba(255,255,255,0.3);">&copy; 2025 BAH Travel Ltd. All rights
+        <p class="font-body text-xs" style="color:rgba(255,255,255,0.3);">&copy; 2026 BAH Travel Ltd. All rights
           reserved. ATOL Protected.</p>
       </div>
     </div>
@@ -889,7 +988,7 @@
     </div>
     <div class="wa-popup-body">
       <div class="wa-greeting">
-        <p class="font-body" style="margin:0;">Hello! 👋 How can we help you plan your pilgrimage?</p>
+        <p class="font-body" style="margin:0;">Hello! 👋 How can we help you today? We offer visa services, flight bookings, and Hajj/Umrah packages.</p>
         <div class="wa-greeting-time">now</div>
       </div>
       <div class="wa-typing-dots mt-3 ml-1"><span></span><span></span><span></span></div>
@@ -928,7 +1027,17 @@
           const isOpen = mobileMenu.classList.toggle('open');
           hamburger.classList.toggle('open');
           hamburger.setAttribute('aria-expanded', isOpen);
+          nav.classList.toggle('menu-open', isOpen);
           document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            nav.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
         });
 
         const waBtn = document.getElementById('waBtn');
