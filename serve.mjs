@@ -26,6 +26,11 @@ const server = createServer(async (req, res) => {
   const urlPath = req.url.split('?')[0];
   let filePath = join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
 
+  // If no extension, try adding .html (mimic Vercel cleanUrls)
+  if (!extname(filePath)) {
+    filePath += '.html';
+  }
+
   try {
     const content = await readFile(filePath);
     const ext = extname(filePath).toLowerCase();
