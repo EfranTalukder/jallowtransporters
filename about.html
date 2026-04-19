@@ -959,12 +959,24 @@
     <style>
       #stats a.trustpilot-stat:hover .trustpilot-num { transform: translateY(-2px); }
       #stats a.trustpilot-stat:focus-visible { outline: 2px solid #F5A623; outline-offset: 6px; border-radius: 6px; }
+
+      @media (min-width: 768px) {
+        #stats.section-navy {
+          background: #FAF7F2 !important;
+          color: #1E1E1E !important;
+        }
+        #stats h2 { color: #1E1E1E !important; }
+        #stats p { color: #4A4A4A !important; }
+        #stats .font-display { color: #1E1E1E !important; }
+      }
     </style>
   </section>
 
   <!-- CTA -->
-  <section class="py-20 md:py-28 bg-cream">
+  <section class="py-20 md:py-28" style="background:#FFFFFF;">
     <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <span class="reveal font-body text-sm font-semibold tracking-widest uppercase mb-5 inline-block"
+        style="color:#E8941A;">Get in Touch</span>
       <h2 class="reveal font-display text-4xl md:text-5xl font-bold mb-6" style="color:#1E1E1E;line-height:1.1;">Ready
         to Get Started?</h2>
       <p class="reveal font-body text-lg mb-8"
