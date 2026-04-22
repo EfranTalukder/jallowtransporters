@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>BAH Travel — Visa Services, Flight Ticketing & Hajj/Umrah Packages</title>
+  <title>Jallow Transporters — UK to Gambia, Conakry & Morocco Freight | Sea, Air & Tourism</title>
   <meta name="description"
-    content="BAH Travel offers expert visa processing, competitive flight ticketing, and premium Hajj & Umrah packages. ATOL protected. Serving the UK and Gambia.">
+    content="Jallow Transporters Ltd — UK-headquartered freight specialists. Container shipping, air cargo, Moroccan tourism packages and preorders. Door-to-door service from Birmingham to West Africa.">
   <meta name="keywords"
-    content="visa services UK, flight ticketing, Hajj packages, Umrah packages, BAH Travel, ATOL protected, Schengen visa, travel agency">
+    content="Jallow Transporters, UK to Gambia shipping, UK to Guinea Conakry, air freight Morocco, container shipping Birmingham, Moroccan tourism, freight UK West Africa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -23,9 +23,8 @@
           colors: {
             cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
             charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
-            amber: { DEFAULT: '#E8941A', light: '#F5A623', dark: '#C67A0F' },
-            navy: { DEFAULT: '#1B2D4F', dark: '#0F1A30' },
-            gold: { DEFAULT: '#D4AF37', light: '#E8C547' },
+            teal: { DEFAULT: '#1F9D9D', light: '#E6F4F4', dark: '#15787A', deep: '#0E5F61' },
+            navy: { DEFAULT: '#0E1B2E', dark: '#070E1A' },
           },
           fontFamily: {
             display: ['Montserrat', 'system-ui', 'sans-serif'],
@@ -36,18 +35,8 @@
     }
   </script>
   <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Manrope', system-ui, sans-serif;
       background: #FAF7F2;
@@ -55,13 +44,7 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', system-ui, sans-serif;
       letter-spacing: -0.03em;
       line-height: 1.15;
@@ -70,17 +53,11 @@
 
     /* ── Grain Overlay ── */
     .grain-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.03;
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 256px 256px;
+      background-repeat: repeat; background-size: 256px 256px;
     }
 
-    /* ── Spring Easing ── */
     :root {
       --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -89,1616 +66,1148 @@
 
     /* ── Nav ── */
     .nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       transition: background-color 0.4s var(--smooth), box-shadow 0.4s var(--smooth), backdrop-filter 0.4s var(--smooth);
       background: transparent;
     }
-
     .nav-bar.scrolled {
       background: rgba(250, 247, 242, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 1px 3px rgba(30, 30, 30, 0.04), 0 8px 32px rgba(232, 148, 26, 0.08);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 3px rgba(14, 27, 46, 0.04), 0 8px 32px rgba(31, 157, 157, 0.08);
     }
+    .nav-bar.scrolled .nav-link { color: #1E1E1E; }
+    .nav-bar.scrolled .nav-link:hover { color: #1F9D9D; }
+    .nav-bar.scrolled .logo-lockup-text { filter: none; }
 
-    .nav-bar.scrolled .nav-link {
-      color: #1E1E1E;
+    .nav-logo {
+      height: 52px; width: auto; display: block;
+      transition: transform 0.4s var(--smooth);
     }
-
-    .nav-bar.scrolled .nav-link:hover {
-      color: #E8941A;
-    }
-
-    .nav-bar.scrolled .logo-travel-text {
-      color: #1E1E1E !important;
-    }
-
-    .logo-travel-text {
-      color: #FFFFFF;
-      transition: color 0.4s var(--smooth);
+    .nav-bar.scrolled .nav-logo { transform: scale(0.92); }
+    @media (max-width: 768px) {
+      .nav-logo { height: 42px; }
     }
 
     .nav-link {
-      color: #FFFFFF;
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding: 0.25rem 0;
+      color: #FFFFFF; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
+      position: relative; padding: 0.25rem 0;
       transition: color 0.3s var(--smooth);
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #E8941A;
-      border-radius: 1px;
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+      background: #1F9D9D; border-radius: 1px;
       transition: width 0.3s var(--spring);
     }
-
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    .nav-link:focus-visible {
-      outline: 2px solid #E8941A;
-      outline-offset: 4px;
-      border-radius: 2px;
-    }
-
-    /* ── Logo Style ── */
-    .logo-bah {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.08em;
-    }
-
-    .logo-travel {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 4px; border-radius: 2px; }
 
     /* ── Hero ── */
-    .hero-section {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
+    .hero-section { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=1920&h=1080&fit=crop&q=85') center/cover no-repeat;
+      position: absolute; inset: 0; z-index: 0;
+      background: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920&h=1280&fit=crop&q=85') center/cover no-repeat;
       background-attachment: fixed;
     }
-
     .hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(15, 26, 48, 0.88) 0%, rgba(27, 45, 79, 0.72) 40%, rgba(232, 148, 26, 0.15) 100%);
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(14, 27, 46, 0.88) 0%, rgba(14, 27, 46, 0.72) 45%, rgba(31, 157, 157, 0.35) 100%);
     }
-
     .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(15, 26, 48, 0.92) 0%, transparent 50%);
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14, 27, 46, 0.95) 0%, transparent 55%);
+    }
+    @media (max-width: 1024px) {
+      .hero-bg { background-attachment: scroll; }
     }
 
-    /* ── Islamic Pattern Divider ── */
-    .islamic-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 2rem 0;
+    .hero-accent-line {
+      display: inline-block; width: 48px; height: 2px; background: #1F9D9D; border-radius: 1px;
+      margin-right: 0.9rem; vertical-align: middle;
     }
 
-    .islamic-star {
-      width: 28px;
-      height: 28px;
-      fill: #E8941A;
-      animation: gentle-rotate 40s linear infinite;
-      opacity: 0.7;
+    /* ── Divider ── */
+    .section-divider {
+      display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem 0;
     }
-
-    @keyframes gentle-rotate {
-      to {
-        transform: rotate(360deg);
-      }
+    .divider-dot {
+      width: 8px; height: 8px; background: #1F9D9D; border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(31, 157, 157, 0.12);
     }
-
-    .islamic-line {
-      height: 2px;
-      width: 100px;
-      background: linear-gradient(to right, transparent, #E8941A, transparent);
-    }
-
-    /* ── Animations ── */
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-down {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes scale-in {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes bounce-in {
-      0% {
-        opacity: 0;
-        transform: scale(0) translateY(20px);
-      }
-
-      60% {
-        transform: scale(1.15) translateY(-5px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    @keyframes float-pulse {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
-    @keyframes dot-bounce {
-
-      0%,
-      80%,
-      100% {
-        transform: translateY(0);
-      }
-
-      40% {
-        transform: translateY(-6px);
-      }
-    }
-
-    @keyframes wa-attention {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      10% {
-        transform: scale(1.1);
-      }
-
-      20% {
-        transform: scale(1);
-      }
-
-      30% {
-        transform: scale(1.05);
-      }
-
-      40% {
-        transform: scale(1);
-      }
-    }
-
-    @keyframes slide-up {
-      from {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-anim {
-      opacity: 0;
-      animation: fade-up 1s var(--ease-out-expo) forwards;
-    }
-
-    .hero-anim-1 {
-      animation-delay: 0.15s;
-    }
-
-    .hero-anim-2 {
-      animation-delay: 0.35s;
-    }
-
-    .hero-anim-3 {
-      animation-delay: 0.55s;
-    }
-
-    .hero-anim-4 {
-      animation-delay: 0.75s;
-    }
-
-    .nav-anim {
-      opacity: 0;
-      animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.92);
-      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-    }
-
-    .reveal-scale.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .stagger-1 {
-      transition-delay: 0.08s;
-    }
-
-    .stagger-2 {
-      transition-delay: 0.16s;
-    }
-
-    .stagger-3 {
-      transition-delay: 0.24s;
-    }
-
-    .stagger-4 {
-      transition-delay: 0.32s;
-    }
-
-    .stagger-5 {
-      transition-delay: 0.40s;
-    }
-
-    .stagger-4 {
-      transition-delay: 0.32s;
-    }
-
-    /* ── Card Hover ── */
-    .card-hover {
-      transition: transform 0.5s var(--spring), box-shadow 0.5s var(--spring);
-    }
-
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -8px rgba(232, 148, 26, 0.2), 0 4px 16px -4px rgba(30, 30, 30, 0.08);
-    }
-
-    .card-hover:active {
-      transform: translateY(-2px);
-    }
-
-    .card-img-zoom {
-      transition: transform 0.7s var(--smooth);
-    }
-
-    .card-hover:hover .card-img-zoom {
-      transform: scale(1.08);
-    }
-
-    /* ── Islamic Pattern Overlay on Cards ── */
-    .islamic-pattern {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 L61 39 L92 39 L67 57 L78 86 L50 68 L22 86 L33 57 L8 39 L39 39 Z' fill='none' stroke='%23E8941A' stroke-width='0.3' opacity='0.15'/%3E%3C/svg%3E");
-      background-size: 80px 80px;
-      pointer-events: none;
+    .divider-line {
+      height: 1px; width: 80px;
+      background: linear-gradient(to right, transparent, #1F9D9D, transparent);
       opacity: 0.6;
     }
 
+    /* ── Animations ── */
+    @keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scale-in { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    @keyframes bounce-in {
+      0% { opacity: 0; transform: scale(0) translateY(20px); }
+      60% { transform: scale(1.15) translateY(-5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes float-pulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+    @keyframes wa-attention {
+      0%, 100% { transform: scale(1); }
+      10% { transform: scale(1.1); }
+      20% { transform: scale(1); }
+      30% { transform: scale(1.05); }
+      40% { transform: scale(1); }
+    }
+    @keyframes soft-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(31, 157, 157, 0.35); }
+      50% { box-shadow: 0 0 0 10px rgba(31, 157, 157, 0); }
+    }
+    @keyframes slow-drift {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+    }
+
+    .hero-anim { opacity: 0; animation: fade-up 1s var(--ease-out-expo) forwards; }
+    .hero-anim-1 { animation-delay: 0.15s; }
+    .hero-anim-2 { animation-delay: 0.35s; }
+    .hero-anim-3 { animation-delay: 0.55s; }
+    .hero-anim-4 { animation-delay: 0.75s; }
+    .nav-anim { opacity: 0; animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .stagger-1 { transition-delay: 0.08s; }
+    .stagger-2 { transition-delay: 0.16s; }
+    .stagger-3 { transition-delay: 0.24s; }
+    .stagger-4 { transition-delay: 0.32s; }
+    .stagger-5 { transition-delay: 0.40s; }
+    .stagger-6 { transition-delay: 0.48s; }
+
+    /* ── Card Hover ── */
+    .card-hover { transition: transform 0.5s var(--spring), box-shadow 0.5s var(--spring); }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px -10px rgba(31, 157, 157, 0.22), 0 6px 20px -6px rgba(14, 27, 46, 0.08);
+    }
+    .card-hover:active { transform: translateY(-2px); }
+    .card-img-zoom { transition: transform 0.7s var(--smooth); }
+    .card-hover:hover .card-img-zoom { transform: scale(1.08); }
+
     /* ── Buttons ── */
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #E8941A;
-      color: #FFFFFF;
-      padding: 0.9rem 2rem;
-      border-radius: 0.5rem;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.01em;
-      border: none;
-      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #1F9D9D; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+      border: none; cursor: pointer;
       transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
-      box-shadow: 0 4px 16px -2px rgba(232, 148, 26, 0.3);
+      box-shadow: 0 4px 16px -2px rgba(31, 157, 157, 0.35);
     }
-
-    .btn-primary:hover {
-      background: #F5A623;
-      box-shadow: 0 8px 28px -4px rgba(232, 148, 26, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .btn-primary:active {
-      transform: translateY(1px) scale(0.98);
-      background: #C67A0F;
-    }
-
-    .btn-primary:focus-visible {
-      outline: 2px solid #E8941A;
-      outline-offset: 3px;
-    }
-
-    .btn-primary .btn-arrow {
-      transition: transform 0.3s var(--spring);
-    }
-
-    .btn-primary:hover .btn-arrow {
-      transform: translateX(4px);
-    }
+    .btn-primary:hover { background: #15787A; box-shadow: 0 10px 30px -6px rgba(31, 157, 157, 0.45); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #0E5F61; }
+    .btn-primary:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 3px; }
+    .btn-primary .btn-arrow { transition: transform 0.3s var(--spring); }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
 
     .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: #FFFFFF;
-      padding: 0.9rem 2rem;
-      border-radius: 0.5rem;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.01em;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      transition: transform 0.3s var(--spring), border-color 0.3s var(--smooth), background-color 0.3s var(--smooth), color 0.3s var(--smooth);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+      border: 2px solid rgba(255, 255, 255, 0.4); cursor: pointer;
+      transition: transform 0.3s var(--spring), border-color 0.3s var(--smooth), background-color 0.3s var(--smooth);
     }
+    .btn-outline:hover { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(1px) scale(0.98); }
+    .btn-outline:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
 
-    .btn-outline:hover {
-      border-color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline:active {
-      transform: translateY(1px) scale(0.98);
-    }
-
-    .btn-outline:focus-visible {
-      outline: 2px solid #FFFFFF;
-      outline-offset: 3px;
-    }
-
-    .btn-amber-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: #E8941A;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 2px solid #E8941A;
-      cursor: pointer;
+    .btn-teal-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #1F9D9D;
+      padding: 0.75rem 1.5rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.9rem;
+      border: 2px solid #1F9D9D; cursor: pointer;
       transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth), color 0.3s var(--smooth), box-shadow 0.3s var(--spring);
     }
+    .btn-teal-outline:hover { background: #1F9D9D; color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 24px -6px rgba(31, 157, 157, 0.35); }
+    .btn-teal-outline:active { transform: translateY(1px) scale(0.98); }
+    .btn-teal-outline:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 3px; }
 
-    .btn-amber-outline:hover {
-      background: #E8941A;
+    /* ── Service Card ── */
+    .service-card {
+      position: relative; background: #FFFFFF; border-radius: 1.25rem; overflow: hidden;
+      box-shadow: 0 8px 24px -8px rgba(14, 27, 46, 0.08), 0 2px 6px -2px rgba(14, 27, 46, 0.04);
+      display: flex; flex-direction: column;
+    }
+    .service-card .service-img {
+      height: 220px; position: relative; overflow: hidden;
+    }
+    .service-card .service-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .service-card .service-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14, 27, 46, 0.45), transparent 55%);
+      mix-blend-mode: multiply;
+    }
+    .service-card .service-body { padding: 1.75rem 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
+    .service-card .service-badge {
+      position: absolute; top: 1rem; left: 1rem; z-index: 2;
+      background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px);
+      color: #0E5F61; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.4rem 0.75rem; border-radius: 0.35rem;
+    }
+    .service-card .service-badge.upcoming {
+      background: linear-gradient(135deg, #1F9D9D, #15787A);
       color: #FFFFFF;
+      animation: soft-pulse 2.6s ease-in-out infinite;
+    }
+    .service-card h3 {
+      font-size: 1.35rem; color: #0E1B2E; margin-bottom: 0.6rem;
+    }
+    .service-card p { color: #4A4A4A; font-size: 0.95rem; line-height: 1.65; flex: 1; }
+    .service-card .service-routes {
+      display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem;
+    }
+    .service-card .route-chip {
+      font-size: 0.72rem; font-weight: 600; color: #15787A;
+      background: #E6F4F4; padding: 0.25rem 0.65rem; border-radius: 0.3rem;
+      letter-spacing: 0.01em;
+    }
+    .service-card .service-link {
+      margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.4rem;
+      color: #1F9D9D; font-weight: 600; font-size: 0.9rem;
+      transition: gap 0.3s var(--spring), color 0.3s var(--smooth);
+    }
+    .card-hover:hover .service-link { gap: 0.7rem; color: #15787A; }
+    .card-hover:hover .service-link svg { transform: translateX(2px); }
+
+    /* ── Trust Strip ── */
+    .trust-strip {
+      background: #FFFFFF; border-top: 1px solid #F0EBE3; border-bottom: 1px solid #F0EBE3;
+      padding: 1.25rem 1.5rem;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.6rem; color: #4A4A4A;
+      font-size: 0.88rem; font-weight: 600;
+    }
+    .trust-item svg { color: #1F9D9D; flex-shrink: 0; }
+
+    /* ── Routes Map Block ── */
+    .routes-block {
+      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 100%);
+      color: #FFFFFF; position: relative; overflow: hidden;
+    }
+    .routes-block::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 30%, rgba(31, 157, 157, 0.18), transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(31, 157, 157, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+    .route-pill {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(31, 157, 157, 0.3);
+      padding: 0.7rem 1.1rem; border-radius: 999px;
+      font-size: 0.9rem; font-weight: 500; color: #FFFFFF;
+      transition: background 0.3s var(--smooth), border-color 0.3s var(--smooth), transform 0.3s var(--spring);
+    }
+    .route-pill:hover {
+      background: rgba(31, 157, 157, 0.15); border-color: rgba(31, 157, 157, 0.6);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px -4px rgba(232, 148, 26, 0.3);
+    }
+    .route-pill .route-arrow { color: #1F9D9D; animation: slow-drift 2.4s ease-in-out infinite; }
+    .route-dot { width: 8px; height: 8px; background: #1F9D9D; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Process Steps ── */
+    .process-step {
+      position: relative; display: flex; flex-direction: column; align-items: flex-start;
+      padding: 2rem 1.5rem 2rem 1.5rem; background: #FFFFFF; border-radius: 1rem;
+      box-shadow: 0 6px 20px -8px rgba(14, 27, 46, 0.08);
+    }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, #1F9D9D, #15787A);
+      color: #FFFFFF; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 14px -4px rgba(31, 157, 157, 0.4);
     }
 
-    .btn-amber-outline:active {
-      transform: translateY(1px) scale(0.98);
+    /* ── Why Us ── */
+    .pillar-card {
+      background: #FFFFFF; border-radius: 1rem; padding: 2rem 1.5rem;
+      border: 1px solid #F0EBE3;
+      transition: transform 0.5s var(--spring), border-color 0.3s var(--smooth), box-shadow 0.5s var(--spring);
+    }
+    .pillar-card:hover {
+      transform: translateY(-6px); border-color: rgba(31, 157, 157, 0.3);
+      box-shadow: 0 18px 40px -12px rgba(31, 157, 157, 0.18);
+    }
+    .pillar-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, #E6F4F4, #C9E8E8);
+      color: #0E5F61; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
     }
 
-    .btn-amber-outline:focus-visible {
-      outline: 2px solid #E8941A;
-      outline-offset: 3px;
+    /* ── Testimonial ── */
+    .testimonial-card {
+      background: #FFFFFF; border-radius: 1rem; padding: 2rem;
+      box-shadow: 0 8px 24px -10px rgba(14, 27, 46, 0.08);
+      position: relative;
     }
+    .testimonial-card::before {
+      content: '"'; position: absolute; top: -12px; left: 20px;
+      font-family: 'Montserrat', sans-serif; font-size: 5rem; color: #1F9D9D;
+      line-height: 1; opacity: 0.15;
+    }
+    .testimonial-stars { color: #F5A623; display: flex; gap: 2px; margin-bottom: 1rem; }
+
+    /* ── CTA Band ── */
+    .cta-band {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 100%);
+      color: #FFFFFF;
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 40%, rgba(31, 157, 157, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: linear-gradient(180deg, #0E1B2E 0%, #070E1A 100%);
+      color: #C5CEDC; position: relative;
+    }
+    .footer-logo { height: 68px; width: auto; display: block; }
+    .footer a { color: #C5CEDC; transition: color 0.3s var(--smooth); }
+    .footer a:hover { color: #1F9D9D; }
+    .footer h4 {
+      font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06); color: #C5CEDC;
+      transition: background 0.3s var(--smooth), color 0.3s var(--smooth), transform 0.3s var(--spring);
+    }
+    .social-icon:hover { background: #1F9D9D; color: #FFFFFF; transform: translateY(-2px); }
 
     /* ── WhatsApp Widget ── */
     .wa-btn {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 9000;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: #25D366;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
       animation: bounce-in 0.8s var(--spring) 1.5s forwards, wa-attention 3s ease-in-out 4s infinite;
       opacity: 0;
       transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring);
     }
-
-    .wa-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45);
-    }
-
-    .wa-btn:active {
-      transform: scale(0.95);
-    }
-
-    .wa-btn:focus-visible {
-      outline: 3px solid #25D366;
-      outline-offset: 4px;
-    }
+    .wa-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45); }
+    .wa-btn:active { transform: scale(0.95); }
+    .wa-btn:focus-visible { outline: 3px solid #25D366; outline-offset: 4px; }
 
     .wa-popup {
-      position: fixed;
-      bottom: 6.5rem;
-      right: 1.5rem;
-      z-index: 9001;
-      width: 360px;
-      max-width: calc(100vw - 2rem);
-      background: #FFFFFF;
-      border-radius: 1rem;
-      box-shadow: 0 12px 48px rgba(30, 30, 30, 0.12), 0 2px 8px rgba(30, 30, 30, 0.06);
-      overflow: hidden;
-      transform: translateY(20px) scale(0.95);
-      opacity: 0;
+      position: fixed; bottom: 6.5rem; right: 1.5rem; z-index: 9001;
+      width: 360px; max-width: calc(100vw - 2rem);
+      background: #FFFFFF; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(14, 27, 46, 0.15), 0 2px 8px rgba(14, 27, 46, 0.06);
+      transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none;
       transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth);
-      pointer-events: none;
     }
-
-    .wa-popup.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
+    .wa-popup.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
     .wa-popup-header {
       background: linear-gradient(135deg, #075E54, #128C7E);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;
     }
-
     .wa-popup-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #FAF7F2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: #FAF7F2; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      overflow: hidden;
     }
-
-    .wa-popup-body {
-      padding: 1.25rem;
-      background: #E5DDD5;
-      min-height: 100px;
-    }
-
+    .wa-popup-avatar img { width: 100%; height: 100%; object-fit: contain; }
+    .wa-popup-body { padding: 1.25rem; background: #E5DDD5; min-height: 100px; }
     .wa-greeting {
-      background: #FFFFFF;
-      padding: 0.75rem 1rem;
+      background: #FFFFFF; padding: 0.75rem 1rem;
       border-radius: 0 0.75rem 0.75rem 0.75rem;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      max-width: 85%;
+      font-size: 0.88rem; color: #1E1E1E; max-width: 85%;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
     }
-
-    .wa-greeting-time {
-      font-size: 0.7rem;
-      color: #999;
-      text-align: right;
-      margin-top: 0.25rem;
-    }
-
-    .wa-popup-input {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #F0EBE3;
-      background: #FFFFFF;
-    }
-
+    .wa-greeting-time { font-size: 0.7rem; color: #999; text-align: right; margin-top: 0.25rem; }
+    .wa-popup-input { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-top: 1px solid #F0EBE3; background: #FFFFFF; }
     .wa-popup-input input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: 'Manrope', sans-serif;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      background: #F0EBE3;
-      padding: 0.6rem 1rem;
-      border-radius: 1.5rem;
+      flex: 1; border: none; outline: none; padding: 0.55rem 0.75rem; font-size: 0.88rem;
+      background: #F5F5F5; border-radius: 1.5rem;
     }
-
-    .wa-popup-input input::placeholder {
-      color: #999;
-    }
-
-    .wa-popup-input input:focus {
-      background: #E8E2D9;
-    }
-
     .wa-send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: #25D366;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.2s var(--spring), background-color 0.2s;
+      width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+      background: #128C7E; color: white; display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s var(--smooth);
     }
-
-    .wa-send-btn:hover {
-      background: #20BA5A;
-      transform: scale(1.08);
-    }
-
-    .wa-send-btn:active {
-      transform: scale(0.92);
-    }
-
-    .wa-typing-dots {
-      display: flex;
-      gap: 4px;
-      padding: 0.4rem 0;
-    }
-
-    .wa-typing-dots span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #999;
-      animation: dot-bounce 1.4s ease-in-out infinite;
-    }
-
-    .wa-typing-dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .wa-typing-dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    /* ── Testimonial ── */
-    .testimonial-card {
-      position: relative;
-      padding: 2rem 2rem 1.5rem;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1rem;
-      transition: transform 0.5s var(--spring), box-shadow 0.5s var(--spring), border-color 0.5s var(--smooth);
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.3);
-      border-color: rgba(232, 148, 26, 0.2);
-    }
+    .wa-send-btn:hover { background: #075E54; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0.75rem; background: #FFFFFF; border-radius: 1rem; width: fit-content; margin-top: 0.75rem; }
+    .wa-typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #25D366; animation: dot-bounce 1.4s infinite ease-in-out; }
+    .wa-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .wa-typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
     /* ── Mobile Menu ── */
     .mobile-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: rgba(250, 247, 242, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      gap: 1.5rem;
-      transform: translateX(100%);
-      opacity: 0;
-      transition: transform 0.6s var(--ease-out-expo), opacity 0.4s var(--smooth);
-      overflow: hidden;
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
+      background: #FFFFFF; z-index: 1050; padding: 5.5rem 1.75rem 2rem;
+      transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo);
+      box-shadow: -10px 0 40px rgba(14, 27, 46, 0.08);
+      display: flex; flex-direction: column; gap: 1.2rem;
     }
-
-    .mobile-menu.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
+    .mobile-menu.open { transform: translateX(0); }
     .mobile-menu a {
-      font-family: 'Montserrat', system-ui, sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1E1E1E;
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: color 0.3s var(--smooth), opacity 0.5s var(--smooth), transform 0.5s var(--ease-out-expo);
-      position: relative;
-      z-index: 1;
+      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.15rem;
+      padding: 0.6rem 0; border-bottom: 1px solid #F0EBE3;
     }
-
-    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
-    .mobile-menu.open a:nth-of-type(1) { transition-delay: 0.15s; }
-    .mobile-menu.open a:nth-of-type(2) { transition-delay: 0.22s; }
-    .mobile-menu.open a:nth-of-type(3) { transition-delay: 0.29s; }
-    .mobile-menu.open a:nth-of-type(4) { transition-delay: 0.36s; }
-
-    .mobile-menu a:hover {
-      color: #E8941A;
-    }
-
-    .mobile-menu a.active {
-      color: #E8941A;
-    }
-
-    .mm-num {
-      display: none;
-    }
-
-    .mm-footer {
-      margin-top: 3rem;
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #4A4A4A;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.5s var(--smooth) 0.5s;
-    }
-
-    .mobile-menu.open .mm-footer {
-      opacity: 1;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 0.5rem;
-      background: none;
-      border: none;
-      z-index: 1001;
-    }
-
+    .mobile-menu a:hover { color: #1F9D9D; }
     .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #FFFFFF;
-      border-radius: 1px;
-      transition: transform 0.3s var(--spring), opacity 0.2s, background-color 0.3s;
+      display: block; width: 24px; height: 2px; background: #FFFFFF; margin: 5px 0;
+      border-radius: 2px; transition: transform 0.3s var(--smooth), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
-
-    .nav-bar.scrolled .hamburger span {
-      background: #1E1E1E;
+    .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
+    .menu-backdrop {
+      position: fixed; inset: 0; background: rgba(14, 27, 46, 0.4); z-index: 1040;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--smooth);
     }
+    .menu-backdrop.open { opacity: 1; pointer-events: auto; }
 
-    .hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-      background: #1E1E1E;
+    /* ── Scroll indicator ── */
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.65); font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; font-weight: 600; display: flex; flex-direction: column;
+      align-items: center; gap: 0.5rem; animation: float-pulse 2.4s ease-in-out infinite;
     }
-
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-      background: #1E1E1E;
-    }
-
-    .nav-bar.menu-open {
-      background: transparent !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
-    }
-
-    .nav-bar.menu-open .logo-travel-text {
-      color: #1E1E1E !important;
+    .scroll-indicator-line {
+      width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
     }
 
     @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-    }
-
-    /* ── Section Backgrounds ── */
-    .section-cream-dark {
-      background: #F0EBE3;
-    }
-
-    .section-navy {
-      background: linear-gradient(135deg, #1B2D4F 0%, #0F1A30 100%);
-      color: #FFFFFF;
-    }
-
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #FAF7F2;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #d4cfc7;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #bab4a9;
-    }
-
-    /* ── Mobile Responsive ── */
-    @media (max-width: 640px) {
-      .wa-popup {
-        right: 0;
-        bottom: 5.5rem;
-        max-width: 100vw;
-        width: 100vw;
-        border-radius: 1rem 1rem 0 0;
-      }
-
-      .logo-bah,
-      .logo-travel {
-        font-size: 1.2rem;
-      }
-
-      .logo-divider {
-        font-size: 1rem;
-      }
-    }
-
-    /* ── Mobile Overrides (Appended) ── */
-    @media (max-width: 768px) {
-
-      /* Mobile Hero Override */
-      .hero-bg {
-        background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=1200&fit=crop&q=85') center/cover no-repeat !important;
-      }
-
-      /* Typography Scaling */
-      .text-5xl,
-      .text-7xl,
-      .text-8xl {
-        font-size: 2.25rem !important;
-        line-height: 1.2 !important;
-      }
-
-      .text-4xl {
-        font-size: 1.875rem !important;
-        line-height: 1.3 !important;
-      }
-
-      .text-3xl {
-        font-size: 1.5rem !important;
-      }
-
-      p.text-lg,
-      p.text-xl {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-      }
-
-      /* Spacing Fixes */
-      .py-32 {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-
-      .py-24 {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-
-      .px-6,
-      .px-8,
-      .lg\:px-8 {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-      }
-
-      .hero-section .relative {
-        padding-top: 7rem !important;
-        padding-bottom: 3.5rem !important;
-      }
-
-      /* Layout Fixes */
-      .gap-8,
-      .gap-10,
-      .gap-12 {
-        gap: 1.5rem !important;
-      }
-
-      /* WhatsApp Fixes */
-      .wa-btn {
-        bottom: 1rem !important;
-        right: 1rem !important;
-        width: 50px !important;
-        height: 50px !important;
-      }
-
-      .wa-popup {
-        right: 0 !important;
-        bottom: 4.5rem !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        border-radius: 1rem 1rem 0 0 !important;
-      }
-
-      /* Nav Fixes */
-      .logo-bah,
-      .logo-travel {
-        font-size: 1.15rem !important;
-      }
-
-      .mobile-menu a {
-        font-size: 2rem !important;
-      }
-
-      .desktop-nav {
-        display: none !important;
-      }
-
-      .scroll-indicator {
-        display: none !important;
-      }
-
-      /* Performance Fix for Mobile Scroll Jitter */
-      * {
-        background-attachment: scroll !important;
-      }
-      .grain-overlay {
-        transform: translateZ(0) !important;
-        will-change: transform;
-      }
+      .hero-section { min-height: 88vh; }
+      .service-card .service-img { height: 200px; }
     }
   </style>
 </head>
 
 <body>
+  <div class="grain-overlay"></div>
 
-  <!-- Grain Overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
-
-  <!-- ═══════════════════════════════ NAVIGATION ═══════════════════════════════ -->
-  <nav class="nav-bar nav-anim" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 no-underline" aria-label="BAH Travel Home">
-        <svg width="36" height="36" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-          <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-          <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-        <div class="flex items-baseline gap-0">
-          <span class="logo-bah" style="color:#E8941A;">BAH</span>
-          <span class="logo-travel logo-travel-text">TRAVEL</span>
-        </div>
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav class="nav-bar nav-anim" id="navbar">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3" aria-label="Jallow Transporters home">
+        <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="nav-logo">
       </a>
 
-      <!-- Desktop Links -->
-      <div class="desktop-nav flex items-center gap-8">
-        <a href="/" class="nav-link active no-underline">Home</a>
-        <a href="/about" class="nav-link no-underline">About</a>
-        <a href="/contact" class="nav-link no-underline">Contact</a>
-        <a href="/terms" class="nav-link no-underline">Terms</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/#routes" class="nav-link">Routes</a>
+        <a href="/terms.html" class="nav-link">Terms</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/contact.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
+          Get a Quote
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
 
-      <!-- Hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <button class="hamburger md:hidden flex flex-col justify-center items-center w-10 h-10" id="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-    <a href="/" class="active"><span class="mm-num">01</span><span>Home</span></a>
-    <a href="/about"><span class="mm-num">02</span><span>About</span></a>
-    <a href="/contact"><span class="mm-num">03</span><span>Contact</span></a>
-    <a href="/terms"><span class="mm-num">04</span><span>Terms</span></a>
-    <div class="mm-footer" aria-hidden="true">Your trusted travel partner</div>
-  </div>
+  <div class="menu-backdrop" id="menu-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#routes">Routes</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/contact.html" class="btn-primary mt-4 justify-center">Get a Quote</a>
+  </aside>
 
-  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-  <section class="hero-section" id="hero">
-    <div class="hero-bg" role="img" aria-label="Airplane window view at golden hour sunset"></div>
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
 
-    <!-- Decorative geometric pattern -->
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;">
-
-      <svg style="position:absolute;bottom:15%;left:3%;opacity:0.06;" width="320" height="320" viewBox="0 0 200 200"
-        fill="none">
-        <!-- Geometric Islamic pattern -->
-        <circle cx="100" cy="100" r="80" fill="none" stroke="#F5A623" stroke-width="0.5" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#F5A623" stroke-width="0.4" opacity="0.6" />
-        <circle cx="100" cy="100" r="40" fill="none" stroke="#F5A623" stroke-width="0.3" opacity="0.4" />
-        <polygon points="100,20 163.4,56.7 140.45,132.4 59.55,132.4 36.6,56.7" fill="none" stroke="#F5A623"
-          stroke-width="0.4" opacity="0.3" />
-      </svg>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 md:py-0 w-full">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-5 lg:px-8 pt-32 pb-20">
       <div class="max-w-3xl">
-        <!-- Heading with strong visual -->
-        <h1 class="hero-anim hero-anim-2 font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white"
-          style="line-height:1.05;">
-          Your World,<br>Our Expertise
+        <div class="hero-anim hero-anim-1 mb-5">
+          <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase text-teal-light/90">
+            <span class="hero-accent-line"></span>
+            UK · Gambia · Guinea Conakry · Morocco
+          </span>
+        </div>
+
+        <h1 class="hero-anim hero-anim-2 text-white text-[2.5rem] sm:text-5xl lg:text-[4rem] leading-[1.05] mb-6">
+          Reliable freight from the <span class="text-teal">UK to West Africa</span> &amp; beyond.
         </h1>
 
-        <!-- Subtext -->
-        <p class="hero-anim hero-anim-3 font-body text-lg md:text-xl mb-10"
-          style="color:rgba(255,255,255,0.8);max-width:580px;line-height:1.7;">
-          Expert visa processing, competitive flights worldwide, and premium Hajj &amp; Umrah packages — BAH Travel makes your journey seamless from the UK and Gambia.
+        <p class="hero-anim hero-anim-3 text-white/80 text-base sm:text-lg max-w-2xl mb-9 font-normal">
+          Sea freight, air cargo, Moroccan tourism and preorder goods — handled end to end with
+          <span class="text-teal-light font-semibold">customer care</span>,
+          <span class="text-teal-light font-semibold">commitment</span>, and zero compromise.
         </p>
 
-        <!-- CTAs -->
-        <div class="hero-anim hero-anim-4 flex flex-wrap gap-4">
-          <a href="#services" class="btn-primary no-underline">
-            Explore Our Services <span class="btn-arrow">→</span>
+        <div class="hero-anim hero-anim-4 flex flex-col sm:flex-row gap-4">
+          <a href="/contact.html" class="btn-primary">
+            Get a Free Quote
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="/contact" class="btn-outline no-underline">
-            Contact Us
+          <a href="#services" class="btn-outline">
+            Explore Services
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hero-anim scroll-indicator"
-      style="animation-delay:1.2s;">
-      <div
-        style="width:24px;height:40px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;display:flex;justify-content:center;padding-top:8px;">
-        <div
-          style="width:3px;height:8px;background:rgba(255,255,255,0.5);border-radius:2px;animation:float-pulse 2s ease-in-out infinite;">
-        </div>
-      </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-indicator-line"></div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════ SERVICES OVERVIEW ═══════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-cream" id="services">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="font-body text-sm font-semibold tracking-widest uppercase" style="color:#E8941A;">✦ What We
-          Offer</span>
-        <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6" style="color:#1E1E1E;">Complete Travel Solutions
-        </h2>
-        <p class="font-body text-lg mx-auto" style="color:#4A4A4A;max-width:580px;">
-          From visa applications and flight bookings to premium Hajj &amp; Umrah packages, we provide end-to-end travel solutions for clients in the UK and Gambia.
-        </p>
+  <!-- ═══════════════ TRUST STRIP ═══════════════ -->
+  <div class="trust-strip">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
+      <div class="trust-item reveal stagger-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        UK-headquartered · Birmingham
       </div>
-
-      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-        <!-- Visa Services -->
-        <div class="card-hover reveal stagger-1 bg-white rounded-xl overflow-hidden"
-          style="box-shadow: 0 4px 16px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.04);">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-blue-900 to-blue-800">
-            <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=600&h=400&fit=crop&q=80"
-              alt="Visa Documentation Services" class="card-img-zoom w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-            <span
-              class="absolute top-4 left-5 font-body text-xs font-bold tracking-widest uppercase text-white px-3 py-1.5 rounded-full"
-              style="background: linear-gradient(135deg, #E8941A, #F5A623);">✦ Travel</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-bold mb-3" style="color:#1E1E1E;">Visa Services</h3>
-            <p class="font-body text-sm mb-5" style="color:#4A4A4A;line-height:1.7;">
-              Expert visa processing for UK, Europe, Schengen, and worldwide destinations. We handle applications, documentation, and follow-up, so you don't have to.
-            </p>
-            <a href="/contact" class="btn-amber-outline no-underline text-xs">
-              Start Application <span class="btn-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Flight Ticketing -->
-        <div class="card-hover reveal stagger-2 bg-white rounded-xl overflow-hidden"
-          style="box-shadow: 0 4px 16px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.04);">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-sky-900 to-sky-800">
-            <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?w=600&h=400&fit=crop&q=80"
-              alt="International Flight Bookings" class="card-img-zoom w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-            <span
-              class="absolute top-4 left-5 font-body text-xs font-bold tracking-widest uppercase text-white px-3 py-1.5 rounded-full"
-              style="background: linear-gradient(135deg, #E8941A, #F5A623);">✦ Flights</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-bold mb-3" style="color:#1E1E1E;">Flight Ticketing</h3>
-            <p class="font-body text-sm mb-5" style="color:#4A4A4A;line-height:1.7;">
-              Competitive fares to the UK and worldwide destinations. Business and economy class, multi-city routes, and last-minute bookings.
-            </p>
-            <a href="/contact" class="btn-amber-outline no-underline text-xs">
-              Get a Quote <span class="btn-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Tailored Experiences -->
-        <div class="card-hover reveal stagger-3 bg-white rounded-xl overflow-hidden"
-          style="box-shadow: 0 4px 16px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.04);">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-emerald-900 to-emerald-800">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop&q=80"
-              alt="Tailored Travel Experiences" class="card-img-zoom w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-            <span
-              class="absolute top-4 left-5 font-body text-xs font-bold tracking-widest uppercase text-white px-3 py-1.5 rounded-full"
-              style="background: linear-gradient(135deg, #E8941A, #F5A623);">✦ Bespoke</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-bold mb-3" style="color:#1E1E1E;">Tailored Experiences</h3>
-            <p class="font-body text-sm mb-5" style="color:#4A4A4A;line-height:1.7;">
-              Custom itineraries for pilgrimages, family holidays, business trips, or group travel. VIP services and personalised planning.
-            </p>
-            <a href="/contact" class="btn-amber-outline no-underline text-xs">
-              Enquire Now <span class="btn-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
+      <div class="trust-item reveal stagger-2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Door-to-door collection
       </div>
-
-      <!-- Bottom row: 2 cards centered -->
-      <div class="flex flex-col md:flex-row justify-center gap-6 lg:gap-8 mt-6 lg:mt-8">
-        <!-- Hajj Packages -->
-        <div class="card-hover reveal stagger-4 bg-white rounded-xl overflow-hidden md:w-1/3"
-          style="box-shadow: 0 4px 16px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.04);">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-blue-900 to-blue-800">
-            <img src="https://images.unsplash.com/photo-1589827577276-65d717348780?w=600&h=400&fit=crop&q=80"
-              alt="Kaaba in Makkah during Hajj" class="card-img-zoom w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-            <div class="islamic-pattern"></div>
-            <span
-              class="absolute top-4 left-5 font-body text-xs font-bold tracking-widest uppercase text-white px-3 py-1.5 rounded-full"
-              style="background: linear-gradient(135deg, #E8941A, #F5A623);">✦ Hajj</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-bold mb-3" style="color:#1E1E1E;">Hajj Packages</h3>
-            <p class="font-body text-sm mb-5" style="color:#4A4A4A;line-height:1.7;">
-              Comprehensive packages including flights, 5-star accommodation near the Haram, guided rituals, and full visa support.
-            </p>
-            <a href="/about" class="btn-amber-outline no-underline text-xs">
-              Learn More <span class="btn-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Umrah Packages -->
-        <div class="card-hover reveal stagger-5 bg-white rounded-xl overflow-hidden md:w-1/3"
-          style="box-shadow: 0 4px 16px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.04);">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-emerald-900 to-emerald-800">
-            <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&h=400&fit=crop&q=80"
-              alt="Prophet's Mosque in Medina" class="card-img-zoom w-full h-full object-cover" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-            <div class="islamic-pattern"></div>
-            <span
-              class="absolute top-4 left-5 font-body text-xs font-bold tracking-widest uppercase text-white px-3 py-1.5 rounded-full"
-              style="background: linear-gradient(135deg, #E8941A, #F5A623);">✦ Umrah</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display text-xl font-bold mb-3" style="color:#1E1E1E;">Umrah Packages</h3>
-            <p class="font-body text-sm mb-5" style="color:#4A4A4A;line-height:1.7;">
-              Flexible year-round Umrah journeys with premium hotels, private transport between Makkah & Madinah, and expert guides.
-            </p>
-            <a href="/about" class="btn-amber-outline no-underline text-xs">
-              Learn More <span class="btn-arrow">→</span>
-            </a>
-          </div>
-        </div>
+      <div class="trust-item reveal stagger-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"/><path d="M9 5h6v2H9z"/></svg>
+        Trusted by the diaspora
+      </div>
+      <div class="trust-item reveal stagger-4">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Clear, honest pricing
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ -->
-  <section class="py-24 md:py-32" id="testimonials" style="background:#F6F2EC;">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <span class="font-body text-sm font-semibold tracking-widest uppercase"
-          style="color:#E8941A;">Testimonials</span>
-        <h2 class="font-display text-4xl md:text-5xl font-bold mt-3 mb-5" style="color:#1E1E1E;">What Our Clients Say
-        </h2>
-        <p class="font-body text-base mx-auto" style="color:#4A4A4A;max-width:520px;line-height:1.7;">
-          Read genuine experiences from clients we've had the honour of serving.
-        </p>
+  <!-- ═══════════════ INTRO ═══════════════ -->
+  <section class="py-20 lg:py-28 bg-cream">
+    <div class="max-w-5xl mx-auto px-5 lg:px-8 text-center">
+      <div class="section-divider reveal">
+        <span class="divider-line"></span>
+        <span class="divider-dot"></span>
+        <span class="divider-line"></span>
       </div>
-
-        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <!-- Review 1 -->
-          <div class="reveal stagger-1 bg-white rounded-2xl p-7 flex flex-col h-full"
-            style="box-shadow:0 2px 16px rgba(30,30,30,0.07),0 0 0 1px rgba(0,182,122,0.15);">
-            <div class="flex flex-col gap-3 mb-5">
-              <div class="flex gap-[2px]" aria-label="5 out of 5 stars">
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-              </div>
-              <span class="font-display font-bold text-lg leading-tight" style="color:#1E1E1E;">It was brilliant</span>
-            </div>
-            <p class="font-body text-sm flex-1 mb-6" style="color:#3A3A3A;line-height:1.85;">
-              "It was brilliant, my mum whom I bought the tickets for, was supported all the way through from searching for the most convenient travel dates to getting a very generous lady who helped her from Banjul to Manchester. We couldn't be more happier with your service."
-            </p>
-            <div class="flex items-center gap-3 pt-5" style="border-top:1px solid #F0EBE3;">
-              <div
-                class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-body text-sm font-bold text-white"
-                style="background:#0F1A30;">TS</div>
-              <div class="flex-1">
-                <div class="font-body text-sm font-bold" style="color:#1E1E1E;">Taibou Sawo</div>
-                <div class="font-body text-xs" style="color:#4A4A4A;">April 18, 2026</div>
-              </div>
-              <div title="Verified by Trustpilot" class="flex-shrink-0">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00B67A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-            </div>
-          </div>
-
-          <!-- Review 2 -->
-          <div class="reveal stagger-2 bg-white rounded-2xl p-7 flex flex-col h-full"
-            style="box-shadow:0 2px 16px rgba(30,30,30,0.07),0 0 0 1px rgba(0,182,122,0.15);">
-            <div class="flex flex-col gap-3 mb-5">
-              <div class="flex gap-[2px]" aria-label="5 out of 5 stars">
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-              </div>
-              <span class="font-display font-bold text-lg leading-tight" style="color:#1E1E1E;">Amazing service</span>
-            </div>
-            <p class="font-body text-sm flex-1 mb-6" style="color:#3A3A3A;line-height:1.85;">
-              "Amazing service! The staff were incredibly kind and helpful when I needed to buy two tickets at the very last minute. They went out of their way to find me the cheapest possible option and did everything they could to help me pay less. I'm so grateful for their support."
-            </p>
-            <div class="flex items-center gap-3 pt-5" style="border-top:1px solid #F0EBE3;">
-              <div
-                class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-body text-sm font-bold text-white"
-                style="background:#C67A0F;">AS</div>
-              <div class="flex-1">
-                <div class="font-body text-sm font-bold" style="color:#1E1E1E;">Aicha Saliou</div>
-                <div class="font-body text-xs" style="color:#4A4A4A;">Feb 9, 2026</div>
-              </div>
-              <div title="Verified by Trustpilot" class="flex-shrink-0">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00B67A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-            </div>
-          </div>
-
-          <!-- Review 3 -->
-          <div class="reveal stagger-3 bg-white rounded-2xl p-7 flex flex-col h-full"
-            style="box-shadow:0 2px 16px rgba(30,30,30,0.07),0 0 0 1px rgba(0,182,122,0.15);">
-            <div class="flex flex-col gap-3 mb-5">
-              <div class="flex gap-[2px]" aria-label="5 out of 5 stars">
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                <div class="w-[20px] h-[20px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-              </div>
-              <span class="font-display font-bold text-lg leading-tight" style="color:#1E1E1E;">Thank you</span>
-            </div>
-            <p class="font-body text-sm flex-1 mb-6" style="color:#3A3A3A;line-height:1.85;">
-              "I have used the service for a while and I continued using the service due to my experience and the staff kept delivering to the highest standards. They recently went out of their way to cater for my needs, of which I am very grateful."
-            </p>
-            <div class="flex items-center gap-3 pt-5" style="border-top:1px solid #F0EBE3;">
-              <div
-                class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-body text-sm font-bold text-white"
-                style="background:#1B2D4F;">MF</div>
-              <div class="flex-1">
-                <div class="font-body text-sm font-bold" style="color:#1E1E1E;">Musu Faal</div>
-                <div class="font-body text-xs" style="color:#4A4A4A;">Feb 10, 2026</div>
-              </div>
-              <div title="Verified by Trustpilot" class="flex-shrink-0">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00B67A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Trustpilot CTA Section -->
-        <div class="mt-10 flex w-full max-w-6xl mx-auto reveal stagger-4 px-4 md:px-0">
-          <div class="w-full bg-white rounded-2xl flex flex-col md:flex-row items-center justify-between p-6 md:px-10 gap-6 md:gap-0" style="box-shadow:0 4px 24px rgba(30,30,30,0.06), 0 0 0 1px rgba(0,182,122,0.15);">
-            
-            <div class="flex flex-col md:flex-row items-center gap-5 text-center md:text-left">
-              <div class="flex items-center justify-center w-14 h-14 rounded-full flex-shrink-0" style="background:rgba(0,182,122,0.1);">
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="#00B67A"><path d="M16 2.666l4.242 8.595 9.485 1.38-6.863 6.69 1.62 9.447L16 24.321l-8.484 4.457 1.62-9.447-6.863-6.69 9.485-1.38L16 2.666z"/></svg>
-              </div>
-              <div>
-                <div class="flex flex-col md:flex-row items-center gap-2 mb-2 md:mb-1">
-                  <span class="font-display font-bold text-xl" style="color:#1E1E1E;">Excellent</span>
-                  <div class="flex gap-[2px]" aria-label="5 out of 5 stars">
-                    <div class="w-[22px] h-[22px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                    <div class="w-[22px] h-[22px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                    <div class="w-[22px] h-[22px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                    <div class="w-[22px] h-[22px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                    <div class="w-[22px] h-[22px] bg-[#00B67A] flex items-center justify-center rounded-[2px]"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                  </div>
-                </div>
-                <p class="font-body text-sm" style="color:#4A4A4A;">Based on real reviews on <span style="font-weight:700;color:#1E1E1E;">Trustpilot</span></p>
-              </div>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-5 w-full md:w-auto">
-              <a href="https://www.trustpilot.com/review/bahtravel.com" target="_blank" rel="noopener" class="font-body text-sm font-bold no-underline" style="color:#4A4A4A; transition: color 0.3s;" onmouseover="this.style.color='#1E1E1E'" onmouseout="this.style.color='#4A4A4A'">
-                Read all reviews
-              </a>
-              <span class="hidden md:inline" style="color:#E5E7EB;">|</span>
-              <a href="https://www.trustpilot.com/review/bahtravel.com" target="_blank" rel="noopener" class="group w-full md:w-auto justify-center font-body text-sm font-bold no-underline rounded-xl flex items-center gap-2" style="background:#00B67A; color:white; padding: 0.85rem 1.75rem; transition: transform 0.3s, background 0.3s, box-shadow 0.3s; box-shadow: 0 4px 14px rgba(0,182,122,0.35);" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='#00a56e'; this.style.boxShadow='0 6px 20px rgba(0,182,122,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.background='#00B67A'; this.style.boxShadow='0 4px 14px rgba(0,182,122,0.35)';">
-                Write a Review <span style="font-size:1.1em; transition:transform 0.3s;" class="group-hover:translate-x-1">?</span>
-              </a>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-  <!-- ═══════════════════════════════ CTA BANNER ═══════════════════════════════ -->
-  <section class="py-20 md:py-28 relative overflow-hidden" style="background: #F5F5F5;">
-    <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
-      <span class="font-body text-sm font-semibold tracking-widest uppercase mb-5 inline-block"
-        style="color:#E8941A;">Get in Touch</span>
-      <h2 class="reveal font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-        style="line-height:1.1;color:#1E1E1E;">
-        Ready to Travel?
-      </h2>
-      <p class="reveal font-body text-lg mb-10"
-        style="color:#4A4A4A;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8;">
-        Whether it's a visa application, flight booking, or a sacred pilgrimage — our team is here to make it happen.
+      <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-4">
+        Jallow Transporters Ltd
       </p>
-      <div class="reveal flex flex-wrap items-center justify-center gap-4">
-        <a href="tel:+2202289111" class="btn-primary no-underline"
-          style="transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s;"
-          onmouseover="this.style.transform='translateY(-3px)';" onmouseout="this.style.transform='';">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <path
-              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-          </svg>
-          +220 228 9111
+      <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-5xl text-navy mb-5">
+        Customer. Care. Commitment.
+      </h2>
+      <p class="reveal stagger-1 text-charcoal-light text-base sm:text-lg max-w-3xl mx-auto">
+        From a single suitcase of Moroccan goods to a full 40-foot container heading into Banjul,
+        we handle every shipment like it's our own. Family-run from Birmingham, built to serve
+        the West African diaspora with the consistency and honesty the route has always needed.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SERVICES ═══════════════ -->
+  <section id="services" class="py-20 lg:py-28 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl mb-14">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">
+          What we do
+        </p>
+        <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-5">
+          Freight, tourism &amp; Moroccan goods — under one roof.
+        </h2>
+        <p class="reveal stagger-1 text-charcoal-light text-base sm:text-lg">
+          Whether you're shipping household items to Gambia, booking a Marrakech escape,
+          or preordering authentic Moroccan argan oil, each of our services runs on the
+          same principle: show up, do what we said, every time.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- Container Shipping -->
+        <article class="service-card card-hover reveal stagger-1">
+          <div class="service-img">
+            <span class="service-badge">Sea Freight</span>
+            <img class="card-img-zoom" src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=900&h=600&fit=crop&q=82" alt="Stacked shipping containers at port" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>Container Shipping</h3>
+            <p>Full containers and shared loads from the UK and Spain into The Gambia and Guinea Conakry, with honest timelines and real collection support at both ends.</p>
+            <div class="service-routes">
+              <span class="route-chip">UK → Gambia</span>
+              <span class="route-chip">UK → Conakry</span>
+              <span class="route-chip">Spain → Gambia</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Request container quote
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Air Freight -->
+        <article class="service-card card-hover reveal stagger-2">
+          <div class="service-img">
+            <span class="service-badge">Air Cargo</span>
+            <img class="card-img-zoom" src="/images/cargo_plane_tarmac.png" alt="Cargo plane on tarmac being loaded" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>Air Freight &amp; Cargo</h3>
+            <p>Fast, tracked air cargo both ways between the UK and Gambia, Conakry, and Morocco. Ideal for time-critical parcels, business stock, or urgent family sends.</p>
+            <div class="service-routes">
+              <span class="route-chip">UK ⇄ Gambia</span>
+              <span class="route-chip">UK ⇄ Conakry</span>
+              <span class="route-chip">UK ⇄ Morocco</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Get air freight rates
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Morocco Tourism -->
+        <article class="service-card card-hover reveal stagger-3">
+          <div class="service-img">
+            <span class="service-badge">Tourism</span>
+            <img class="card-img-zoom" src="/images/marrakech_rooftop.png" alt="Marrakech rooftop view and minaret at sunset" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>Morocco Tourism Packages</h3>
+            <p>Curated Moroccan getaways — riads in Marrakech, the blue streets of Chefchaouen, desert nights in Merzouga. Transport, stay, and local guides arranged end to end.</p>
+            <div class="service-routes">
+              <span class="route-chip">Marrakech</span>
+              <span class="route-chip">Chefchaouen</span>
+              <span class="route-chip">Sahara</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Plan your trip
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Moroccan Preorders -->
+        <article class="service-card card-hover reveal stagger-4">
+          <div class="service-img">
+            <span class="service-badge">Preorders</span>
+            <img class="card-img-zoom" src="/images/moroccan_souk.png" alt="Moroccan spices, leather and lanterns in a souk" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>Moroccan Products, Preordered</h3>
+            <p>Argan oil, leather, spices, ceramics, lanterns — authentic Moroccan goods sourced to order and shipped to your door. Tell us what you want; we bring it back.</p>
+            <div class="service-routes">
+              <span class="route-chip">Argan &amp; oils</span>
+              <span class="route-chip">Leather</span>
+              <span class="route-chip">Artisan goods</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Place a preorder
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- LHD Cars & Road Trips -->
+        <article class="service-card card-hover reveal stagger-5">
+          <div class="service-img">
+            <span class="service-badge">Vehicles</span>
+            <img class="card-img-zoom" src="/images/vehicle_road_trip.png" alt="Car transporter on the road" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>LHD Cars &amp; Europe Road Trips</h3>
+            <p>Left-hand-drive vehicle sourcing across Europe and guided road trips from the continent down to Gambia. Paperwork, borders and logistics — all handled.</p>
+            <div class="service-routes">
+              <span class="route-chip">LHD cars</span>
+              <span class="route-chip">Europe → Gambia</span>
+              <span class="route-chip">Convoys</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Talk to us
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- JT Uber -->
+        <article class="service-card card-hover reveal stagger-6">
+          <div class="service-img">
+            <span class="service-badge upcoming">Coming Soon</span>
+            <img class="card-img-zoom" src="/images/ride_hailing.png" alt="Phone app with driver on street — ride hailing" loading="lazy">
+          </div>
+          <div class="service-body">
+            <h3>JT Uber — Gambia</h3>
+            <p>Ride-hailing built for The Gambia. Reliable drivers, fair fares, and an app that actually works when you need a ride from Banjul to Serekunda. Launching soon.</p>
+            <div class="service-routes">
+              <span class="route-chip">Banjul</span>
+              <span class="route-chip">Serekunda</span>
+              <span class="route-chip">Nationwide</span>
+            </div>
+            <a href="/contact.html" class="service-link">
+              Be first to know
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s var(--spring);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ROUTES ═══════════════ -->
+  <section id="routes" class="routes-block py-20 lg:py-28">
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="grid lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
+        <div>
+          <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal mb-3">
+            Our network
+          </p>
+          <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-white mb-5">
+            Routes we cover — by sea &amp; by air.
+          </h2>
+          <p class="reveal stagger-1 text-white/70 text-base sm:text-lg mb-8">
+            A focused network across Europe and West Africa. No over-promising, no mystery
+            destinations — just the corridors our customers actually ship and travel on.
+          </p>
+          <a href="/contact.html" class="btn-primary reveal stagger-2">
+            Check a route
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div>
+          <h3 class="reveal text-white text-sm font-bold uppercase tracking-[0.18em] mb-5 opacity-80">Container &amp; Sea Freight</h3>
+          <div class="flex flex-wrap gap-3 mb-10">
+            <span class="route-pill reveal stagger-1"><span class="route-dot"></span>United Kingdom <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> The Gambia</span>
+            <span class="route-pill reveal stagger-2"><span class="route-dot"></span>United Kingdom <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Guinea Conakry</span>
+            <span class="route-pill reveal stagger-3"><span class="route-dot"></span>Spain <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> The Gambia</span>
+          </div>
+
+          <h3 class="reveal text-white text-sm font-bold uppercase tracking-[0.18em] mb-5 opacity-80">Air Freight &amp; Cargo</h3>
+          <div class="flex flex-wrap gap-3 mb-10">
+            <span class="route-pill reveal stagger-1"><span class="route-dot"></span>UK <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10M7 7l4-4M7 7l4 4M17 17H7M17 17l-4-4M17 17l-4 4"/></svg> Gambia</span>
+            <span class="route-pill reveal stagger-2"><span class="route-dot"></span>UK <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10M7 7l4-4M7 7l4 4M17 17H7M17 17l-4-4M17 17l-4 4"/></svg> Conakry</span>
+            <span class="route-pill reveal stagger-3"><span class="route-dot"></span>UK <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10M7 7l4-4M7 7l4 4M17 17H7M17 17l-4-4M17 17l-4 4"/></svg> Morocco</span>
+          </div>
+
+          <h3 class="reveal text-white text-sm font-bold uppercase tracking-[0.18em] mb-5 opacity-80">Tourism &amp; Special Routes</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="route-pill reveal stagger-1"><span class="route-dot"></span>Marrakech · Chefchaouen · Sahara</span>
+            <span class="route-pill reveal stagger-2"><span class="route-dot"></span>Europe <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Gambia (road trip)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ WHY CHOOSE US ═══════════════ -->
+  <section class="py-20 lg:py-28 bg-cream">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">Why Jallow Transporters</p>
+        <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-5">
+          Built on four things we don't compromise on.
+        </h2>
+        <p class="reveal stagger-1 text-charcoal-light text-base sm:text-lg">
+          We're a small team that actually picks up the phone, meets shipments at the port,
+          and treats every box like it's going to family — because half the time, it is.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="pillar-card reveal stagger-1">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="text-navy text-lg mb-2">Diaspora-focused service</h3>
+          <p class="text-charcoal-light text-sm">We ship with the families we serve in mind — clear pricing, clear timelines, and no surprises when your container lands.</p>
+        </div>
+
+        <div class="pillar-card reveal stagger-2">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 class="text-navy text-lg mb-2">Door-to-door collection</h3>
+          <p class="text-charcoal-light text-sm">We come to you across the UK to collect goods, weigh them, and label them properly — no wasted trips to storage depots.</p>
+        </div>
+
+        <div class="pillar-card reveal stagger-3">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="text-navy text-lg mb-2">Clear, honest pricing</h3>
+          <p class="text-charcoal-light text-sm">One quote, agreed upfront. No hidden port fees or last-minute surcharges — just the number you were given when you booked.</p>
+        </div>
+
+        <div class="pillar-card reveal stagger-4">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <h3 class="text-navy text-lg mb-2">Feet on the ground</h3>
+          <p class="text-charcoal-light text-sm">Local contacts at every port we ship into — Banjul, Conakry, Casablanca — so collection and clearance actually happens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PROCESS ═══════════════ -->
+  <section class="py-20 lg:py-28 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl mb-14">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">How it works</p>
+        <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-5">
+          Four steps, one shipment, done right.
+        </h2>
+        <p class="reveal stagger-1 text-charcoal-light text-base sm:text-lg">
+          We keep the process deliberately simple so there's nothing to second-guess
+          between booking with us and your goods being collected at the other end.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="process-step reveal stagger-1">
+          <div class="step-num">1</div>
+          <h3 class="text-navy text-lg mb-2">Book &amp; label</h3>
+          <p class="text-charcoal-light text-sm">Tell us what you're sending. We confirm the route, price, and help you pack, seal and label to standard.</p>
+        </div>
+        <div class="process-step reveal stagger-2">
+          <div class="step-num">2</div>
+          <h3 class="text-navy text-lg mb-2">We collect</h3>
+          <p class="text-charcoal-light text-sm">Door-to-door collection across the UK, or drop-off at our Birmingham warehouse — whichever suits you.</p>
+        </div>
+        <div class="process-step reveal stagger-3">
+          <div class="step-num">3</div>
+          <h3 class="text-navy text-lg mb-2">Ship by sea or air</h3>
+          <p class="text-charcoal-light text-sm">Your freight moves on the right service for its weight and urgency, with updates along the way.</p>
+        </div>
+        <div class="process-step reveal stagger-4">
+          <div class="step-num">4</div>
+          <h3 class="text-navy text-lg mb-2">Arrival &amp; handover</h3>
+          <p class="text-charcoal-light text-sm">We notify you the moment it lands. Collection windows and clearance guidance handled at the destination port.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+  <section class="py-20 lg:py-28 bg-cream">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">The word on the street</p>
+        <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-4">
+          What our senders say.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="testimonial-card reveal stagger-1">
+          <div class="testimonial-stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-charcoal text-base mb-5 italic">
+            "Sent two barrels and a freezer to my family in Serekunda. Collected from my door in Manchester, cleared and delivered in Gambia exactly when they said. First time I've not had to chase anyone."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">AJ</div>
+            <div>
+              <p class="font-bold text-navy text-sm">Aminata Jallow</p>
+              <p class="text-charcoal-light text-xs">Manchester → Serekunda</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal stagger-2">
+          <div class="testimonial-stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-charcoal text-base mb-5 italic">
+            "Preordered argan oil and leather babouches through JT for my shop. Genuine stock, decent wholesale pricing, and they handled the whole import side. Already on my third order."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">MK</div>
+            <div>
+              <p class="font-bold text-navy text-sm">Mariama Kamara</p>
+              <p class="text-charcoal-light text-xs">Retailer, London</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal stagger-3">
+          <div class="testimonial-stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-charcoal text-base mb-5 italic">
+            "Booked the Morocco package for our anniversary. Marrakech, the desert, the drive through the Atlas — all properly organised, nothing felt generic. We're going back next year."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">SB</div>
+            <div>
+              <p class="font-bold text-navy text-sm">Sulayman &amp; Binta</p>
+              <p class="text-charcoal-light text-xs">Birmingham → Morocco</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA BAND ═══════════════ -->
+  <section class="cta-band py-20 lg:py-24">
+    <div class="relative max-w-5xl mx-auto px-5 lg:px-8 text-center">
+      <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal mb-4">Ready when you are</p>
+      <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-white mb-5 max-w-3xl mx-auto">
+        Got something to ship? Let's get it moving.
+      </h2>
+      <p class="reveal stagger-1 text-white/70 text-base sm:text-lg max-w-2xl mx-auto mb-9">
+        Tell us the route, the weight, and when you need it there. We'll come back with a
+        straight quote — usually the same day.
+      </p>
+      <div class="reveal stagger-2 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact.html" class="btn-primary">
+          Get Your Quote
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://wa.me/2202289111" target="_blank" rel="noopener" class="btn-outline no-underline"
-          style="color:#1E1E1E;border-color:#1E1E1E;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s;"
-          onmouseover="this.style.transform='translateY(-3px)';this.style.background='rgba(0,0,0,0.05)';"
-          onmouseout="this.style.transform='';this.style.background='transparent';">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-            <path
-              d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.478-.752-6.229-2.028l-.356-.27-3.281 1.1 1.1-3.281-.27-.356A9.95 9.95 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
-          </svg>
-          WhatsApp Us
+        <a href="https://wa.me/447831005961" target="_blank" rel="noopener" class="btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
+          Chat on WhatsApp
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
-  <footer class="py-16 md:py-20" style="background: linear-gradient(180deg, #0F1A30 0%, #0A1222 100%);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-12 lg:gap-16 mb-14">
-        <!-- Company -->
-        <div>
-          <div class="flex items-center gap-2 mb-6">
-            <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-              <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-              <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-            <div class="flex items-baseline gap-0">
-              <span
-                style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;color:#E8941A;letter-spacing:-0.06em;">BAH</span>
-              <span
-                style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;color:#FFFFFF;letter-spacing:0.1em;">TRAVEL</span>
-            </div>
-          </div>
-          <p class="font-body text-sm mb-5" style="color:rgba(255,255,255,0.55);line-height:1.8;">
-            Your trusted partner for visa services, flight bookings, and Hajj &amp; Umrah packages. ATOL protected. Serving the UK and Gambia.
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
+
+        <div class="md:col-span-2">
+          <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="footer-logo mb-5">
+          <p class="text-sm text-white/60 max-w-sm mb-5">
+            UK-headquartered freight specialists serving the diaspora with sea and air cargo to
+            West Africa, Moroccan tourism and authentic Moroccan preorders.
           </p>
-          <div class="flex items-center gap-2 mb-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8941A" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <span class="font-body text-xs font-semibold" style="color:rgba(255,255,255,0.6);">ATOL Protected</span>
+          <div class="flex gap-3">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+            </a>
           </div>
         </div>
 
-        <!-- Quick Links -->
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-6">Quick Links</h4>
-          <ul class="space-y-4">
-            <li><a href="/" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);transition:color 0.3s;" onmouseover="this.style.color='#E8941A'"
-                onmouseout="this.style.color='rgba(255,255,255,0.5)'">Home</a></li>
-            <li><a href="/about" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);transition:color 0.3s;" onmouseover="this.style.color='#E8941A'"
-                onmouseout="this.style.color='rgba(255,255,255,0.5)'">About Us</a></li>
-            <li><a href="/contact" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);transition:color 0.3s;" onmouseover="this.style.color='#E8941A'"
-                onmouseout="this.style.color='rgba(255,255,255,0.5)'">Contact Us</a></li>
-            <li><a href="/terms" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);transition:color 0.3s;" onmouseover="this.style.color='#E8941A'"
-                onmouseout="this.style.color='rgba(255,255,255,0.5)'">Terms & Conditions</a></li>
+          <h4>Explore</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#routes">Our Routes</a></li>
+            <li><a href="/terms.html">Booking Guidelines</a></li>
+            <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
 
-        <!-- Contact -->
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-6">Get In Touch</h4>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8941A" stroke-width="2"
-                class="flex-shrink-0 mt-1">
-                <path
-                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-              </svg>
-              <a href="tel:+2202289111" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.6);">+220 228 9111</a>
+          <h4>Get in Touch</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Sher Storage, Smethwick,<br>Birmingham B66 2NZ, UK</span>
             </li>
-            <li class="flex items-start gap-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8941A" stroke-width="2"
-                class="flex-shrink-0 mt-1">
-                <path
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <a href="mailto:info@bahtravel.com" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.6);">info@bahtravel.com</a>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+447831005961">+44 7831 005961</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a>
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="pt-8 border-t border-white/10">
-        <p class="font-body text-xs text-center" style="color:rgba(255,255,255,0.4);">
-          © 2026 BAH Travel. All rights reserved. ATOL Protected — Booking Reference: UK12345
-        </p>
+      <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <p>© <span id="year"></span> Jallow Transporters Ltd. All rights reserved.</p>
+        <p>Customer · Care · Commitment</p>
       </div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════ WHATSAPP WIDGET ═══════════════════════════════ -->
-  <button class="wa-btn" id="waBtn" aria-label="Open WhatsApp chat">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path
-        d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.478-.752-6.229-2.028l-.356-.27-3.281 1.1 1.1-3.281-.27-.356A9.95 9.95 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
+  <!-- ═══════════════ WHATSAPP WIDGET ═══════════════ -->
+  <button class="wa-btn" id="wa-btn" aria-label="Chat with us on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/>
     </svg>
   </button>
 
-  <!-- WhatsApp Popup -->
-  <div class="wa-popup" id="waPopup">
+  <div class="wa-popup" id="wa-popup" role="dialog" aria-label="WhatsApp chat">
     <div class="wa-popup-header">
       <div class="wa-popup-avatar">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="color:#128C7E;">
-          <path
-            d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
-        </svg>
+        <img src="/brand_assets/jt-logo.png" alt="JT">
       </div>
-      <div>
-        <div class="font-body text-sm font-semibold text-white">BAH Travel Support</div>
-        <div class="font-body text-xs" style="color:rgba(255,255,255,0.7);">Always here to help</div>
+      <div class="flex-1">
+        <p class="text-white font-semibold text-sm leading-tight">Jallow Transporters</p>
+        <p class="text-white/80 text-xs">Typically replies within an hour</p>
       </div>
+      <button id="wa-close" class="text-white/80 hover:text-white" aria-label="Close chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
     <div class="wa-popup-body">
       <div class="wa-greeting">
-        Hello! 👋 How can we help you today? We offer visa services, flight bookings, and Hajj/Umrah packages.
+        <p>Hey there 👋 How can the JT team help today — a quote, a collection, or a preorder?</p>
+        <p class="wa-greeting-time">Online now</p>
       </div>
-      <div class="wa-greeting-time">Just now</div>
+      <div class="wa-typing" id="wa-typing" style="display:none;">
+        <span class="wa-typing-dot"></span>
+        <span class="wa-typing-dot"></span>
+        <span class="wa-typing-dot"></span>
+      </div>
     </div>
-    <div class="wa-popup-input">
-      <input type="text" placeholder="Type your message..." onkeydown="if(event.key === 'Enter') this.nextElementSibling.click()">
-      <button class="wa-send-btn" onclick="const p = this.previousElementSibling; const msg = p.value.trim(); window.open(msg ? 'https://wa.me/2202289111?text=' + encodeURIComponent(msg) : 'https://wa.me/2202289111', '_blank'); p.value = '';">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.9429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.28340141 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99021575 L3.03521743,10.4310889 C3.03521743,10.5881863 3.19218622,10.7452837 3.50612381,10.7452837 L16.6915026,11.5307706 C16.6915026,11.5307706 17.1624089,11.5307706 17.1624089,11.0594785 L17.1624089,12.0020627 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
-        </svg>
+    <form class="wa-popup-input" id="wa-form">
+      <input type="text" id="wa-input" placeholder="Type a message..." aria-label="Message">
+      <button type="submit" class="wa-send-btn" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
-    </div>
+    </form>
   </div>
 
   <script>
-    // Scroll Animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
-
-    // Navbar scroll effect
+    // Nav scroll state
     const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
+    const onScroll = () => {
+      if (window.scrollY > 10) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-      lastScroll = window.scrollY;
-    });
-
-    // Mobile menu toggle
+    // Mobile menu
     const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('menu-backdrop');
+    const closeMenu = () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      backdrop.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    };
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-      navbar.classList.toggle('menu-open', hamburger.classList.contains('open'));
-      hamburger.setAttribute('aria-expanded', hamburger.classList.contains('open'));
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      backdrop.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+    backdrop.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    // Scroll reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => io.observe(el));
+    // Fallback: ensure all reveal elements become visible if not already (e.g. for full-page screenshots)
+    setTimeout(() => document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => el.classList.add('visible')), 600);
+
+    // WhatsApp widget
+    const waBtn = document.getElementById('wa-btn');
+    const waPopup = document.getElementById('wa-popup');
+    const waClose = document.getElementById('wa-close');
+    const waForm = document.getElementById('wa-form');
+    const waInput = document.getElementById('wa-input');
+    const waTyping = document.getElementById('wa-typing');
+    const WA_NUMBER = '447831005961';
+
+    const openOrRedirect = () => {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        window.open('https://wa.me/' + WA_NUMBER, '_blank');
+      } else {
+        waPopup.classList.add('open');
+      }
+    };
+    waBtn.addEventListener('click', openOrRedirect);
+    waClose.addEventListener('click', () => waPopup.classList.remove('open'));
+    waForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = waInput.value.trim();
+      if (!msg) return;
+      waTyping.style.display = 'flex';
+      setTimeout(() => {
+        waTyping.style.display = 'none';
+        window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+        waInput.value = '';
+      }, 800);
     });
 
-    // Close mobile menu when link is clicked
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        navbar.classList.remove('menu-open');
-        hamburger.setAttribute('aria-expanded', 'false');
+    // Active nav link for hash changes
+    const links = document.querySelectorAll('.nav-link');
+    const setActive = () => {
+      const hash = window.location.hash || '/';
+      links.forEach(l => {
+        const href = l.getAttribute('href');
+        l.classList.toggle('active', (hash === '/' && href === '/') || href === hash || href.endsWith(hash));
       });
-    });
-
-    // WhatsApp Widget
-    const waBtn = document.getElementById('waBtn');
-    const waPopup = document.getElementById('waPopup');
-
-    waBtn.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        window.open('https://wa.me/2202289111', '_blank');
-        return;
-      }
-      waPopup.classList.toggle('open');
-    });
-
-    // Close popup when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!waBtn.contains(e.target) && !waPopup.contains(e.target)) {
-        waPopup.classList.remove('open');
-      }
-    });
-
-    // Active nav link
-    document.querySelectorAll('.nav-link, .mobile-menu a').forEach(link => {
-      if (link.href === window.location.href) {
-        link.classList.add('active');
-      }
-    });
+    };
+    window.addEventListener('hashchange', setActive);
   </script>
-
 </body>
 
 </html>

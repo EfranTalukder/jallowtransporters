@@ -5,58 +5,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>Contact BAH Travel — Get in Touch | Visa, Flights & Hajj/Umrah</title>
+  <title>Contact Jallow Transporters — Get a Freight Quote | Birmingham UK</title>
   <meta name="description"
-    content="Contact BAH Travel via WhatsApp, phone, or email. Our team is here to help with visa applications, flight bookings, and Hajj & Umrah packages.">
+    content="Contact Jallow Transporters Ltd for a free quote on container shipping, air freight, Moroccan tourism or preorders. Based in Birmingham, B66 2NZ. Call +44 7831 005961.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { theme: { extend: { colors: { cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' }, charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' }, amber: { DEFAULT: '#E8941A', light: '#F5A623', dark: '#C67A0F' }, navy: { DEFAULT: '#1B2D4F', dark: '#0F1A30' } }, fontFamily: { display: ['Montserrat', 'Georgia', 'serif'], body: ['Manrope', 'system-ui', 'sans-serif'] } } } }</script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
+            teal: { DEFAULT: '#1F9D9D', light: '#E6F4F4', dark: '#15787A', deep: '#0E5F61' },
+            navy: { DEFAULT: '#0E1B2E', dark: '#070E1A' },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'system-ui', 'sans-serif'],
+            body: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Manrope', system-ui, sans-serif;
-      background: #FAF7F2;
-      color: #1E1E1E;
-      line-height: 1.7;
-      overflow-x: hidden;
+      background: #FAF7F2; color: #1E1E1E; line-height: 1.7; overflow-x: hidden;
     }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', system-ui, sans-serif;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; font-weight: 800;
     }
 
     .grain-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.03;
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 256px 256px;
+      background-repeat: repeat; background-size: 256px 256px;
     }
 
     :root {
@@ -66,1322 +57,659 @@
     }
 
     .nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       transition: background-color 0.4s var(--smooth), box-shadow 0.4s var(--smooth), backdrop-filter 0.4s var(--smooth);
       background: transparent;
     }
-
     .nav-bar.scrolled {
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 1px 3px rgba(30, 30, 30, 0.04), 0 8px 32px rgba(30, 30, 30, 0.06);
+      background: rgba(250, 247, 242, 0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 3px rgba(14, 27, 46, 0.04), 0 8px 32px rgba(31, 157, 157, 0.08);
     }
-
-    .nav-bar.scrolled .nav-link {
-      color: #1E1E1E;
-    }
-
-    .nav-bar.scrolled .nav-link:hover {
-      color: #E8941A;
-    }
+    .nav-bar.scrolled .nav-link { color: #1E1E1E; }
+    .nav-bar.scrolled .nav-link:hover { color: #1F9D9D; }
+    .nav-logo { height: 52px; width: auto; display: block; transition: transform 0.4s var(--smooth); }
+    .nav-bar.scrolled .nav-logo { transform: scale(0.92); }
+    @media (max-width: 768px) { .nav-logo { height: 42px; } }
 
     .nav-link {
-      color: #FFFFFF;
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding: 0.25rem 0;
+      color: #FFFFFF; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
+      position: relative; padding: 0.25rem 0;
       transition: color 0.3s var(--smooth);
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #E8941A;
-      border-radius: 1px;
-      transition: width 0.3s var(--spring);
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+      background: #1F9D9D; border-radius: 1px; transition: width 0.3s var(--spring);
     }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 4px; border-radius: 2px; }
 
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-down {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .stagger-1 {
-      transition-delay: 0.08s;
-    }
-
-    .stagger-2 {
-      transition-delay: 0.16s;
-    }
-
-    .stagger-3 {
-      transition-delay: 0.24s;
-    }
-
-    .hero-anim {
-      opacity: 0;
-      animation: fade-up 1s var(--ease-out-expo) forwards;
-    }
-
-    .hero-anim-1 {
-      animation-delay: 0.15s;
-    }
-
-    .hero-anim-2 {
-      animation-delay: 0.35s;
-    }
-
-    .nav-anim {
-      opacity: 0;
-      animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards;
-    }
-
-    .card-hover {
-      transition: transform 0.5s var(--spring), box-shadow 0.5s var(--spring);
-    }
-
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 40px -8px rgba(232, 148, 26, 0.15), 0 4px 16px -4px rgba(30, 30, 30, 0.08);
-    }
-
-    .section-navy {
-      background: linear-gradient(135deg, #1B2D4F 0%, #0F1A30 100%);
+    .page-hero {
+      position: relative; padding-top: 9rem; padding-bottom: 5rem; overflow: hidden;
+      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 55%, #0E5F61 100%);
       color: #FFFFFF;
     }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 0.5rem;
-      background: none;
-      border: none;
-      z-index: 1001;
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(31, 157, 157, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.15), transparent 60%);
+      pointer-events: none;
     }
+    .hero-accent-line { display: inline-block; width: 48px; height: 2px; background: #1F9D9D; border-radius: 1px; margin-right: 0.9rem; vertical-align: middle; }
 
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #FFFFFF;
-      border-radius: 1px;
-      transition: transform 0.3s var(--spring), opacity 0.2s, background-color 0.3s;
-    }
-
-    .nav-bar.scrolled .hamburger span {
-      background: #1E1E1E;
-    }
-
-    .hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-      background: #1E1E1E;
-    }
-
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-      background: #1E1E1E;
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-    }
-
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: rgba(250, 247, 242, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      gap: 1.5rem;
-      transform: translateX(100%);
-      opacity: 0;
-      transition: transform 0.6s var(--ease-out-expo), opacity 0.4s var(--smooth);
-      overflow: hidden;
-    }
-
-    .mobile-menu.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .mobile-menu a {
-      font-family: 'Montserrat', system-ui, sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1E1E1E;
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: color 0.3s var(--smooth), opacity 0.5s var(--smooth), transform 0.5s var(--ease-out-expo);
-      position: relative;
-      z-index: 1;
-    }
-
-    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
-    .mobile-menu.open a:nth-of-type(1) { transition-delay: 0.15s; }
-    .mobile-menu.open a:nth-of-type(2) { transition-delay: 0.22s; }
-    .mobile-menu.open a:nth-of-type(3) { transition-delay: 0.29s; }
-    .mobile-menu.open a:nth-of-type(4) { transition-delay: 0.36s; }
-
-    .mobile-menu a:hover { color: #E8941A; }
-    .mobile-menu a.active { color: #E8941A; }
-
-    .mm-num {
-      display: none;
-    }
-
-    .mm-footer {
-      margin-top: 3rem;
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #4A4A4A;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.5s var(--smooth) 0.5s;
-    }
-
-    .mobile-menu.open .mm-footer { opacity: 1; }
-
-    .nav-bar.menu-open {
-      background: transparent !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
-    }
-
-    .nav-bar.menu-open .logo-travel-text {
-      color: #1E1E1E !important;
-    }
-
+    @keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes bounce-in {
-      0% {
-        opacity: 0;
-        transform: scale(0) translateY(20px);
-      }
-
-      60% {
-        transform: scale(1.15) translateY(-5px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      0% { opacity: 0; transform: scale(0) translateY(20px); }
+      60% { transform: scale(1.15) translateY(-5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     @keyframes wa-attention {
+      0%, 100% { transform: scale(1); } 10% { transform: scale(1.1); }
+      20% { transform: scale(1); } 30% { transform: scale(1.05); } 40% { transform: scale(1); }
+    }
+    @keyframes dot-bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-      0%,
-      100% {
-        transform: scale(1);
-      }
+    .hero-anim { opacity: 0; animation: fade-up 1s var(--ease-out-expo) forwards; }
+    .hero-anim-1 { animation-delay: 0.15s; } .hero-anim-2 { animation-delay: 0.35s; } .hero-anim-3 { animation-delay: 0.55s; }
+    .nav-anim { opacity: 0; animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards; }
 
-      10% {
-        transform: scale(1.1);
-      }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-1 { transition-delay: 0.08s; } .stagger-2 { transition-delay: 0.16s; } .stagger-3 { transition-delay: 0.24s; } .stagger-4 { transition-delay: 0.32s; }
 
-      20% {
-        transform: scale(1);
-      }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: #1F9D9D; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+      border: none; cursor: pointer;
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
+      box-shadow: 0 4px 16px -2px rgba(31, 157, 157, 0.35);
+    }
+    .btn-primary:hover { background: #15787A; box-shadow: 0 10px 30px -6px rgba(31, 157, 157, 0.45); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #0E5F61; }
+    .btn-primary:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 3px; }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-primary .btn-arrow { transition: transform 0.3s var(--spring); }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
 
-      30% {
-        transform: scale(1.05);
-      }
+    /* Form */
+    .form-card {
+      background: #FFFFFF; border-radius: 1.25rem; padding: 2.25rem 2rem;
+      box-shadow: 0 24px 48px -16px rgba(14, 27, 46, 0.12), 0 2px 6px -2px rgba(14, 27, 46, 0.04);
+      border: 1px solid #F0EBE3;
+    }
+    .form-label {
+      display: block; font-size: 0.8rem; font-weight: 600; color: #0E1B2E;
+      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; background: #FAF7F2; border: 1px solid #F0EBE3;
+      padding: 0.8rem 1rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-size: 0.95rem; color: #1E1E1E;
+      transition: border-color 0.3s var(--smooth), background 0.3s var(--smooth), box-shadow 0.3s var(--smooth);
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none; border-color: #1F9D9D; background: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(31, 157, 157, 0.12);
+    }
+    .form-textarea { resize: vertical; min-height: 140px; }
+    .form-error { font-size: 0.78rem; color: #C04B4F; margin-top: 0.35rem; display: none; }
+    .form-input.error, .form-textarea.error, .form-select.error { border-color: #C04B4F; background: #FDF4F4; }
+    .form-input.error + .form-error, .form-textarea.error + .form-error, .form-select.error + .form-error { display: block; }
 
-      40% {
-        transform: scale(1);
-      }
+    .spinner {
+      display: none; width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35);
+      border-top-color: #FFFFFF; border-radius: 50%; animation: spin 0.8s linear infinite;
     }
 
-    @keyframes dot-bounce {
-
-      0%,
-      80%,
-      100% {
-        transform: translateY(0);
-      }
-
-      40% {
-        transform: translateY(-6px);
-      }
+    .success-card {
+      display: none; background: linear-gradient(135deg, #E6F4F4 0%, #FFFFFF 100%);
+      border: 1px solid #1F9D9D; border-radius: 1rem; padding: 2.5rem 2rem; text-align: center;
+    }
+    .success-icon {
+      width: 72px; height: 72px; margin: 0 auto 1.25rem; border-radius: 50%;
+      background: linear-gradient(135deg, #1F9D9D, #15787A); color: #FFFFFF;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 30px -6px rgba(31, 157, 157, 0.45);
     }
 
+    /* Contact cards */
+    .contact-card {
+      background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1rem;
+      padding: 1.5rem 1.4rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: transform 0.4s var(--spring), border-color 0.3s var(--smooth), box-shadow 0.4s var(--spring);
+    }
+    .contact-card:hover { transform: translateY(-4px); border-color: rgba(31, 157, 157, 0.3); box-shadow: 0 18px 40px -12px rgba(31, 157, 157, 0.18); }
+    .contact-icon {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, #E6F4F4, #C9E8E8); color: #0E5F61;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-label { font-size: 0.72rem; font-weight: 700; color: #15787A; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .contact-value { color: #0E1B2E; font-weight: 600; font-size: 0.98rem; line-height: 1.4; }
+    .contact-value a { color: #0E1B2E; transition: color 0.3s var(--smooth); }
+    .contact-value a:hover { color: #1F9D9D; }
+
+    .map-wrap {
+      border-radius: 1.25rem; overflow: hidden;
+      box-shadow: 0 18px 48px -16px rgba(14, 27, 46, 0.2);
+      border: 1px solid #F0EBE3; background: #F0EBE3;
+    }
+    .map-wrap iframe { display: block; width: 100%; height: 400px; border: 0; filter: saturate(0.92) contrast(0.96); }
+
+    /* WhatsApp */
     .wa-btn {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 9000;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: #25D366;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
       animation: bounce-in 0.8s var(--spring) 1.5s forwards, wa-attention 3s ease-in-out 4s infinite;
       opacity: 0;
       transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring);
     }
-
-    .wa-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45);
-    }
-
+    .wa-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45); }
+    .wa-btn:active { transform: scale(0.95); }
+    .wa-btn:focus-visible { outline: 3px solid #25D366; outline-offset: 4px; }
     .wa-popup {
-      position: fixed;
-      bottom: 6.5rem;
-      right: 1.5rem;
-      z-index: 9001;
-      width: 360px;
-      max-width: calc(100vw - 2rem);
-      background: #FFFFFF;
-      border-radius: 1rem;
-      box-shadow: 0 12px 48px rgba(30, 30, 30, 0.12), 0 2px 8px rgba(30, 30, 30, 0.06);
-      overflow: hidden;
-      transform: translateY(20px) scale(0.95);
-      opacity: 0;
+      position: fixed; bottom: 6.5rem; right: 1.5rem; z-index: 9001;
+      width: 360px; max-width: calc(100vw - 2rem);
+      background: #FFFFFF; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(14, 27, 46, 0.15), 0 2px 8px rgba(14, 27, 46, 0.06);
+      transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none;
       transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth);
-      pointer-events: none;
     }
+    .wa-popup.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .wa-popup-header { background: linear-gradient(135deg, #075E54, #128C7E); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .wa-popup-avatar { width: 42px; height: 42px; border-radius: 50%; background: #FAF7F2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .wa-popup-avatar img { width: 100%; height: 100%; object-fit: contain; }
+    .wa-popup-body { padding: 1.25rem; background: #E5DDD5; min-height: 100px; }
+    .wa-greeting { background: #FFFFFF; padding: 0.75rem 1rem; border-radius: 0 0.75rem 0.75rem 0.75rem; font-size: 0.88rem; color: #1E1E1E; max-width: 85%; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
+    .wa-greeting-time { font-size: 0.7rem; color: #999; text-align: right; margin-top: 0.25rem; }
+    .wa-popup-input { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-top: 1px solid #F0EBE3; background: #FFFFFF; }
+    .wa-popup-input input { flex: 1; border: none; outline: none; padding: 0.55rem 0.75rem; font-size: 0.88rem; background: #F5F5F5; border-radius: 1.5rem; }
+    .wa-send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer; background: #128C7E; color: white; display: flex; align-items: center; justify-content: center; transition: background 0.3s var(--smooth); }
+    .wa-send-btn:hover { background: #075E54; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0.75rem; background: #FFFFFF; border-radius: 1rem; width: fit-content; margin-top: 0.75rem; }
+    .wa-typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #25D366; animation: dot-bounce 1.4s infinite ease-in-out; }
+    .wa-typing-dot:nth-child(2) { animation-delay: 0.2s; } .wa-typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-    .wa-popup.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      pointer-events: auto;
+    /* Footer */
+    .footer { background: linear-gradient(180deg, #0E1B2E 0%, #070E1A 100%); color: #C5CEDC; }
+    .footer-logo { height: 68px; width: auto; display: block; }
+    .footer a { color: #C5CEDC; transition: color 0.3s var(--smooth); }
+    .footer a:hover { color: #1F9D9D; }
+    .footer h4 {
+      font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem;
     }
-
-    .wa-popup-header {
-      background: linear-gradient(135deg, #075E54, #128C7E);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06); color: #C5CEDC;
+      transition: background 0.3s var(--smooth), color 0.3s var(--smooth), transform 0.3s var(--spring);
     }
+    .social-icon:hover { background: #1F9D9D; color: #FFFFFF; transform: translateY(-2px); }
 
-    .wa-popup-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #FAF7F2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
+      background: #FFFFFF; z-index: 1050; padding: 5.5rem 1.75rem 2rem;
+      transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo);
+      box-shadow: -10px 0 40px rgba(14, 27, 46, 0.08);
+      display: flex; flex-direction: column; gap: 1.2rem;
     }
-
-    .wa-popup-body {
-      padding: 1.25rem;
-      background: #E5DDD5;
-      min-height: 100px;
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.15rem;
+      padding: 0.6rem 0; border-bottom: 1px solid #F0EBE3;
     }
-
-    .wa-greeting {
-      background: #FFFFFF;
-      padding: 0.75rem 1rem;
-      border-radius: 0 0.75rem 0.75rem 0.75rem;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      max-width: 85%;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    .mobile-menu a:hover { color: #1F9D9D; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: #FFFFFF; margin: 5px 0; border-radius: 2px;
+      transition: transform 0.3s var(--smooth), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
-
-    .wa-greeting-time {
-      font-size: 0.7rem;
-      color: #999;
-      text-align: right;
-      margin-top: 0.25rem;
+    .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
+    .menu-backdrop {
+      position: fixed; inset: 0; background: rgba(14, 27, 46, 0.4); z-index: 1040;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--smooth);
     }
-
-    .wa-popup-input {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #F0EBE3;
-      background: #FFFFFF;
-    }
-
-    .wa-popup-input input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: 'Manrope', sans-serif;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      background: #F0EBE3;
-      padding: 0.6rem 1rem;
-      border-radius: 1.5rem;
-    }
-
-    .wa-send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: #25D366;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.2s var(--spring), background-color 0.2s;
-    }
-
-    .wa-send-btn:hover {
-      background: #20BA5A;
-      transform: scale(1.08);
-    }
-
-    .wa-typing-dots {
-      display: flex;
-      gap: 4px;
-      padding: 0.4rem 0;
-    }
-
-    .wa-typing-dots span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #999;
-      animation: dot-bounce 1.4s ease-in-out infinite;
-    }
-
-    .wa-typing-dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .wa-typing-dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .cf-input-focus:focus {
-      border-color: #E8941A !important;
-      box-shadow: 0 0 0 3px rgba(232, 148, 26, 0.12) !important;
-    }
-
-    #cf-submit:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px -4px rgba(232, 148, 26, 0.45), 0 2px 8px rgba(232, 148, 26, 0.2);
-    }
-
-    #cf-submit:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    #cf-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #FAF7F2;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #d4cfc7;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 640px) {
-      .wa-popup {
-        right: 0;
-        bottom: 5.5rem;
-        max-width: 100vw;
-        width: 100vw;
-        border-radius: 1rem 1rem 0 0;
-      }
-    }
-
-    .logo-bah {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.08em;
-    }
-
-    .logo-travel {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-    }
-
-    .nav-bar.scrolled .logo-travel-text {
-      color: #1E1E1E !important;
-    }
-
-    .logo-travel-text {
-      color: #FFFFFF;
-      transition: color 0.4s;
-    }
-
-    /* ── Mobile Overrides (Appended) ── */
-    @media (max-width: 768px) {
-
-      /* Typography Scaling */
-      .text-5xl,
-      .text-7xl,
-      .text-8xl {
-        font-size: 2.25rem !important;
-        line-height: 1.2 !important;
-      }
-
-      .text-4xl {
-        font-size: 1.875rem !important;
-        line-height: 1.3 !important;
-      }
-
-      .text-3xl {
-        font-size: 1.5rem !important;
-      }
-
-      p.text-lg,
-      p.text-xl {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-      }
-
-      /* Spacing Fixes */
-      .py-32 {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-
-      .py-24 {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-
-      .px-6,
-      .px-8,
-      .lg\:px-8 {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-      }
-
-      .hero-section .relative {
-        padding-top: 7rem !important;
-        padding-bottom: 3.5rem !important;
-      }
-
-      /* Layout Fixes */
-      .gap-8,
-      .gap-10,
-      .gap-12 {
-        gap: 1.5rem !important;
-      }
-
-      /* WhatsApp Fixes */
-      .wa-btn {
-        bottom: 1rem !important;
-        right: 1rem !important;
-        width: 50px !important;
-        height: 50px !important;
-      }
-
-      .wa-popup {
-        right: 0 !important;
-        bottom: 4.5rem !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        border-radius: 1rem 1rem 0 0 !important;
-      }
-
-      /* Nav Fixes */
-      .logo-bah,
-      .logo-travel {
-        font-size: 1.15rem !important;
-      }
-
-      .mobile-menu a {
-        font-size: 2rem !important;
-      }
-
-      .desktop-nav {
-        display: none !important;
-      }
-
-      .scroll-indicator {
-        display: none !important;
-      }
-
-      /* Contact page — Follow Us social icons */
-      .contact-social {
-        gap: 1.25rem !important;
-      }
-
-      .contact-social a {
-        width: 64px !important;
-        height: 64px !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        box-shadow: none !important;
-      }
-
-      .contact-social a svg {
-        width: 26px !important;
-        height: 26px !important;
-      }
-
-      /* Performance Fix for Mobile Scroll Jitter */
-      * {
-        background-attachment: scroll !important;
-      }
-      .grain-overlay {
-        transform: translateZ(0) !important;
-        will-change: transform;
-      }
-    }
+    .menu-backdrop.open { opacity: 1; pointer-events: auto; }
   </style>
 </head>
 
 <body>
-  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="grain-overlay"></div>
 
-  <!-- Navigation -->
-  <nav class="nav-bar nav-anim" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 no-underline" aria-label="BAH Travel Home">
-        <svg width="36" height="36" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-          <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-          <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-        <div class="flex items-baseline gap-0">
-          <span class="logo-bah" style="color:#E8941A;">BAH</span>
-          <span class="logo-travel logo-travel-text">TRAVEL</span>
-        </div>
+  <nav class="nav-bar nav-anim" id="navbar">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3" aria-label="Jallow Transporters home">
+        <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="nav-logo">
       </a>
-      <div class="desktop-nav flex items-center gap-8">
-        <a href="/" class="nav-link no-underline">Home</a>
-        <a href="/about" class="nav-link no-underline">About</a>
-        <a href="/contact" class="nav-link active no-underline">Contact</a>
-        <a href="/terms" class="nav-link no-underline">Terms</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/#routes" class="nav-link">Routes</a>
+        <a href="/terms.html" class="nav-link">Terms</a>
+        <a href="/contact.html" class="nav-link active">Contact</a>
+        <a href="/contact.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
+          Get a Quote
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <button class="hamburger md:hidden flex flex-col justify-center items-center w-10 h-10" id="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-    <a href="/"><span class="mm-num">01</span><span>Home</span></a>
-    <a href="/about"><span class="mm-num">02</span><span>About</span></a>
-    <a href="/contact" class="active"><span class="mm-num">03</span><span>Contact</span></a>
-    <a href="/terms"><span class="mm-num">04</span><span>Terms</span></a>
-    <div class="mm-footer" aria-hidden="true">Your trusted travel partner</div>
-  </div>
+  <div class="menu-backdrop" id="menu-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#routes">Routes</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/contact.html" class="btn-primary mt-4 justify-center">Get a Quote</a>
+  </aside>
 
-  <!-- Hero Section -->
-  <section class="relative min-h-[50vh] pt-24 pb-12 md:pt-32 md:pb-20 flex items-center section-navy" id="hero">
-    <div class="absolute inset-0 z-0"
-      style="background: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&h=1080&fit=crop&q=85') center/cover no-repeat; background-attachment: fixed;">
-      <div
-        style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,26,48,0.88) 0%, rgba(27,45,79,0.72) 40%, rgba(232,148,26,0.18) 100%);">
-      </div>
-      <div
-        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,26,48,0.9) 0%, transparent 40%);">
-      </div>
-    </div>
-    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;">
-      <svg style="position:absolute;top:-10%;right:5%;opacity:0.06;" width="300" height="300" viewBox="0 0 200 200"
-        fill="none">
-        <polygon points="100,10 123,40 160,40 132,62 143,98 100,78 57,98 68,62 40,40 77,40" fill="#E8941A" />
-      </svg>
-    </div>
-    <div class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full">
-      <div class="hero-anim hero-anim-1 flex items-center gap-3 mb-6">
-        <span style="display:inline-block;width:40px;height:1px;background:#E8941A;"></span>
-        <span class="font-body text-sm font-semibold tracking-widest uppercase" style="color:#E8941A;">Get in
-          Touch</span>
-      </div>
-      <h1 class="hero-anim hero-anim-2 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
-        Contact Us
+  <section class="page-hero">
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 text-center">
+      <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-teal mb-5">
+        <span class="hero-accent-line"></span>Get in touch
+      </p>
+      <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
+        Tell us what you need <span class="text-teal">moved, booked, or sourced.</span>
       </h1>
-      <p class="hero-anim hero-anim-2 font-body text-lg md:text-xl"
-        style="color:rgba(255,255,255,0.7);max-width:580px;line-height:1.7;">
-        Reach out to our team via WhatsApp, phone, or email. We're here to help with visas, flights, and pilgrimage planning.
+      <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-2xl mx-auto">
+        Container quote, air freight rate, Morocco package, or a Moroccan preorder — drop us a
+        message and we'll come back the same day.
       </p>
     </div>
   </section>
 
-  <!-- Contact Methods -->
-  <section class="py-24 md:py-32 bg-cream">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <h2 class="font-display text-4xl md:text-5xl font-bold mb-5" style="color:#1E1E1E;">How to Reach Us</h2>
-        <p class="font-body text-lg mx-auto" style="color:#4A4A4A;max-width:540px;">
-          Choose your preferred way to connect. Typically, we reply within minutes.
-        </p>
+  <!-- ═════ CONTACT GRID ═════ -->
+  <section class="py-20 lg:py-24">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-14 items-start">
+
+      <!-- FORM -->
+      <div class="reveal-left">
+        <div class="form-card">
+          <div class="mb-7">
+            <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-2">Send a message</p>
+            <h2 class="text-navy text-[1.75rem] lg:text-[2.25rem] mb-2">Request a quote</h2>
+            <p class="text-charcoal-light text-sm">Fill the form — we typically reply within the hour during UK business hours.</p>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="form-label" for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-input" required placeholder="Your full name">
+                <p class="form-error">Please enter your name.</p>
+              </div>
+              <div>
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input" required placeholder="you@example.com">
+                <p class="form-error">Please enter a valid email address.</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="form-label" for="phone">Phone / WhatsApp</label>
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+44 ...">
+                <p class="form-error">Please enter a phone number.</p>
+              </div>
+              <div>
+                <label class="form-label" for="service">Service</label>
+                <select id="service" name="service" class="form-select" required>
+                  <option value="">Choose a service</option>
+                  <option>Container shipping</option>
+                  <option>Air freight / cargo</option>
+                  <option>Morocco tourism package</option>
+                  <option>Moroccan preorder</option>
+                  <option>LHD car / Europe road trip</option>
+                  <option>JT Uber (launch updates)</option>
+                  <option>Something else</option>
+                </select>
+                <p class="form-error">Please select a service.</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label class="form-label" for="origin">From</label>
+                <input type="text" id="origin" name="origin" class="form-input" placeholder="e.g. Birmingham, UK">
+              </div>
+              <div>
+                <label class="form-label" for="destination">To</label>
+                <input type="text" id="destination" name="destination" class="form-input" placeholder="e.g. Banjul, Gambia">
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="form-label" for="message">Tell us about your shipment</label>
+              <textarea id="message" name="message" class="form-textarea" required placeholder="What you're sending, approximate size/weight, timeline, and anything else we should know."></textarea>
+              <p class="form-error">Please include a short message.</p>
+            </div>
+
+            <button type="submit" class="btn-primary w-full sm:w-auto" id="submitBtn">
+              <span id="btnText">Send Message</span>
+              <div class="spinner" id="spinner"></div>
+              <svg class="btn-arrow" id="btnArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+
+            <p class="text-xs text-charcoal-light mt-4">
+              By sending this form you agree to be contacted about your enquiry. We don't share your details.
+            </p>
+          </form>
+        </div>
+
+        <div class="success-card" id="successCard" role="status" aria-live="polite">
+          <div class="success-icon">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 class="text-navy text-2xl mb-2">Message sent</h3>
+          <p class="text-charcoal-light mb-5">Thanks — we've got your enquiry and will be in touch shortly. For anything urgent, WhatsApp is the fastest way to reach us.</p>
+          <a href="https://wa.me/447831005961" class="btn-primary">
+            Continue on WhatsApp
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto">
-        <!-- WhatsApp -->
-        <a href="https://wa.me/2202289111" target="_blank" rel="noopener"
-          class="card-hover reveal stagger-1 bg-white rounded-xl overflow-hidden no-underline"
-          style="box-shadow: 0 2px 12px rgba(30,30,30,0.04), 0 0 0 1px rgba(30,30,30,0.03);">
-          <div style="padding:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;">
-            <div
-              style="width:64px;height:64px;background:linear-gradient(135deg,#25D366,#20BA5A);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                <path
-                  d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.478-.752-6.229-2.028l-.356-.27-3.281 1.1 1.1-3.281-.27-.356A9.95 9.95 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-display text-2xl font-bold mb-2" style="color:#1E1E1E;">WhatsApp</h3>
-              <p class="font-body text-sm mb-4" style="color:#4A4A4A;">Instant messaging, fastest response</p>
-              <div class="font-body text-base font-semibold" style="color:#25D366;">Message us now</div>
-            </div>
-          </div>
-        </a>
+      <!-- CONTACT DETAILS -->
+      <div class="reveal-right space-y-4">
+        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-2">Reach us directly</p>
+        <h2 class="text-navy text-[1.75rem] lg:text-[2.25rem] mb-5">Or skip the form.</h2>
 
-        <!-- Phone -->
-        <a href="tel:+2202289111" class="card-hover reveal stagger-2 bg-white rounded-xl overflow-hidden no-underline"
-          style="box-shadow: 0 2px 12px rgba(30,30,30,0.04), 0 0 0 1px rgba(30,30,30,0.03);">
-          <div style="padding:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;">
-            <div
-              style="width:64px;height:64px;background:linear-gradient(135deg,#E8941A,#C67A0F);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round">
-                <path
-                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-display text-2xl font-bold mb-2" style="color:#1E1E1E;">Phone</h3>
-              <p class="font-body text-sm mb-4" style="color:#4A4A4A;">Speak to our team directly</p>
-              <div class="font-body text-base font-semibold" style="color:#E8941A;">+220 228 9111</div>
-            </div>
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-        </a>
+          <div>
+            <p class="contact-label">Head Office</p>
+            <p class="contact-value">Sher Storage, Smethwick<br>Birmingham B66 2NZ<br>United Kingdom</p>
+          </div>
+        </div>
 
-        <!-- Email -->
-        <a href="mailto:info@bahtravel.com"
-          class="card-hover reveal stagger-3 bg-white rounded-xl overflow-hidden no-underline"
-          style="box-shadow: 0 2px 12px rgba(30,30,30,0.04), 0 0 0 1px rgba(30,30,30,0.03);">
-          <div style="padding:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;">
-            <div
-              style="width:64px;height:64px;background:linear-gradient(135deg,#1B2D4F,#0F1A30);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="M22 7l-10 7L2 7" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-display text-2xl font-bold mb-2" style="color:#1E1E1E;">Email</h3>
-              <p class="font-body text-sm mb-4" style="color:#4A4A4A;">Detailed enquiries and documents</p>
-              <div class="font-body text-base font-semibold" style="color:#1B2D4F;">info@bahtravel.com</div>
-            </div>
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-        </a>
+          <div>
+            <p class="contact-label">Phone</p>
+            <p class="contact-value"><a href="tel:+447831005961">+44 7831 005961</a></p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
+          </div>
+          <div>
+            <p class="contact-label">WhatsApp</p>
+            <p class="contact-value"><a href="https://wa.me/447831005961" target="_blank" rel="noopener">+44 7831 005961</a></p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <p class="contact-label">Email</p>
+            <p class="contact-value"><a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <p class="contact-label">Opening Hours</p>
+            <p class="contact-value text-sm text-charcoal-light font-normal">
+              Mon – Fri · 9:00 AM – 6:00 PM<br>
+              Saturday · 10:00 AM – 4:00 PM<br>
+              Sunday · By appointment
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Form -->
-  <section class="py-24 md:py-32" style="background: linear-gradient(180deg, #F0EBE3 0%, #FAF7F2 100%);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-5 gap-16 lg:gap-20 items-start">
+  <!-- ═════ MAP ═════ -->
+  <section class="pb-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="mb-6">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-2">Find us</p>
+        <h2 class="reveal text-navy text-[1.75rem] lg:text-[2.25rem]">Birmingham — B66 2NZ.</h2>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe
+          src="https://www.google.com/maps?q=Sher+Storage+Smethwick+Birmingham+B66+2NZ&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Jallow Transporters head office map">
+        </iframe>
+      </div>
+    </div>
+  </section>
 
-        <!-- Left: Context -->
-        <div class="lg:col-span-2 reveal">
-          <div class="flex items-center gap-3 mb-6">
-            <span style="display:inline-block;width:32px;height:1px;background:#E8941A;"></span>
-            <span class="font-body text-sm font-semibold tracking-widest uppercase" style="color:#E8941A;">Direct
-              Message</span>
-          </div>
-          <h2 class="font-display text-4xl md:text-5xl font-bold mb-6" style="color:#1E1E1E;line-height:1.1;">Plan
-            Your<br>Trip</h2>
-          <p class="font-body text-base mb-10" style="color:#4A4A4A;line-height:1.8;">
-            Tell us a little about your journey — what you're looking for, when you'd like to travel, and any questions
-            you have. Our team will get back to you with a personalised plan.
+  <footer class="footer pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
+        <div class="md:col-span-2">
+          <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="footer-logo mb-5">
+          <p class="text-sm text-white/60 max-w-sm mb-5">
+            UK-headquartered freight specialists serving the diaspora with sea and air cargo to
+            West Africa, Moroccan tourism and authentic Moroccan preorders.
           </p>
-
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div
-                style="width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,#E8941A,#C67A0F);border-radius:0.625rem;display:flex;align-items:center;justify-content:center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                  stroke-linecap="round">
-                  <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <div>
-                <div class="font-body text-sm font-semibold mb-0.5" style="color:#1E1E1E;">Response time</div>
-                <div class="font-body text-sm" style="color:#4A4A4A;">We reply within 24 hours, often sooner</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div
-                style="width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,#1B2D4F,#0F1A30);border-radius:0.625rem;display:flex;align-items:center;justify-content:center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                  stroke-linecap="round">
-                  <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" />
-                  <path d="M9 10l2 2 4-4" />
-                </svg>
-              </div>
-              <div>
-                <div class="font-body text-sm font-semibold mb-0.5" style="color:#1E1E1E;">Personalised advice</div>
-                <div class="font-body text-sm" style="color:#4A4A4A;">Every enquiry reviewed by our team</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div
-                style="width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,#25D366,#20BA5A);border-radius:0.625rem;display:flex;align-items:center;justify-content:center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                  stroke-linecap="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M22 7l-10 7L2 7" />
-                </svg>
-              </div>
-              <div>
-                <div class="font-body text-sm font-semibold mb-0.5" style="color:#1E1E1E;">No obligation</div>
-                <div class="font-body text-sm" style="color:#4A4A4A;">Ask us anything, completely free</div>
-              </div>
-            </div>
+          <div class="flex gap-3">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+            </a>
           </div>
-        </div>
-
-        <!-- Right: Form -->
-        <div class="lg:col-span-3 reveal stagger-1">
-          <div class="bg-white rounded-2xl p-8 lg:p-10"
-            style="box-shadow: 0 8px 48px -8px rgba(30,30,30,0.08), 0 2px 12px -2px rgba(30,30,30,0.04), 0 0 0 1px rgba(30,30,30,0.03);">
-
-            <!-- Success state (hidden by default) -->
-            <div id="formSuccess" style="display:none; text-align:center; padding: 2rem 0;">
-              <div
-                style="width:64px;height:64px;background:linear-gradient(135deg,#E8941A,#C67A0F);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              <h3 class="font-display text-2xl font-bold mb-3" style="color:#1E1E1E;">Message Sent!</h3>
-              <p class="font-body text-base" style="color:#4A4A4A;line-height:1.8;">Thank you for reaching out. We'll
-                review your enquiry and get back to you within 24 hours.</p>
-            </div>
-
-            <!-- Form -->
-            <form id="contactForm" novalidate>
-              <div class="grid sm:grid-cols-2 gap-6 mb-6">
-                <!-- Full Name -->
-                <div>
-                  <label for="cf-name" class="font-body text-sm font-semibold mb-2 block" style="color:#1E1E1E;">Full
-                    Name <span style="color:#E8941A;">*</span></label>
-                  <input type="text" id="cf-name" name="user_name" placeholder="e.g. Ahmed Hassan" autocomplete="name"
-                    required class="cf-input-focus"
-                    style="width:100%;padding:0.75rem 1rem;border:1.5px solid #E0D9CE;border-radius:0.625rem;font-family:'Manrope',sans-serif;font-size:0.9rem;color:#1E1E1E;background:#FAF7F2;outline:none;transition:border-color 0.2s,box-shadow 0.2s;">
-                  <p class="cf-error font-body text-xs mt-1.5" style="color:#C67A0F;display:none;">Please enter your
-                    name</p>
-                </div>
-                <!-- Email -->
-                <div>
-                  <label for="cf-email" class="font-body text-sm font-semibold mb-2 block" style="color:#1E1E1E;">Email
-                    Address <span style="color:#E8941A;">*</span></label>
-                  <input type="email" id="cf-email" name="user_email" placeholder="you@example.com" autocomplete="email"
-                    required class="cf-input-focus"
-                    style="width:100%;padding:0.75rem 1rem;border:1.5px solid #E0D9CE;border-radius:0.625rem;font-family:'Manrope',sans-serif;font-size:0.9rem;color:#1E1E1E;background:#FAF7F2;outline:none;transition:border-color 0.2s,box-shadow 0.2s;">
-                  <p class="cf-error font-body text-xs mt-1.5" style="color:#C67A0F;display:none;">Please enter a valid
-                    email</p>
-                </div>
-              </div>
-
-              <div class="grid sm:grid-cols-2 gap-6 mb-6">
-                <!-- Phone -->
-                <div>
-                  <label for="cf-phone" class="font-body text-sm font-semibold mb-2 block" style="color:#1E1E1E;">Phone
-                    <span class="font-body font-normal text-xs" style="color:#4A4A4A;">(optional)</span></label>
-                  <input type="tel" id="cf-phone" name="user_phone" placeholder="+44 7000 000000" autocomplete="tel"
-                    class="cf-input-focus"
-                    style="width:100%;padding:0.75rem 1rem;border:1.5px solid #E0D9CE;border-radius:0.625rem;font-family:'Manrope',sans-serif;font-size:0.9rem;color:#1E1E1E;background:#FAF7F2;outline:none;transition:border-color 0.2s,box-shadow 0.2s;">
-                </div>
-                <!-- Interest -->
-                <div>
-                  <label for="cf-interest" class="font-body text-sm font-semibold mb-2 block" style="color:#1E1E1E;">I'm
-                    interested in <span style="color:#E8941A;">*</span></label>
-                  <div style="position:relative;">
-                    <select id="cf-interest" name="user_interest" required class="cf-input-focus"
-                      style="width:100%;padding:0.75rem 1rem;padding-right:2.5rem;border:1.5px solid #E0D9CE;border-radius:0.625rem;font-family:'Manrope',sans-serif;font-size:0.9rem;color:#1E1E1E;background:#FAF7F2;outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;">
-                      <option value="" disabled selected>Select a service</option>
-                      <option value="Visa-UK">Visa Processing (UK)</option>
-                      <option value="Visa-Other">Visa Processing (Schengen/Other)</option>
-                      <option value="Flights">Flight Booking</option>
-                      <option value="Umrah">Umrah Package</option>
-                      <option value="Hajj">Hajj Package</option>
-                      <option value="Group">Group Travel</option>
-                      <option value="Other">General Enquiry</option>
-                    </select>
-                    <svg
-                      style="position:absolute;right:0.875rem;top:50%;transform:translateY(-50%);pointer-events:none;"
-                      width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A4A4A" stroke-width="2"
-                      stroke-linecap="round">
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
-                  </div>
-                  <p class="cf-error font-body text-xs mt-1.5" style="color:#C67A0F;display:none;">Please select an
-                    option</p>
-                </div>
-              </div>
-
-              <!-- Message -->
-              <div class="mb-8">
-                <label for="cf-message" class="font-body text-sm font-semibold mb-2 block" style="color:#1E1E1E;">Your
-                  Message <span style="color:#E8941A;">*</span></label>
-                <textarea id="cf-message" name="user_message" rows="5"
-                  placeholder="Tell us about your plans — preferred travel dates, group size, any special requirements..."
-                  required class="cf-input-focus"
-                  style="width:100%;padding:0.875rem 1rem;border:1.5px solid #E0D9CE;border-radius:0.625rem;font-family:'Manrope',sans-serif;font-size:0.9rem;color:#1E1E1E;background:#FAF7F2;outline:none;resize:vertical;min-height:130px;transition:border-color 0.2s,box-shadow 0.2s;"></textarea>
-                <p class="cf-error font-body text-xs mt-1.5" style="color:#C67A0F;display:none;">Please enter your
-                  message</p>
-              </div>
-
-              <!-- Error banner -->
-              <div id="formError"
-                style="display:none;background:rgba(198,122,15,0.08);border:1px solid rgba(198,122,15,0.2);border-radius:0.625rem;padding:0.875rem 1rem;margin-bottom:1.5rem;">
-                <p class="font-body text-sm" style="color:#C67A0F;">Something went wrong. Please try again or contact us
-                  directly via WhatsApp or email.</p>
-              </div>
-
-              <!-- Submit -->
-              <button type="submit" id="cf-submit"
-                style="width:100%;padding:0.9rem 2rem;background:linear-gradient(135deg,#E8941A,#C67A0F);color:#FFFFFF;font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:700;letter-spacing:0.01em;border:none;border-radius:0.625rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.625rem;box-shadow:0 4px 20px -4px rgba(232,148,26,0.4),0 1px 4px rgba(232,148,26,0.15);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s cubic-bezier(0.34,1.56,0.64,1),opacity 0.2s;">
-                <span id="cf-btn-text">Send Message</span>
-                <svg id="cf-btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                </svg>
-                <svg id="cf-spinner" style="display:none;animation:spin 0.8s linear infinite;" width="18" height="18"
-                  viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-                  <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" opacity="0.25" />
-                  <path d="M21 12a9 9 0 00-9-9" stroke-linecap="round" />
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Social Media -->
-  <section class="py-24 md:py-32 section-navy">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16 reveal">
-        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-5">Follow Us</h2>
-        <p class="font-body text-lg"
-          style="color:rgba(255,255,255,0.7);max-width:540px;margin-left:auto;margin-right:auto;">
-          Connect with us on social media for travel tips, updates, and inspiration.
-        </p>
-      </div>
-
-      <div class="contact-social flex items-center justify-center gap-6 flex-wrap">
-        <a href="https://www.facebook.com/profile.php?id=100063561303167#" target="_blank" rel="noopener"
-          aria-label="Facebook"
-          class="card-hover reveal stagger-1 w-20 h-20 rounded-full flex items-center justify-center no-underline bg-white/10 border border-white/20"
-          style="transition:transform 0.3s,background 0.3s;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-            <path
-              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-          </svg>
-        </a>
-        <a href="https://www.instagram.com/bahtransporters/" target="_blank" rel="noopener" aria-label="Instagram"
-          class="card-hover reveal stagger-2 w-20 h-20 rounded-full flex items-center justify-center no-underline bg-white/10 border border-white/20"
-          style="transition:transform 0.3s,background 0.3s;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-          </svg>
-        </a>
-        <a href="https://www.tiktok.com/@bahtransportersltd" target="_blank" rel="noopener" aria-label="TikTok"
-          class="card-hover reveal stagger-3 w-20 h-20 rounded-full flex items-center justify-center no-underline bg-white/10 border border-white/20"
-          style="transition:transform 0.3s,background 0.3s;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-            <path
-              d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.33-1.07 4.74-2.87 6.27-2.12 1.83-5.26 2.37-7.9 1.34-2.48-1-4.32-3.32-4.66-5.99-.44-3.47 1.81-6.9 5.25-7.79 1.47-.38 3.05-.27 4.45.24v4.06c-.84-.2-1.72-.25-2.58-.1-1.04.18-2 .92-2.3 1.91-.32 1.05.02 2.22.84 2.96.96.86 2.5 1.11 3.65.51.98-.51 1.62-1.55 1.62-2.67.01-6.19.01-12.38.01-18.57z" />
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Business Hours -->
-  <section class="py-24 md:py-32 bg-cream">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-      <div class="reveal">
-        <h2 class="font-display text-4xl md:text-5xl font-bold mb-8" style="color:#1E1E1E;">Business Hours</h2>
-        <div class="bg-white rounded-2xl p-8 lg:p-10"
-          style="box-shadow: 0 4px 24px -4px rgba(30,30,30,0.06), 0 0 0 1px rgba(30,30,30,0.03);">
-          <div class="space-y-6">
-            <div class="flex items-center justify-between border-b pb-4 border-cream-dark">
-              <span class="font-body text-lg font-semibold" style="color:#1E1E1E;">Monday – Friday</span>
-              <span class="font-body" style="color:#4A4A4A;">9:00 AM – 6:00 PM (GMT)</span>
-            </div>
-            <div class="flex items-center justify-between border-b pb-4 border-cream-dark">
-              <span class="font-body text-lg font-semibold" style="color:#1E1E1E;">Saturday</span>
-              <span class="font-body" style="color:#4A4A4A;">10:00 AM – 4:00 PM (GMT)</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-body text-lg font-semibold" style="color:#1E1E1E;">Sunday</span>
-              <span class="font-body" style="color:#4A4A4A;">Closed</span>
-            </div>
-          </div>
-          <p class="font-body text-sm mt-8" style="color:#4A4A4A;">For urgent matters, WhatsApp us anytime. We typically
-            reply within hours, even on weekends.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-16 md:py-20" style="background: linear-gradient(180deg, #0F1A30 0%, #0A1222 100%);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-12 lg:gap-16 mb-14">
-        <div>
-          <div class="flex items-center gap-2 mb-5">
-            <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-              <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-              <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-            <span class="font-display text-lg font-bold"><span style="color:#E8941A;">BAH</span><span
-                style="color:#FFFFFF;">TRAVEL</span></span>
-          </div>
-          <p class="font-body text-sm mb-5" style="color:rgba(255,255,255,0.5);line-height:1.8;">Your trusted partner for visa services, flight bookings, and Hajj &amp; Umrah packages. ATOL protected.</p>
         </div>
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-5">Quick Links</h4>
-          <ul class="space-y-3">
-            <li><a href="/" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Home</a></li>
-            <li><a href="/about" class="font-body text-sm no-underline" style="color:rgba(255,255,255,0.5);">About
-                Us</a></li>
-            <li><a href="/contact" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Contact Us</a></li>
-            <li><a href="/terms" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Terms</a></li>
+          <h4>Explore</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#routes">Our Routes</a></li>
+            <li><a href="/terms.html">Booking Guidelines</a></li>
+            <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-5">Contact</h4>
-          <ul class="space-y-3">
-            <li><a href="tel:+2202289111" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">+220 228 9111</a></li>
-            <li><a href="https://wa.me/2202289111" target="_blank" rel="noopener" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">WhatsApp</a></li>
-            <li><a href="mailto:info@bahtravel.com" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">info@bahtravel.com</a></li>
+          <h4>Get in Touch</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Sher Storage, Smethwick,<br>Birmingham B66 2NZ, UK</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+447831005961">+44 7831 005961</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="pt-8" style="border-top: 1px solid rgba(255,255,255,0.06);">
-        <p class="font-body text-xs" style="color:rgba(255,255,255,0.3);">&copy; 2026 BAH Travel Ltd. All rights
-          reserved. ATOL Protected.</p>
+      <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <p>© <span id="year"></span> Jallow Transporters Ltd. All rights reserved.</p>
+        <p>Customer · Care · Commitment</p>
       </div>
     </div>
   </footer>
 
-  <!-- WhatsApp Widget -->
-  <button class="wa-btn" id="waBtn" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path
-        d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.478-.752-6.229-2.028l-.356-.27-3.281 1.1 1.1-3.281-.27-.356A9.95 9.95 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
-    </svg>
+  <button class="wa-btn" id="wa-btn" aria-label="Chat with us on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
   </button>
 
-  <div class="wa-popup" id="waPopup" role="dialog" aria-label="WhatsApp Chat">
+  <div class="wa-popup" id="wa-popup" role="dialog" aria-label="WhatsApp chat">
     <div class="wa-popup-header">
-      <div class="wa-popup-avatar">
-        <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
-          <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-          <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round" />
-        </svg>
+      <div class="wa-popup-avatar"><img src="/brand_assets/jt-logo.png" alt="JT"></div>
+      <div class="flex-1">
+        <p class="text-white font-semibold text-sm leading-tight">Jallow Transporters</p>
+        <p class="text-white/80 text-xs">Typically replies within an hour</p>
       </div>
-      <div>
-        <div class="font-body text-sm font-semibold text-white">BAH Travel</div>
-        <div class="font-body text-xs" style="color:rgba(255,255,255,0.7);">Typically replies within minutes</div>
-      </div>
-      <button id="waClose"
-        style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;padding:0.25rem;transition:color 0.2s;"
-        aria-label="Close chat">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
+      <button id="wa-close" class="text-white/80 hover:text-white" aria-label="Close chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="wa-popup-body">
       <div class="wa-greeting">
-        <p class="font-body" style="margin:0;">Hello! 👋 How can we help you today? We offer visa services, flight bookings, and Hajj/Umrah packages.</p>
-        <div class="wa-greeting-time">now</div>
+        <p>Hey there 👋 How can the JT team help today — a quote, a collection, or a preorder?</p>
+        <p class="wa-greeting-time">Online now</p>
       </div>
-      <div class="wa-typing-dots mt-3 ml-1"><span></span><span></span><span></span></div>
+      <div class="wa-typing" id="wa-typing" style="display:none;">
+        <span class="wa-typing-dot"></span><span class="wa-typing-dot"></span><span class="wa-typing-dot"></span>
+      </div>
     </div>
-    <div class="wa-popup-input">
-      <input type="text" id="waInput" placeholder="Type your message..." aria-label="Type your message">
-      <button class="wa-send-btn" id="waSend" aria-label="Send message">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-        </svg>
+    <form class="wa-popup-input" id="wa-form">
+      <input type="text" id="wa-input" placeholder="Type a message..." aria-label="Message">
+      <button type="submit" class="wa-send-btn" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
-    </div>
+    </form>
   </div>
 
-  <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-      (function () {
-        // ─────────────────────────────────────────────────────
-        // EmailJS Configuration — fill these in from your EmailJS dashboard:
-        // 1. Sign up free at https://www.emailjs.com/
-        // 2. Add an Email Service (Gmail) → copy the Service ID below
-        // 3. Create an Email Template → copy the Template ID below
-        //    Template variables to use: {{user_name}}, {{user_email}}, {{user_phone}}, {{user_interest}}, {{user_message}}
-        //    Set "To Email" in the template to: efran8744@gmail.com
-        // 4. Go to Account → API Keys → copy your Public Key below
-        // ─────────────────────────────────────────────────────
-        const EMAILJS_PUBLIC_KEY = 'JmgwfE-WvKVAUNBvC';
-        const EMAILJS_SERVICE_ID = 'service_s45mlov';
-        const EMAILJS_TEMPLATE_ID = 'template_akg9hrr';
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => { if (window.scrollY > 10) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-        const form = document.getElementById('contactForm');
-        const successBox = document.getElementById('formSuccess');
-        const errorBanner = document.getElementById('formError');
-        const submitBtn = document.getElementById('cf-submit');
-        const btnText = document.getElementById('cf-btn-text');
-        const btnIcon = document.getElementById('cf-btn-icon');
-        const spinner = document.getElementById('cf-spinner');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('menu-backdrop');
+    const closeMenu = () => {
+      hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); backdrop.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false'); mobileMenu.setAttribute('aria-hidden', 'true');
+    };
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open); backdrop.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open)); mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+    backdrop.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-        function setField(input, valid) {
-          const err = input.closest('div').querySelector('.cf-error');
-          input.style.borderColor = valid ? '#E0D9CE' : '#C67A0F';
-          if (err) err.style.display = valid ? 'none' : 'block';
-        }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => el.classList.add('visible')), 600);
 
-        function validateForm() {
-          let ok = true;
-          const name = document.getElementById('cf-name');
-          const email = document.getElementById('cf-email');
-          const interest = document.getElementById('cf-interest');
-          const message = document.getElementById('cf-message');
+    // WhatsApp widget
+    const waBtn = document.getElementById('wa-btn');
+    const waPopup = document.getElementById('wa-popup');
+    const waClose = document.getElementById('wa-close');
+    const waForm = document.getElementById('wa-form');
+    const waInput = document.getElementById('wa-input');
+    const waTyping = document.getElementById('wa-typing');
+    const WA_NUMBER = '447831005961';
+    const openOrRedirect = () => {
+      if (window.matchMedia('(max-width: 768px)').matches) window.open('https://wa.me/' + WA_NUMBER, '_blank');
+      else waPopup.classList.add('open');
+    };
+    waBtn.addEventListener('click', openOrRedirect);
+    waClose.addEventListener('click', () => waPopup.classList.remove('open'));
+    waForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = waInput.value.trim(); if (!msg) return;
+      waTyping.style.display = 'flex';
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+    });
 
-          if (!name.value.trim()) { setField(name, false); ok = false; } else setField(name, true);
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { setField(email, false); ok = false; } else setField(email, true);
-          if (!interest.value) { setField(interest, false); ok = false; } else setField(interest, true);
-          if (!message.value.trim()) { setField(message, false); ok = false; } else setField(message, true);
-          return ok;
-        }
+    // ─────────────────────────────────────────────────────────
+    // EmailJS Configuration
+    // Replace with your Jallow Transporters EmailJS account keys.
+    // Dashboard → Account → API Keys (public), Email Services, and Email Templates.
+    // ─────────────────────────────────────────────────────────
+    const EMAILJS_PUBLIC_KEY = 'JmgwfE-WvKVAUNBvC';
+    const EMAILJS_SERVICE_ID = 'service_s45mlov';
+    const EMAILJS_TEMPLATE_ID = 'template_akg9hrr';
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          errorBanner.style.display = 'none';
-          if (!validateForm()) return;
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
-          // Loading state
-          submitBtn.disabled = true;
-          btnText.textContent = 'Sending…';
-          btnIcon.style.display = 'none';
-          spinner.style.display = 'block';
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnArrow = document.getElementById('btnArrow');
+    const spinner = document.getElementById('spinner');
+    const successCard = document.getElementById('successCard');
 
-          emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-            .then(function () {
-              form.style.display = 'none';
-              successBox.style.display = 'block';
-            })
-            .catch(function () {
-              submitBtn.disabled = false;
-              btnText.textContent = 'Send Message';
-              btnIcon.style.display = 'block';
-              spinner.style.display = 'none';
-              errorBanner.style.display = 'block';
-            });
+    const setError = (el, on) => el.classList.toggle('error', on);
+    const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+      const name = form.name, email = form.email, phone = form.phone, service = form.service, message = form.message;
+      setError(name, !name.value.trim()); if (!name.value.trim()) ok = false;
+      setError(email, !isEmail(email.value.trim())); if (!isEmail(email.value.trim())) ok = false;
+      setError(service, !service.value); if (!service.value) ok = false;
+      setError(message, message.value.trim().length < 5); if (message.value.trim().length < 5) ok = false;
+      if (!ok) return;
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending...';
+      btnArrow.style.display = 'none';
+      spinner.style.display = 'block';
+
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+        .then(() => {
+          form.style.display = 'none';
+          successCard.style.display = 'block';
+          successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch((err) => {
+          console.error('EmailJS error', err);
+          btnText.textContent = 'Try again';
+          btnArrow.style.display = 'inline-block';
+          spinner.style.display = 'none';
+          submitBtn.disabled = false;
+          alert('Sorry — something went wrong sending your message. Please try again, or contact us via WhatsApp.');
         });
+    });
 
-        // Clear field error on input
-        ['cf-name', 'cf-email', 'cf-interest', 'cf-message'].forEach(function (id) {
-          const el = document.getElementById(id);
-          el.addEventListener('input', function () { setField(el, true); });
-        });
-      })();
-  </script>
-
-  <script>
-    (function () {
-      'use strict';
-
-      const nav = document.getElementById('navbar');
-      const logoText = document.querySelector('.nav-bar-logo-text');
-      function handleScroll() {
-        if (window.scrollY > 60) {
-          nav.classList.add('scrolled');
-          if (logoText) logoText.style.color = '#1E1E1E';
-        } else {
-          nav.classList.remove('scrolled');
-          if (logoText) logoText.style.color = '#FFFFFF';
-        }
-      }
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll();
-
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      hamburger.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', isOpen);
-        nav.classList.toggle('menu-open', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-      });
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-          nav.classList.remove('menu-open');
-          hamburger.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        });
-      });
-
-      const revealEls = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      revealEls.forEach(el => observer.observe(el));
-      setTimeout(() => {
-        revealEls.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('visible');
-        });
-      }, 400);
-
-      const waBtn = document.getElementById('waBtn');
-      const waPopup = document.getElementById('waPopup');
-      const waClose = document.getElementById('waClose');
-      const waInput = document.getElementById('waInput');
-      const waSend = document.getElementById('waSend');
-      waBtn.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          window.open('https://wa.me/2202289111', '_blank');
-          return;
-        }
-        waPopup.classList.toggle('open');
-        if (waPopup.classList.contains('open')) waInput.focus();
-      });
-      waClose.addEventListener('click', () => waPopup.classList.remove('open'));
-      function sendWhatsApp() {
-        const msg = waInput.value.trim();
-        const url = msg ? 'https://wa.me/2202289111?text=' + encodeURIComponent(msg) : 'https://wa.me/2202289111';
-        window.open(url, '_blank');
-      }
-      waSend.addEventListener('click', sendWhatsApp);
-      waInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendWhatsApp(); });
-    })();
+    ['name','email','phone','service','message'].forEach((n) => {
+      const el = form[n];
+      if (!el) return;
+      el.addEventListener('input', () => el.classList.remove('error'));
+      el.addEventListener('change', () => el.classList.remove('error'));
+    });
   </script>
 </body>
 

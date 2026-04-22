@@ -5,58 +5,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>Terms & Conditions | BAH Travel ATOL Protected Travel Services</title>
+  <title>Booking Guidelines & Terms — Jallow Transporters Ltd</title>
   <meta name="description"
-    content="Terms and conditions for BAH Travel. Read about our booking policies, cancellation terms, ATOL protection, and privacy practices.">
+    content="Booking guidelines and terms of service for Jallow Transporters — what to pack, label, deposit, claim limits, storage fees and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { theme: { extend: { colors: { cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' }, charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' }, amber: { DEFAULT: '#E8941A', light: '#F5A623', dark: '#C67A0F' }, navy: { DEFAULT: '#1B2D4F', dark: '#0F1A30' } }, fontFamily: { display: ['Montserrat', 'Georgia', 'serif'], body: ['Manrope', 'system-ui', 'sans-serif'] } } } }</script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
+            teal: { DEFAULT: '#1F9D9D', light: '#E6F4F4', dark: '#15787A', deep: '#0E5F61' },
+            navy: { DEFAULT: '#0E1B2E', dark: '#070E1A' },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'system-ui', 'sans-serif'],
+            body: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Manrope', system-ui, sans-serif;
-      background: #FAF7F2;
-      color: #1E1E1E;
-      line-height: 1.7;
-      overflow-x: hidden;
+      background: #FAF7F2; color: #1E1E1E; line-height: 1.7; overflow-x: hidden;
     }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', system-ui, sans-serif;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; font-weight: 800;
     }
 
     .grain-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.03;
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 256px 256px;
+      background-repeat: repeat; background-size: 256px 256px;
     }
 
     :root {
@@ -66,979 +57,586 @@
     }
 
     .nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       transition: background-color 0.4s var(--smooth), box-shadow 0.4s var(--smooth), backdrop-filter 0.4s var(--smooth);
       background: transparent;
     }
-
     .nav-bar.scrolled {
-      background: rgba(250, 247, 242, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 1px 3px rgba(30, 30, 30, 0.04), 0 8px 32px rgba(30, 30, 30, 0.06);
+      background: rgba(250, 247, 242, 0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 3px rgba(14, 27, 46, 0.04), 0 8px 32px rgba(31, 157, 157, 0.08);
     }
-
-    .nav-bar.scrolled .nav-link {
-      color: #1E1E1E;
-    }
-
-    .nav-bar.scrolled .nav-link:hover {
-      color: #E8941A;
-    }
+    .nav-bar.scrolled .nav-link { color: #1E1E1E; }
+    .nav-bar.scrolled .nav-link:hover { color: #1F9D9D; }
+    .nav-logo { height: 52px; width: auto; display: block; transition: transform 0.4s var(--smooth); }
+    .nav-bar.scrolled .nav-logo { transform: scale(0.92); }
+    @media (max-width: 768px) { .nav-logo { height: 42px; } }
 
     .nav-link {
-      color: #FFFFFF;
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding: 0.25rem 0;
+      color: #FFFFFF; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
+      position: relative; padding: 0.25rem 0;
       transition: color 0.3s var(--smooth);
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #E8941A;
-      border-radius: 1px;
-      transition: width 0.3s var(--spring);
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+      background: #1F9D9D; border-radius: 1px; transition: width 0.3s var(--spring);
     }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 4px; border-radius: 2px; }
 
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-down {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-anim {
-      opacity: 0;
-      animation: fade-up 1s var(--ease-out-expo) forwards;
-    }
-
-    .hero-anim-1 {
-      animation-delay: 0.15s;
-    }
-
-    .hero-anim-2 {
-      animation-delay: 0.35s;
-    }
-
-    .nav-anim {
-      opacity: 0;
-      animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards;
-    }
-
-    .section-navy {
-      background: linear-gradient(135deg, #1B2D4F 0%, #0F1A30 100%);
+    .page-hero {
+      position: relative; padding-top: 9rem; padding-bottom: 5rem; overflow: hidden;
+      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 55%, #0E5F61 100%);
       color: #FFFFFF;
     }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 0.5rem;
-      background: none;
-      border: none;
-      z-index: 1001;
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(31, 157, 157, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.15), transparent 60%);
+      pointer-events: none;
     }
+    .hero-accent-line { display: inline-block; width: 48px; height: 2px; background: #1F9D9D; border-radius: 1px; margin-right: 0.9rem; vertical-align: middle; }
 
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #FFFFFF;
-      border-radius: 1px;
-      transition: transform 0.3s var(--spring), opacity 0.2s, background-color 0.3s;
-    }
-
-    .nav-bar.scrolled .hamburger span {
-      background: #1E1E1E;
-    }
-
-    .hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-      background: #1E1E1E;
-    }
-
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-      background: #1E1E1E;
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-    }
-
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: rgba(250, 247, 242, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      gap: 1.5rem;
-      transform: translateX(100%);
-      opacity: 0;
-      transition: transform 0.6s var(--ease-out-expo), opacity 0.4s var(--smooth);
-      overflow: hidden;
-    }
-
-    .mobile-menu.open {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .mobile-menu a {
-      font-family: 'Montserrat', system-ui, sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1E1E1E;
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: color 0.3s var(--smooth), opacity 0.5s var(--smooth), transform 0.5s var(--ease-out-expo);
-      position: relative;
-      z-index: 1;
-    }
-
-    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
-    .mobile-menu.open a:nth-of-type(1) { transition-delay: 0.15s; }
-    .mobile-menu.open a:nth-of-type(2) { transition-delay: 0.22s; }
-    .mobile-menu.open a:nth-of-type(3) { transition-delay: 0.29s; }
-    .mobile-menu.open a:nth-of-type(4) { transition-delay: 0.36s; }
-
-    .mobile-menu a:hover { color: #E8941A; }
-    .mobile-menu a.active { color: #E8941A; }
-
-    .mm-num {
-      display: none;
-    }
-
-    .mm-footer {
-      margin-top: 3rem;
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #4A4A4A;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.5s var(--smooth) 0.5s;
-    }
-
-    .mobile-menu.open .mm-footer { opacity: 1; }
-
-    .nav-bar.menu-open {
-      background: transparent !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
-    }
-
-    .nav-bar.menu-open .logo-travel-text {
-      color: #1E1E1E !important;
-    }
-
+    @keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes bounce-in {
-      0% {
-        opacity: 0;
-        transform: scale(0) translateY(20px);
-      }
-
-      60% {
-        transform: scale(1.15) translateY(-5px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      0% { opacity: 0; transform: scale(0) translateY(20px); }
+      60% { transform: scale(1.15) translateY(-5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     @keyframes wa-attention {
+      0%, 100% { transform: scale(1); } 10% { transform: scale(1.1); }
+      20% { transform: scale(1); } 30% { transform: scale(1.05); } 40% { transform: scale(1); }
+    }
+    @keyframes dot-bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
 
-      0%,
-      100% {
-        transform: scale(1);
-      }
+    .hero-anim { opacity: 0; animation: fade-up 1s var(--ease-out-expo) forwards; }
+    .hero-anim-1 { animation-delay: 0.15s; } .hero-anim-2 { animation-delay: 0.35s; } .hero-anim-3 { animation-delay: 0.55s; }
+    .nav-anim { opacity: 0; animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards; }
 
-      10% {
-        transform: scale(1.1);
-      }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.06s; } .stagger-2 { transition-delay: 0.12s; }
+    .stagger-3 { transition-delay: 0.18s; } .stagger-4 { transition-delay: 0.24s; }
+    .stagger-5 { transition-delay: 0.30s; } .stagger-6 { transition-delay: 0.36s; }
 
-      20% {
-        transform: scale(1);
-      }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #1F9D9D; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+      border: none; cursor: pointer;
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
+      box-shadow: 0 4px 16px -2px rgba(31, 157, 157, 0.35);
+    }
+    .btn-primary:hover { background: #15787A; box-shadow: 0 10px 30px -6px rgba(31, 157, 157, 0.45); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #0E5F61; }
+    .btn-primary:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 3px; }
+    .btn-primary .btn-arrow { transition: transform 0.3s var(--spring); }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
 
-      30% {
-        transform: scale(1.05);
-      }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-weight: 600; font-size: 0.95rem;
+      border: 2px solid rgba(255, 255, 255, 0.4); cursor: pointer;
+      transition: transform 0.3s var(--spring), border-color 0.3s var(--smooth), background-color 0.3s var(--smooth);
+    }
+    .btn-outline:hover { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
 
-      40% {
-        transform: scale(1);
-      }
+    .term-card {
+      position: relative;
+      display: flex; gap: 1.25rem;
+      background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1rem;
+      padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+      transition: transform 0.4s var(--spring), border-color 0.3s var(--smooth), box-shadow 0.4s var(--spring);
+    }
+    .term-card:hover {
+      transform: translateY(-4px); border-color: rgba(31, 157, 157, 0.3);
+      box-shadow: 0 18px 40px -12px rgba(31, 157, 157, 0.18);
+    }
+    .term-num {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, #E6F4F4, #C9E8E8);
+      color: #0E5F61; display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+    .term-card .term-body h3 {
+      color: #0E1B2E; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .term-card .term-body p {
+      color: #4A4A4A; font-size: 0.95rem; line-height: 1.65;
     }
 
-    @keyframes dot-bounce {
-
-      0%,
-      80%,
-      100% {
-        transform: translateY(0);
-      }
-
-      40% {
-        transform: translateY(-6px);
-      }
+    .info-box {
+      background: linear-gradient(135deg, #E6F4F4 0%, #FFFFFF 100%);
+      border: 1px solid rgba(31, 157, 157, 0.35); border-radius: 1rem;
+      padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .info-box-icon {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, #1F9D9D, #15787A); color: #FFFFFF;
+      display: flex; align-items: center; justify-content: center;
     }
 
+    .cta-band {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 100%); color: #FFFFFF;
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 40%, rgba(31, 157, 157, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    .footer { background: linear-gradient(180deg, #0E1B2E 0%, #070E1A 100%); color: #C5CEDC; }
+    .footer-logo { height: 68px; width: auto; display: block; }
+    .footer a { color: #C5CEDC; transition: color 0.3s var(--smooth); }
+    .footer a:hover { color: #1F9D9D; }
+    .footer h4 {
+      font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06); color: #C5CEDC;
+      transition: background 0.3s var(--smooth), color 0.3s var(--smooth), transform 0.3s var(--spring);
+    }
+    .social-icon:hover { background: #1F9D9D; color: #FFFFFF; transform: translateY(-2px); }
+
+    /* WhatsApp */
     .wa-btn {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 9000;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: #25D366;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
       animation: bounce-in 0.8s var(--spring) 1.5s forwards, wa-attention 3s ease-in-out 4s infinite;
       opacity: 0;
       transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring);
     }
-
-    .wa-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45);
-    }
-
+    .wa-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45); }
+    .wa-btn:active { transform: scale(0.95); }
+    .wa-btn:focus-visible { outline: 3px solid #25D366; outline-offset: 4px; }
     .wa-popup {
-      position: fixed;
-      bottom: 6.5rem;
-      right: 1.5rem;
-      z-index: 9001;
-      width: 360px;
-      max-width: calc(100vw - 2rem);
-      background: #FFFFFF;
-      border-radius: 1rem;
-      box-shadow: 0 12px 48px rgba(30, 30, 30, 0.12), 0 2px 8px rgba(30, 30, 30, 0.06);
-      overflow: hidden;
-      transform: translateY(20px) scale(0.95);
-      opacity: 0;
+      position: fixed; bottom: 6.5rem; right: 1.5rem; z-index: 9001;
+      width: 360px; max-width: calc(100vw - 2rem);
+      background: #FFFFFF; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(14, 27, 46, 0.15), 0 2px 8px rgba(14, 27, 46, 0.06);
+      transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none;
       transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth);
-      pointer-events: none;
     }
+    .wa-popup.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .wa-popup-header { background: linear-gradient(135deg, #075E54, #128C7E); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .wa-popup-avatar { width: 42px; height: 42px; border-radius: 50%; background: #FAF7F2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .wa-popup-avatar img { width: 100%; height: 100%; object-fit: contain; }
+    .wa-popup-body { padding: 1.25rem; background: #E5DDD5; min-height: 100px; }
+    .wa-greeting { background: #FFFFFF; padding: 0.75rem 1rem; border-radius: 0 0.75rem 0.75rem 0.75rem; font-size: 0.88rem; color: #1E1E1E; max-width: 85%; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
+    .wa-greeting-time { font-size: 0.7rem; color: #999; text-align: right; margin-top: 0.25rem; }
+    .wa-popup-input { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-top: 1px solid #F0EBE3; background: #FFFFFF; }
+    .wa-popup-input input { flex: 1; border: none; outline: none; padding: 0.55rem 0.75rem; font-size: 0.88rem; background: #F5F5F5; border-radius: 1.5rem; }
+    .wa-send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer; background: #128C7E; color: white; display: flex; align-items: center; justify-content: center; transition: background 0.3s var(--smooth); }
+    .wa-send-btn:hover { background: #075E54; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0.75rem; background: #FFFFFF; border-radius: 1rem; width: fit-content; margin-top: 0.75rem; }
+    .wa-typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #25D366; animation: dot-bounce 1.4s infinite ease-in-out; }
+    .wa-typing-dot:nth-child(2) { animation-delay: 0.2s; } .wa-typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-    .wa-popup.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      pointer-events: auto;
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
+      background: #FFFFFF; z-index: 1050; padding: 5.5rem 1.75rem 2rem;
+      transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo);
+      box-shadow: -10px 0 40px rgba(14, 27, 46, 0.08);
+      display: flex; flex-direction: column; gap: 1.2rem;
     }
-
-    .wa-popup-header {
-      background: linear-gradient(135deg, #075E54, #128C7E);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.15rem;
+      padding: 0.6rem 0; border-bottom: 1px solid #F0EBE3;
     }
-
-    .wa-popup-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #FAF7F2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .mobile-menu a:hover { color: #1F9D9D; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: #FFFFFF; margin: 5px 0; border-radius: 2px;
+      transition: transform 0.3s var(--smooth), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
-
-    .wa-popup-body {
-      padding: 1.25rem;
-      background: #E5DDD5;
-      min-height: 100px;
+    .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
+    .menu-backdrop {
+      position: fixed; inset: 0; background: rgba(14, 27, 46, 0.4); z-index: 1040;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--smooth);
     }
-
-    .wa-greeting {
-      background: #FFFFFF;
-      padding: 0.75rem 1rem;
-      border-radius: 0 0.75rem 0.75rem 0.75rem;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      max-width: 85%;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-    }
-
-    .wa-greeting-time {
-      font-size: 0.7rem;
-      color: #999;
-      text-align: right;
-      margin-top: 0.25rem;
-    }
-
-    .wa-popup-input {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-top: 1px solid #F0EBE3;
-      background: #FFFFFF;
-    }
-
-    .wa-popup-input input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: 'Manrope', sans-serif;
-      font-size: 0.88rem;
-      color: #1E1E1E;
-      background: #F0EBE3;
-      padding: 0.6rem 1rem;
-      border-radius: 1.5rem;
-    }
-
-    .wa-send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: #25D366;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.2s var(--spring), background-color 0.2s;
-    }
-
-    .wa-send-btn:hover {
-      background: #20BA5A;
-      transform: scale(1.08);
-    }
-
-    .wa-typing-dots {
-      display: flex;
-      gap: 4px;
-      padding: 0.4rem 0;
-    }
-
-    .wa-typing-dots span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #999;
-      animation: dot-bounce 1.4s ease-in-out infinite;
-    }
-
-    .wa-typing-dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .wa-typing-dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .terms-content h2 {
-      font-size: 1.75rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      color: #1E1E1E;
-    }
-
-    .terms-content h3 {
-      font-size: 1.25rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: #1E1E1E;
-      font-weight: 600;
-    }
-
-    .terms-content p {
-      margin-bottom: 1rem;
-      color: #4A4A4A;
-    }
-
-    .terms-content ul {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-      color: #4A4A4A;
-    }
-
-    .terms-content li {
-      margin-bottom: 0.5rem;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #FAF7F2;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #d4cfc7;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 640px) {
-      .wa-popup {
-        right: 0;
-        bottom: 5.5rem;
-        max-width: 100vw;
-        width: 100vw;
-        border-radius: 1rem 1rem 0 0;
-      }
-    }
-
-    .logo-bah {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.08em;
-    }
-
-    .logo-travel {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-    }
-
-    .nav-bar.scrolled .logo-travel-text {
-      color: #1E1E1E !important;
-    }
-
-    .logo-travel-text {
-      color: #FFFFFF;
-      transition: color 0.4s;
-    }
-
-    /* ── Mobile Overrides (Appended) ── */
-    @media (max-width: 768px) {
-
-      /* Typography Scaling */
-      .text-5xl,
-      .text-7xl,
-      .text-8xl {
-        font-size: 2.25rem !important;
-        line-height: 1.2 !important;
-      }
-
-      .text-4xl {
-        font-size: 1.875rem !important;
-        line-height: 1.3 !important;
-      }
-
-      .text-3xl {
-        font-size: 1.5rem !important;
-      }
-
-      p.text-lg,
-      p.text-xl {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-      }
-
-      /* Spacing Fixes */
-      .py-32 {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-
-      .py-24 {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-      }
-
-      .px-6,
-      .px-8,
-      .lg\:px-8 {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-      }
-
-      .hero-section .relative {
-        padding-top: 7rem !important;
-        padding-bottom: 3.5rem !important;
-      }
-
-      /* Layout Fixes */
-      .gap-8,
-      .gap-10,
-      .gap-12 {
-        gap: 1.5rem !important;
-      }
-
-      /* WhatsApp Fixes */
-      .wa-btn {
-        bottom: 1rem !important;
-        right: 1rem !important;
-        width: 50px !important;
-        height: 50px !important;
-      }
-
-      .wa-popup {
-        right: 0 !important;
-        bottom: 4.5rem !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        border-radius: 1rem 1rem 0 0 !important;
-      }
-
-      /* Nav Fixes */
-      .logo-bah,
-      .logo-travel {
-        font-size: 1.15rem !important;
-      }
-
-      .mobile-menu a {
-        font-size: 2rem !important;
-      }
-
-      .desktop-nav {
-        display: none !important;
-      }
-
-      .scroll-indicator {
-        display: none !important;
-      }
-
-      /* Performance Fix for Mobile Scroll Jitter */
-      * {
-        background-attachment: scroll !important;
-      }
-      .grain-overlay {
-        transform: translateZ(0) !important;
-        will-change: transform;
-      }
-    }
+    .menu-backdrop.open { opacity: 1; pointer-events: auto; }
   </style>
 </head>
 
 <body>
-  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="grain-overlay"></div>
 
-  <!-- Navigation -->
-  <nav class="nav-bar nav-anim" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 no-underline" aria-label="BAH Travel Home">
-        <svg width="36" height="36" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-          <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-          <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-        <div class="flex items-baseline gap-0">
-          <span class="logo-bah" style="color:#E8941A;">BAH</span>
-          <span class="logo-travel logo-travel-text">TRAVEL</span>
-        </div>
+  <nav class="nav-bar nav-anim" id="navbar">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3" aria-label="Jallow Transporters home">
+        <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="nav-logo">
       </a>
-      <div class="desktop-nav flex items-center gap-8">
-        <a href="/" class="nav-link no-underline">Home</a>
-        <a href="/about" class="nav-link no-underline">About</a>
-        <a href="/contact" class="nav-link no-underline">Contact</a>
-        <a href="/terms" class="nav-link active no-underline">Terms</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/#routes" class="nav-link">Routes</a>
+        <a href="/terms.html" class="nav-link active">Terms</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/contact.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
+          Get a Quote
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <button class="hamburger md:hidden flex flex-col justify-center items-center w-10 h-10" id="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-    <a href="/"><span class="mm-num">01</span><span>Home</span></a>
-    <a href="/about"><span class="mm-num">02</span><span>About</span></a>
-    <a href="/contact"><span class="mm-num">03</span><span>Contact</span></a>
-    <a href="/terms" class="active"><span class="mm-num">04</span><span>Terms</span></a>
-    <div class="mm-footer" aria-hidden="true">Your trusted travel partner</div>
-  </div>
+  <div class="menu-backdrop" id="menu-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#routes">Routes</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/contact.html" class="btn-primary mt-4 justify-center">Get a Quote</a>
+  </aside>
 
-  <!-- Hero Section -->
-  <section class="relative min-h-[50vh] pt-24 pb-12 md:pt-32 md:pb-20 flex items-center section-navy" id="hero">
-    <div class="absolute inset-0 z-0"
-      style="background: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&h=1080&fit=crop&q=85') center/cover no-repeat; background-attachment: fixed;">
-      <div
-        style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,26,48,0.88) 0%, rgba(27,45,79,0.72) 40%, rgba(232,148,26,0.18) 100%);">
-      </div>
-      <div
-        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,26,48,0.9) 0%, transparent 40%);">
-      </div>
-    </div>
-    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;">
-      <svg style="position:absolute;top:-10%;right:5%;opacity:0.04;" width="300" height="300" viewBox="0 0 200 200"
-        fill="none">
-        <polygon points="100,10 123,40 160,40 132,62 143,98 100,78 57,98 68,62 40,40 77,40" fill="#E8941A" />
-      </svg>
-    </div>
-    <div class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full">
-      <div class="hero-anim hero-anim-1 flex items-center gap-3 mb-6">
-        <span style="display:inline-block;width:40px;height:1px;background:#E8941A;"></span>
-        <span class="font-body text-sm font-semibold tracking-widest uppercase" style="color:#E8941A;">Legal</span>
-      </div>
-      <h1 class="hero-anim hero-anim-2 font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
-        Terms & Conditions
+  <section class="page-hero">
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 text-center">
+      <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-teal mb-5">
+        <span class="hero-accent-line"></span>Booking Guidelines
+      </p>
+      <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
+        Clear terms — so there are <span class="text-teal">no surprises later.</span>
       </h1>
-      <p class="hero-anim hero-anim-2 font-body text-lg md:text-xl"
-        style="color:rgba(255,255,255,0.7);max-width:580px;line-height:1.7;">
-        Please read our terms and conditions carefully before booking any of our services.
+      <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-3xl mx-auto">
+        Please read these guidelines before booking a shipment. They cover packing, liability,
+        deposits, claims, and how we handle storage and payment at port.
       </p>
     </div>
   </section>
 
-  <!-- Content -->
-  <section class="py-24 md:py-32 bg-cream">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8">
-      <div class="terms-content">
-        <h2>1. ATOL Protection</h2>
-        <p>BAH Travel is an ATOL protected agent (ATOL number: [NUMBER]). This means you are protected by the Civil
-          Aviation Authority's Air Travel Organisers' Licensing scheme. Your financial position is protected in the
-          event of our failure. You may contact ATOL at www.atol.org.uk or call 0203 1766 000.</p>
-
-        <h2>2. Booking & Payment</h2>
-        <h3>2.1 Deposit</h3>
-        <p>A non-refundable deposit of £500–£1,000 per person is required to secure your booking, depending on the
-          package selected. This is payable within 7 days of confirmation.</p>
-        <h3>2.2 Balance Payment</h3>
-        <p>The balance is due 8 weeks before departure. Failure to pay by this date may result in cancellation of your
-          booking and forfeiture of all payments.</p>
-        <h3>2.3 Currency</h3>
-        <p>All prices are quoted in British pounds (GBP). Exchange rate fluctuations may result in price adjustments for
-          bookings made more than 12 weeks in advance.</p>
-        <h3>2.4 Visa Service Fees</h3>
-        <p>Visa processing fees are payable in full at the time of application submission. These fees cover our processing service only and do not include embassy or consulate fees, which are payable separately as required.</p>
-
-        <h2>3. Cancellation & Refunds</h2>
-        <h3>3.1 Cancellation by Customer</h3>
-        <ul>
-          <li>More than 12 weeks before departure: Deposit only (£500–£1,000)</li>
-          <li>8–12 weeks before departure: 25% of total package cost</li>
-          <li>4–8 weeks before departure: 50% of total package cost</li>
-          <li>Less than 4 weeks before departure: 100% of total package cost (no refund)</li>
-        </ul>
-        <h3>3.2 Cancellation by BAH Travel</h3>
-        <p>We reserve the right to cancel your package if we fail to obtain visas, flights, or hotel accommodation. In
-          such cases, a full refund will be issued within 30 days.</p>
-
-        <h2>4. Visa & Documentation</h2>
-        <h3>4.1 Visa Processing Services</h3>
-        <p>BAH Travel acts as an agent to assist with visa applications for all destinations, including the UK, Schengen area, US, Canada, and others. We do not guarantee visa approval. Embassy and consulate decisions are final and outside our control.</p>
-        <h3>4.2 Client Responsibilities</h3>
-        <p>Clients must provide accurate and complete documentation as requested. Falsified or incomplete documents may result in application rejection. BAH Travel is not liable for rejections due to inaccurate or incomplete information provided by the client. Passports must be valid for at least 6 months beyond your intended travel date.</p>
-        <h3>4.3 Refund on Visa Rejection</h3>
-        <p>Visa service fees charged by BAH Travel are non-refundable regardless of the application outcome. Embassy and consulate fees may be refundable subject to the respective authority's own refund policy.</p>
-        <h3>4.4 Processing Times</h3>
-        <p>We provide estimated processing timelines based on experience; however, actual processing times are determined by embassies and consulates and cannot be guaranteed by BAH Travel.</p>
-
-        <h2>5. Health & Insurance</h2>
-        <p>We strongly recommend travel and medical insurance covering your trip. While we cover certain medical
-          emergencies on our pilgrimage packages, comprehensive travel insurance is your responsibility and is not included in our
-          service fees or package prices.</p>
-        <p>Clients with pre-existing medical conditions must disclose these during booking. We cannot guarantee
-          accommodation for mobility requirements.</p>
-
-        <h2>6. Liability & Responsibility</h2>
-        <p>BAH Travel is not responsible for:</p>
-        <ul>
-          <li>Losses or damages to personal belongings</li>
-          <li>Flight delays, cancellations, or changes by airlines</li>
-          <li>Hotel room changes, downgrades, or closures</li>
-          <li>Acts of God (natural disasters, extreme weather)</li>
-          <li>Political unrest or changes in government regulations</li>
-          <li>Personal injury or illness not caused by BAH Travel negligence</li>
-        </ul>
-        <p>Our liability is limited to the total amount paid for your package.</p>
-
-        <h2>7. Behaviour & Code of Conduct</h2>
-        <p>Clients must respect local laws, customs, and practices at their destination. Disruptive behaviour, substance abuse, or
-          violation of hotel/transport policies may result in immediate removal from the group without refund. BAH
-          Travel is not responsible for repatriation costs in such cases.</p>
-
-        <h2>8. Prices & Inclusions</h2>
-        <h3>8.1 What's Included</h3>
-        <ul>
-          <li>Return flights (economy class)</li>
-          <li>Hotel accommodation as per package</li>
-          <li>Airport transfers</li>
-          <li>Group leader & guide services</li>
-          <li>Breakfast (and selected meals as per package)</li>
-          <li>Visa assistance</li>
-        </ul>
-        <h3>8.2 What's Not Included</h3>
-        <ul>
-          <li>Travel & medical insurance (highly recommended)</li>
-          <li>Personal expenses (gifts, souvenirs, additional meals)</li>
-          <li>Optional tours or activities not specified in itinerary</li>
-          <li>Vaccinations or medical checks</li>
-          <li>Excess baggage fees</li>
-        </ul>
-
-        <h2>9. Flight Ticketing Services</h2>
-        <h3>9.1 Scope of Service</h3>
-        <p>BAH Travel acts as a booking agent for airline tickets. We source and issue tickets on behalf of clients but are not the operating airline.</p>
-        <h3>9.2 Ticketing Fees</h3>
-        <p>Our service and booking fees are non-refundable once a ticket has been issued, regardless of whether the client subsequently cancels or changes the booking.</p>
-        <h3>9.3 Changes & Cancellations</h3>
-        <p>Flight changes and cancellations are subject to the airline's own policies and fare rules. BAH Travel charges an administration fee for processing amendments or cancellations on your behalf, in addition to any airline-imposed charges.</p>
-        <h3>9.4 Baggage & Check-in</h3>
-        <p>Baggage allowances, check-in procedures, and boarding requirements are the client's responsibility and are governed by the airline's terms of carriage.</p>
-        <h3>9.5 Schedule Changes by Airlines</h3>
-        <p>BAH Travel will notify clients of any airline-initiated schedule changes as promptly as possible. However, we are not liable for delays, cancellations, or schedule changes imposed by the airline.</p>
-        <h3>9.6 No-Shows</h3>
-        <p>Clients who fail to check in or board their flight (no-shows) are not entitled to a refund from BAH Travel. Airline refund policies for no-shows vary by fare type.</p>
-
-        <h2>10. Itinerary Changes</h2>
-        <p>We reserve the right to make changes to the itinerary due to circumstances beyond our control (flight
-          changes, hotel unavailability, local restrictions). We will provide 48 hours' notice where possible and offer
-          alternative arrangements of equal or greater value.</p>
-
-        <h2>11. Privacy & Data Protection</h2>
-        <p id="privacy">We collect and process personal data (name, passport details, contact information, medical
-          needs) solely for the purpose of providing our travel services. Your data is stored securely and will not be
-          shared with third parties except where necessary (airlines, hotels, visa authorities). By booking with BAH
-          Travel, you consent to this processing. For details, see our Privacy Policy.</p>
-
-        <h2>12. Complaints</h2>
-        <p>If you have a complaint, please contact us in writing within 30 days of return. We will respond within 14
-          days. Unresolved complaints may be escalated to ATOL or relevant regulatory bodies.</p>
-
-        <h2>13. Governing Law</h2>
-        <p>These terms are governed by English law. Any disputes shall be resolved through negotiation or, if necessary,
-          through the courts of England and Wales.</p>
-
-        <h2>14. Contact</h2>
-        <p>BAH Travel Ltd<br>
-          Email: info@bahtravel.com<br>
-          Phone: +220 228 9111<br>
-          WhatsApp: +220 228 9111</p>
-
-        <p style="margin-top:3rem;padding-top:2rem;border-top:1px solid #d4cfc7;color:#999;font-size:0.9rem;">Last
-          updated: 2025. These terms may be updated at any time without notice.</p>
+  <!-- ═════ INTRO / NOTE ═════ -->
+  <section class="py-14 lg:py-16">
+    <div class="max-w-4xl mx-auto px-5 lg:px-8">
+      <div class="info-box reveal">
+        <div class="info-box-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <div>
+          <h3 class="text-navy text-lg font-bold mb-1">Why we have booking guidelines</h3>
+          <p class="text-charcoal-light text-sm">
+            Freight moves through ports, customs, and third-party hands. These guidelines exist to
+            keep your shipment safe, your expectations realistic, and our service consistent for
+            every customer. By booking with Jallow Transporters, you confirm you've read and
+            accepted these terms.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-16 md:py-20" style="background: linear-gradient(180deg, #0F1A30 0%, #0A1222 100%);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-12 lg:gap-16 mb-14">
-        <div>
-          <div class="flex items-center gap-2 mb-5">
-            <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="23" fill="none" stroke="#E8941A" stroke-width="1.5" opacity="0.3" />
-              <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-              <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-            <span class="font-display text-lg font-bold"><span style="color:#E8941A;">BAH</span><span
-                style="color:#FFFFFF;">TRAVEL</span></span>
+  <!-- ═════ TERMS ═════ -->
+  <section class="pb-20 lg:pb-28">
+    <div class="max-w-4xl mx-auto px-5 lg:px-8 space-y-4">
+
+      <article class="term-card reveal stagger-1">
+        <div class="term-num">01</div>
+        <div class="term-body">
+          <h3>Customers must pack and protect all freight</h3>
+          <p>All goods must be packed, sealed, wrapped, and protected by the customer before handover. Items submitted unpacked or inadequately protected may be refused at collection.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-2">
+        <div class="term-num">02</div>
+        <div class="term-body">
+          <h3>Minor scratches and dents are not covered</h3>
+          <p>Minor cosmetic damage such as small scratches and dents that occur during normal handling and transit are not covered under our liability terms.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-3">
+        <div class="term-num">03</div>
+        <div class="term-body">
+          <h3>No liability for unprotected goods</h3>
+          <p>If goods have not been properly packed and protected by the customer, Jallow Transporters Ltd accepts no liability for damage in transit.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-4">
+        <div class="term-num">04</div>
+        <div class="term-body">
+          <h3>Send pictures of all goods</h3>
+          <p>Customers must send clear photographs of all goods to Jallow Transporters before shipment. This protects both parties and supports any future claims process.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-5">
+        <div class="term-num">05</div>
+        <div class="term-body">
+          <h3>Provide the collection &amp; delivery address</h3>
+          <p>Customers must supply the full collection address (where freight is to be picked up) and the destination delivery address before booking is confirmed.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-6">
+        <div class="term-num">06</div>
+        <div class="term-body">
+          <h3>Storage fee after 10 days at port</h3>
+          <p>A storage fee of <strong class="text-navy">£3 per day</strong> applies if freight is not collected within 10 days of arrival at the destination port. This covers warehousing and yard fees we incur on your behalf.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-1">
+        <div class="term-num">07</div>
+        <div class="term-body">
+          <h3>Label all freight with recipient contact details</h3>
+          <p>Every item, box, barrel, or pallet must be clearly labelled with the recipient's name and a contactable phone number. Unlabelled freight may be delayed or held at port until ownership is verified.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-2">
+        <div class="term-num">08</div>
+        <div class="term-body">
+          <h3>Minimum deposit required to confirm booking</h3>
+          <p>A minimum deposit is required to confirm and reserve space on a container or air freight load. Bookings are not held without deposit.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-3">
+        <div class="term-num">09</div>
+        <div class="term-body">
+          <h3>Maximum claim of £200 — within 1 year</h3>
+          <p>The maximum claim payable for loss or damage to freight is <strong class="text-navy">£200</strong>. All claims must be submitted in writing within <strong class="text-navy">12 months</strong> of the shipment date, with supporting evidence (photos, receipts, packing list).</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-4">
+        <div class="term-num">10</div>
+        <div class="term-body">
+          <h3>Glass and screens are not covered</h3>
+          <p>We do not accept responsibility for any glass items, including televisions and screens. In the event of damage in transit, only the shipping fee for the affected item will be refunded — the value of the item itself is not covered.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-5">
+        <div class="term-num">11</div>
+        <div class="term-body">
+          <h3>Payments due on container arrival, not after clearance</h3>
+          <p>All outstanding balances must be cleared on arrival of the container at the destination port. Payment cannot be deferred until after customs clearance.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═════ FOOTNOTE ═════ -->
+  <section class="pb-20 lg:pb-24">
+    <div class="max-w-4xl mx-auto px-5 lg:px-8 space-y-6">
+      <div class="text-center reveal">
+        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">Governing law</p>
+        <h2 class="text-navy text-[1.6rem] lg:text-[2rem] mb-4">United Kingdom · England &amp; Wales</h2>
+        <p class="text-charcoal-light text-base max-w-2xl mx-auto">
+          These booking guidelines and any contract for services with Jallow Transporters Ltd are
+          governed by the laws of England and Wales. Any disputes will be handled in the UK
+          courts unless otherwise agreed in writing.
+        </p>
+      </div>
+
+      <div class="info-box reveal">
+        <div class="info-box-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-navy text-lg font-bold mb-1">Questions about these terms?</h3>
+          <p class="text-charcoal-light text-sm mb-4">
+            If anything here is unclear, talk to us before booking. We'd rather answer the
+            question than have you guess.
+          </p>
+          <a href="/contact.html" class="btn-primary" style="padding: 0.7rem 1.5rem; font-size: 0.9rem;">
+            Contact Us
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ CTA ═════ -->
+  <section class="cta-band py-20 lg:py-24">
+    <div class="relative max-w-5xl mx-auto px-5 lg:px-8 text-center">
+      <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal mb-4">Ready when you are</p>
+      <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-white mb-5 max-w-3xl mx-auto">
+        Terms read. Now let's get your freight moving.
+      </h2>
+      <p class="reveal stagger-1 text-white/70 text-base sm:text-lg max-w-2xl mx-auto mb-9">
+        Tell us the route, the weight, and when you need it there. We'll come back with a
+        straight quote — usually the same day.
+      </p>
+      <div class="reveal stagger-2 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact.html" class="btn-primary">
+          Get Your Quote
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/447831005961" target="_blank" rel="noopener" class="btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
+        <div class="md:col-span-2">
+          <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="footer-logo mb-5">
+          <p class="text-sm text-white/60 max-w-sm mb-5">
+            UK-headquartered freight specialists serving the diaspora with sea and air cargo to
+            West Africa, Moroccan tourism and authentic Moroccan preorders.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+            </a>
           </div>
-          <p class="font-body text-sm mb-5" style="color:rgba(255,255,255,0.5);line-height:1.8;">Your trusted partner for visa services, flight bookings, and Hajj &amp; Umrah packages. ATOL protected.</p>
         </div>
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-5">Quick Links</h4>
-          <ul class="space-y-3">
-            <li><a href="/" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Home</a></li>
-            <li><a href="/about" class="font-body text-sm no-underline" style="color:rgba(255,255,255,0.5);">About
-                Us</a></li>
-            <li><a href="/contact" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Contact Us</a></li>
-            <li><a href="/terms" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">Terms</a></li>
+          <h4>Explore</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#routes">Our Routes</a></li>
+            <li><a href="/terms.html">Booking Guidelines</a></li>
+            <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-display text-base font-semibold text-white mb-5">Contact</h4>
-          <ul class="space-y-3">
-            <li><a href="tel:+2202289111" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">+220 228 9111</a></li>
-            <li><a href="https://wa.me/2202289111" target="_blank" rel="noopener" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">WhatsApp</a></li>
-            <li><a href="mailto:info@bahtravel.com" class="font-body text-sm no-underline"
-                style="color:rgba(255,255,255,0.5);">info@bahtravel.com</a></li>
+          <h4>Get in Touch</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Sher Storage, Smethwick,<br>Birmingham B66 2NZ, UK</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+447831005961">+44 7831 005961</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="pt-8" style="border-top: 1px solid rgba(255,255,255,0.06);">
-        <p class="font-body text-xs" style="color:rgba(255,255,255,0.3);">&copy; 2026 BAH Travel Ltd. All rights
-          reserved. ATOL Protected.</p>
+      <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <p>© <span id="year"></span> Jallow Transporters Ltd. All rights reserved.</p>
+        <p>Customer · Care · Commitment</p>
       </div>
     </div>
   </footer>
 
-  <!-- WhatsApp Widget -->
-  <button class="wa-btn" id="waBtn" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path
-        d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.478-.752-6.229-2.028l-.356-.27-3.281 1.1 1.1-3.281-.27-.356A9.95 9.95 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
-    </svg>
+  <button class="wa-btn" id="wa-btn" aria-label="Chat with us on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
   </button>
 
-  <div class="wa-popup" id="waPopup" role="dialog" aria-label="WhatsApp Chat">
+  <div class="wa-popup" id="wa-popup" role="dialog" aria-label="WhatsApp chat">
     <div class="wa-popup-header">
-      <div class="wa-popup-avatar">
-        <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
-          <path d="M20 30 L24 22 L28 30" fill="#E8941A" opacity="0.9" />
-          <path d="M14 30 L24 12 L34 30" stroke="#E8941A" stroke-width="2" fill="none" stroke-linecap="round" />
-        </svg>
+      <div class="wa-popup-avatar"><img src="/brand_assets/jt-logo.png" alt="JT"></div>
+      <div class="flex-1">
+        <p class="text-white font-semibold text-sm leading-tight">Jallow Transporters</p>
+        <p class="text-white/80 text-xs">Typically replies within an hour</p>
       </div>
-      <div>
-        <div class="font-body text-sm font-semibold text-white">BAH Travel</div>
-        <div class="font-body text-xs" style="color:rgba(255,255,255,0.7);">Typically replies within minutes</div>
-      </div>
-      <button id="waClose"
-        style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;padding:0.25rem;transition:color 0.2s;"
-        aria-label="Close chat">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
+      <button id="wa-close" class="text-white/80 hover:text-white" aria-label="Close chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="wa-popup-body">
       <div class="wa-greeting">
-        <p class="font-body" style="margin:0;">Hello! 👋 How can we help you today? We offer visa services, flight bookings, and Hajj/Umrah packages.</p>
-        <div class="wa-greeting-time">now</div>
+        <p>Hey there 👋 How can the JT team help today — a quote, a collection, or a preorder?</p>
+        <p class="wa-greeting-time">Online now</p>
       </div>
-      <div class="wa-typing-dots mt-3 ml-1"><span></span><span></span><span></span></div>
+      <div class="wa-typing" id="wa-typing" style="display:none;">
+        <span class="wa-typing-dot"></span><span class="wa-typing-dot"></span><span class="wa-typing-dot"></span>
+      </div>
     </div>
-    <div class="wa-popup-input">
-      <input type="text" id="waInput" placeholder="Type your message..." aria-label="Type your message">
-      <button class="wa-send-btn" id="waSend" aria-label="Send message">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-        </svg>
+    <form class="wa-popup-input" id="wa-form">
+      <input type="text" id="wa-input" placeholder="Type a message..." aria-label="Message">
+      <button type="submit" class="wa-send-btn" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
-    </div>
+    </form>
   </div>
 
   <script>
-      (function () {
-        'use strict';
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        const nav = document.getElementById('navbar');
-        const logoText = document.querySelector('.nav-bar-logo-text');
-        function handleScroll() {
-          if (window.scrollY > 60) {
-            nav.classList.add('scrolled');
-            if (logoText) logoText.style.color = '#1E1E1E';
-          } else {
-            nav.classList.remove('scrolled');
-            if (logoText) logoText.style.color = '#FFFFFF';
-          }
-        }
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => { if (window.scrollY > 10) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        hamburger.addEventListener('click', () => {
-          const isOpen = mobileMenu.classList.toggle('open');
-          hamburger.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', isOpen);
-          nav.classList.toggle('menu-open', isOpen);
-          document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            hamburger.classList.remove('open');
-            mobileMenu.classList.remove('open');
-            nav.classList.remove('menu-open');
-            hamburger.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-          });
-        });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('menu-backdrop');
+    const closeMenu = () => {
+      hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); backdrop.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false'); mobileMenu.setAttribute('aria-hidden', 'true');
+    };
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open); backdrop.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open)); mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+    backdrop.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-        const waBtn = document.getElementById('waBtn');
-        const waPopup = document.getElementById('waPopup');
-        const waClose = document.getElementById('waClose');
-        const waInput = document.getElementById('waInput');
-        const waSend = document.getElementById('waSend');
-        waBtn.addEventListener('click', (e) => {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            window.open('https://wa.me/2202289111', '_blank');
-            return;
-          }
-          waPopup.classList.toggle('open');
-          if (waPopup.classList.contains('open')) waInput.focus();
-        });
-        waClose.addEventListener('click', () => waPopup.classList.remove('open'));
-        function sendWhatsApp() {
-          const msg = waInput.value.trim();
-          const url = msg ? 'https://wa.me/2202289111?text=' + encodeURIComponent(msg) : 'https://wa.me/2202289111';
-          window.open(url, '_blank');
-        }
-        waSend.addEventListener('click', sendWhatsApp);
-        waInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendWhatsApp(); });
-      })();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 600);
+
+    const waBtn = document.getElementById('wa-btn');
+    const waPopup = document.getElementById('wa-popup');
+    const waClose = document.getElementById('wa-close');
+    const waForm = document.getElementById('wa-form');
+    const waInput = document.getElementById('wa-input');
+    const waTyping = document.getElementById('wa-typing');
+    const WA_NUMBER = '447831005961';
+    const openOrRedirect = () => {
+      if (window.matchMedia('(max-width: 768px)').matches) window.open('https://wa.me/' + WA_NUMBER, '_blank');
+      else waPopup.classList.add('open');
+    };
+    waBtn.addEventListener('click', openOrRedirect);
+    waClose.addEventListener('click', () => waPopup.classList.remove('open'));
+    waForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = waInput.value.trim(); if (!msg) return;
+      waTyping.style.display = 'flex';
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+    });
   </script>
 </body>
 
