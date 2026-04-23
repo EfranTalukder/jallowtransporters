@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 480" role="img" aria-label="Jallow Transporters">
+  <defs>
+    <style>
+      .teal{fill:#288a96}
+      .coral{fill:#cd4c56}
+      .word{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:700;font-size:54px;letter-spacing:-1px}
+    </style>
+  </defs>
+
+  <!-- Top bar (J cap + T crossbar combined) -->
+  <rect x="48" y="40" width="446" height="30" rx="2" class="teal"/>
+
+  <!-- J letter (filled path so we control every terminal exactly) -->
+  <path class="teal" d="
+    M 80 70
+    L 134 70
+    L 134 256
+    Q 134 286 164 286
+    L 186 286
+    Q 216 286 216 256
+    L 216 242
+    A 20 20 0 1 1 176 242
+    L 176 252
+    Q 176 258 170 258
+    L 162 258
+    Q 156 258 156 252
+    L 156 70 Z"/>
+
+  <!-- T stem (short visible segment above truck) -->
+  <rect x="348" y="68" width="26" height="16" class="teal"/>
+
+  <!-- ============ TRUCK ============ -->
+  <g transform="translate(238, 82)">
+    <!-- Cab body with rounded top corners -->
+    <path class="coral" d="
+      M 6 0
+      L 242 0
+      Q 248 0 248 6
+      L 248 232
+      L 0 232
+      L 0 6
+      Q 0 0 6 0 Z"/>
+
+    <!-- Windshield (narrower than cab, with center divider) -->
+    <rect x="22" y="14" width="204" height="36" fill="#ffffff"/>
+    <rect x="122" y="14" width="4" height="36" class="coral"/>
+
+    <!-- Grille area: 3 horizontal bars flanked by smaller headlights -->
+    <rect x="14" y="92" width="44" height="26" rx="2" fill="#ffffff"/>
+    <rect x="66" y="90" width="116" height="8" fill="#ffffff"/>
+    <rect x="66" y="104" width="116" height="8" fill="#ffffff"/>
+    <rect x="66" y="118" width="116" height="8" fill="#ffffff"/>
+    <rect x="190" y="92" width="44" height="26" rx="2" fill="#ffffff"/>
+
+    <!-- Subtle cab lower detail: thin coral/white accent line -->
+    <rect x="14" y="168" width="220" height="4" fill="#ffffff" opacity="0.35"/>
+
+    <!-- Bumper (wider than cab) -->
+    <rect x="-22" y="232" width="292" height="46" rx="4" class="coral"/>
+    <!-- License plate recess -->
+    <rect x="100" y="248" width="48" height="18" rx="2" fill="#ffffff"/>
+
+    <!-- Ground swoosh (dips in middle, rises at edges) -->
+    <path d="M -38 304 Q 124 328 286 304"
+          stroke="#cd4c56" stroke-width="6" fill="none"
+          stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="270" y="432" text-anchor="middle" class="word">
+    <tspan class="coral">Jallow</tspan><tspan class="teal" dx="12">Transporters</tspan>
+  </text>
+</svg>
