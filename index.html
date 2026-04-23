@@ -367,16 +367,64 @@
 
     /* ── Testimonial ── */
     .testimonial-card {
-      background: #FFFFFF; border-radius: 1rem; padding: 2rem;
-      box-shadow: 0 8px 24px -10px rgba(14, 27, 46, 0.08);
       position: relative;
+      background: #FFFFFF;
+      border-radius: 1rem;
+      padding: 2rem;
+      border: 1px solid rgba(14, 27, 46, 0.06);
+      box-shadow: 0 1px 2px rgba(14, 27, 46, 0.03), 0 10px 24px -16px rgba(14, 27, 46, 0.10);
+      display: flex; flex-direction: column;
+      transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo), border-color 0.5s var(--smooth);
     }
-    .testimonial-card::before {
-      content: '"'; position: absolute; top: -12px; left: 20px;
-      font-family: 'Montserrat', sans-serif; font-size: 5rem; color: #1F9D9D;
-      line-height: 1; opacity: 0.15;
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(31, 157, 157, 0.18);
+      box-shadow: 0 1px 2px rgba(14, 27, 46, 0.04), 0 18px 36px -18px rgba(14, 27, 46, 0.14);
     }
-    .testimonial-stars { color: #F5A623; display: flex; gap: 2px; margin-bottom: 1rem; }
+
+    .testimonial-stars {
+      display: inline-flex; align-items: center; gap: 3px;
+      color: #F5B841;
+      margin-bottom: 1.25rem;
+      align-self: flex-start;
+    }
+    .testimonial-stars svg { width: 18px; height: 18px; }
+
+    .testimonial-quote {
+      color: #1E1E1E;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      font-weight: 500;
+      font-style: normal;
+      margin-bottom: 1.75rem;
+      flex: 1;
+    }
+
+    .testimonial-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(14, 27, 46, 0.10), rgba(14, 27, 46, 0.02) 70%, transparent);
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #E6F4F4;
+      color: #0E5F61;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .testimonial-route {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; font-weight: 600;
+      color: #15787A;
+      margin-top: 0.15rem;
+    }
+    .testimonial-route svg { flex-shrink: 0; }
 
     /* ── CTA Band ── */
     .cta-band {
@@ -766,12 +814,12 @@
             <img class="card-img-zoom" src="/images/moroccan_souk.png" alt="Moroccan spices, leather and lanterns in a souk" loading="lazy">
           </div>
           <div class="service-body">
-            <h3>Moroccan Products, Preordered</h3>
-            <p>Argan oil, leather, spices, ceramics, lanterns — authentic Moroccan goods sourced to order and shipped to your door. Tell us what you want; we bring it back.</p>
+            <h3>Moroccan Gems</h3>
+            <p>Black hammam soap, argan oil, olive oil, kaftans and abayas — authentic Moroccan treasures sourced to order and shipped to your door. Tell us what you want; we bring it back.</p>
             <div class="service-routes">
-              <span class="route-chip">Argan &amp; oils</span>
-              <span class="route-chip">Leather</span>
-              <span class="route-chip">Artisan goods</span>
+              <span class="route-chip">Argan &amp; olive oil</span>
+              <span class="route-chip">Hammam soap</span>
+              <span class="route-chip">Kaftans &amp; abayas</span>
             </div>
             <a href="/contact.html" class="service-link">
               Place a preorder
@@ -976,61 +1024,73 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="testimonial-card reveal stagger-1">
-          <div class="testimonial-stars">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <p class="text-charcoal text-base mb-5 italic">
-            "Sent two barrels and a freezer to my family in Serekunda. Collected from my door in Manchester, cleared and delivered in Gambia exactly when they said. First time I've not had to chase anyone."
+          <p class="testimonial-quote">
+            Sent two barrels and a freezer to my family in Serekunda. Collected from my door in Manchester, cleared and delivered in Gambia exactly when they said. First time I've not had to chase anyone.
           </p>
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">AJ</div>
-            <div>
-              <p class="font-bold text-navy text-sm">Aminata Jallow</p>
-              <p class="text-charcoal-light text-xs">Manchester → Serekunda</p>
+          <div class="testimonial-divider"></div>
+          <div class="flex items-center gap-3.5">
+            <div class="testimonial-avatar">AS</div>
+            <div class="min-w-0">
+              <p class="font-bold text-navy text-sm leading-tight">Aminata Sarah</p>
+              <p class="testimonial-route">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                Manchester to Serekunda
+              </p>
             </div>
           </div>
         </div>
 
         <div class="testimonial-card reveal stagger-2">
-          <div class="testimonial-stars">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <p class="text-charcoal text-base mb-5 italic">
-            "Preordered argan oil and leather babouches through JT for my shop. Genuine stock, decent wholesale pricing, and they handled the whole import side. Already on my third order."
+          <p class="testimonial-quote">
+            Preordered argan oil and leather babouches through JT for my shop. Genuine stock, decent wholesale pricing, and they handled the whole import side. Already on my third order.
           </p>
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">MK</div>
-            <div>
-              <p class="font-bold text-navy text-sm">Mariama Kamara</p>
-              <p class="text-charcoal-light text-xs">Retailer, London</p>
+          <div class="testimonial-divider"></div>
+          <div class="flex items-center gap-3.5">
+            <div class="testimonial-avatar">MK</div>
+            <div class="min-w-0">
+              <p class="font-bold text-navy text-sm leading-tight">Mariama Kamara</p>
+              <p class="testimonial-route">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8z"/></svg>
+                Retailer, London
+              </p>
             </div>
           </div>
         </div>
 
         <div class="testimonial-card reveal stagger-3">
-          <div class="testimonial-stars">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <p class="text-charcoal text-base mb-5 italic">
-            "Booked the Morocco package for our anniversary. Marrakech, the desert, the drive through the Atlas — all properly organised, nothing felt generic. We're going back next year."
+          <p class="testimonial-quote">
+            Booked the Morocco package for our anniversary. Marrakech, the desert, the drive through the Atlas — all properly organised, nothing felt generic. We're going back next year.
           </p>
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-teal-light text-teal-dark flex items-center justify-center font-bold">SB</div>
-            <div>
-              <p class="font-bold text-navy text-sm">Sulayman &amp; Binta</p>
-              <p class="text-charcoal-light text-xs">Birmingham → Morocco</p>
+          <div class="testimonial-divider"></div>
+          <div class="flex items-center gap-3.5">
+            <div class="testimonial-avatar">SB</div>
+            <div class="min-w-0">
+              <p class="font-bold text-navy text-sm leading-tight">Sulayman &amp; Binta</p>
+              <p class="testimonial-route">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                Birmingham to Morocco
+              </p>
             </div>
           </div>
         </div>
