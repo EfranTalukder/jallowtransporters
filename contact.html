@@ -767,7 +767,6 @@
     </form>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -798,14 +797,16 @@
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => io.observe(el));
     setTimeout(() => document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => el.classList.add('visible')), 600);
 
-    // WhatsApp widget
+    // WhatsApp widget & Form Redirect
+    const WA_NUMBER = '447831005961';
+
     const waBtn = document.getElementById('wa-btn');
     const waPopup = document.getElementById('wa-popup');
     const waClose = document.getElementById('wa-close');
     const waForm = document.getElementById('wa-form');
     const waInput = document.getElementById('wa-input');
     const waTyping = document.getElementById('wa-typing');
-    const WA_NUMBER = '447831005961';
+    
     const openOrRedirect = () => {
       if (window.matchMedia('(max-width: 768px)').matches) window.open('https://wa.me/' + WA_NUMBER, '_blank');
       else waPopup.classList.add('open');
@@ -819,17 +820,7 @@
       setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
     });
 
-    // ─────────────────────────────────────────────────────────
-    // EmailJS Configuration
-    // Replace with your Jallow Transporters EmailJS account keys.
-    // Dashboard → Account → API Keys (public), Email Services, and Email Templates.
-    // ─────────────────────────────────────────────────────────
-    const EMAILJS_PUBLIC_KEY = 'JmgwfE-WvKVAUNBvC';
-    const EMAILJS_SERVICE_ID = 'service_s45mlov';
-    const EMAILJS_TEMPLATE_ID = 'template_akg9hrr';
-
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
+    // Main Contact Form Logic
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
@@ -843,32 +834,48 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       let ok = true;
-      const name = form.name, email = form.email, phone = form.phone, service = form.service, message = form.message;
+      const name = form.name, email = form.email, phone = form.phone, service = form.service, origin = form.origin, destination = form.destination, message = form.message;
+      
       setError(name, !name.value.trim()); if (!name.value.trim()) ok = false;
       setError(email, !isEmail(email.value.trim())); if (!isEmail(email.value.trim())) ok = false;
       setError(service, !service.value); if (!service.value) ok = false;
       setError(message, message.value.trim().length < 5); if (message.value.trim().length < 5) ok = false;
+      
       if (!ok) return;
 
       submitBtn.disabled = true;
-      btnText.textContent = 'Sending...';
+      btnText.textContent = 'Redirecting...';
       btnArrow.style.display = 'none';
       spinner.style.display = 'block';
 
-      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-        .then(() => {
-          form.style.display = 'none';
-          successCard.style.display = 'block';
-          successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        })
-        .catch((err) => {
-          console.error('EmailJS error', err);
-          btnText.textContent = 'Try again';
-          btnArrow.style.display = 'inline-block';
-          spinner.style.display = 'none';
-          submitBtn.disabled = false;
-          alert('Sorry — something went wrong sending your message. Please try again, or contact us via WhatsApp.');
-        });
+      // Construct the WhatsApp Message
+      let waMessage = `*New Quote Request from Website*\n\n`;
+      waMessage += `*Name:* ${name.value.trim()}\n`;
+      waMessage += `*Email:* ${email.value.trim()}\n`;
+      if (phone.value.trim()) waMessage += `*Phone/WA:* ${phone.value.trim()}\n`;
+      waMessage += `*Service:* ${service.value}\n`;
+      if (origin.value.trim()) waMessage += `*From:* ${origin.value.trim()}\n`;
+      if (destination.value.trim()) waMessage += `*To:* ${destination.value.trim()}\n`;
+      waMessage += `\n*Message:*\n${message.value.trim()}`;
+
+      // Open WhatsApp in a new tab
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+      
+      // Artificial delay for premium feel
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+        
+        // Show success state on the page
+        form.style.display = 'none';
+        successCard.style.display = 'block';
+        successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Reset button in case they come back
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnArrow.style.display = 'inline-block';
+        spinner.style.display = 'none';
+      }, 800);
     });
 
     ['name','email','phone','service','message'].forEach((n) => {
