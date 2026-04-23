@@ -20,6 +20,7 @@ const urls = [
   { url: 'http://localhost:3000', label: 'home-mobile' },
   { url: 'http://localhost:3000/about.html', label: 'about-mobile' },
   { url: 'http://localhost:3000/contact.html', label: 'contact-mobile' },
+  { url: 'http://localhost:3000/terms.html', label: 'terms-mobile' },
 ];
 
 for (const {url, label} of urls) {

@@ -249,31 +249,52 @@
 
     /* Mobile menu */
     .mobile-menu {
-      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
-      background: #FFFFFF; z-index: 1050; padding: 5.5rem 1.75rem 2rem;
-      transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo);
-      box-shadow: -10px 0 40px rgba(14, 27, 46, 0.08);
-      display: flex; flex-direction: column; gap: 1.2rem;
+      position: fixed; inset: 0; width: 100vw; height: 100vh;
+      background: #FAF7F2; z-index: 1050; padding: 1.5rem 1.25rem;
+      transform: scale(0.97); opacity: 0; pointer-events: none;
+      transition: transform 0.4s var(--ease-out-expo), opacity 0.3s ease;
+      display: flex; flex-direction: column;
     }
-    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu.open { transform: scale(1); opacity: 1; pointer-events: auto; }
     .mobile-menu a {
-      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.15rem;
-      padding: 0.6rem 0; border-bottom: 1px solid #F0EBE3;
+      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.25rem;
+      text-decoration: none; transform: translateY(20px); opacity: 0;
+      transition: transform 0.4s var(--spring), opacity 0.4s ease, color 0.3s ease;
     }
-    .mobile-menu a:hover { color: #1F9D9D; }
+    .mobile-menu.open a { transform: translateY(0); opacity: 1; }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.14s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.18s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #1F9D9D; }
+    .mobile-menu-footer { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s var(--spring); }
+    .mobile-menu.open .mobile-menu-footer { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
     .hamburger span {
-      display: block; width: 24px; height: 2px; background: #FFFFFF; margin: 5px 0; border-radius: 2px;
-      transition: transform 0.3s var(--smooth), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
+      display: block; width: 22px; height: 3px; background: #FFFFFF; margin: 4px 0;
+      border-radius: 3px; transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
     .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
-    .menu-backdrop {
-      position: fixed; inset: 0; background: rgba(14, 27, 46, 0.4); z-index: 1040;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--smooth);
+    .menu-backdrop { display: none !important; }
+
+    /* ── Mobile button refinements ── */
+    @media (max-width: 640px) {
+      .btn-primary,
+      .btn-outline {
+        padding: 0.8rem 1.15rem;
+        font-size: 0.92rem;
+        min-height: 48px;
+        border-radius: 0.55rem;
+        line-height: 1.2;
+        gap: 0.4rem;
+      }
+      .btn-primary .btn-arrow,
+      .btn-outline svg { width: 14px; height: 14px; }
     }
-    .menu-backdrop.open { opacity: 1; pointer-events: auto; }
   </style>
 </head>
 
@@ -305,13 +326,23 @@
 
   <div class="menu-backdrop" id="menu-backdrop"></div>
   <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/#services">Services</a>
-    <a href="/#routes">Routes</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/contact.html" class="btn-primary mt-4 justify-center">Get a Quote</a>
+    <div class="flex justify-between items-center w-full mb-8">
+      <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="h-10 w-auto">
+      <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0E1B2E; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="flex-1 flex flex-col justify-center items-center w-full mt-[-4rem]">
+      <div class="flex flex-col items-center gap-6 mb-20">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/terms.html" class="active">Terms</a>
+      </div>
+      <div class="mobile-menu-footer text-center">
+        <p class="text-[0.65rem] tracking-[0.2em] font-bold text-charcoal-light uppercase">Your Trusted Freight Partner</p>
+      </div>
+    </div>
   </aside>
 
   <section class="page-hero">
@@ -320,7 +351,7 @@
         <span class="hero-accent-line"></span>Booking Guidelines
       </p>
       <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
-        Clear terms — so there are <span class="text-teal">no surprises later.</span>
+        Clear terms so there are <span class="text-teal">no surprises later.</span>
       </h1>
       <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-3xl mx-auto">
         Please read these guidelines before booking a shipment. They cover packing, liability,
@@ -487,7 +518,7 @@
         Tell us the route, the weight, and when you need it there. We'll come back with a
         straight quote — usually the same day.
       </p>
-      <div class="reveal stagger-2 flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="reveal stagger-2 flex flex-wrap gap-3 sm:gap-4 justify-center">
         <a href="/contact.html" class="btn-primary">
           Get Your Quote
           <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -610,6 +641,7 @@
       hamburger.setAttribute('aria-expanded', String(open)); mobileMenu.setAttribute('aria-hidden', String(!open));
     });
     backdrop.addEventListener('click', closeMenu);
+    document.getElementById('mobile-close-btn')?.addEventListener('click', closeMenu);
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
     const io = new IntersectionObserver(entries => {

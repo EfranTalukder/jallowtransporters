@@ -131,7 +131,7 @@
     .stagger-1 { transition-delay: 0.08s; } .stagger-2 { transition-delay: 0.16s; } .stagger-3 { transition-delay: 0.24s; } .stagger-4 { transition-delay: 0.32s; }
 
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: #1F9D9D; color: #FFFFFF;
       padding: 0.95rem 2rem; border-radius: 0.5rem;
       font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
@@ -146,7 +146,7 @@
     .btn-primary:hover .btn-arrow { transform: translateX(4px); }
 
     .btn-outline {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: transparent; color: #FFFFFF;
       padding: 0.95rem 2rem; border-radius: 0.5rem;
       font-weight: 600; font-size: 0.95rem;
@@ -257,31 +257,37 @@
     .wa-typing-dot:nth-child(2) { animation-delay: 0.2s; } .wa-typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
     .mobile-menu {
-      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
-      background: #FFFFFF; z-index: 1050; padding: 5.5rem 1.75rem 2rem;
-      transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo);
-      box-shadow: -10px 0 40px rgba(14, 27, 46, 0.08);
-      display: flex; flex-direction: column; gap: 1.2rem;
+      position: fixed; inset: 0; width: 100vw; height: 100vh;
+      background: #FAF7F2; z-index: 1050; padding: 1.5rem 1.25rem;
+      transform: scale(0.97); opacity: 0; pointer-events: none;
+      transition: transform 0.4s var(--ease-out-expo), opacity 0.3s ease;
+      display: flex; flex-direction: column;
     }
-    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu.open { transform: scale(1); opacity: 1; pointer-events: auto; }
     .mobile-menu a {
-      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.15rem;
-      padding: 0.6rem 0; border-bottom: 1px solid #F0EBE3;
+      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.25rem;
+      text-decoration: none; transform: translateY(20px); opacity: 0;
+      transition: transform 0.4s var(--spring), opacity 0.4s ease, color 0.3s ease;
     }
-    .mobile-menu a:hover { color: #1F9D9D; }
+    .mobile-menu.open a { transform: translateY(0); opacity: 1; }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.14s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.18s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #1F9D9D; }
+    .mobile-menu-footer { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s var(--spring); }
+    .mobile-menu.open .mobile-menu-footer { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
     .hamburger span {
-      display: block; width: 24px; height: 2px; background: #FFFFFF; margin: 5px 0; border-radius: 2px;
-      transition: transform 0.3s var(--smooth), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
+      display: block; width: 22px; height: 3px; background: #FFFFFF; margin: 4px 0;
+      border-radius: 3px; transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
     .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
-    .menu-backdrop {
-      position: fixed; inset: 0; background: rgba(14, 27, 46, 0.4); z-index: 1040;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s var(--smooth);
-    }
-    .menu-backdrop.open { opacity: 1; pointer-events: auto; }
+    .menu-backdrop { display: none !important; }
 
     .story-photo-grid {
       display: grid; grid-template-columns: 1.1fr 0.9fr; grid-template-rows: 1fr 1fr; gap: 1rem; height: 500px;
@@ -289,9 +295,24 @@
     .story-photo-grid > div:nth-child(1) { grid-row: span 2; }
     @media (max-width: 900px) { .story-photo-grid { height: 420px; } }
     @media (max-width: 640px) {
-      .story-photo-grid { grid-template-columns: 1fr; grid-template-rows: 2fr 1fr 1fr; height: auto; }
+      .story-photo-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
       .story-photo-grid > div { height: 220px; }
       .story-photo-grid > div:nth-child(1) { height: 280px; grid-row: auto; }
+    }
+
+    /* ── Mobile button refinements ── */
+    @media (max-width: 640px) {
+      .btn-primary,
+      .btn-outline {
+        padding: 0.8rem 1.15rem;
+        font-size: 0.92rem;
+        min-height: 48px;
+        border-radius: 0.55rem;
+        line-height: 1.2;
+        gap: 0.4rem;
+      }
+      .btn-primary .btn-arrow,
+      .btn-outline svg { width: 14px; height: 14px; }
     }
   </style>
 </head>
@@ -324,13 +345,23 @@
 
   <div class="menu-backdrop" id="menu-backdrop"></div>
   <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/#services">Services</a>
-    <a href="/#routes">Routes</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/contact.html" class="btn-primary mt-4 justify-center">Get a Quote</a>
+    <div class="flex justify-between items-center w-full mb-8">
+      <img src="/brand_assets/jt-logo.png" alt="Jallow Transporters" class="h-10 w-auto">
+      <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0E1B2E; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="flex-1 flex flex-col justify-center items-center w-full mt-[-4rem]">
+      <div class="flex flex-col items-center gap-6 mb-20">
+        <a href="/">Home</a>
+        <a href="/about.html" class="active">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+      <div class="mobile-menu-footer text-center">
+        <p class="text-[0.65rem] tracking-[0.2em] font-bold text-charcoal-light uppercase">Your Trusted Freight Partner</p>
+      </div>
+    </div>
   </aside>
 
   <section class="page-hero">
@@ -339,7 +370,7 @@
         <span class="hero-accent-line"></span>About Jallow Transporters Ltd
       </p>
       <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
-        A family-run freight business with <span class="text-teal">its feet on the ground</span> in three countries.
+        <span class="text-teal">Moving freight</span> across borders.
       </h1>
       <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-3xl mx-auto">
         Jallow Transporters started because the diaspora needed a shipping partner that actually
@@ -376,7 +407,7 @@
           Our story
         </p>
         <h2 class="text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-6">
-          Freight handled the way it should be — personally.
+          Freight handled the way it should be personally.
         </h2>
         <div class="space-y-5 text-charcoal-light text-base sm:text-lg">
           <p>
@@ -388,7 +419,7 @@
           <p>
             We started small — a handful of containers a year to Banjul, a few cargo pallets out
             to Conakry. As families told their families, the business grew. Today we move sea and
-            air freight across three countries, run Moroccan tourism packages, and bring authentic
+            air freight across four countries, run Moroccan tourism packages, and bring authentic
             Moroccan goods back to the UK on preorder.
           </p>
           <p>
@@ -403,10 +434,10 @@
           <div class="about-photo-tile">
             <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&h=1200&fit=crop&q=82" alt="Container ship and port cranes" loading="lazy">
           </div>
-          <div class="about-photo-tile">
-            <img src="/images/cargo_plane_loading.png" alt="Cargo plane being loaded" loading="lazy">
+          <div class="about-photo-tile hidden sm:block">
+            <img src="/images/air_cargo_takeoff_premium.png" alt="Premium air cargo plane at takeoff" loading="lazy">
           </div>
-          <div class="about-photo-tile">
+          <div class="about-photo-tile hidden sm:block">
             <img src="/images/marrakech_courtyard_v3.png" alt="Marrakech courtyard and palm" loading="lazy">
           </div>
         </div>
@@ -486,11 +517,11 @@
           <ul class="space-y-4 text-charcoal-light">
             <li class="flex items-start gap-3">
               <span class="mt-1 text-teal flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <div><strong class="text-navy">Container shipping</strong> — UK and Spain to The Gambia and Guinea Conakry.</div>
+              <div><strong class="text-navy">Container shipping</strong> — UK and Spain to The Gambia, Guinea Conakry, and Senegal.</div>
             </li>
             <li class="flex items-start gap-3">
               <span class="mt-1 text-teal flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <div><strong class="text-navy">Air freight</strong> — both ways between the UK and Gambia, Conakry and Morocco.</div>
+              <div><strong class="text-navy">Air freight</strong> — both ways between the UK and Gambia, Conakry, Senegal, and Morocco.</div>
             </li>
             <li class="flex items-start gap-3">
               <span class="mt-1 text-teal flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -525,7 +556,7 @@
           Where we operate
         </p>
         <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-navy mb-5">
-          From Birmingham — out to Banjul, Conakry &amp; Casablanca.
+          From Birmingham out to Banjul, Conakry, Dakar &amp; Casablanca.
         </h2>
         <p class="reveal stagger-1 text-charcoal-light text-base sm:text-lg">
           A deliberately focused network. We don't promise to ship anywhere on a map — we
@@ -533,29 +564,36 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-        <div class="value-card reveal stagger-1 text-center">
+      <div class="flex flex-wrap justify-center gap-6 mt-10">
+        <div class="value-card reveal stagger-1 text-center w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
           <div class="value-icon mx-auto">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
           </div>
           <h3 class="text-navy text-lg mb-1">United Kingdom</h3>
           <p class="text-charcoal-light text-sm">Head office · Birmingham B66 2NZ</p>
         </div>
-        <div class="value-card reveal stagger-2 text-center">
+        <div class="value-card reveal stagger-2 text-center w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
           <div class="value-icon mx-auto">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
           </div>
           <h3 class="text-navy text-lg mb-1">The Gambia</h3>
           <p class="text-charcoal-light text-sm">Banjul &amp; nationwide coverage</p>
         </div>
-        <div class="value-card reveal stagger-3 text-center">
+        <div class="value-card reveal stagger-3 text-center w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
           <div class="value-icon mx-auto">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
           </div>
           <h3 class="text-navy text-lg mb-1">Guinea Conakry</h3>
           <p class="text-charcoal-light text-sm">Container &amp; air freight corridor</p>
         </div>
-        <div class="value-card reveal stagger-4 text-center">
+        <div class="value-card reveal stagger-4 text-center w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
+          <div class="value-icon mx-auto">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <h3 class="text-navy text-lg mb-1">Senegal</h3>
+          <p class="text-charcoal-light text-sm">Dakar · sea &amp; air freight</p>
+        </div>
+        <div class="value-card reveal stagger-5 text-center w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]">
           <div class="value-icon mx-auto">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 0 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
           </div>
@@ -570,13 +608,13 @@
     <div class="relative max-w-5xl mx-auto px-5 lg:px-8 text-center">
       <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal mb-4">Let's ship something</p>
       <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-white mb-5 max-w-3xl mx-auto">
-        Questions, quotes, or a collection — we're one message away.
+        Questions, quotes, or a collection we're one message away.
       </h2>
       <p class="reveal stagger-1 text-white/70 text-base sm:text-lg max-w-2xl mx-auto mb-9">
         Tell us what you need moved. We'll come back with a quote and a timeline — usually
         the same day.
       </p>
-      <div class="reveal stagger-2 flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="reveal stagger-2 flex flex-wrap gap-3 sm:gap-4 justify-center">
         <a href="/contact.html" class="btn-primary">
           Get in Touch
           <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -699,6 +737,7 @@
       hamburger.setAttribute('aria-expanded', String(open)); mobileMenu.setAttribute('aria-hidden', String(!open));
     });
     backdrop.addEventListener('click', closeMenu);
+    document.getElementById('mobile-close-btn')?.addEventListener('click', closeMenu);
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
     const io = new IntersectionObserver(entries => {
