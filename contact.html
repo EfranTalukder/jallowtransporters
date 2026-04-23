@@ -558,7 +558,7 @@
 
       <!-- Form -->
       <div class="reveal-right">
-        <div class="form-card">
+        <div class="form-card" id="formCard">
           <form id="contactForm" novalidate>
             <div class="grid sm:grid-cols-2 gap-5 mb-5">
               <div>
@@ -626,12 +626,13 @@
 
         <div class="success-card" id="successCard" role="status" aria-live="polite">
           <div class="success-icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <!-- WhatsApp arrow icon -->
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
-          <h3 class="text-navy text-2xl mb-2">Message received</h3>
-          <p class="text-charcoal-light mb-5">Thanks — we've got your enquiry and will be in touch shortly. For anything urgent, WhatsApp is the fastest way to reach us.</p>
-          <a href="https://wa.me/447831005961" class="btn-primary">
-            Continue on WhatsApp
+          <h3 class="text-navy text-2xl mb-2">One last step</h3>
+          <p class="text-charcoal-light mb-5">Your details have been pre-filled in WhatsApp. Just tap <strong>Send</strong> there to complete your enquiry — we'll reply within the hour during business hours.</p>
+          <a id="successWaBtn" href="https://wa.me/447831005961" target="_blank" class="btn-primary">
+            Open WhatsApp &amp; Send
             <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -826,6 +827,7 @@
     const btnText = document.getElementById('btnText');
     const btnArrow = document.getElementById('btnArrow');
     const spinner = document.getElementById('spinner');
+    const formCard = document.getElementById('formCard');
     const successCard = document.getElementById('successCard');
 
     const setError = (el, on) => el.classList.toggle('error', on);
@@ -864,9 +866,12 @@
       // Artificial delay for premium feel
       setTimeout(() => {
         window.open(waUrl, '_blank');
-        
+
+        // Update the fallback button with the same pre-filled URL
+        document.getElementById('successWaBtn').href = waUrl;
+
         // Show success state on the page
-        form.style.display = 'none';
+        formCard.style.display = 'none';
         successCard.style.display = 'block';
         successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
