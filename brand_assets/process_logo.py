@@ -8,14 +8,53 @@ img = Image.open(src).convert('RGBA')
 w, h = img.size
 pixels = img.load()
 
-# Edge-only color-to-alpha:
-#  - Pure white pixels  -> fully transparent
-#  - Anti-aliased edges -> recover true color via un-premultiply (kills halo)
-#  - Solid interior     -> left ALONE (preserves original artwork colors,
-#                          e.g. the coral truck stays coral, not pure red)
-WHITE_FLOOR = 250   # at or above min(r,g,b) >= this -> treat as pure white
-SOLID_FLOOR = 200   # at or below min(r,g,b) <= this -> treat as solid color
+# Strategy: brand-aware color-to-alpha.
+#
+# 1. Auto-detect the dominant brand colors (teal, coral, dark gray).
+# 2. For each pixel:
+#      - White-ish  (min channel >= 250): fully transparent.
+#      - Solid      (min channel <= 200): keep original color, alpha = 1.
+#      - Edge band  (in between): find the nearest brand color and express
+#        the pixel as that brand color composited over white at a fractional
+#        alpha. This way edges blend through PURE BRAND COLOR, never through
+#        white -> no halo on any background, and interior color is unchanged.
 
+WHITE_FLOOR = 250
+SOLID_FLOOR = 200
+
+# --- Step 1: detect brand colors from solid pixels ---
+solid_samples = []
+for y in range(0, h, 3):
+    for x in range(0, w, 3):
+        r, g, b, _ = pixels[x, y]
+        if min(r, g, b) <= 130:
+            solid_samples.append((r, g, b))
+
+# Bucket samples by dominant hue family. Hand-tuned for this logo's palette
+# (teal letters, coral truck, dark gray tagline) but degrades gracefully if a
+# bucket is empty.
+teal_pix  = [p for p in solid_samples if p[1] > p[0] + 20 and p[2] > p[0] + 20]
+coral_pix = [p for p in solid_samples if p[0] > p[1] + 30 and p[0] > p[2] + 30]
+gray_pix  = [p for p in solid_samples if abs(p[0]-p[1]) < 15
+                                    and abs(p[1]-p[2]) < 15
+                                    and max(p) < 100]
+
+def avg(group):
+    if not group:
+        return None
+    n = len(group)
+    return (sum(p[0] for p in group)//n,
+            sum(p[1] for p in group)//n,
+            sum(p[2] for p in group)//n)
+
+brand_colors = [c for c in (avg(teal_pix), avg(coral_pix), avg(gray_pix)) if c]
+print(f"Detected brand colors: {brand_colors}")
+
+def nearest_brand(r, g, b):
+    return min(brand_colors,
+               key=lambda c: (c[0]-r)**2 + (c[1]-g)**2 + (c[2]-b)**2)
+
+# --- Step 2: rewrite every pixel ---
 for y in range(h):
     for x in range(w):
         r, g, b, a_in = pixels[x, y]
@@ -26,22 +65,23 @@ for y in range(h):
             continue
 
         if min_c <= SOLID_FLOOR:
-            # Solid foreground — keep the artist's original color exactly.
             pixels[x, y] = (r, g, b, a_in)
             continue
 
-        # Edge band: pixel is partway between solid color and white.
-        # Compute fractional alpha and un-premultiply against white so the
-        # recovered color composites cleanly on ANY background.
-        alpha = (WHITE_FLOOR - min_c) / (WHITE_FLOOR - SOLID_FLOOR)
-        nr = int(round((r - 255 * (1 - alpha)) / alpha))
-        ng = int(round((g - 255 * (1 - alpha)) / alpha))
-        nb = int(round((b - 255 * (1 - alpha)) / alpha))
-        nr = max(0, min(255, nr))
-        ng = max(0, min(255, ng))
-        nb = max(0, min(255, nb))
+        # Edge band — snap to nearest brand color, compute alpha so that
+        # brand * alpha + white * (1 - alpha) reproduces the source pixel.
+        bc = nearest_brand(r, g, b)
+        # Use the channel with the largest brand-vs-white delta for stability.
+        deltas = [255 - bc[0], 255 - bc[1], 255 - bc[2]]
+        idx = deltas.index(max(deltas))
+        if deltas[idx] == 0:
+            pixels[x, y] = (0, 0, 0, 0)
+            continue
+        src_c = (r, g, b)[idx]
+        alpha = (255 - src_c) / deltas[idx]
+        alpha = max(0.0, min(1.0, alpha))
         new_a = int(round(alpha * 255 * (a_in / 255.0)))
-        pixels[x, y] = (nr, ng, nb, new_a)
+        pixels[x, y] = (bc[0], bc[1], bc[2], new_a)
 
 bbox = img.getbbox()
 if bbox:
