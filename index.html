@@ -565,6 +565,10 @@
 
     @media (max-width: 768px) {
       .hero-section { min-height: 100vh; padding-bottom: 3rem; }
+      .hero-bg {
+        background-image: url('images/premium_container_shipping.png');
+        background-position: center 60%;
+      }
       .service-card .service-img { height: 200px; }
       .scroll-indicator { display: none; }
       .section-divider { display: none; }
@@ -653,15 +657,25 @@
           </span>
         </div>
 
-        <h1 class="hero-anim hero-anim-2 text-white text-[2.5rem] sm:text-5xl lg:text-[4rem] leading-[1.05] mb-6">
-          Reliable freight from the <span class="text-teal">UK to West Africa</span> &amp; beyond.
-        </h1>
+        <!-- Desktop copy -->
+        <div class="hidden md:block">
+          <h1 class="hero-anim hero-anim-2 text-white text-[2.5rem] sm:text-5xl lg:text-[4rem] leading-[1.05] mb-6">
+            Freight from the UK to <span class="text-teal">West &amp; North Africa</span> and beyond.
+          </h1>
+          <p class="hero-anim hero-anim-3 text-white/80 text-base sm:text-lg max-w-2xl mb-9 font-normal">
+            Sea freight, air cargo, Moroccan tourism, and pre-order goods — from the UK to your destination, done right.
+          </p>
+        </div>
 
-        <p class="hero-anim hero-anim-3 text-white/80 text-base sm:text-lg max-w-2xl mb-9 font-normal">
-          Sea freight, air cargo, Moroccan tourism and preorder goods — handled end to end with
-          <span class="text-teal-light font-semibold">customer care</span>,
-          <span class="text-teal-light font-semibold">commitment</span>, and zero compromise.
-        </p>
+        <!-- Mobile copy -->
+        <div class="block md:hidden">
+          <h1 class="hero-anim hero-anim-2 text-white text-[2.5rem] leading-[1.08] mb-6">
+            Freight from the UK to <span class="text-teal">West &amp; North Africa</span> and beyond.
+          </h1>
+          <p class="hero-anim hero-anim-3 text-white/80 text-base max-w-2xl mb-9 font-normal">
+            Sea freight, air cargo, Moroccan tourism, and pre-order goods — handled end to end.
+          </p>
+        </div>
 
         <div class="hero-anim hero-anim-4 flex flex-wrap gap-2.5 sm:gap-4 items-center">
           <a href="/contact.html" class="btn-primary">
@@ -802,6 +816,7 @@
               <span class="route-chip">Chefchaouen</span>
               <span class="route-chip">Agadir</span>
               <span class="route-chip">Sahara</span>
+              <span class="route-chip">Merzouga</span>
             </div>
             <a href="/contact.html" class="service-link">
               Plan your trip
@@ -918,7 +933,7 @@
 
           <h3 class="reveal text-white text-sm font-bold uppercase tracking-[0.18em] mb-5 opacity-80">Tourism &amp; Special Routes</h3>
           <div class="flex flex-wrap gap-3">
-            <span class="route-pill reveal stagger-1"><span class="route-dot"></span>Marrakech · Chefchaouen · Agadir · Sahara</span>
+            <span class="route-pill reveal stagger-1"><span class="route-dot"></span>Marrakech · Chefchaouen · Agadir · Sahara · Merzouga</span>
             <span class="route-pill reveal stagger-2"><span class="route-dot"></span>Europe <svg class="route-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Gambia (road trip)</span>
           </div>
         </div>
