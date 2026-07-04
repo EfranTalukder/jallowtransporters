@@ -56,27 +56,63 @@
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      transition: background-color 0.4s var(--smooth), box-shadow 0.4s var(--smooth), backdrop-filter 0.4s var(--smooth);
-      background: transparent;
+    /* ── Top utility bar ── */
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+      background: #0E1B2E;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
-    .nav-bar.scrolled {
-      background: rgba(250, 247, 242, 0.95);
+    .top-bar-inner {
+      max-width: 80rem; margin: 0 auto;
+      padding: 0.4rem 1.25rem 0.4rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar a {
+      color: rgba(255, 255, 255, 0.85); text-decoration: none;
+      transition: color 0.25s var(--smooth);
+    }
+    .top-bar a:hover { color: #1F9D9D; }
+    .top-bar-phone {
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .top-bar-social {
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .top-bar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.25s var(--smooth), color 0.25s var(--smooth);
+    }
+    .top-bar-social a:hover {
+      background: #1F9D9D; color: #FFFFFF;
+    }
+    @media (max-width: 768px) {
+      .top-bar { display: none; }
+    }
+
+    .nav-bar {
+      position: fixed; top: 32px; left: 0; right: 0; z-index: 1000;
+      background: rgba(250, 247, 242, 0.97);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       box-shadow: 0 1px 3px rgba(14, 27, 46, 0.04), 0 8px 32px rgba(31, 157, 157, 0.08);
+      transition: box-shadow 0.4s var(--smooth);
     }
-    .nav-bar.scrolled .nav-link { color: #1E1E1E; }
-    .nav-bar.scrolled .nav-link:hover { color: #1F9D9D; }
+    @media (max-width: 768px) {
+      .nav-bar { top: 0; }
+    }
     .nav-logo { height: 66px; width: auto; display: block; transition: transform 0.4s var(--smooth); }
-    .nav-bar.scrolled .nav-logo { transform: scale(0.92); }
     @media (max-width: 768px) { .nav-logo { height: 54px; } }
 
     .nav-link {
-      color: #FFFFFF; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
+      color: #1E1E1E; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
       position: relative; padding: 0.25rem 0;
       transition: color 0.3s var(--smooth);
     }
+    .nav-link:hover { color: #1F9D9D; }
     .nav-link::after {
       content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
       background: #1F9D9D; border-radius: 1px; transition: width 0.3s var(--spring);
@@ -272,10 +308,9 @@
     .mobile-menu-footer { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s var(--spring); }
     .mobile-menu.open .mobile-menu-footer { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
     .hamburger span {
-      display: block; width: 22px; height: 3px; background: #FFFFFF; margin: 4px 0;
+      display: block; width: 22px; height: 3px; background: #0E1B2E; margin: 4px 0;
       border-radius: 3px; transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
-    .nav-bar.scrolled .hamburger span { background: #0E1B2E; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
@@ -300,6 +335,23 @@
 
 <body>
   <div class="grain-overlay"></div>
+  <!-- ═══════════════ TOP BAR ═══════════════ -->
+  <div class="top-bar" id="top-bar">
+    <div class="top-bar-inner">
+      <a href="tel:+447831005961" class="top-bar-phone">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        +44 7831 005961
+      </a>
+      <div class="top-bar-social">
+        <a href="https://www.facebook.com/share/18UyfcS7Fy/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/jallow.transporters?igsh=MnlpYnd2aDUyZzNy" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <nav class="nav-bar nav-anim" id="navbar">
     <div class="max-w-7xl mx-auto px-5 lg:px-8 py-1.5 flex items-center justify-between">
@@ -627,9 +679,6 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const navbar = document.getElementById('navbar');
-    const onScroll = () => { if (window.scrollY > 10) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
 
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
