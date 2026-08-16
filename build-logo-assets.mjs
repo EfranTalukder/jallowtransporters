@@ -3,7 +3,8 @@
 //   out:    brand_assets/jt-logo-2026.png         transparent, for light surfaces
 //           brand_assets/jt-logo-2026-light.png   knockout, for the navy surfaces
 //           brand_assets/jt-monogram-light.png    JT only (no ring, no wordmark),
-//                                                 pairs with typeset text in the footer
+//                                                 silver + green, pairs with the
+//                                                 typeset name in the footer
 //           favicon.png                           mark on a white disc
 //
 // Run with:  node build-logo-assets.mjs
@@ -60,24 +61,35 @@ const out = await page.evaluate(async (b64) => {
   mctx.imageSmoothingQuality = 'high';
   mctx.drawImage(full, 0, 0, SIZE, SIZE);
 
-  // ── 2. knockout for dark surfaces: navy -> white, green lifted to #22C77E ──
-  const light = document.createElement('canvas');
-  light.width = SIZE; light.height = SIZE;
-  const lctx = light.getContext('2d');
-  lctx.drawImage(mark, 0, 0);
-  const lid = lctx.getImageData(0, 0, SIZE, SIZE);
-  const ld = lid.data;
-  const [GR, GG, GB] = [31, 201, 125];
-  for (let i = 0; i < ld.length; i += 4) {
-    if (ld[i + 3] === 0) continue;
-    // ramp on green-dominance, so the navy->green ring gradient becomes
-    // white->green with no hard seam
-    const t = Math.max(0, Math.min(1, (ld[i + 1] - ld[i + 2]) / 55));
-    ld[i] = Math.round(255 + (GR - 255) * t);
-    ld[i + 1] = Math.round(255 + (GG - 255) * t);
-    ld[i + 2] = Math.round(255 + (GB - 255) * t);
-  }
-  lctx.putImageData(lid, 0, 0);
+  // ── 2. knockout for dark surfaces ──
+  // The navy half of the mark disappears on a navy background, so it is
+  // recoloured. `t` ramps on green-dominance, which turns the mark's own
+  // navy->green gradient into light->green with no hard seam.
+  const knockout = (light, green) => {
+    const c = document.createElement('canvas');
+    c.width = SIZE; c.height = SIZE;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(mark, 0, 0);
+    const id = ctx.getImageData(0, 0, SIZE, SIZE), d = id.data;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i + 3] === 0) continue;
+      const t = Math.max(0, Math.min(1, (d[i + 1] - d[i + 2]) / 55));
+      d[i] = Math.round(light[0] + (green[0] - light[0]) * t);
+      d[i + 1] = Math.round(light[1] + (green[1] - light[1]) * t);
+      d[i + 2] = Math.round(light[2] + (green[2] - light[2]) * t);
+    }
+    ctx.putImageData(id, 0, 0);
+    return c;
+  };
+
+  const GREEN = [31, 201, 125];   // #1FC97D
+  const SILVER = [194, 206, 228]; // #C2CEE4 — same tone as the footer body text
+
+  // full mark, white knockout — the general-purpose reverse logo
+  const light = knockout([255, 255, 255], GREEN);
+  // footer monogram source: silver instead of white, so the mark sits in the
+  // footer's own tonal range and green stays the only bright note
+  const monoSrc = knockout(SILVER, GREEN);
 
   // ── 3. monogram: knockout with the ring and the small "JALLOW" dropped ──
   // At footer size the ring steals ~20% of the box and the built-in wordmark
@@ -87,7 +99,7 @@ const out = await page.evaluate(async (b64) => {
   const mono = document.createElement('canvas');
   mono.width = SIZE; mono.height = SIZE;
   const nctx = mono.getContext('2d');
-  nctx.drawImage(light, 0, 0);
+  nctx.drawImage(monoSrc, 0, 0);
   const nid = nctx.getImageData(0, 0, SIZE, SIZE);
   const nd = nid.data;
   let minX = SIZE, minY = SIZE, maxX = 0, maxY = 0;
