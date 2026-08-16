@@ -2,6 +2,8 @@
 //   source: brand_assets/jt-logo-2026-source.svg  (artwork sits on a white plate)
 //   out:    brand_assets/jt-logo-2026.png         transparent, for light surfaces
 //           brand_assets/jt-logo-2026-light.png   knockout, for the navy surfaces
+//           brand_assets/jt-monogram-light.png    JT only (no ring, no wordmark),
+//                                                 pairs with typeset text in the footer
 //           favicon.png                           mark on a white disc
 //
 // Run with:  node build-logo-assets.mjs
@@ -77,7 +79,38 @@ const out = await page.evaluate(async (b64) => {
   }
   lctx.putImageData(lid, 0, 0);
 
-  // ── 3. favicon: mark on a white disc so it reads on dark browser chrome ──
+  // ── 3. monogram: knockout with the ring and the small "JALLOW" dropped ──
+  // At footer size the ring steals ~20% of the box and the built-in wordmark
+  // turns to mush, so the footer pairs this with typeset text instead.
+  const RING_CUT = 236;  // ring sits between r=238 and r=252 at 512px
+  const WORD_CUT = 365;  // blank band (y 358-372) between the wave and "JALLOW"
+  const mono = document.createElement('canvas');
+  mono.width = SIZE; mono.height = SIZE;
+  const nctx = mono.getContext('2d');
+  nctx.drawImage(light, 0, 0);
+  const nid = nctx.getImageData(0, 0, SIZE, SIZE);
+  const nd = nid.data;
+  let minX = SIZE, minY = SIZE, maxX = 0, maxY = 0;
+  for (let y = 0; y < SIZE; y++) {
+    for (let x = 0; x < SIZE; x++) {
+      const o = (y * SIZE + x) * 4;
+      if (y >= WORD_CUT || Math.hypot(x - SIZE / 2, y - SIZE / 2) > RING_CUT) { nd[o + 3] = 0; continue; }
+      if (nd[o + 3] > 25) {
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        if (y < minY) minY = y; if (y > maxY) maxY = y;
+      }
+    }
+  }
+  nctx.putImageData(nid, 0, 0);
+  const mw = maxX - minX + 1, mh = maxY - minY + 1;
+  const monoTrim = document.createElement('canvas');
+  monoTrim.height = SIZE;
+  monoTrim.width = Math.round((mw / mh) * SIZE);
+  const tctx = monoTrim.getContext('2d');
+  tctx.imageSmoothingQuality = 'high';
+  tctx.drawImage(mono, minX, minY, mw, mh, 0, 0, monoTrim.width, monoTrim.height);
+
+  // ── 4. favicon: mark on a white disc so it reads on dark browser chrome ──
   const F = 256;
   const fav = document.createElement('canvas');
   fav.width = F; fav.height = F;
@@ -92,6 +125,7 @@ const out = await page.evaluate(async (b64) => {
   return {
     mark: mark.toDataURL('image/png'),
     light: light.toDataURL('image/png'),
+    mono: monoTrim.toDataURL('image/png'),
     favicon: fav.toDataURL('image/png'),
   };
 }, b64);
@@ -104,6 +138,7 @@ const write = (path, dataUrl) => {
 
 write('brand_assets/jt-logo-2026.png', out.mark);
 write('brand_assets/jt-logo-2026-light.png', out.light);
+write('brand_assets/jt-monogram-light.png', out.mono);
 write('favicon.png', out.favicon);
 
 await browser.close();
