@@ -5,6 +5,8 @@
 //           brand_assets/jt-monogram-light.png    JT only (no ring, no wordmark),
 //                                                 silver + green, pairs with the
 //                                                 typeset name in the footer
+//           brand_assets/jt-monogram.png          same JT-only cut in navy + green,
+//                                                 for the mobile menu header
 //           favicon.png                           mark on a white disc
 //
 // Run with:  node build-logo-assets.mjs
@@ -91,36 +93,43 @@ const out = await page.evaluate(async (b64) => {
   // footer's own tonal range and green stays the only bright note
   const monoSrc = knockout(SILVER, GREEN);
 
-  // ── 3. monogram: knockout with the ring and the small "JALLOW" dropped ──
-  // At footer size the ring steals ~20% of the box and the built-in wordmark
-  // turns to mush, so the footer pairs this with typeset text instead.
+  // ── 3. monogram: the ring and the small "JALLOW" dropped, then trimmed ──
+  // Wherever the mark sits small, the ring steals ~20% of the box and the
+  // built-in wordmark turns to mush, so those surfaces pair this with
+  // typeset text instead.
   const RING_CUT = 236;  // ring sits between r=238 and r=252 at 512px
   const WORD_CUT = 365;  // blank band (y 358-372) between the wave and "JALLOW"
-  const mono = document.createElement('canvas');
-  mono.width = SIZE; mono.height = SIZE;
-  const nctx = mono.getContext('2d');
-  nctx.drawImage(monoSrc, 0, 0);
-  const nid = nctx.getImageData(0, 0, SIZE, SIZE);
-  const nd = nid.data;
-  let minX = SIZE, minY = SIZE, maxX = 0, maxY = 0;
-  for (let y = 0; y < SIZE; y++) {
-    for (let x = 0; x < SIZE; x++) {
-      const o = (y * SIZE + x) * 4;
-      if (y >= WORD_CUT || Math.hypot(x - SIZE / 2, y - SIZE / 2) > RING_CUT) { nd[o + 3] = 0; continue; }
-      if (nd[o + 3] > 25) {
-        if (x < minX) minX = x; if (x > maxX) maxX = x;
-        if (y < minY) minY = y; if (y > maxY) maxY = y;
+  const monogram = (src) => {
+    const cut = document.createElement('canvas');
+    cut.width = SIZE; cut.height = SIZE;
+    const nctx = cut.getContext('2d');
+    nctx.drawImage(src, 0, 0);
+    const nid = nctx.getImageData(0, 0, SIZE, SIZE);
+    const nd = nid.data;
+    let minX = SIZE, minY = SIZE, maxX = 0, maxY = 0;
+    for (let y = 0; y < SIZE; y++) {
+      for (let x = 0; x < SIZE; x++) {
+        const o = (y * SIZE + x) * 4;
+        if (y >= WORD_CUT || Math.hypot(x - SIZE / 2, y - SIZE / 2) > RING_CUT) { nd[o + 3] = 0; continue; }
+        if (nd[o + 3] > 25) {
+          if (x < minX) minX = x; if (x > maxX) maxX = x;
+          if (y < minY) minY = y; if (y > maxY) maxY = y;
+        }
       }
     }
-  }
-  nctx.putImageData(nid, 0, 0);
-  const mw = maxX - minX + 1, mh = maxY - minY + 1;
-  const monoTrim = document.createElement('canvas');
-  monoTrim.height = SIZE;
-  monoTrim.width = Math.round((mw / mh) * SIZE);
-  const tctx = monoTrim.getContext('2d');
-  tctx.imageSmoothingQuality = 'high';
-  tctx.drawImage(mono, minX, minY, mw, mh, 0, 0, monoTrim.width, monoTrim.height);
+    nctx.putImageData(nid, 0, 0);
+    const mw = maxX - minX + 1, mh = maxY - minY + 1;
+    const trim = document.createElement('canvas');
+    trim.height = SIZE;
+    trim.width = Math.round((mw / mh) * SIZE);
+    const tctx = trim.getContext('2d');
+    tctx.imageSmoothingQuality = 'high';
+    tctx.drawImage(cut, minX, minY, mw, mh, 0, 0, trim.width, trim.height);
+    return trim;
+  };
+
+  const monoTrim = monogram(monoSrc);      // silver + green, for navy surfaces
+  const monoDarkTrim = monogram(mark);     // navy + green, for light surfaces
 
   // ── 4. favicon: mark on a white disc so it reads on dark browser chrome ──
   const F = 256;
@@ -138,6 +147,7 @@ const out = await page.evaluate(async (b64) => {
     mark: mark.toDataURL('image/png'),
     light: light.toDataURL('image/png'),
     mono: monoTrim.toDataURL('image/png'),
+    monoDark: monoDarkTrim.toDataURL('image/png'),
     favicon: fav.toDataURL('image/png'),
   };
 }, b64);
@@ -151,6 +161,7 @@ const write = (path, dataUrl) => {
 write('brand_assets/jt-logo-2026.png', out.mark);
 write('brand_assets/jt-logo-2026-light.png', out.light);
 write('brand_assets/jt-monogram-light.png', out.mono);
+write('brand_assets/jt-monogram.png', out.monoDark);
 write('favicon.png', out.favicon);
 
 await browser.close();

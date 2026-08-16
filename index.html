@@ -492,22 +492,9 @@
     }
     .footer-lockup { display: flex; align-items: center; gap: 0.95rem; }
     .footer-lockup img { height: 60px; width: auto; display: block; }
-    .footer-lockup-name {
-      font-family: 'Montserrat', system-ui, sans-serif;
-      font-weight: 800; font-size: 1.3rem; line-height: 1.05;
-      letter-spacing: -0.02em; color: #FFFFFF;
-    }
-    .footer-lockup-kicker {
-      display: block; margin-top: 0.42rem;
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: #22C77E;
-    }
     @media (max-width: 480px) {
       .footer-lockup { gap: 0.8rem; }
       .footer-lockup img { height: 52px; }
-      .footer-lockup-name { font-size: 1.15rem; }
-      .footer-lockup-kicker { font-size: 0.6rem; letter-spacing: 0.15em; }
     }
     .footer a { color: #C2CEE4; transition: color 0.3s var(--smooth); }
     .footer a:hover { color: #22C77E; }
@@ -726,7 +713,7 @@
       </div>
     </div>
     <div class="flex justify-between items-center w-full mb-8">
-      <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="h-10 w-auto">
+      <img src="/brand_assets/jt-monogram.png" alt="Jallow Transporters" class="h-14 w-auto">
       <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0A1E4A; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
@@ -1244,8 +1231,7 @@
 
         <div class="md:col-span-2">
           <div class="footer-lockup mb-5">
-            <img src="/brand_assets/jt-monogram-light.png" alt="" aria-hidden="true">
-            <p class="footer-lockup-name">Jallow Transporters<span class="footer-lockup-kicker">UK &middot; West &amp; North Africa</span></p>
+            <img src="/brand_assets/jt-monogram-light.png" alt="Jallow Transporters">
           </div>
           <p class="text-sm text-white/60 max-w-sm mb-5">
             UK-headquartered freight specialists serving the diaspora with sea and air cargo to
