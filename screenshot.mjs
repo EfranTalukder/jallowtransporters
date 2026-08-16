@@ -1,7 +1,16 @@
 import puppeteer from 'puppeteer';
 import { mkdir, readdir } from 'fs/promises';
+import { existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
+
+// Puppeteer's own Chrome download may be missing; fall back to installed Chrome.
+const chromeCandidates = [
+  'C:/Users/Efran/.cache/puppeteer/chrome/win64-146.0.7680.153/chrome-win64/chrome.exe',
+  'C:/Program Files/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+];
+const chromePath = chromeCandidates.find(existsSync);
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const screenshotsDir = join(__dirname, 'temporary screenshots');
@@ -22,7 +31,7 @@ const filename = label
   : `screenshot-${next}.png`;
 
 const browser = await puppeteer.launch({
-  executablePath: 'C:/Users/Efran/.cache/puppeteer/chrome/win64-146.0.7680.153/chrome-win64/chrome.exe',
+  executablePath: chromePath,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 });
 

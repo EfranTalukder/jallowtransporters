@@ -21,8 +21,8 @@
           colors: {
             cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
             charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
-            teal: { DEFAULT: '#1F9D9D', light: '#E6F4F4', dark: '#15787A', deep: '#0E5F61' },
-            navy: { DEFAULT: '#0E1B2E', dark: '#070E1A' },
+            brand: { DEFAULT: '#00A15C', light: '#E4F4EC', dark: '#007A46', deep: '#065C37', bright: '#22C77E' },
+            navy: { DEFAULT: '#0A1E4A', dark: '#04102E' },
           },
           fontFamily: {
             display: ['Montserrat', 'system-ui', 'sans-serif'],
@@ -59,7 +59,7 @@
     /* ── Top utility bar ── */
     .top-bar {
       position: relative;
-      background: #0E1B2E;
+      background: #0A1E4A;
       color: rgba(255, 255, 255, 0.85);
       font-size: 0.78rem;
       font-weight: 500;
@@ -74,8 +74,8 @@
       color: rgba(255, 255, 255, 0.85); text-decoration: none;
       transition: color 0.25s var(--smooth);
     }
-    .top-bar a:hover { color: #1F9D9D; }
-    .top-bar a:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 2px; border-radius: 4px; }
+    .top-bar a:hover { color: #22C77E; }
+    .top-bar a:focus-visible { outline: 2px solid #22C77E; outline-offset: 2px; border-radius: 4px; }
     .top-bar-phone {
       display: flex; align-items: center; gap: 0.45rem;
     }
@@ -89,7 +89,7 @@
       transition: background 0.25s var(--smooth), color 0.25s var(--smooth);
     }
     .top-bar-social a:hover {
-      background: #1F9D9D; color: #FFFFFF;
+      background: #00A15C; color: #FFFFFF;
     }
     @media (max-width: 768px) {
       .top-bar { font-size: 0.72rem; }
@@ -102,7 +102,7 @@
       position: sticky; top: 0; z-index: 1000;
       background: rgba(250, 247, 242, 0.97);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 1px 3px rgba(14, 27, 46, 0.04), 0 8px 32px rgba(31, 157, 157, 0.08);
+      box-shadow: 0 1px 3px rgba(10, 30, 74, 0.04), 0 8px 32px rgba(0, 161, 92, 0.08);
       transition: box-shadow 0.4s var(--smooth);
     }
     .nav-logo { height: 66px; width: auto; display: block; transition: transform 0.4s var(--smooth); }
@@ -113,27 +113,27 @@
       position: relative; padding: 0.25rem 0;
       transition: color 0.3s var(--smooth);
     }
-    .nav-link:hover { color: #1F9D9D; }
+    .nav-link:hover { color: #00A15C; }
     .nav-link::after {
       content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
-      background: #1F9D9D; border-radius: 1px; transition: width 0.3s var(--spring);
+      background: #00A15C; border-radius: 1px; transition: width 0.3s var(--spring);
     }
     .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .nav-link:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 4px; border-radius: 2px; }
+    .nav-link:focus-visible { outline: 2px solid #00A15C; outline-offset: 4px; border-radius: 2px; }
 
     .page-hero {
       position: relative; padding-top: 3rem; padding-bottom: 5rem; overflow: hidden;
-      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 55%, #0E5F61 100%);
+      background: linear-gradient(135deg, #0A1E4A 0%, #04102E 55%, #06482B 100%);
       color: #FFFFFF;
     }
     .page-hero::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(circle at 20% 30%, rgba(31, 157, 157, 0.25), transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.15), transparent 60%);
+        radial-gradient(circle at 20% 30%, rgba(0, 161, 92, 0.16), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(0, 161, 92, 0.10), transparent 60%);
       pointer-events: none;
     }
-    .hero-accent-line { display: inline-block; width: 48px; height: 2px; background: #1F9D9D; border-radius: 1px; margin-right: 0.9rem; vertical-align: middle; }
+    .hero-accent-line { display: inline-block; width: 48px; height: 2px; background: #22C77E; border-radius: 1px; margin-right: 0.9rem; vertical-align: middle; }
 
     @keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -160,16 +160,16 @@
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: #1F9D9D; color: #FFFFFF;
+      background: #00A15C; color: #FFFFFF;
       padding: 0.95rem 2rem; border-radius: 0.5rem;
       font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
       border: none; cursor: pointer;
       transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
-      box-shadow: 0 4px 16px -2px rgba(31, 157, 157, 0.35);
+      box-shadow: 0 4px 16px -2px rgba(0, 161, 92, 0.35);
     }
-    .btn-primary:hover { background: #15787A; box-shadow: 0 10px 30px -6px rgba(31, 157, 157, 0.45); transform: translateY(-2px); }
-    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #0E5F61; }
-    .btn-primary:focus-visible { outline: 2px solid #1F9D9D; outline-offset: 3px; }
+    .btn-primary:hover { background: #007A46; box-shadow: 0 10px 30px -6px rgba(0, 161, 92, 0.45); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #065C37; }
+    .btn-primary:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
     .btn-primary .btn-arrow { transition: transform 0.3s var(--spring); }
     .btn-primary:hover .btn-arrow { transform: translateX(4px); }
 
@@ -191,50 +191,50 @@
       transition: transform 0.4s var(--spring), border-color 0.3s var(--smooth), box-shadow 0.4s var(--spring);
     }
     .term-card:hover {
-      transform: translateY(-4px); border-color: rgba(31, 157, 157, 0.3);
-      box-shadow: 0 18px 40px -12px rgba(31, 157, 157, 0.18);
+      transform: translateY(-4px); border-color: rgba(0, 161, 92, 0.3);
+      box-shadow: 0 18px 40px -12px rgba(0, 161, 92, 0.18);
     }
     .term-num {
       flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px;
-      background: linear-gradient(135deg, #E6F4F4, #C9E8E8);
-      color: #0E5F61; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #E4F4EC, #C3E8D5);
+      color: #065C37; display: flex; align-items: center; justify-content: center;
       font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.05rem;
       letter-spacing: -0.02em;
     }
     .term-card .term-body h3 {
-      color: #0E1B2E; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;
+      color: #0A1E4A; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;
     }
     .term-card .term-body p {
       color: #4A4A4A; font-size: 0.95rem; line-height: 1.65;
     }
 
     .info-box {
-      background: linear-gradient(135deg, #E6F4F4 0%, #FFFFFF 100%);
-      border: 1px solid rgba(31, 157, 157, 0.35); border-radius: 1rem;
+      background: linear-gradient(135deg, #E4F4EC 0%, #FFFFFF 100%);
+      border: 1px solid rgba(0, 161, 92, 0.35); border-radius: 1rem;
       padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start;
     }
     .info-box-icon {
       flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
-      background: linear-gradient(135deg, #1F9D9D, #15787A); color: #FFFFFF;
+      background: linear-gradient(135deg, #00A15C, #007A46); color: #FFFFFF;
       display: flex; align-items: center; justify-content: center;
     }
 
     .cta-band {
       position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #0E1B2E 0%, #070E1A 100%); color: #FFFFFF;
+      background: linear-gradient(135deg, #0A1E4A 0%, #04102E 100%); color: #FFFFFF;
     }
     .cta-band::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(circle at 20% 40%, rgba(31, 157, 157, 0.25), transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(31, 157, 157, 0.12), transparent 60%);
+        radial-gradient(circle at 20% 40%, rgba(0, 161, 92, 0.17), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(0, 161, 92, 0.12), transparent 60%);
       pointer-events: none;
     }
 
-    .footer { background: linear-gradient(180deg, #0E1B2E 0%, #070E1A 100%); color: #C5CEDC; }
+    .footer { background: linear-gradient(180deg, #0A1E4A 0%, #04102E 100%); color: #C2CEE4; }
     .footer-logo { height: 84px; width: auto; display: block; }
-    .footer a { color: #C5CEDC; transition: color 0.3s var(--smooth); }
-    .footer a:hover { color: #1F9D9D; }
+    .footer a { color: #C2CEE4; transition: color 0.3s var(--smooth); }
+    .footer a:hover { color: #22C77E; }
     .footer h4 {
       font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-weight: 700;
       font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem;
@@ -242,10 +242,10 @@
     .social-icon {
       display: inline-flex; align-items: center; justify-content: center;
       width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(255, 255, 255, 0.06); color: #C5CEDC;
+      background: rgba(255, 255, 255, 0.06); color: #C2CEE4;
       transition: background 0.3s var(--smooth), color 0.3s var(--smooth), transform 0.3s var(--spring);
     }
-    .footer .social-icon:hover { background: #1F9D9D; color: #FFFFFF; transform: translateY(-2px); }
+    .footer .social-icon:hover { background: #00A15C; color: #FFFFFF; transform: translateY(-2px); }
 
     /* WhatsApp */
     .wa-btn {
@@ -265,7 +265,7 @@
       position: fixed; bottom: 6.5rem; right: 1.5rem; z-index: 9001;
       width: 360px; max-width: calc(100vw - 2rem);
       background: #FFFFFF; border-radius: 1rem; overflow: hidden;
-      box-shadow: 0 12px 48px rgba(14, 27, 46, 0.15), 0 2px 8px rgba(14, 27, 46, 0.06);
+      box-shadow: 0 12px 48px rgba(10, 30, 74, 0.15), 0 2px 8px rgba(10, 30, 74, 0.06);
       transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none;
       transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth);
     }
@@ -295,7 +295,7 @@
     }
     .mobile-menu.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
     .mobile-menu a {
-      color: #0E1B2E; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.25rem;
+      color: #0A1E4A; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.25rem;
       text-decoration: none; transform: translateY(20px); opacity: 0;
       transition: transform 0.4s var(--spring), opacity 0.4s ease, color 0.3s ease;
     }
@@ -306,23 +306,23 @@
     .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
     .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
     .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
-    .mobile-menu a:hover, .mobile-menu a.active { color: #1F9D9D; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #00A15C; }
     /* Utility bar inside the menu keeps its own compact styling */
     .mobile-menu .top-bar a {
       color: rgba(255, 255, 255, 0.85); font-family: inherit; font-weight: 500; font-size: inherit;
       transform: none; opacity: 1; transition: color 0.25s var(--smooth);
     }
-    .mobile-menu .top-bar a:hover { color: #1F9D9D; }
-    .mobile-menu .top-bar-social a:hover { background: #1F9D9D; color: #FFFFFF; }
+    .mobile-menu .top-bar a:hover { color: #22C77E; }
+    .mobile-menu .top-bar-social a:hover { background: #00A15C; color: #FFFFFF; }
     .mobile-menu-footer { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s var(--spring); }
     .mobile-menu.open .mobile-menu-footer { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
     .hamburger span {
-      display: block; width: 22px; height: 3px; background: #0E1B2E; margin: 4px 0;
+      display: block; width: 22px; height: 3px; background: #0A1E4A; margin: 4px 0;
       border-radius: 3px; transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0E1B2E; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0A1E4A; }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0E1B2E; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0A1E4A; }
     .menu-backdrop { display: none !important; }
 
     /* ── Mobile button refinements ── */
@@ -368,7 +368,7 @@
   <nav class="nav-bar nav-anim" id="navbar">
     <div class="max-w-7xl mx-auto px-5 lg:px-8 py-1.5 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3" aria-label="Jallow Transporters home">
-        <img src="/brand_assets/logo4-transparent.svg" alt="Jallow Transporters" class="nav-logo">
+        <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="nav-logo">
       </a>
       <div class="hidden md:flex items-center gap-8">
         <a href="/" class="nav-link">Home</a>
@@ -410,8 +410,8 @@
       </div>
     </div>
     <div class="flex justify-between items-center w-full mb-8">
-      <img src="/brand_assets/logo4-transparent.svg" alt="Jallow Transporters" class="h-10 w-auto">
-      <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0E1B2E; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
+      <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="h-10 w-auto">
+      <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0A1E4A; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
@@ -430,11 +430,11 @@
 
   <section class="page-hero">
     <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 text-center">
-      <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-teal mb-5">
+      <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-brand-bright mb-5">
         <span class="hero-accent-line"></span>Booking Guidelines
       </p>
       <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
-        Clear terms so there are <span class="text-teal">no surprises later.</span>
+        Clear terms so there are <span class="text-brand-bright">no surprises later.</span>
       </h1>
       <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-3xl mx-auto">
         Please read these guidelines before booking a shipment. They cover packing, liability,
@@ -562,7 +562,7 @@
   <section class="pb-20 lg:pb-24">
     <div class="max-w-4xl mx-auto px-5 lg:px-8 space-y-6">
       <div class="text-center reveal">
-        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal-dark mb-3">Governing law</p>
+        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-dark mb-3">Governing law</p>
         <h2 class="text-navy text-[1.6rem] lg:text-[2rem] mb-4">United Kingdom · England &amp; Wales</h2>
         <p class="text-charcoal-light text-base max-w-2xl mx-auto">
           These booking guidelines and any contract for services with Jallow Transporters Ltd are
@@ -593,7 +593,7 @@
   <!-- ═════ CTA ═════ -->
   <section class="cta-band py-20 lg:py-24">
     <div class="relative max-w-5xl mx-auto px-5 lg:px-8 text-center">
-      <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-teal mb-4">Ready when you are</p>
+      <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-bright mb-4">Ready when you are</p>
       <h2 class="reveal text-[2rem] sm:text-[2.5rem] lg:text-[3rem] text-white mb-5 max-w-3xl mx-auto">
         Terms read. Now let's get your freight moving.
       </h2>
@@ -618,7 +618,7 @@
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
         <div class="md:col-span-2">
-          <img src="/brand_assets/logo4-transparent.svg" alt="Jallow Transporters" class="footer-logo mb-5">
+          <img src="/brand_assets/jt-logo-2026-light.png" alt="Jallow Transporters" class="footer-logo mb-5">
           <p class="text-sm text-white/60 max-w-sm mb-5">
             UK-headquartered freight specialists serving the diaspora with sea and air cargo to
             West Africa, Moroccan tourism and authentic Moroccan preorders.
@@ -653,15 +653,15 @@
           <h4>Get in Touch</h4>
           <ul class="space-y-3 text-sm text-white/70">
             <li class="flex items-start gap-2.5">
-              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <span>5 Ferndale Crescent, Highgate,<br>Birmingham B12 0HF, UK</span>
             </li>
             <li class="flex items-start gap-2.5">
-              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
               <a href="tel:+447831005961">+44 7831 005961</a>
             </li>
             <li class="flex items-start gap-2.5">
-              <svg class="mt-0.5 flex-shrink-0 text-teal" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               <a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a>
             </li>
           </ul>
@@ -680,7 +680,7 @@
 
   <div class="wa-popup" id="wa-popup" role="dialog" aria-label="WhatsApp chat">
     <div class="wa-popup-header">
-      <div class="wa-popup-avatar"><img src="/brand_assets/logo4-transparent.svg" alt="JT"></div>
+      <div class="wa-popup-avatar"><img src="/brand_assets/jt-logo-2026.png" alt="JT"></div>
       <div class="flex-1">
         <p class="text-white font-semibold text-sm leading-tight">Jallow Transporters</p>
         <p class="text-white/80 text-xs">Typically replies within an hour</p>
