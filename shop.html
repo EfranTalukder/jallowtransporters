@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>JT Moroccan Gems — Authentic Moroccan Black Soap, Argan Oil &amp; Abayas | Jallow Transporters</title>
+  <meta name="description"
+    content="Shop authentic Moroccan goods hand-picked by the Jallow Transporters team: black soap, argan oil, kessa gloves, olive oil, attaya tea and abayas. Order online, collect free in Birmingham or UK post.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://efzmisktbzjjpwzfloka.supabase.co" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
+            brand: { DEFAULT: '#00A15C', light: '#E4F4EC', dark: '#007A46', deep: '#065C37', bright: '#22C77E' },
+            navy: { DEFAULT: '#0A1E4A', dark: '#04102E' },
+          },
+          fontFamily: {
+            display: ['Montserrat', 'system-ui', 'sans-serif'],
+            body: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      background: #FAF7F2; color: #1E1E1E; line-height: 1.7; overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      letter-spacing: -0.03em; line-height: 1.15; font-weight: 800;
+    }
+
+    .grain-overlay {
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px;
+    }
+
+    :root {
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── Top utility bar ── */
+    .top-bar {
+      position: relative;
+      background: #0A1E4A;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .top-bar-inner {
+      max-width: 80rem; margin: 0 auto;
+      padding: 0.4rem 1.25rem 0.4rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar a {
+      color: rgba(255, 255, 255, 0.85); text-decoration: none;
+      transition: color 0.25s var(--smooth);
+    }
+    .top-bar a:hover { color: #22C77E; }
+    .top-bar a:focus-visible { outline: 2px solid #22C77E; outline-offset: 2px; border-radius: 4px; }
+    .top-bar-phone {
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .top-bar-social {
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .top-bar-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.25s var(--smooth), color 0.25s var(--smooth);
+    }
+    .top-bar-social a:hover {
+      background: #00A15C; color: #FFFFFF;
+    }
+    @media (max-width: 768px) {
+      .top-bar { font-size: 0.72rem; }
+      .top-bar-inner { padding: 0.35rem 1rem; }
+      .top-bar-social { gap: 0.5rem; }
+      .top-bar-social a { width: 24px; height: 24px; }
+    }
+
+    .nav-bar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(250, 247, 242, 0.97);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 3px rgba(10, 30, 74, 0.04), 0 8px 32px rgba(0, 161, 92, 0.08);
+      transition: box-shadow 0.4s var(--smooth);
+    }
+    .nav-logo { height: 66px; width: auto; display: block; transition: transform 0.4s var(--smooth); }
+    @media (max-width: 768px) { .nav-logo { height: 54px; } }
+
+    .nav-link {
+      color: #1E1E1E; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em;
+      position: relative; padding: 0.25rem 0;
+      transition: color 0.3s var(--smooth);
+    }
+    .nav-link:hover { color: #00A15C; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+      background: #00A15C; border-radius: 1px; transition: width 0.3s var(--spring);
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #00A15C; outline-offset: 4px; border-radius: 2px; }
+
+    .page-hero {
+      position: relative; padding-top: 3rem; padding-bottom: 7rem; overflow: hidden;
+      background: linear-gradient(135deg, #0A1E4A 0%, #04102E 55%, #06482B 100%);
+      color: #FFFFFF;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 161, 92, 0.16), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(0, 161, 92, 0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-accent-line { display: inline-block; width: 48px; height: 2px; background: #22C77E; border-radius: 1px; margin-right: 0.9rem; vertical-align: middle; }
+
+    @keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce-in {
+      0% { opacity: 0; transform: scale(0) translateY(20px); }
+      60% { transform: scale(1.15) translateY(-5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes wa-attention {
+      0%, 100% { transform: scale(1); } 10% { transform: scale(1.1); }
+      20% { transform: scale(1); } 30% { transform: scale(1.05); } 40% { transform: scale(1); }
+    }
+    @keyframes dot-bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes panel-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes shimmer { 0% { opacity: 0.55; } 50% { opacity: 1; } 100% { opacity: 0.55; } }
+    @keyframes pop-in { 0% { opacity: 0; transform: scale(0.6); } 70% { transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
+
+    .hero-anim { opacity: 0; animation: fade-up 1s var(--ease-out-expo) forwards; }
+    .hero-anim-1 { animation-delay: 0.15s; } .hero-anim-2 { animation-delay: 0.35s; } .hero-anim-3 { animation-delay: 0.55s; }
+    .nav-anim { opacity: 0; animation: fade-down 0.8s var(--ease-out-expo) 0.1s forwards; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.08s; } .stagger-2 { transition-delay: 0.16s; } .stagger-3 { transition-delay: 0.24s; } .stagger-4 { transition-delay: 0.32s; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: #00A15C; color: #FFFFFF;
+      padding: 0.95rem 2rem; border-radius: 0.5rem;
+      font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+      border: none; cursor: pointer;
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
+      box-shadow: 0 4px 16px -2px rgba(0, 161, 92, 0.35);
+    }
+    .btn-primary:hover { background: #007A46; box-shadow: 0 10px 30px -6px rgba(0, 161, 92, 0.45); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.98); background: #065C37; }
+    .btn-primary:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-primary .btn-arrow { transition: transform 0.3s var(--spring); }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      padding: 0.9rem 1.4rem; border-radius: 0.5rem; background: transparent;
+      color: #0A1E4A; font-weight: 600; font-size: 0.95rem; border: 1.5px solid #E7E1D7; cursor: pointer;
+      transition: transform 0.3s var(--spring), border-color 0.3s var(--smooth), background-color 0.3s var(--smooth);
+    }
+    .btn-ghost:hover { border-color: #0A1E4A; background: #FFFFFF; transform: translateY(-1px); }
+    .btn-ghost:active { transform: translateY(1px) scale(0.98); }
+    .btn-ghost:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+
+    .btn-wa {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+      padding: 0.95rem 1.6rem; border-radius: 0.5rem; background: #25D366; color: #FFFFFF;
+      font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer;
+      box-shadow: 0 10px 24px -10px rgba(37, 211, 102, 0.6);
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), background-color 0.3s var(--smooth);
+    }
+    .btn-wa:hover { background: #1EBE5A; transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(37, 211, 102, 0.65); }
+    .btn-wa:active { transform: translateY(1px) scale(0.98); }
+    .btn-wa:focus-visible { outline: 3px solid #25D366; outline-offset: 3px; }
+
+    /* Form */
+    .form-card {
+      background: #FFFFFF; border-radius: 1.5rem; padding: 2.25rem 2.25rem;
+      box-shadow: 0 30px 60px -20px rgba(10, 30, 74, 0.14), 0 2px 6px -2px rgba(10, 30, 74, 0.04);
+      border: 1px solid #F0EBE3;
+    }
+    @media (max-width: 640px) { .form-card { padding: 1.5rem 1.15rem; border-radius: 1.25rem; } }
+    .form-label {
+      display: block; font-size: 0.88rem; font-weight: 600; color: #0A1E4A;
+      margin-bottom: 0.5rem; letter-spacing: 0;
+    }
+    .form-label .req { color: #E08A3C; margin-left: 0.15rem; }
+    .form-label .opt { color: #8A8F98; font-weight: 500; margin-left: 0.25rem; font-size: 0.82rem; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; background: #FAF7F2; border: 1px solid #E7E1D7;
+      padding: 0.85rem 1rem; border-radius: 0.6rem;
+      font-family: 'Manrope', sans-serif; font-size: 1rem; color: #1E1E1E;
+      transition: border-color 0.3s var(--smooth), background 0.3s var(--smooth), box-shadow 0.3s var(--smooth);
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none; border-color: #00A15C; background: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(0, 161, 92, 0.12);
+    }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-hint { font-size: 0.78rem; color: #6B7280; margin-top: 0.35rem; }
+    .form-error { font-size: 0.78rem; color: #C04B4F; margin-top: 0.35rem; display: none; }
+    .form-input.error, .form-textarea.error, .form-select.error { border-color: #C04B4F; background: #FDF4F4; }
+    .form-input.error ~ .form-error, .form-textarea.error ~ .form-error, .form-select.error ~ .form-error { display: block; }
+    .field-error-block .form-error { display: block; }
+    .btn-submit {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 1.05rem 1.75rem;
+      background: linear-gradient(135deg, #00A15C 0%, #007A46 100%);
+      color: #FFFFFF; border: none; cursor: pointer;
+      border-radius: 0.75rem; font-family: 'Manrope', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.01em;
+      box-shadow: 0 12px 28px -10px rgba(0, 161, 92, 0.5);
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), filter 0.3s var(--smooth);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 18px 38px -12px rgba(0, 161, 92, 0.55); filter: brightness(1.05); }
+    .btn-submit:active { transform: translateY(1px) scale(0.99); }
+    .btn-submit:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .btn-submit .btn-arrow { transition: transform 0.3s var(--spring); }
+    .btn-submit:hover .btn-arrow { transform: translateX(4px); }
+
+    .spinner {
+      display: none; width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35);
+      border-top-color: #FFFFFF; border-radius: 50%; animation: spin 0.8s linear infinite;
+    }
+    .is-loading .spinner { display: inline-block; }
+    .is-loading .btn-arrow { display: none; }
+
+    /* WhatsApp */
+    .wa-btn {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+      animation: bounce-in 0.8s var(--spring) 1.5s forwards, wa-attention 3s ease-in-out 4s infinite;
+      opacity: 0;
+      transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring);
+    }
+    .wa-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45); }
+    .wa-btn:active { transform: scale(0.95); }
+    .wa-btn:focus-visible { outline: 3px solid #25D366; outline-offset: 4px; }
+    .wa-popup {
+      position: fixed; bottom: 6.5rem; right: 1.5rem; z-index: 9001;
+      width: 360px; max-width: calc(100vw - 2rem);
+      background: #FFFFFF; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(10, 30, 74, 0.15), 0 2px 8px rgba(10, 30, 74, 0.06);
+      transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none;
+      transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth);
+    }
+    .wa-popup.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .wa-popup-header { background: linear-gradient(135deg, #075E54, #128C7E); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .wa-popup-avatar { width: 42px; height: 42px; border-radius: 50%; background: #FAF7F2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .wa-popup-avatar img { width: 100%; height: 100%; object-fit: contain; }
+    .wa-popup-body { padding: 1.25rem; background: #E5DDD5; min-height: 100px; }
+    .wa-greeting { background: #FFFFFF; padding: 0.75rem 1rem; border-radius: 0 0.75rem 0.75rem 0.75rem; font-size: 0.88rem; color: #1E1E1E; max-width: 85%; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
+    .wa-greeting-time { font-size: 0.7rem; color: #999; text-align: right; margin-top: 0.25rem; }
+    .wa-popup-input { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-top: 1px solid #F0EBE3; background: #FFFFFF; }
+    .wa-popup-input input { flex: 1; border: none; outline: none; padding: 0.55rem 0.75rem; font-size: 0.88rem; background: #F5F5F5; border-radius: 1.5rem; }
+    .wa-send-btn { width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer; background: #128C7E; color: white; display: flex; align-items: center; justify-content: center; transition: background 0.3s var(--smooth); }
+    .wa-send-btn:hover { background: #075E54; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0.75rem; background: #FFFFFF; border-radius: 1rem; width: fit-content; margin-top: 0.75rem; }
+    .wa-typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #25D366; animation: dot-bounce 1.4s infinite ease-in-out; }
+    .wa-typing-dot:nth-child(2) { animation-delay: 0.2s; } .wa-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    /* Footer */
+    .footer { background: linear-gradient(180deg, #0A1E4A 0%, #04102E 100%); color: #C2CEE4; }
+    .footer-lockup { display: flex; align-items: center; gap: 0.95rem; }
+    .footer-lockup img { height: 60px; width: auto; display: block; }
+    @media (max-width: 480px) {
+      .footer-lockup { gap: 0.8rem; }
+      .footer-lockup img { height: 52px; }
+    }
+    .footer a { color: #C2CEE4; transition: color 0.3s var(--smooth); }
+    .footer a:hover { color: #22C77E; }
+    .footer h4 {
+      font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06); color: #C2CEE4;
+      transition: background 0.3s var(--smooth), color 0.3s var(--smooth), transform 0.3s var(--spring);
+    }
+    .footer .social-icon:hover { background: #00A15C; color: #FFFFFF; transform: translateY(-2px); }
+
+    .mobile-menu .top-bar { margin: -1.5rem -1.25rem 1.25rem; }
+    .mobile-menu {
+      position: fixed; inset: 0; width: 100vw; height: 100vh;
+      background: #FAF7F2; z-index: 1050; padding: 1.5rem 1.25rem;
+      transform: translateX(100%); opacity: 0; pointer-events: none;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column;
+    }
+    .mobile-menu.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu a {
+      color: #0A1E4A; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.25rem;
+      text-decoration: none; transform: translateY(20px); opacity: 0;
+      transition: transform 0.4s var(--spring), opacity 0.4s ease, color 0.3s ease;
+    }
+    .mobile-menu.open a { transform: translateY(0); opacity: 1; }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.14s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.18s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: #00A15C; }
+    .mobile-menu .top-bar a {
+      color: rgba(255, 255, 255, 0.85); font-family: inherit; font-weight: 500; font-size: inherit;
+      transform: none; opacity: 1; transition: color 0.25s var(--smooth);
+    }
+    .mobile-menu .top-bar a:hover { color: #22C77E; }
+    .mobile-menu .top-bar-social a:hover { background: #00A15C; color: #FFFFFF; }
+    .mobile-menu-footer { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s var(--spring); }
+    .mobile-menu.open .mobile-menu-footer { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+    .hamburger span {
+      display: block; width: 22px; height: 3px; background: #0A1E4A; margin: 4px 0;
+      border-radius: 3px; transition: transform 0.4s var(--spring), opacity 0.3s var(--smooth), background 0.3s var(--smooth);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #0A1E4A; }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #0A1E4A; }
+    .menu-backdrop { display: none !important; }
+
+    /* ── Mobile button refinements ── */
+    @media (max-width: 640px) {
+      .btn-primary {
+        padding: 0.9rem 0.95rem;
+        font-size: 0.92rem;
+        min-height: 52px;
+        border-radius: 0.55rem;
+        line-height: 1.2;
+        gap: 0.4rem;
+      }
+      .btn-primary .btn-arrow { width: 14px; height: 14px; }
+    }
+
+    /* ── Moroccan Gems shop ── */
+    .shopbar {
+      position: sticky; top: var(--navh, 78px); z-index: 40; margin-top: -2.75rem;
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid #F0EBE3; border-radius: 1rem; padding: 0.55rem;
+      box-shadow: 0 24px 50px -22px rgba(10, 30, 74, 0.28), 0 2px 6px -2px rgba(10, 30, 74, 0.05);
+    }
+    .cat-row { display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; flex: 1 1 320px; min-width: 0; padding: 0.1rem; }
+    .cat-row::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      flex-shrink: 0; white-space: nowrap; border: 1.5px solid #E7E1D7; background: #FAF7F2; color: #4A4A4A;
+      padding: 0.55rem 0.95rem; border-radius: 999px; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      transition: background-color 0.3s var(--smooth), color 0.3s var(--smooth), border-color 0.3s var(--smooth), transform 0.3s var(--spring);
+    }
+    .cat-chip:hover { border-color: #0A1E4A; color: #0A1E4A; }
+    .cat-chip:active { transform: scale(0.97); }
+    .cat-chip:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .cat-chip[aria-pressed="true"] { background: #0A1E4A; border-color: #0A1E4A; color: #FFFFFF; }
+    .shop-search { position: relative; flex: 0 1 240px; min-width: 160px; }
+    .shop-search input { width: 100%; padding: 0.6rem 0.9rem 0.6rem 2.2rem; border-radius: 999px; border: 1.5px solid #E7E1D7; background: #FAF7F2; font-size: 0.9rem; transition: border-color 0.3s var(--smooth), box-shadow 0.3s var(--smooth), background 0.3s var(--smooth); }
+    .shop-search input:focus { outline: none; border-color: #00A15C; background: #FFFFFF; box-shadow: 0 0 0 4px rgba(0, 161, 92, 0.12); }
+    .shop-search svg { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #8A8F98; pointer-events: none; }
+    .cart-btn {
+      position: relative; display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
+      background: #0A1E4A; color: #FFFFFF; border: none; cursor: pointer; border-radius: 999px;
+      padding: 0.62rem 1.05rem; font-weight: 700; font-size: 0.88rem;
+      box-shadow: 0 10px 22px -12px rgba(10, 30, 74, 0.7);
+      transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth);
+    }
+    .cart-btn:hover { background: #04102E; transform: translateY(-1px); }
+    .cart-btn:active { transform: scale(0.97); }
+    .cart-btn:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    .cart-count { min-width: 22px; height: 22px; border-radius: 999px; background: #00A15C; color: #FFFFFF; font-size: 0.72rem; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; }
+    .cart-count.bump { animation: pop-in 0.45s var(--spring); }
+    @media (max-width: 640px) {
+      .shopbar { margin-top: -2.25rem; gap: 0.5rem; }
+      .cat-row { flex: 1 1 100%; }
+      .shop-search { flex: 1 1 0; min-width: 0; }
+    }
+
+    .p-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+    @media (min-width: 768px) { .p-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.35rem; } }
+    @media (min-width: 1180px) { .p-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .p-card {
+      position: relative; display: flex; flex-direction: column; min-width: 0;
+      background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1.25rem; overflow: hidden;
+      box-shadow: 0 18px 40px -28px rgba(10, 30, 74, 0.28), 0 2px 6px -2px rgba(10, 30, 74, 0.04);
+      transition: transform 0.45s var(--spring), box-shadow 0.45s var(--smooth);
+    }
+    .p-card:hover { transform: translateY(-4px); box-shadow: 0 34px 60px -30px rgba(10, 30, 74, 0.38), 0 4px 10px -4px rgba(10, 30, 74, 0.06); }
+    .p-media { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #F0EBE3; border: none; padding: 0; cursor: pointer; }
+    .p-media:focus-visible { outline: 3px solid #00A15C; outline-offset: -3px; }
+    .p-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.001); transition: transform 0.9s var(--ease-out-expo); }
+    .p-card:hover .p-media img { transform: scale(1.06); }
+    .p-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4, 16, 46, 0.42), transparent 45%); pointer-events: none; }
+    .p-tint { position: absolute; inset: 0; background: #C9862F; mix-blend-mode: multiply; opacity: 0.06; pointer-events: none; }
+    .p-badges { position: absolute; left: 0.7rem; top: 0.7rem; right: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.35rem; z-index: 2; }
+    .p-badge { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; padding: 0.28rem 0.6rem; border-radius: 999px; background: rgba(255, 255, 255, 0.94); color: #0A1E4A; box-shadow: 0 4px 12px -6px rgba(10, 30, 74, 0.35); }
+    .p-badge.green { background: #00A15C; color: #FFFFFF; }
+    .p-badge.amber { background: #FFF3E2; color: #9A5B12; }
+    .p-badge.dark { background: #0A1E4A; color: #FFFFFF; }
+    .p-body { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.95rem 1rem 1rem; flex: 1; }
+    .p-name { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0A1E4A; letter-spacing: -0.02em; line-height: 1.2; font-size: 1rem; }
+    .p-tag { font-size: 0.8rem; color: #6B7280; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .p-price { margin-top: auto; padding-top: 0.6rem; display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
+    .p-price b { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #0A1E4A; letter-spacing: -0.02em; }
+    .p-price span { font-size: 0.78rem; color: #8A8F98; font-weight: 600; }
+    .p-price s { font-size: 0.82rem; color: #9AA0A8; }
+    .p-actions { padding: 0 1rem 1rem; }
+    @media (max-width: 520px) {
+      .p-body { padding: 0.75rem 0.75rem 0.8rem; } .p-actions { padding: 0 0.75rem 0.8rem; }
+      .p-name { font-size: 0.92rem; } .p-price b { font-size: 1.05rem; } .p-tag { font-size: 0.76rem; }
+    }
+    .btn-add {
+      width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      padding: 0.78rem 0.9rem; border-radius: 0.75rem; border: none; cursor: pointer;
+      background: #00A15C; color: #FFFFFF; font-weight: 700; font-size: 0.9rem;
+      box-shadow: 0 10px 22px -14px rgba(0, 161, 92, 0.8);
+      transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth), box-shadow 0.3s var(--spring);
+    }
+    .btn-add:hover { background: #007A46; transform: translateY(-1px); }
+    .btn-add:active { transform: scale(0.97); background: #065C37; }
+    .btn-add:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    .btn-add:disabled { background: #E7E1D7; color: #8A8F98; box-shadow: none; cursor: not-allowed; transform: none; }
+    .qty { display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; border: 1.5px solid #00A15C; border-radius: 0.75rem; background: #E4F4EC; padding: 0.2rem; }
+    .qty button { width: 38px; height: 38px; border-radius: 0.6rem; border: none; background: #FFFFFF; color: #007A46; font-size: 1.15rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.25s var(--spring), background-color 0.25s var(--smooth); }
+    .qty button:hover { background: #FAF7F2; }
+    .qty button:active { transform: scale(0.92); }
+    .qty button:focus-visible { outline: 2px solid #00A15C; outline-offset: 1px; }
+    .qty button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .qty output { font-weight: 800; color: #0A1E4A; min-width: 2.2rem; text-align: center; font-size: 0.95rem; }
+    .qty.sm button { width: 30px; height: 30px; font-size: 1rem; }
+
+    .p-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: rgba(255, 255, 255, 0.92);
+      background: radial-gradient(circle at 25% 20%, rgba(0, 161, 92, 0.55), transparent 55%), radial-gradient(circle at 85% 90%, rgba(201, 134, 47, 0.45), transparent 50%), linear-gradient(150deg, #0A1E4A, #04102E); }
+    .p-fallback::before { content: ''; position: absolute; inset: 0; opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 2l6 16 16 6-16 6-6 16-6-16-16-6 16-6z' fill='none' stroke='%23ffffff' stroke-width='1.2'/%3E%3C/svg%3E"); background-size: 48px 48px; }
+    .p-fallback svg { position: relative; width: 44%; max-width: 110px; height: auto; opacity: 0.95; }
+    .p-fallback small { position: relative; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; }
+
+    .trip-banner { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; background: linear-gradient(135deg, #E4F4EC, #FFFFFF 70%); border: 1px solid #CDEBDC; border-radius: 1rem; padding: 0.95rem 1.15rem; }
+    .trip-banner .ico { width: 42px; height: 42px; border-radius: 12px; background: #00A15C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 22px -12px rgba(0, 161, 92, 0.8); }
+
+    .how { display: grid; gap: 1rem; grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    @media (min-width: 768px) { .how { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .how-card { background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1.25rem; padding: 1.35rem; box-shadow: 0 18px 40px -30px rgba(10, 30, 74, 0.3); }
+    .how-card .n { width: 36px; height: 36px; border-radius: 50%; background: #0A1E4A; color: #FFFFFF; font-family: 'Montserrat', sans-serif; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; }
+
+    .skel { background: linear-gradient(90deg, #F0EBE3, #F7F3EC, #F0EBE3); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; border-radius: 1.25rem; }
+
+    /* product dialog */
+    .overlay { position: fixed; inset: 0; z-index: 1200; background: rgba(4, 16, 46, 0.55); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity 0.35s var(--smooth); }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .p-dialog { position: fixed; z-index: 1210; left: 50%; top: 50%; width: min(980px, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); overflow: auto;
+      transform: translate(-50%, -46%) scale(0.97); opacity: 0; pointer-events: none; background: #FFFFFF; border-radius: 1.5rem;
+      box-shadow: 0 40px 90px -30px rgba(4, 16, 46, 0.55); transition: transform 0.45s var(--spring), opacity 0.3s var(--smooth); }
+    .p-dialog.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+    @media (max-width: 767px) {
+      .p-dialog { left: 0; right: 0; top: auto; bottom: 0; width: 100%; max-height: 92vh; border-radius: 1.5rem 1.5rem 0 0; transform: translateY(100%); }
+      .p-dialog.open { transform: translateY(0); }
+    }
+    .gal-main { position: relative; aspect-ratio: 1 / 1; background: #F0EBE3; overflow: hidden; }
+    .gal-main img { width: 100%; height: 100%; object-fit: cover; }
+    .gal-thumbs { display: flex; gap: 0.5rem; padding: 0.75rem; overflow-x: auto; }
+    .gal-thumbs button { width: 64px; height: 64px; flex-shrink: 0; border-radius: 0.6rem; overflow: hidden; border: 2px solid transparent; padding: 0; cursor: pointer; background: #F0EBE3; transition: border-color 0.25s var(--smooth), transform 0.25s var(--spring); }
+    .gal-thumbs button[aria-current="true"] { border-color: #00A15C; }
+    .gal-thumbs button:hover { transform: translateY(-1px); }
+    .gal-thumbs button:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .gal-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+    .gal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255, 255, 255, 0.92); color: #0A1E4A; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 18px -8px rgba(10, 30, 74, 0.45); transition: transform 0.25s var(--spring); }
+    .gal-nav:hover { transform: translateY(-50%) scale(1.06); }
+    .gal-nav:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .icon-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: #FAF7F2; color: #0A1E4A; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.25s var(--smooth), transform 0.25s var(--spring); }
+    .icon-btn:hover { background: #F0EBE3; }
+    .icon-btn:active { transform: scale(0.94); }
+    .icon-btn:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+
+    /* basket drawer */
+    .cart-panel { position: fixed; z-index: 1210; top: 0; right: 0; bottom: 0; width: min(440px, 100vw); background: #FAF7F2; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform 0.5s var(--ease-out-expo); box-shadow: -30px 0 80px -40px rgba(4, 16, 46, 0.6); }
+    .cart-panel.open { transform: translateX(0); }
+    .cart-head { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.25rem; background: #FFFFFF; border-bottom: 1px solid #F0EBE3; }
+    .cart-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.25rem; }
+    .cart-foot { background: #FFFFFF; border-top: 1px solid #F0EBE3; padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom)); }
+    .c-line { display: grid; grid-template-columns: 64px 1fr auto; gap: 0.8rem; align-items: center; background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1rem; padding: 0.6rem; }
+    .c-thumb { width: 64px; height: 64px; border-radius: 0.75rem; overflow: hidden; position: relative; background: #F0EBE3; }
+    .c-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .c-thumb .p-fallback svg { width: 55%; }
+    .c-thumb .p-fallback small { display: none; }
+    .del-opt { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.85rem 0.95rem; border-radius: 0.9rem; border: 1.5px solid #E7E1D7; background: #FFFFFF; cursor: pointer; transition: border-color 0.25s var(--smooth), background-color 0.25s var(--smooth); }
+    .del-opt:has(input:checked) { border-color: #00A15C; background: #F3FBF7; }
+    .del-opt input { margin-top: 0.3rem; accent-color: #00A15C; }
+    .del-opt:focus-within { box-shadow: 0 0 0 4px rgba(0, 161, 92, 0.12); }
+    .sum-row { display: flex; justify-content: space-between; font-size: 0.92rem; color: #4A4A4A; padding: 0.15rem 0; }
+    .sum-row.total { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0A1E4A; font-size: 1.15rem; padding-top: 0.5rem; }
+    .done-tick { width: 72px; height: 72px; border-radius: 50%; background: #00A15C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; animation: pop-in 0.6s var(--spring); box-shadow: 0 18px 36px -14px rgba(0, 161, 92, 0.7); }
+    .ref-pill { display: inline-block; font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 0.06em; color: #0A1E4A; background: #FFFFFF; border: 2px dashed #00A15C; border-radius: 0.75rem; padding: 0.5rem 1rem; font-size: 1.25rem; }
+    .float-cart { position: fixed; left: 50%; bottom: 1.25rem; z-index: 8990; transform: translate(-50%, 140%); transition: transform 0.5s var(--spring); }
+    .float-cart.show { transform: translate(-50%, 0); }
+    @media (min-width: 768px) { .float-cart { display: none; } }
+    .t-status { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.35rem; margin: 1rem 0; }
+    .t-status div { height: 6px; border-radius: 999px; background: #F0EBE3; }
+    .t-status div.on { background: #00A15C; }
+    .info-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+    .info-mini div { background: #FAF7F2; border-radius: 0.75rem; padding: 0.65rem 0.8rem; }
+    .info-mini p:first-child { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8F98; }
+    .info-mini p:last-child { font-weight: 700; color: #0A1E4A; }
+    body.panel-open .wa-btn, body.panel-open .wa-popup { opacity: 0 !important; pointer-events: none !important; animation: none !important; }
+  </style>
+</head>
+
+<body>
+  <div class="grain-overlay"></div>
+  <!-- ═══════════════ TOP BAR ═══════════════ -->
+  <div class="top-bar" id="top-bar">
+    <div class="top-bar-inner">
+      <a href="tel:+447831005961" class="top-bar-phone">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        +44 7831 005961
+      </a>
+      <div class="top-bar-social">
+        <a href="https://www.facebook.com/share/18UyfcS7Fy/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/jallow.transporters?igsh=MnlpYnd2aDUyZzNy" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@jt.transporters?_r=1&_t=ZS-97XIr7xbhhJ" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar nav-anim" id="navbar">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-1.5 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3" aria-label="Jallow Transporters home">
+        <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="nav-logo">
+      </a>
+      <div class="hidden md:flex items-center gap-5 lg:gap-8">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/#services" class="nav-link">Services</a>
+        <a href="/#routes" class="nav-link">Routes</a>
+        <a href="/shop.html" class="nav-link">Shop</a>
+        <a href="/terms.html" class="nav-link">Terms</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/book.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
+          Book Now
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <button class="hamburger md:hidden flex flex-col justify-center items-center w-10 h-10" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-backdrop" id="menu-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="top-bar">
+      <div class="top-bar-inner">
+        <a href="tel:+447831005961" class="top-bar-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          +44 7831 005961
+        </a>
+        <div class="top-bar-social">
+          <a href="https://www.facebook.com/share/18UyfcS7Fy/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/jallow.transporters?igsh=MnlpYnd2aDUyZzNy" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@jt.transporters?_r=1&_t=ZS-97XIr7xbhhJ" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-between items-center w-full mb-8">
+      <img src="/brand_assets/jt-monogram.png" alt="Jallow Transporters" class="h-14 w-auto">
+      <button onclick="document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('menu-backdrop').classList.remove('open');" aria-label="Close menu" style="color: #0A1E4A; padding: 0.5rem; margin-right: -0.5rem; cursor: pointer; position: relative; z-index: 1060;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="flex-1 flex flex-col justify-center items-center w-full mt-[-4rem]">
+      <div class="flex flex-col items-center gap-6 mb-20">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/book.html">Book</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+      <div class="mobile-menu-footer text-center">
+        <p class="text-[0.65rem] tracking-[0.2em] font-bold text-charcoal-light uppercase">Your Trusted Freight Partner</p>
+      </div>
+    </div>
+  </aside>
+
+  <section class="page-hero">
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 text-center">
+      <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-brand-bright mb-5">
+        <span class="hero-accent-line"></span>JT Moroccan Gems
+      </p>
+      <h1 class="hero-anim hero-anim-2 text-white text-[2.2rem] sm:text-5xl lg:text-[3.6rem] leading-[1.08] max-w-4xl mx-auto mb-5">
+        Authentic Moroccan goods, <span class="text-brand-bright">brought home by our own team.</span>
+      </h1>
+      <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-2xl mx-auto">
+        Black soap, argan oil, abayas, tea and more — hand-picked in Morocco. Order online, collect free in Birmingham or get it posted. You pay once we confirm on WhatsApp.
+      </p>
+    </div>
+  </section>
+
+  <main class="pb-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="shopbar" id="shopbar">
+        <div class="cat-row" id="cats" role="group" aria-label="Categories">
+          <button class="cat-chip" aria-pressed="true" data-cat="all">All</button>
+        </div>
+        <label class="shop-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="q" placeholder="Search the shop…" aria-label="Search the shop" autocomplete="off">
+        </label>
+        <button class="cart-btn" id="cartBtn" aria-label="Open your basket">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="hidden sm:inline">Basket</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+
+      <div class="mt-6 hidden" id="tripBanner"></div>
+
+      <section class="mt-8" aria-live="polite">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="text-navy text-[1.6rem] sm:text-[2rem]" id="gridTitle">The collection</h2>
+            <p class="text-charcoal-light text-sm" id="gridSub">Loading the shop…</p>
+          </div>
+        </div>
+        <div class="p-grid" id="grid">
+          <div class="skel" style="aspect-ratio:4/6.2"></div><div class="skel" style="aspect-ratio:4/6.2"></div>
+          <div class="skel" style="aspect-ratio:4/6.2"></div><div class="skel hidden md:block" style="aspect-ratio:4/6.2"></div>
+        </div>
+      </section>
+
+      <section class="mt-20">
+        <p class="reveal text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand mb-3 text-center">How it works</p>
+        <h2 class="reveal text-navy text-[1.8rem] sm:text-[2.3rem] text-center mb-8">Order today, enjoy it soon.</h2>
+        <div class="how">
+          <div class="how-card reveal stagger-1"><div class="n">1</div><h3 class="text-navy text-lg mb-1">Order online</h3><p class="text-sm text-charcoal-light">Add what you'd like to your basket and send it — no account needed.</p></div>
+          <div class="how-card reveal stagger-2"><div class="n">2</div><h3 class="text-navy text-lg mb-1">We confirm on WhatsApp</h3><p class="text-sm text-charcoal-light" id="payHow">We check your order, tell you when it arrives and how to pay.</p></div>
+          <div class="how-card reveal stagger-3"><div class="n">3</div><h3 class="text-navy text-lg mb-1">Collect or receive by post</h3><p class="text-sm text-charcoal-light" id="delHow">Collect free from our Birmingham base (B12), or we post it anywhere in the UK.</p></div>
+        </div>
+      </section>
+
+      <section class="mt-20 grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start" id="track">
+        <div class="reveal">
+          <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand mb-3">Already ordered?</p>
+          <h2 class="text-navy text-[1.8rem] sm:text-[2.2rem] mb-3">Track your order</h2>
+          <p class="text-charcoal-light">Enter your order number (it starts with <b>MG-</b>) and the phone number you ordered with.</p>
+        </div>
+        <div class="form-card reveal stagger-1">
+          <form id="trackForm" class="grid sm:grid-cols-2 gap-4" novalidate>
+            <div><label class="form-label" for="tRef">Order number</label><input class="form-input" id="tRef" placeholder="MG-7K2QAF" autocomplete="off" style="text-transform:uppercase"></div>
+            <div><label class="form-label" for="tPhone">Phone</label><input class="form-input" id="tPhone" inputmode="tel" placeholder="07…" autocomplete="tel"></div>
+            <div class="sm:col-span-2"><button class="btn-submit w-full" id="tBtn" type="submit"><span class="spinner"></span><span>Show my order</span></button></div>
+          </form>
+          <div id="trackOut" class="mt-5" aria-live="polite"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- product dialog -->
+  <div class="overlay" id="overlay"></div>
+  <div class="p-dialog" id="pDialog" role="dialog" aria-modal="true" aria-labelledby="pdName"></div>
+
+  <!-- basket -->
+  <aside class="cart-panel" id="cart" role="dialog" aria-modal="true" aria-label="Your basket" aria-hidden="true">
+    <div class="cart-head">
+      <div><p class="font-display font-extrabold text-navy text-lg leading-tight" id="cartTitle">Your basket</p><p class="text-xs text-charcoal-light" id="cartSub"></p></div>
+      <button class="icon-btn" id="cartClose" aria-label="Close basket"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-foot" id="cartFoot"></div>
+  </aside>
+  <div class="float-cart" id="floatCart"><button class="cart-btn" id="floatCartBtn" style="padding:0.85rem 1.3rem;font-size:0.95rem"></button></div>
+
+  <footer class="footer pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
+        <div class="md:col-span-2">
+          <div class="footer-lockup mb-5">
+            <img src="/brand_assets/jt-monogram-light.png" alt="Jallow Transporters">
+          </div>
+          <p class="text-sm text-white/60 max-w-sm mb-5">
+            UK-headquartered freight specialists serving the diaspora with sea and air cargo to
+            West Africa, Moroccan tourism and authentic Moroccan preorders.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://www.facebook.com/share/18UyfcS7Fy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/jallow.transporters?igsh=MnlpYnd2aDUyZzNy" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="https://x.com/Msjallow12345" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@jt.transporters?_r=1&_t=ZS-97XIr7xbhhJ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#routes">Our Routes</a></li>
+            <li><a href="/book.html">Book Freight</a></li>
+            <li><a href="/shop.html">Moroccan Gems Shop</a></li>
+            <li><a href="/terms.html">Booking Guidelines</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in Touch</h4>
+          <ul class="space-y-3 text-sm text-white/70">
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>5 Ferndale Crescent, Highgate,<br>Birmingham B12 0HF, UK</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+447831005961">+44 7831 005961</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-0.5 flex-shrink-0 text-brand-bright" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:jallowtransportersltd@outlook.com" class="break-all">jallowtransportersltd@outlook.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <p>© <span id="year"></span> Jallow Transporters Ltd. All rights reserved.</p>
+        <p>Customer · Care · Commitment</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="wa-btn" id="wa-btn" aria-label="Chat with us on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
+  </button>
+
+  <div class="wa-popup" id="wa-popup" role="dialog" aria-label="WhatsApp chat">
+    <div class="wa-popup-header">
+      <div class="wa-popup-avatar"><img src="/brand_assets/jt-logo-2026.png" alt="JT"></div>
+      <div class="flex-1">
+        <p class="text-white font-semibold text-sm leading-tight">Jallow Transporters</p>
+        <p class="text-white/80 text-xs">Typically replies within an hour</p>
+      </div>
+      <button id="wa-close" class="text-white/80 hover:text-white" aria-label="Close chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="wa-popup-body">
+      <div class="wa-greeting">
+        <p>Hey there 👋 How can the JT team help today — a quote, a collection, or a preorder?</p>
+        <p class="wa-greeting-time">Online now</p>
+      </div>
+      <div class="wa-typing" id="wa-typing" style="display:none;">
+        <span class="wa-typing-dot"></span><span class="wa-typing-dot"></span><span class="wa-typing-dot"></span>
+      </div>
+    </div>
+    <form class="wa-popup-input" id="wa-form">
+      <input type="text" id="wa-input" placeholder="Type a message..." aria-label="Message">
+      <button type="submit" class="wa-send-btn" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('menu-backdrop');
+    const closeMenu = () => {
+      hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); backdrop.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false'); mobileMenu.setAttribute('aria-hidden', 'true');
+    };
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open); backdrop.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open)); mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+    backdrop.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 600);
+
+    // WhatsApp widget
+    const WA_NUMBER = '447831005961';
+    const waBtn = document.getElementById('wa-btn');
+    const waPopup = document.getElementById('wa-popup');
+    const waForm = document.getElementById('wa-form');
+    const waInput = document.getElementById('wa-input');
+    const waTyping = document.getElementById('wa-typing');
+    waBtn.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 768px)').matches) window.open('https://wa.me/' + WA_NUMBER, '_blank');
+      else waPopup.classList.add('open');
+    });
+    document.getElementById('wa-close').addEventListener('click', () => waPopup.classList.remove('open'));
+    waForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = waInput.value.trim(); if (!msg) return;
+      waTyping.style.display = 'flex';
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+    });
+  </script>
+
+  <script>
+    // ─────────────────────────────────────────────────────────────────────
+    // JT Moroccan Gems shop — products, prices and stock come live from the
+    // Jallow Transporters backend (managed in the JT Admin app). Orders go
+    // through a protected server function that re-checks prices and stock.
+    // ─────────────────────────────────────────────────────────────────────
+    const SUPABASE_URL = 'https://efzmisktbzjjpwzfloka.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_uBiVOnVTOGhE-nZBM4P7ig_YtnbWHVw';
+    const startedAt = Date.now();
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const money = (n) => '£' + Number(n || 0).toFixed(2);
+    const photoUrl = (p) => `${SUPABASE_URL}/storage/v1/object/public/shop-photos/${p.split('/').map(encodeURIComponent).join('/')}`;
+    const qtyText = (q) => Number.isInteger(Number(q)) ? String(Number(q)) : String(Number(q));
+    /** "2 kg Black soap", "1 × 100ml Argan oil", "3 × Abaya" */
+    const qtyLabel = (q, unit) => unit === 'kg' ? `${qtyText(q)} kg` : unit === 'each' ? `${qtyText(q)} ×` : `${qtyText(q)} × ${unit}`;
+
+    async function rpc(name, body = {}) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      if (!res.ok) throw new Error(`Could not load ${name}`);
+      return res.json();
+    }
+    async function callFunction(name, body) {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      let data = {};
+      try { data = await res.json(); } catch (_) { /* ignore */ }
+      if (!res.ok) { const e = new Error(data.error || 'Something went wrong. Please try again or WhatsApp us on +44 7831 005961.'); e.status = res.status; throw e; }
+      return data;
+    }
+
+    const ICONS = {
+      soap: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="26" width="44" height="24" rx="8"/><path d="M18 26c0-6 6-10 14-10s14 4 14 10"/><circle cx="22" cy="12" r="3"/><circle cx="32" cy="8" r="2"/><circle cx="41" cy="12" r="2.5"/></svg>',
+      oil: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M26 6h12v8l6 8v30a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6V22l6-8z"/><path d="M20 32h24"/><path d="M32 38c-3 4-4 6-4 8a4 4 0 0 0 8 0c0-2-1-4-4-8z"/></svg>',
+      tea: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22h28l-3 30a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4z"/><path d="M24 22c0-4 3-6 8-6s8 2 8 6"/><path d="M30 8c-2 2-2 4 0 6M36 8c-2 2-2 4 0 6"/><path d="M22 34h20"/></svg>',
+      cloth: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c0 4 4 7 8 7s8-3 8-7l10 6-4 12-6-2v32H24V24l-6 2-4-12z"/><path d="M32 15v8"/></svg>',
+      home: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40h40"/><path d="M14 40c2 8 9 12 18 12s16-4 18-12"/><path d="M20 40c0-12 5-22 12-26 7 4 12 14 12 26"/><circle cx="32" cy="10" r="2.5"/></svg>',
+      gem: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h28l10 14-24 30L8 24z"/><path d="M8 24h48M24 10l-4 14 12 30 12-30-4-14"/></svg>',
+    };
+    const iconFor = (catName) => {
+      const c = (catName || '').toLowerCase();
+      return c.includes('soap') || c.includes('beauty') ? ICONS.soap : c.includes('oil') ? ICONS.oil : c.includes('food') || c.includes('tea') ? ICONS.tea
+        : c.includes('cloth') ? ICONS.cloth : c.includes('home') || c.includes('gift') ? ICONS.home : ICONS.gem;
+    };
+
+    const state = { products: [], categories: [], settings: {}, nextTrip: null, cat: 'all', q: '', cart: loadCart(), delivery: 'collect', step: 'cart', placing: false };
+    function loadCart() { try { const c = JSON.parse(localStorage.getItem('jt_gems_cart') || '[]'); return Array.isArray(c) ? c.filter((l) => l && l.id && l.qty > 0) : []; } catch (_) { return []; } }
+    function saveCart() { try { localStorage.setItem('jt_gems_cart', JSON.stringify(state.cart)); } catch (_) { /* private mode */ } }
+    const byId = (id) => state.products.find((p) => p.id === id);
+    const catName = (id) => (state.categories.find((c) => c.id === id) || {}).name || '';
+    const postage = () => Number(state.settings.postage_fee ?? 9);
+    const inCart = (id) => (state.cart.find((l) => l.id === id) || {}).qty || 0;
+
+    function media(p, cls = '') {
+      if (p.photos && p.photos.length) return `<img src="${photoUrl(p.photos[0])}" alt="${esc(p.name)}" loading="lazy" class="${cls}">`;
+      return `<div class="p-fallback">${iconFor(catName(p.category_id))}<small>Photo coming soon</small></div>`;
+    }
+    function badges(p) {
+      const b = [];
+      if (p.sold_out) b.push('<span class="p-badge dark">Sold out</span>');
+      else if (p.stock_left) b.push(`<span class="p-badge amber">Only ${qtyText(p.stock_left)} left</span>`);
+      if (p.preorder && !p.sold_out) b.push('<span class="p-badge">Pre-order</span>');
+      if (p.featured && !p.sold_out) b.push('<span class="p-badge green">Favourite</span>');
+      return b.join('');
+    }
+    function actionHtml(p) {
+      if (p.sold_out) return '<button class="btn-add" disabled>Sold out</button>';
+      const q = inCart(p.id);
+      if (!q) return `<button class="btn-add" data-add="${p.id}" aria-label="Add ${esc(p.name)} to basket"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add to basket</button>`;
+      return `<div class="qty"><button data-dec="${p.id}" aria-label="One less ${esc(p.name)}">−</button><output aria-live="polite">${q}${p.unit !== 'each' ? ' <span class="text-xs text-charcoal-light font-semibold">' + (p.unit === 'kg' ? 'kg' : '× ' + esc(p.unit)) + '</span>' : ''}</output><button data-inc="${p.id}" aria-label="One more ${esc(p.name)}" ${q >= p.max_qty ? 'disabled' : ''}>+</button></div>`;
+    }
+
+    function renderCats() {
+      const cats = [{ id: 'all', name: 'All' }, ...state.categories];
+      $('cats').innerHTML = cats.map((c) => `<button class="cat-chip" data-cat="${c.id}" aria-pressed="${state.cat === c.id}">${esc(c.name)}</button>`).join('');
+    }
+    function visible() {
+      const q = state.q.trim().toLowerCase();
+      return state.products.filter((p) => (state.cat === 'all' || p.category_id === state.cat)
+        && (!q || [p.name, p.tagline, p.description, catName(p.category_id)].some((x) => (x || '').toLowerCase().includes(q))));
+    }
+    function renderGrid() {
+      const list = visible();
+      $('gridTitle').textContent = state.cat === 'all' ? 'The collection' : catName(state.cat);
+      $('gridSub').textContent = state.products.length
+        ? `${list.length} product${list.length === 1 ? '' : 's'}${state.q ? ` matching “${state.q}”` : ''} · prices include our trip from Morocco`
+        : 'Our next selection is on its way.';
+      if (!state.products.length) {
+        $('grid').innerHTML = `<div class="col-span-full form-card text-center"><h3 class="text-navy text-xl mb-2">New products are coming soon</h3><p class="text-charcoal-light mb-5">Tell us what you'd like from Morocco and we'll bring it on our next trip.</p><a class="btn-wa" href="https://wa.me/${esc(state.settings.whatsapp || '447831005961')}?text=${encodeURIComponent('Hi JT, I would like to order from Morocco:')}" target="_blank" rel="noopener">WhatsApp us</a></div>`;
+        return;
+      }
+      if (!list.length) { $('grid').innerHTML = '<p class="col-span-full text-center text-charcoal-light py-10">Nothing matches — try another word or category.</p>'; return; }
+      $('grid').innerHTML = list.map((p, i) => `
+        <article class="p-card reveal visible" style="animation: panel-in 0.6s var(--ease-out-expo) ${Math.min(i, 12) * 40}ms both">
+          <button class="p-media" data-open="${p.id}" aria-label="See ${esc(p.name)}">${media(p)}<span class="p-tint"></span><span class="p-badges">${badges(p)}</span></button>
+          <div class="p-body">
+            <p class="text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-brand">${esc(catName(p.category_id))}</p>
+            <h3 class="p-name">${esc(p.name)}</h3>
+            ${p.tagline ? `<p class="p-tag">${esc(p.tagline)}</p>` : ''}
+            <p class="p-price"><b>${money(p.price)}</b><span>${p.unit === 'each' ? 'each' : 'per ' + esc(p.unit)}</span>${p.was_price ? `<s>${money(p.was_price)}</s>` : ''}</p>
+          </div>
+          <div class="p-actions" data-act="${p.id}">${actionHtml(p)}</div>
+        </article>`).join('');
+    }
+    function refreshActions() {
+      document.querySelectorAll('[data-act]').forEach((el) => { const p = byId(el.dataset.act); if (p) el.innerHTML = actionHtml(p); });
+      const d = $('pdAct'); if (d) { const p = byId(d.dataset.id); if (p) d.innerHTML = actionHtml(p); }
+    }
+
+    // ── basket ──────────────────────────────────────────────────────────
+    function setQty(id, qty) {
+      const p = byId(id); if (!p) return;
+      qty = Math.max(0, Math.min(qty, p.max_qty || 50));
+      const line = state.cart.find((l) => l.id === id);
+      if (!qty) state.cart = state.cart.filter((l) => l.id !== id);
+      else if (line) line.qty = qty; else state.cart.push({ id, qty });
+      saveCart(); refreshActions(); renderCart(); updateCount(true);
+    }
+    function lines() { return state.cart.map((l) => ({ ...l, p: byId(l.id) })).filter((l) => l.p && !l.p.sold_out); }
+    function totals() {
+      const items = lines().reduce((s, l) => s + Math.round(l.p.price * l.qty * 100) / 100, 0);
+      const fee = state.delivery === 'post' ? postage() : 0;
+      return { items, fee, total: items + fee, count: lines().reduce((s, l) => s + l.qty, 0) };
+    }
+    function updateCount(bump) {
+      const t = totals();
+      const c = $('cartCount'); c.textContent = t.count; if (bump) { c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump'); }
+      $('floatCart').classList.toggle('show', t.count > 0 && !$('cart').classList.contains('open'));
+      $('floatCartBtn').innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>View basket · ${t.count} · ${money(t.items)}`;
+    }
+    function openCart(step) {
+      if (step) state.step = step;
+      renderCart(); $('cart').classList.add('open'); $('overlay').classList.add('open'); $('cart').setAttribute('aria-hidden', 'false'); document.body.classList.add('panel-open');
+      document.body.style.overflow = 'hidden'; updateCount(false); setTimeout(() => $('cartClose').focus(), 50);
+    }
+    function closeAll() {
+      $('cart').classList.remove('open'); $('pDialog').classList.remove('open'); $('overlay').classList.remove('open');
+      $('cart').setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; document.body.classList.remove('panel-open');
+      if (state.step === 'done') { state.step = 'cart'; }
+      updateCount(false);
+      if (location.search.includes('p=')) history.replaceState(null, '', location.pathname + location.hash);
+    }
+
+    function renderCart() {
+      const L = lines(), t = totals();
+      $('cartSub').textContent = state.step === 'done' ? '' : t.count ? `${t.count} item${t.count === 1 ? '' : 's'}` : '';
+      if (state.step === 'done') return;   // the success view stays until closed
+      if (!L.length) {
+        state.step = 'cart';
+        $('cartTitle').textContent = 'Your basket';
+        $('cartBody').innerHTML = `<div class="text-center py-14"><div class="mx-auto mb-4 w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-brand shadow">${ICONS.gem.replace('<svg', '<svg width="34" height="34"')}</div><p class="font-display font-extrabold text-navy text-lg">Your basket is empty</p><p class="text-sm text-charcoal-light mt-1">Add something you love from Morocco.</p></div>`;
+        $('cartFoot').innerHTML = '<button class="btn-ghost w-full" data-close>Keep shopping</button>';
+        return;
+      }
+      if (state.step === 'cart') {
+        $('cartTitle').textContent = 'Your basket';
+        $('cartBody').innerHTML = `<div class="space-y-3">${L.map((l) => `
+          <div class="c-line">
+            <div class="c-thumb">${media(l.p)}</div>
+            <div class="min-w-0"><p class="font-bold text-navy text-sm leading-tight truncate">${esc(l.p.name)}</p><p class="text-xs text-charcoal-light">${money(l.p.price)} ${l.p.unit === 'each' ? 'each' : 'per ' + esc(l.p.unit)}</p>
+              <div class="qty sm mt-2" style="width:132px"><button data-dec="${l.id}" aria-label="One less">−</button><output>${l.qty}</output><button data-inc="${l.id}" aria-label="One more" ${l.qty >= l.p.max_qty ? 'disabled' : ''}>+</button></div></div>
+            <div class="text-right"><p class="font-display font-extrabold text-navy">${money(l.p.price * l.qty)}</p><button class="text-xs font-bold text-charcoal-light hover:text-[#C04B4F] mt-2" data-remove="${l.id}">Remove</button></div>
+          </div>`).join('')}</div>
+          <p class="form-label mt-6">How would you like to get it?</p>
+          <div class="space-y-2">
+            <label class="del-opt"><input type="radio" name="delivery" value="collect" ${state.delivery === 'collect' ? 'checked' : ''}><span><b class="text-navy">Collect for free</b><span class="block text-xs text-charcoal-light">${esc(state.settings.collect_address || 'Birmingham B12')}</span></span></label>
+            <label class="del-opt"><input type="radio" name="delivery" value="post" ${state.delivery === 'post' ? 'checked' : ''}><span><b class="text-navy">UK post · ${money(postage())}</b><span class="block text-xs text-charcoal-light">We post it anywhere in the UK once it's here.</span></span></label>
+          </div>
+          ${state.nextTrip && L.some((l) => l.p.preorder) ? `<p class="text-xs text-charcoal-light mt-4">Pre-order items come with our next Morocco trip${state.nextTrip.date ? ' (around ' + new Date(state.nextTrip.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) + ')' : ''}.</p>` : ''}`;
+        $('cartFoot').innerHTML = `<div class="sum-row"><span>Items</span><span>${money(t.items)}</span></div><div class="sum-row"><span>${state.delivery === 'post' ? 'UK post' : 'Collection'}</span><span>${t.fee ? money(t.fee) : 'Free'}</span></div>
+          <div class="sum-row total"><span>Total</span><span>${money(t.total)}</span></div>
+          <button class="btn-submit w-full mt-3" data-step="details">Continue<svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <p class="text-center text-xs text-charcoal-light mt-2">No payment now — ${esc(state.settings.payment_note || 'we confirm on WhatsApp first.')}</p>`;
+        return;
+      }
+      // details step
+      const saved = (() => { try { return JSON.parse(localStorage.getItem('jt_gems_me') || '{}'); } catch (_) { return {}; } })();
+      $('cartTitle').textContent = 'Your details';
+      $('cartBody').innerHTML = `<form id="orderForm" class="space-y-4" novalidate>
+          <div><label class="form-label" for="oName">Full name<span class="req">*</span></label><input class="form-input" id="oName" autocomplete="name" value="${esc(saved.name || '')}"><p class="form-error">Please enter your name.</p></div>
+          <div><label class="form-label" for="oPhone">Phone (WhatsApp)<span class="req">*</span></label><input class="form-input" id="oPhone" inputmode="tel" autocomplete="tel" placeholder="07…" value="${esc(saved.phone || '')}"><p class="form-error">Please enter a phone number we can WhatsApp.</p></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div><label class="form-label" for="oCity">Town / city</label><input class="form-input" id="oCity" autocomplete="address-level2" value="${esc(saved.city || '')}"></div>
+            <div><label class="form-label" for="oEmail">Email<span class="opt">(optional)</span></label><input class="form-input" id="oEmail" type="email" autocomplete="email" value="${esc(saved.email || '')}"></div>
+          </div>
+          ${state.delivery === 'post' ? `
+          <div><label class="form-label" for="oAddress">Address<span class="req">*</span></label><input class="form-input" id="oAddress" autocomplete="street-address" value="${esc(saved.address || '')}"><p class="form-error">Please enter your address.</p></div>
+          <div><label class="form-label" for="oPost">Post code<span class="req">*</span></label><input class="form-input" id="oPost" autocomplete="postal-code" style="text-transform:uppercase" value="${esc(saved.postcode || '')}"><p class="form-error">Please enter your post code.</p></div>` : ''}
+          <div><label class="form-label" for="oNotes">Anything we should know?<span class="opt">(optional)</span></label><textarea class="form-textarea" id="oNotes" style="min-height:80px" placeholder="e.g. size or colour for an abaya"></textarea></div>
+          <input type="text" id="oWebsite" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0" name="website">
+          <label class="flex gap-3 items-start text-sm text-charcoal-light field-error-block" id="consentWrap"><input type="checkbox" id="oConsent" class="mt-1 w-4 h-4 accent-[#00A15C]"><span>I agree that JT may contact me on WhatsApp about this order, and I've read the <a class="text-brand font-semibold underline" href="/terms.html" target="_blank">terms</a>.</span></label>
+          <p class="text-sm" id="orderErr" role="alert" style="color:#C04B4F"></p>
+        </form>`;
+      $('cartFoot').innerHTML = `<div class="sum-row total" style="padding-top:0"><span>Total</span><span>${money(t.total)}</span></div>
+        <div class="grid grid-cols-[auto_1fr] gap-2 mt-3"><button class="btn-ghost" data-step="cart" style="padding:0.9rem 1rem">Back</button>
+        <button class="btn-submit" id="placeBtn" data-place><span class="spinner"></span><span>Place order</span><svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
+        <p class="text-center text-xs text-charcoal-light mt-2">You don't pay anything yet.</p>`;
+      setTimeout(() => $('oName') && !$('oName').value && $('oName').focus(), 60);
+    }
+
+    async function placeOrder() {
+      if (state.placing) return;
+      const v = (id) => ($(id) ? $(id).value.trim() : '');
+      let ok = true;
+      const need = (id, test) => { const el = $(id); if (!el) return; const bad = !test(el.value.trim()); el.classList.toggle('error', bad); if (bad) ok = false; };
+      need('oName', (s) => s.length >= 2);
+      need('oPhone', (s) => s.replace(/\D/g, '').length >= 7);
+      if (state.delivery === 'post') { need('oAddress', (s) => s.length >= 4); need('oPost', (s) => s.length >= 4); }
+      if (!$('oConsent').checked) { ok = false; $('orderErr').textContent = 'Please tick the box to agree.'; } else $('orderErr').textContent = '';
+      if (!ok) { const first = document.querySelector('#orderForm .error'); if (first) first.focus(); return; }
+      const me = { name: v('oName'), phone: v('oPhone'), city: v('oCity'), email: v('oEmail'), address: v('oAddress'), postcode: v('oPost') };
+      try { localStorage.setItem('jt_gems_me', JSON.stringify(me)); } catch (_) { /* private mode */ }
+      const L = lines();
+      state.placing = true; $('placeBtn').classList.add('is-loading'); $('placeBtn').disabled = true;
+      try {
+        const res = await callFunction('shop-order', {
+          action: 'order', contact_name: me.name, phone: me.phone, email: me.email, city: me.city, address: me.address, postcode: me.postcode,
+          delivery: state.delivery, notes: v('oNotes'), consent: true, website: v('oWebsite'), started_at: startedAt,
+          items: L.map((l) => ({ product_id: l.id, qty: l.qty })),
+        });
+        const summary = L.map((l) => `${qtyLabel(l.qty, l.p.unit)} ${l.p.name}`).join(', ');
+        try { localStorage.setItem('jt_gems_last', JSON.stringify({ ref: res.ref, phone: me.phone })); } catch (_) { /* private mode */ }
+        state.cart = []; saveCart(); refreshActions(); updateCount(false);
+        state.step = 'done';
+        $('cartTitle').textContent = 'Order placed'; $('cartSub').textContent = '';
+        const wa = `https://wa.me/${state.settings.whatsapp || '447831005961'}?text=${encodeURIComponent(`Hi JT, I've just placed Moroccan Gems order ${res.ref}: ${summary}. Total ${money(res.total)} (${state.delivery === 'post' ? 'UK post' : 'collection'}).`)}`;
+        $('cartBody').innerHTML = `<div class="text-center pt-6">
+            <div class="done-tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h3 class="text-navy text-2xl mb-1">Thank you, ${esc(me.name.split(' ')[0])}!</h3>
+            <p class="text-charcoal-light text-sm mb-4">Your order number is</p>
+            <span class="ref-pill">${esc(res.ref)}</span>
+            <div class="form-card text-left mt-6" style="padding:1.1rem 1.2rem">
+              <div class="sum-row"><span>Items</span><span>${money(res.items_total)}</span></div>
+              <div class="sum-row"><span>${state.delivery === 'post' ? 'UK post' : 'Collection'}</span><span>${Number(res.delivery_fee) ? money(res.delivery_fee) : 'Free'}</span></div>
+              <div class="sum-row total"><span>Total</span><span>${money(res.total)}</span></div>
+            </div>
+            <p class="text-sm text-charcoal-light mt-4">${esc(res.payment_note || 'We will confirm your order on WhatsApp.')}</p>
+          </div>`;
+        $('cartFoot').innerHTML = `<a class="btn-wa w-full" href="${wa}" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>Send it to us on WhatsApp</a>
+          <button class="btn-ghost w-full mt-2" data-close>Keep shopping</button>`;
+        $('tRef').value = res.ref; $('tPhone').value = me.phone;
+      } catch (e) {
+        $('orderErr').textContent = e.message;
+        if (e.status === 400) loadCatalog(true);
+      } finally {
+        state.placing = false; const b = $('placeBtn'); if (b) { b.classList.remove('is-loading'); b.disabled = false; }
+      }
+    }
+
+    // ── product dialog ──────────────────────────────────────────────────
+    function openProduct(id) {
+      const p = byId(id); if (!p) return;
+      let idx = 0;
+      const photos = p.photos || [];
+      const draw = () => {
+        $('pDialog').innerHTML = `
+          <div class="grid md:grid-cols-2">
+            <div class="relative">
+              <div class="gal-main">${photos.length ? `<img src="${photoUrl(photos[idx])}" alt="${esc(p.name)} photo ${idx + 1}">` : media(p)}
+                ${photos.length > 1 ? `<button class="gal-nav" style="left:0.75rem" data-gal="-1" aria-label="Previous photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button class="gal-nav" style="right:0.75rem" data-gal="1" aria-label="Next photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>` : ''}
+                <span class="p-badges">${badges(p)}</span></div>
+              ${photos.length > 1 ? `<div class="gal-thumbs">${photos.map((ph, i) => `<button data-thumb="${i}" aria-label="Photo ${i + 1}" aria-current="${i === idx}"><img src="${photoUrl(ph)}" alt=""></button>`).join('')}</div>` : ''}
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col">
+              <div class="flex items-start justify-between gap-3"><p class="text-[0.7rem] font-extrabold uppercase tracking-[0.16em] text-brand">${esc(catName(p.category_id))}</p>
+                <button class="icon-btn -mt-2 -mr-2" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+              <h2 class="text-navy text-[1.7rem] sm:text-[2rem] mt-1" id="pdName">${esc(p.name)}</h2>
+              ${p.tagline ? `<p class="text-charcoal-light mt-1">${esc(p.tagline)}</p>` : ''}
+              <p class="p-price" style="padding-top:1rem"><b style="font-size:1.6rem">${money(p.price)}</b><span>${p.unit === 'each' ? 'each' : 'per ' + esc(p.unit)}</span>${p.was_price ? `<s>${money(p.was_price)}</s>` : ''}</p>
+              ${p.description ? `<p class="text-[0.95rem] text-charcoal-light mt-4 whitespace-pre-line">${esc(p.description)}</p>` : ''}
+              ${p.preorder && state.nextTrip ? `<p class="text-sm text-navy mt-4 bg-[#E4F4EC] rounded-xl px-3 py-2">Pre-order: comes with our next Morocco trip${state.nextTrip.date ? ', around ' + new Date(state.nextTrip.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) : ''}.</p>` : ''}
+              <div class="mt-auto pt-6"><div id="pdAct" data-id="${p.id}">${actionHtml(p)}</div>
+                ${inCart(p.id) ? '<button class="btn-ghost w-full mt-2" data-open-cart>Go to basket</button>' : ''}
+                <p class="text-xs text-charcoal-light mt-3">Collect free in Birmingham or UK post ${money(postage())}. No payment until we confirm.</p></div>
+            </div>
+          </div>`;
+      };
+      draw();
+      $('pDialog').onclick = (e) => {
+        const g = e.target.closest('[data-gal]'); if (g) { idx = (idx + Number(g.dataset.gal) + photos.length) % photos.length; draw(); return; }
+        const t = e.target.closest('[data-thumb]'); if (t) { idx = Number(t.dataset.thumb); draw(); }
+      };
+      $('pDialog').classList.add('open'); $('overlay').classList.add('open'); document.body.style.overflow = 'hidden'; document.body.classList.add('panel-open');
+      history.replaceState(null, '', `?p=${encodeURIComponent(p.slug)}${location.hash}`);
+      setTimeout(() => { const c = $('pDialog').querySelector('[data-close]'); c && c.focus(); }, 60);
+    }
+
+    // ── events ──────────────────────────────────────────────────────────
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-add],[data-inc],[data-dec],[data-remove],[data-open],[data-close],[data-step],[data-place],[data-open-cart],[data-cat]');
+      if (!el) return;
+      if (el.dataset.add) { setQty(el.dataset.add, 1); if ($('pDialog').classList.contains('open')) openProduct(el.dataset.add); }
+      else if (el.dataset.inc) setQty(el.dataset.inc, inCart(el.dataset.inc) + 1);
+      else if (el.dataset.dec) setQty(el.dataset.dec, inCart(el.dataset.dec) - 1);
+      else if (el.dataset.remove) setQty(el.dataset.remove, 0);
+      else if (el.dataset.open) openProduct(el.dataset.open);
+      else if (el.hasAttribute('data-close')) closeAll();
+      else if (el.dataset.step) { state.step = el.dataset.step; renderCart(); }
+      else if (el.hasAttribute('data-place')) placeOrder();
+      else if (el.hasAttribute('data-open-cart')) { $('pDialog').classList.remove('open'); openCart('cart'); }
+      else if (el.dataset.cat) { state.cat = el.dataset.cat; renderCats(); renderGrid(); }
+    });
+    document.addEventListener('change', (e) => { if (e.target.name === 'delivery') { state.delivery = e.target.value; renderCart(); } });
+    $('overlay').addEventListener('click', closeAll);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+    $('cartBtn').addEventListener('click', () => openCart('cart'));
+    $('floatCartBtn').addEventListener('click', () => openCart('cart'));
+    $('cartClose').addEventListener('click', closeAll);
+    let qt; $('q').addEventListener('input', (e) => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value; renderGrid(); }, 120); });
+
+    // ── tracking ────────────────────────────────────────────────────────
+    const T_STEPS = [['new', 'Received'], ['confirmed', 'Confirmed'], ['ready', 'Ready'], ['sent', 'On its way'], ['completed', 'Done']];
+    $('trackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const ref = $('tRef').value.trim().toUpperCase(), phone = $('tPhone').value.trim();
+      if (!ref || phone.replace(/\D/g, '').length < 7) { $('trackOut').innerHTML = '<p class="text-sm" style="color:#C04B4F">Enter your order number and phone.</p>'; return; }
+      $('tBtn').classList.add('is-loading'); $('tBtn').disabled = true;
+      try {
+        const { order: o } = await callFunction('shop-order', { action: 'track', ref, phone });
+        if (!o) { $('trackOut').innerHTML = '<p class="text-sm text-charcoal-light">We couldn\'t find that order. Check the number and the phone you ordered with, or WhatsApp us.</p>'; return; }
+        const at = o.status === 'cancelled' ? -1 : T_STEPS.findIndex(([s]) => s === o.status);
+        $('trackOut').innerHTML = `
+          <div class="flex items-center justify-between flex-wrap gap-2"><p class="font-display font-extrabold text-navy text-lg">${esc(o.ref)}</p>
+            <span class="text-xs font-bold px-3 py-1 rounded-full ${o.status === 'cancelled' ? 'bg-[#FDF0F0] text-[#C04B4F]' : 'bg-[#E4F4EC] text-[#007A46]'}">${o.status === 'cancelled' ? 'Cancelled' : T_STEPS[at][1]}</span></div>
+          ${o.status !== 'cancelled' ? `<div class="t-status">${T_STEPS.map((_, i) => `<div class="${i <= at ? 'on' : ''}"></div>`).join('')}</div>` : ''}
+          <ul class="text-sm space-y-1 mb-3">${(o.items || []).map((i) => `<li class="flex justify-between gap-3"><span>${esc(qtyLabel(i.qty, i.unit))} ${esc(i.name)}</span><b class="text-navy">${money(i.line_total)}</b></li>`).join('')}</ul>
+          <div class="info-mini"><div><p>Total</p><p>${money(o.total)}</p></div><div><p>${Number(o.balance) > 0.004 ? 'Left to pay' : 'Paid'}</p><p>${money(Number(o.balance) > 0.004 ? o.balance : o.paid)}</p></div>
+            <div><p>Delivery</p><p>${o.delivery === 'post' ? 'UK post' : o.delivery === 'delivery' ? 'Delivered by us' : 'Collection (B12)'}</p></div><div><p>Ordered</p><p>${new Date(o.ordered_on).toLocaleDateString('en-GB')}</p></div></div>`;
+      } catch (err) { $('trackOut').innerHTML = `<p class="text-sm" style="color:#C04B4F">${esc(err.message)}</p>`; }
+      finally { $('tBtn').classList.remove('is-loading'); $('tBtn').disabled = false; }
+    });
+
+    // ── load ────────────────────────────────────────────────────────────
+    async function loadCatalog(quiet) {
+      try {
+        const c = await rpc('get_shop_catalog');
+        state.products = c.products || []; state.categories = c.categories || []; state.settings = c.settings || {}; state.nextTrip = c.next_trip || null;
+        // drop basket lines that are no longer for sale; cap to what's left
+        state.cart = state.cart.filter((l) => { const p = byId(l.id); if (!p || p.sold_out) return false; l.qty = Math.min(l.qty, p.max_qty || 50); return l.qty > 0; });
+        saveCart();
+        if (!state.categories.some((x) => x.id === state.cat)) state.cat = 'all';
+        renderCats(); renderGrid(); updateCount(false);
+        if (state.settings.payment_note) $('payHow').textContent = `We check your order and tell you when it arrives. ${state.settings.payment_note}`;
+        $('delHow').textContent = `Collect free from ${state.settings.collect_address || 'our Birmingham base (B12)'}, or UK post for ${money(postage())}.`;
+        if (state.nextTrip) {
+          const when = state.nextTrip.date ? new Date(state.nextTrip.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) : null;
+          $('tripBanner').className = 'mt-6 trip-banner reveal visible';
+          $('tripBanner').innerHTML = `<span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+            <p class="text-sm text-navy flex-1 min-w-[200px]"><b>Our next Morocco trip${when ? ' is around ' + when : ' is coming up'}.</b> Pre-order now and we'll bring it back for you.</p>`;
+        }
+        const slug = new URLSearchParams(location.search).get('p');
+        if (slug && !quiet) { const p = state.products.find((x) => x.slug === slug); if (p) openProduct(p.id); }
+      } catch (_) {
+        $('gridSub').textContent = 'We couldn\'t load the shop just now.';
+        $('grid').innerHTML = '<div class="col-span-full form-card text-center"><p class="text-charcoal-light mb-4">Please check your connection and try again.</p><button class="btn-primary" onclick="location.reload()">Try again</button></div>';
+      }
+    }
+    try { const last = JSON.parse(localStorage.getItem('jt_gems_last') || 'null'); if (last) { $('tRef').value = last.ref; $('tPhone').value = last.phone; } } catch (_) { /* private mode */ }
+    const tq = new URLSearchParams(location.search).get('track'); if (tq) $('tRef').value = tq.toUpperCase();
+    const setNavH = () => document.documentElement.style.setProperty('--navh', ($('navbar').offsetHeight + 10) + 'px');
+    setNavH(); window.addEventListener('resize', setNavH);
+    loadCatalog();
+  </script>
+</body>
+
+</html>
