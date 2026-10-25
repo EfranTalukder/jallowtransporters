@@ -397,10 +397,13 @@
     .cart-btn:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
     .cart-count { min-width: 22px; height: 22px; border-radius: 999px; background: #00A15C; color: #FFFFFF; font-size: 0.72rem; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; }
     .cart-count.bump { animation: pop-in 0.45s var(--spring); }
+    /* Phones: just search + basket. The category chips show from tablet width up. */
+    @media (max-width: 767px) {
+      .cat-row { display: none; }
+      .shop-search { flex: 1 1 0; min-width: 0; }
+    }
     @media (max-width: 640px) {
       .shopbar { margin-top: -2.25rem; gap: 0.5rem; }
-      .cat-row { flex: 1 1 100%; }
-      .shop-search { flex: 1 1 0; min-width: 0; }
     }
 
     .p-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
@@ -447,6 +450,9 @@
     .btn-add:active { transform: scale(0.97); background: #065C37; }
     .btn-add:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
     .btn-add:disabled { background: #E7E1D7; color: #8A8F98; box-shadow: none; cursor: not-allowed; transform: none; }
+    /* Two cards a row on phones: keep "Add to basket" on one line. */
+    @media (max-width: 520px) { .btn-add { padding: 0.72rem 0.5rem; gap: 0.3rem; font-size: 0.84rem; white-space: nowrap; } }
+    @media (max-width: 380px) { .btn-add svg { display: none; } }
     .qty { display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; border: 1.5px solid #00A15C; border-radius: 0.75rem; background: #E4F4EC; padding: 0.2rem; }
     .qty button { width: 38px; height: 38px; border-radius: 0.6rem; border: none; background: #FFFFFF; color: #007A46; font-size: 1.15rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.25s var(--spring), background-color 0.25s var(--smooth); }
     .qty button:hover { background: #FAF7F2; }
@@ -1154,6 +1160,9 @@
       else if (el.hasAttribute('data-open-cart')) { $('pDialog').classList.remove('open'); openCart('cart'); }
       else if (el.dataset.cat) { state.cat = el.dataset.cat; renderCats(); renderGrid(); }
     });
+    // Phones have no category chips, so a window narrowed to phone size goes back to everything.
+    const phoneWidth = window.matchMedia('(max-width: 767px)');
+    phoneWidth.addEventListener('change', (e) => { if (e.matches && state.cat !== 'all') { state.cat = 'all'; renderCats(); renderGrid(); } });
     document.addEventListener('change', (e) => { if (e.target.name === 'delivery') { state.delivery = e.target.value; renderCart(); } });
     $('overlay').addEventListener('click', closeAll);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
