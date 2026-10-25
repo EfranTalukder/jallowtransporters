@@ -441,6 +441,13 @@
     .rates-table td { padding: 0.85rem 1rem; border-top: 1px solid #F0EBE3; color: #1E1E1E; }
     .rates-table td:last-child { text-align: right; font-weight: 800; color: #0A1E4A; white-space: nowrap; }
     .rates-table th:last-child { text-align: right; }
+    /* Phones: two columns (route with the service under it, and the price) so nothing runs off the screen. */
+    .rates-table .rate-service { display: none; }
+    @media (max-width: 640px) {
+      .rates-table th, .rates-table td { padding: 0.75rem 0.65rem; }
+      .rates-table th:nth-child(2), .rates-table td:nth-child(2) { display: none; }
+      .rates-table .rate-service { display: block; margin-top: 0.1rem; font-size: 0.78rem; font-weight: 500; color: #6B7280; }
+    }
 
     .timeline { position: relative; display: grid; gap: 0; margin: 1.5rem 0 0.5rem; }
     .tl-step { position: relative; display: flex; gap: 1rem; padding-bottom: 1.35rem; }
@@ -1168,6 +1175,7 @@
     });
   </script>
 
+  <script src="/form-checks.js"></script>
   <script>
     // ─────────────────────────────────────────────────────────────────────
     // Booking page — talks to the Jallow Transporters Supabase backend.
@@ -1186,21 +1194,21 @@
     };
 
     async function rpc(name, body = {}) {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
+      const res = await JTForm.send(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
         method: 'POST',
         headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      });
+      }, 'booking');
       if (!res.ok) throw new Error(`Could not load ${name}`);
       return res.json();
     }
 
     async function callFunction(name, body) {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+      const res = await JTForm.send(`${SUPABASE_URL}/functions/v1/${name}`, {
         method: 'POST',
         headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      });
+      }, 'booking');
       let data = {};
       try { data = await res.json(); } catch (_) { /* ignore */ }
       if (!res.ok) {
@@ -1324,7 +1332,7 @@
     function renderRates() {
       if (!state.routes.length) { $('ratesBody').innerHTML = `<tr><td colspan="3" class="text-charcoal-light">Prices unavailable right now.</td></tr>`; return; }
       $('ratesBody').innerHTML = state.routes.map((r) => `
-        <tr><td class="font-semibold text-navy">${esc(r.label)}</td>
+        <tr><td class="font-semibold text-navy">${esc(r.label)}<span class="rate-service">${r.mode === 'air' ? 'Air freight' : 'Sea container'}</span></td>
         <td class="text-charcoal-light">${r.mode === 'air' ? 'Air freight' : 'Sea container'}</td>
         <td>${r.rate ? money(r.rate, r.currency) + ' / kg' : '<span class="font-semibold text-charcoal-light">On request</span>'}</td></tr>`).join('');
     }
@@ -1545,10 +1553,61 @@
       if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
     }
 
-    function showAlert(msg) { $('formAlertText').textContent = msg; $('formAlert').classList.add('show'); }
+    // An alert can carry a WhatsApp button, so nobody is left stuck when something goes wrong.
+    function showAlert(msg, waText) {
+      $('formAlertText').textContent = msg;
+      if (waText) {
+        const a = document.createElement('a');
+        a.href = JTForm.waLink(waText); a.target = '_blank'; a.rel = 'noopener';
+        a.className = 'block mt-2 font-bold underline'; a.textContent = 'Send my booking on WhatsApp instead →';
+        $('formAlertText').appendChild(a);
+      }
+      $('formAlert').classList.add('show');
+    }
     function hideAlert() { $('formAlert').classList.remove('show'); }
-    const fieldError = (id, bad) => { $(id).classList.toggle('error', !!bad); return !bad; };
-    const digits = (v) => (v || '').replace(/\D/g, '');
+    const { checks, setError } = JTForm;
+    const val = (id) => $(id).value.trim();
+    const today = () => new Date().toISOString().slice(0, 10);
+
+    // The checks for one step; each problem gets its own message under its box.
+    function stepErrors(step) {
+      const inbound = isInbound(state.route);
+      const ukAddress = fromUK(state.route) || inbound;
+      const e = {};
+      if (step === 2) {
+        e.description = val('description').length < 2 ? 'Please tell us what you’re sending, e.g. 2 barrels and 1 TV.' : '';
+        const n = $('itemCount');
+        e.itemCount = n.validity.badInput || (val('itemCount') && !(/^\d+$/.test(val('itemCount')) && +val('itemCount') >= 1 && +val('itemCount') <= 500))
+          ? 'Please enter how many items as a whole number, e.g. 3.' : '';
+        if (state.mode === 'air') {
+          const k = $('estKg');
+          const kg = parseFloat(val('estKg'));
+          e.estKg = k.validity.badInput || (val('estKg') && !(kg > 0 && kg <= 5000)) ? 'Please enter the weight in kilos as a number between 0.1 and 5000, e.g. 12 or 12.5.' : '';
+        }
+        const d = $('prefDate').value;
+        e.prefDate = $('prefDate').validity.badInput ? 'Please pick a date from the calendar.'
+          : d && d < today() ? 'Please pick today or a later date.'
+          : d && d > new Date(Date.now() + 366 * 864e5).toISOString().slice(0, 10) ? 'Please pick a date within the next year.' : '';
+      }
+      if (step === 3) {
+        e.contactName = checks.name(val('contactName'));
+        e.phone = checks.phone(val('phone'));
+        e.city = checks.town(val('city'));
+        e.email = checks.email(val('email'));
+        const need = needsAddress();
+        e.address = checks.address(val('address'), { required: need });
+        e.postcode = ukAddress ? checks.ukPostcode(val('postcode'), { required: need }) : '';
+        e.customerNo = val('customerNo') && !/^\d{1,6}$/.test(val('customerNo').replace(/\s/g, ''))
+          ? 'Your customer number is just digits, e.g. 8177. Leave it empty if you don’t have one.' : '';
+      }
+      if (step === 4) {
+        const who = inbound ? 'the sender’s' : 'the receiver’s';
+        e.receiverName = checks.name(val('receiverName'), { what: `${who} full name` });
+        e.receiverPhone = checks.phone(val('receiverPhone'), { required: false });
+        e.receiverCity = checks.town(val('receiverCity'), { required: false, what: `${who} town` });
+      }
+      return e;
+    }
 
     function validate(step) {
       let ok = true;
@@ -1556,28 +1615,9 @@
         if (!state.mode) { $('modeError').classList.remove('hidden'); ok = false; }
         else if (!state.route) { $('routeError').classList.remove('hidden'); ok = false; }
       }
-      if (step === 2) {
-        ok = fieldError('description', $('description').value.trim().length < 2) && ok;
-        const kgRaw = $('estKg').value.trim();
-        if (state.mode === 'air' && kgRaw) { const kg = parseFloat(kgRaw); ok = fieldError('estKg', !(kg > 0 && kg <= 5000)) && ok; }
-        if (!state.method) { $('methodError').classList.remove('hidden'); ok = false; }
-      }
-      if (step === 3) {
-        ok = fieldError('contactName', $('contactName').value.trim().length < 2) && ok;
-        const pd = digits($('phone').value);
-        ok = fieldError('phone', pd.length < 7 || pd.length > 15) && ok;
-        ok = fieldError('city', $('city').value.trim().length < 2) && ok;
-        const em = $('email').value.trim();
-        ok = fieldError('email', em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) && ok;
-        if (needsAddress()) {
-          ok = fieldError('address', $('address').value.trim().length < 3) && ok;
-          if (fromUK(state.route) || isInbound(state.route)) ok = fieldError('postcode', $('postcode').value.trim().length < 4) && ok;
-        }
-      }
-      if (step === 4) {
-        ok = fieldError('receiverName', $('receiverName').value.trim().length < 2) && ok;
-        if (!$('consent').checked) { $('consentError').classList.remove('hidden'); ok = false; }
-      }
+      for (const [id, msg] of Object.entries(stepErrors(step))) ok = setError(id, msg) && ok;
+      if (step === 2 && !state.method) { $('methodError').classList.remove('hidden'); ok = false; }
+      if (step === 4 && !$('consent').checked) { $('consentError').classList.remove('hidden'); ok = false; }
       if (!ok) {
         const firstBad = document.querySelector(`.step-panel[data-step="${step}"] .error, .step-panel[data-step="${step}"] .field-error-block:not(.hidden)`);
         firstBad?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1586,9 +1626,45 @@
       return ok;
     }
 
-    ['description', 'contactName', 'phone', 'city', 'email', 'address', 'postcode', 'receiverName'].forEach((id) =>
-      $(id).addEventListener('input', () => $(id).classList.remove('error')));
+    // Typing clears that box's message; leaving a box that was wrong checks it again.
+    const FIELDS = { description: 2, itemCount: 2, estKg: 2, prefDate: 2, contactName: 3, phone: 3, city: 3, email: 3, address: 3,
+      postcode: 3, customerNo: 3, receiverName: 4, receiverPhone: 4, receiverCity: 4 };
+    Object.entries(FIELDS).forEach(([id, step]) => {
+      $(id).addEventListener('input', () => setError(id, ''));
+      $(id).addEventListener('blur', () => JTForm.afterPress(() => {
+        if (id === 'postcode' && (fromUK(state.route) || isInbound(state.route))) $(id).value = JTForm.formatPostcode($(id).value);
+        if (state.step === step && ($(id).value.trim() || $(id).getAttribute('aria-invalid') === 'true')) setError(id, stepErrors(step)[id] || '');
+      }));
+    });
     $('consent').addEventListener('change', () => $('consentError').classList.add('hidden'));
+
+    // A problem the server found goes back to the box it belongs to.
+    const SERVER_FIELDS = [
+      [/name/i, 3, 'contactName'], [/phone/i, 3, 'phone'], [/weight|kilo/i, 2, 'estKg'],
+      [/guidelines/i, 4, 'consent'], [/route|air or sea|departure/i, 1, null],
+    ];
+    function showServerError(err, payload) {
+      const hit = !err.network && err.status === 400 && SERVER_FIELDS.find(([re]) => re.test(err.message));
+      if (hit) {
+        const [, step, id] = hit;
+        if (state.step !== step) setStep(step);
+        if (id === 'consent') $('consentError').classList.remove('hidden');
+        else if (id) { setError(id, err.message); $(id).focus(); }
+        else showAlert(err.message);
+        return;
+      }
+      showAlert(err.message, err.status === 429 ? null : bookingSummary(payload));
+      $('formAlert').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function bookingSummary(p) {
+      return [
+        'Hello Jallow Transporters, I tried to book on the website but it didn’t go through:',
+        `${p.mode === 'air' ? 'Air freight' : 'Sea container'} · ${state.route?.label ?? ''}${state.departure ? ` · ${state.departure.name}` : ''}`,
+        `Items: ${p.description}${p.est_kg ? ` · about ${p.est_kg} kg` : ''}`,
+        `Name: ${p.contact_name} · Phone: ${p.phone} · ${p.city}`,
+        p.receiver_name ? `${isInbound(state.route) ? 'Sender' : 'Receiver'}: ${p.receiver_name}${p.receiver_phone ? ` (${p.receiver_phone})` : ''}` : '',
+      ].filter(Boolean).join('\n');
+    }
 
     $('backBtn').addEventListener('click', () => setStep(Math.max(1, state.step - 1)));
     $('nextBtn').addEventListener('click', () => {
@@ -1613,8 +1689,8 @@
         email: $('email').value.trim(),
         city: $('city').value.trim(),
         address: $('address').value.trim(),
-        postcode: $('postcode').value.trim(),
-        customer_no: $('customerNo').value.trim(),
+        postcode: (fromUK(state.route) || isInbound(state.route)) ? JTForm.formatPostcode($('postcode').value) : $('postcode').value.trim(),
+        customer_no: $('customerNo').value.replace(/\s/g, ''),
         receiver_name: $('receiverName').value.trim(),
         receiver_phone: $('receiverPhone').value.trim(),
         receiver_city: $('receiverCity').value.trim(),
@@ -1640,8 +1716,7 @@
         }
         showSuccess(res, payload, uploaded);
       } catch (err) {
-        showAlert(err.message);
-        $('formAlert').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showServerError(err, payload);
       } finally {
         state.submitting = false;
         btn.disabled = false; btn.classList.remove('is-loading'); $('nextText').textContent = 'Send booking';

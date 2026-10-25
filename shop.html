@@ -858,6 +858,7 @@
     });
   </script>
 
+  <script src="/form-checks.js"></script>
   <script>
     // ─────────────────────────────────────────────────────────────────────
     // JT Moroccan Gems shop — products, prices and stock come live from the
@@ -876,12 +877,12 @@
     const qtyLabel = (q, unit) => unit === 'kg' ? `${qtyText(q)} kg` : unit === 'each' ? `${qtyText(q)} ×` : `${qtyText(q)} × ${unit}`;
 
     async function rpc(name, body = {}) {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const res = await JTForm.send(`${SUPABASE_URL}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }, 'shop');
       if (!res.ok) throw new Error(`Could not load ${name}`);
       return res.json();
     }
     async function callFunction(name, body) {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const res = await JTForm.send(`${SUPABASE_URL}/functions/v1/${name}`, { method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }, 'order');
       let data = {};
       try { data = await res.json(); } catch (_) { /* ignore */ }
       if (!res.ok) { const e = new Error(data.error || 'Something went wrong. Please try again or WhatsApp us on +44 7831 005961.'); e.status = res.status; throw e; }
@@ -1047,8 +1048,9 @@
           <div><label class="form-label" for="oPost">Post code<span class="req">*</span></label><input class="form-input" id="oPost" autocomplete="postal-code" style="text-transform:uppercase" value="${esc(saved.postcode || '')}"><p class="form-error">Please enter your post code.</p></div>` : ''}
           <div><label class="form-label" for="oNotes">Anything we should know?<span class="opt">(optional)</span></label><textarea class="form-textarea" id="oNotes" style="min-height:80px" placeholder="e.g. size or colour for an abaya"></textarea></div>
           <input type="text" id="oWebsite" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0" name="website">
-          <label class="flex gap-3 items-start text-sm text-charcoal-light field-error-block" id="consentWrap"><input type="checkbox" id="oConsent" class="mt-1 w-4 h-4 accent-[#00A15C]"><span>I agree that JT may contact me on WhatsApp about this order, and I've read the <a class="text-brand font-semibold underline" href="/terms.html" target="_blank">terms</a>.</span></label>
-          <p class="text-sm" id="orderErr" role="alert" style="color:#C04B4F"></p>
+          <div><label class="flex gap-3 items-start text-sm text-charcoal-light" id="consentWrap"><input type="checkbox" id="oConsent" class="mt-1 w-4 h-4 accent-[#00A15C]"><span>I agree that JT may contact me on WhatsApp about this order, and I've read the <a class="text-brand font-semibold underline" href="/terms.html" target="_blank">terms</a>.</span></label>
+            <p class="form-error" id="oConsentErr">Please tick the box to agree, so we can confirm your order on WhatsApp.</p></div>
+          <div class="text-sm" id="orderErr" role="alert" style="color:#C04B4F"></div>
         </form>`;
       $('cartFoot').innerHTML = `<div class="sum-row total" style="padding-top:0"><span>Total</span><span>${money(t.total)}</span></div>
         <div class="grid grid-cols-[auto_1fr] gap-2 mt-3"><button class="btn-ghost" data-step="cart" style="padding:0.9rem 1rem">Back</button>
@@ -1057,16 +1059,43 @@
       setTimeout(() => $('oName') && !$('oName').value && $('oName').focus(), 60);
     }
 
+    // The checks for the details form; each problem gets its own message under its box.
+    function orderErrors() {
+      const v = (id) => ($(id) ? $(id).value.trim() : '');
+      const post = state.delivery === 'post';
+      return {
+        oName: JTForm.checks.name(v('oName')),
+        oPhone: JTForm.checks.phone(v('oPhone')),
+        oCity: JTForm.checks.town(v('oCity'), { required: false }),
+        oEmail: JTForm.checks.email(v('oEmail')),
+        ...(post ? { oAddress: JTForm.checks.address(v('oAddress')), oPost: JTForm.checks.ukPostcode(v('oPost')) } : {}),
+      };
+    }
+    // Typing clears that box's message; leaving a box that was wrong checks it again.
+    document.addEventListener('input', (e) => { if (e.target.closest && e.target.closest('#orderForm') && e.target.id) JTForm.setError(e.target, ''); });
+    document.addEventListener('focusout', (e) => {
+      const el = e.target;
+      if (!el.closest || !el.closest('#orderForm') || !el.id || !(el.id in orderErrors())) return;
+      JTForm.afterPress(() => {
+        if (!el.isConnected) return;   // the form was replaced (order placed / back to basket)
+        if (el.id === 'oPost') el.value = JTForm.formatPostcode(el.value);
+        if (el.value.trim() || el.getAttribute('aria-invalid') === 'true') JTForm.setError(el, orderErrors()[el.id]);
+      });
+    });
+    document.addEventListener('change', (e) => { if (e.target.id === 'oConsent') $('oConsentErr').style.display = ''; });
+    // Problems the server found go back to their box; stock problems send people back to the basket.
+    const ORDER_FIELDS = [[/name/i, 'oName'], [/phone/i, 'oPhone'], [/address|post code/i, 'oAddress'], [/terms/i, 'oConsent']];
+
     async function placeOrder() {
       if (state.placing) return;
       const v = (id) => ($(id) ? $(id).value.trim() : '');
       let ok = true;
-      const need = (id, test) => { const el = $(id); if (!el) return; const bad = !test(el.value.trim()); el.classList.toggle('error', bad); if (bad) ok = false; };
-      need('oName', (s) => s.length >= 2);
-      need('oPhone', (s) => s.replace(/\D/g, '').length >= 7);
-      if (state.delivery === 'post') { need('oAddress', (s) => s.length >= 4); need('oPost', (s) => s.length >= 4); }
-      if (!$('oConsent').checked) { ok = false; $('orderErr').textContent = 'Please tick the box to agree.'; } else $('orderErr').textContent = '';
-      if (!ok) { const first = document.querySelector('#orderForm .error'); if (first) first.focus(); return; }
+      for (const [id, msg] of Object.entries(orderErrors())) ok = JTForm.setError(id, msg) && ok;
+      $('oConsentErr').style.display = $('oConsent').checked ? '' : 'block';
+      if (!$('oConsent').checked) ok = false;
+      $('orderErr').textContent = '';
+      if (!ok) { const first = document.querySelector('#orderForm .error') || $('oConsent'); first.focus(); first.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
+      if ($('oPost')) $('oPost').value = JTForm.formatPostcode($('oPost').value);
       const me = { name: v('oName'), phone: v('oPhone'), city: v('oCity'), email: v('oEmail'), address: v('oAddress'), postcode: v('oPost') };
       try { localStorage.setItem('jt_gems_me', JSON.stringify(me)); } catch (_) { /* private mode */ }
       const L = lines();
@@ -1099,8 +1128,24 @@
           <button class="btn-ghost w-full mt-2" data-close>Keep shopping</button>`;
         $('tRef').value = res.ref; $('tPhone').value = me.phone;
       } catch (e) {
-        $('orderErr').textContent = e.message;
-        if (e.status === 400) loadCatalog(true);
+        const hit = e.status === 400 && ORDER_FIELDS.find(([re]) => re.test(e.message));
+        if (hit && hit[1] === 'oConsent') $('oConsentErr').style.display = 'block';
+        else if (hit && $(hit[1])) { JTForm.setError(hit[1], e.message); $(hit[1]).focus(); }
+        else {
+          $('orderErr').textContent = e.message;
+          if (e.status === 400) {   // sold out, stock or product changed: show the basket again with fresh prices
+            loadCatalog(true);
+            const back = document.createElement('button');
+            back.type = 'button'; back.className = 'block mt-2 font-bold underline'; back.dataset.step = 'cart'; back.textContent = 'Check my basket →';
+            $('orderErr').appendChild(back);
+          } else if (e.status !== 429) {
+            const summary = L.map((l) => `${qtyLabel(l.qty, l.p.unit)} ${l.p.name}`).join(', ');
+            const a = document.createElement('a');
+            a.href = JTForm.waLink(`Hi JT, I tried to order on the website but it didn’t go through: ${summary}. ${state.delivery === 'post' ? 'UK post' : 'Collection'}. Name: ${me.name}, phone: ${me.phone}.`);
+            a.target = '_blank'; a.rel = 'noopener'; a.className = 'block mt-2 font-bold underline'; a.textContent = 'Send my order on WhatsApp instead →';
+            $('orderErr').appendChild(a);
+          }
+        }
       } finally {
         state.placing = false; const b = $('placeBtn'); if (b) { b.classList.remove('is-loading'); b.disabled = false; }
       }
