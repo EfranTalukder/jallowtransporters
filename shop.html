@@ -524,6 +524,15 @@
     .del-opt:focus-within { box-shadow: 0 0 0 4px rgba(0, 161, 92, 0.12); }
     .sum-row { display: flex; justify-content: space-between; font-size: 0.92rem; color: #4A4A4A; padding: 0.15rem 0; }
     .sum-row.total { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0A1E4A; font-size: 1.15rem; padding-top: 0.5rem; }
+    .next-list { display: grid; gap: 0.8rem; }
+    .next-list li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.9rem; line-height: 1.55; color: #4A4A4A; }
+    .next-list .n { flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px; background: #E4F4EC; color: #007A46; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+    .next-list b { color: #0A1E4A; }
+    .wrong-no { margin-top: 1rem; font-size: 0.82rem; color: #6B7280; }
+    .wrong-no a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s var(--smooth); }
+    .wrong-no a:hover { color: #065C37; }
+    .wrong-no a:active { opacity: 0.7; }
+    .wrong-no a:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; border-radius: 3px; }
     .done-tick { width: 72px; height: 72px; border-radius: 50%; background: #00A15C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; animation: pop-in 0.6s var(--spring); box-shadow: 0 18px 36px -14px rgba(0, 161, 92, 0.7); }
     .ref-pill { display: inline-block; font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 0.06em; color: #0A1E4A; background: #FFFFFF; border: 2px dashed #00A15C; border-radius: 0.75rem; padding: 0.5rem 1rem; font-size: 1.25rem; }
     .float-cart { position: fixed; left: 50%; bottom: 1.25rem; z-index: 8990; transform: translate(-50%, 140%); transition: transform 0.5s var(--spring); }
@@ -1106,12 +1115,18 @@
           delivery: state.delivery, notes: v('oNotes'), consent: true, website: v('oWebsite'), started_at: startedAt,
           items: L.map((l) => ({ product_id: l.id, qty: l.qty })),
         });
-        const summary = L.map((l) => `${qtyLabel(l.qty, l.p.unit)} ${l.p.name}`).join(', ');
         try { localStorage.setItem('jt_gems_last', JSON.stringify({ ref: res.ref, phone: me.phone })); } catch (_) { /* private mode */ }
         state.cart = []; saveCart(); refreshActions(); updateCount(false);
         state.step = 'done';
         $('cartTitle').textContent = 'Order placed'; $('cartSub').textContent = '';
-        const wa = `https://wa.me/${state.settings.whatsapp || '447831005961'}?text=${encodeURIComponent(`Hi JT, I've just placed Moroccan Gems order ${res.ref}: ${summary}. Total ${money(res.total)} (${state.delivery === 'post' ? 'UK post' : 'collection'}).`)}`;
+        // The team confirms from the admin app, so the customer only needs to know what happens next.
+        const nextSteps = [
+          `We message you on WhatsApp at <b>${esc(me.phone)}</b> to confirm your order — usually within the hour in UK business hours.`,
+          esc(res.payment_note || state.settings.payment_note || 'We tell you how to pay when we confirm your order.'),
+          state.delivery === 'post' ? 'We post it to you and let you know when it’s on its way.'
+            : `We let you know when it’s ready to collect from ${esc(state.settings.collect_address || 'our Birmingham base (B12)')}.`,
+        ];
+        const wrongNumber = JTForm.waLink(`Hi JT, my Moroccan Gems order ${res.ref} has the wrong phone number. The right number is: `);
         $('cartBody').innerHTML = `<div class="text-center pt-6">
             <div class="done-tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <h3 class="text-navy text-2xl mb-1">Thank you, ${esc(me.name.split(' ')[0])}!</h3>
@@ -1122,9 +1137,13 @@
               <div class="sum-row"><span>${state.delivery === 'post' ? 'UK post' : 'Collection'}</span><span>${Number(res.delivery_fee) ? money(res.delivery_fee) : 'Free'}</span></div>
               <div class="sum-row total"><span>Total</span><span>${money(res.total)}</span></div>
             </div>
-            <p class="text-sm text-charcoal-light mt-4">${esc(res.payment_note || 'We will confirm your order on WhatsApp.')}</p>
+            <div class="text-left mt-6">
+              <p class="text-[0.7rem] tracking-[0.2em] uppercase font-bold text-brand mb-3">What happens next</p>
+              <ol class="next-list">${nextSteps.map((s, i) => `<li><span class="n">${i + 1}</span><span>${s}</span></li>`).join('')}</ol>
+              <p class="wrong-no">Not your number? <a href="${wrongNumber}" target="_blank" rel="noopener">Tell us on WhatsApp</a> so we can reach you.</p>
+            </div>
           </div>`;
-        $('cartFoot').innerHTML = `<a class="btn-wa w-full" href="${wa}" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>Send it to us on WhatsApp</a>
+        $('cartFoot').innerHTML = `<button class="btn-primary w-full" data-track>Track my order</button>
           <button class="btn-ghost w-full mt-2" data-close>Keep shopping</button>`;
         $('tRef').value = res.ref; $('tPhone').value = me.phone;
       } catch (e) {
@@ -1192,7 +1211,7 @@
 
     // ── events ──────────────────────────────────────────────────────────
     document.addEventListener('click', (e) => {
-      const el = e.target.closest('[data-add],[data-inc],[data-dec],[data-remove],[data-open],[data-close],[data-step],[data-place],[data-open-cart],[data-cat]');
+      const el = e.target.closest('[data-add],[data-inc],[data-dec],[data-remove],[data-open],[data-close],[data-step],[data-place],[data-open-cart],[data-cat],[data-track]');
       if (!el) return;
       if (el.dataset.add) { setQty(el.dataset.add, 1); if ($('pDialog').classList.contains('open')) openProduct(el.dataset.add); }
       else if (el.dataset.inc) setQty(el.dataset.inc, inCart(el.dataset.inc) + 1);
@@ -1204,6 +1223,11 @@
       else if (el.hasAttribute('data-place')) placeOrder();
       else if (el.hasAttribute('data-open-cart')) { $('pDialog').classList.remove('open'); openCart('cart'); }
       else if (el.dataset.cat) { state.cat = el.dataset.cat; renderCats(); renderGrid(); }
+      else if (el.hasAttribute('data-track')) {   // after ordering: close the basket and show the order's status
+        closeAll();
+        window.scrollTo({ top: $('track').getBoundingClientRect().top + window.scrollY - $('navbar').offsetHeight - 16, behavior: 'smooth' });
+        $('trackForm').requestSubmit();
+      }
     });
     // Phones have no category chips, so a window narrowed to phone size goes back to everything.
     const phoneWidth = window.matchMedia('(max-width: 767px)');

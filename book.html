@@ -417,6 +417,12 @@
     .copy-btn:focus-visible { outline: 2px solid #22C77E; outline-offset: 2px; }
     .next-list { text-align: left; max-width: 30rem; margin: 0 auto 1.75rem; display: grid; gap: 0.8rem; }
     .next-list li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.92rem; color: #4A4A4A; }
+    .next-list b { color: #0A1E4A; }
+    .wrong-no { max-width: 30rem; margin: -0.75rem auto 1.5rem; text-align: left; padding-left: calc(26px + 0.8rem); font-size: 0.82rem; color: #6B7280; }
+    .wrong-no a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s var(--smooth); }
+    .wrong-no a:hover { color: #065C37; }
+    .wrong-no a:active { opacity: 0.7; }
+    .wrong-no a:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; border-radius: 3px; }
     .next-list .n { flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px; background: #E4F4EC; color: #007A46; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
 
     .dep-card {
@@ -921,17 +927,14 @@
               </div>
               <p class="text-sm text-brand-deep font-semibold mb-5 hidden" id="successEstimate"></p>
               <ol class="next-list">
-                <li><span class="n">1</span><span>Our team checks your booking and confirms it on WhatsApp — usually within the hour during UK business hours.</span></li>
+                <li><span class="n">1</span><span>Our team checks your booking and messages you on WhatsApp<span id="successPhone"></span> to confirm it — usually within the hour during UK business hours.</span></li>
                 <li><span class="n">2</span><span id="successStep2">We arrange the collection or drop-off with you and weigh everything.</span></li>
                 <li><span class="n">3</span><span>Track it any time on this page with your reference and phone number.</span></li>
               </ol>
+              <p class="wrong-no">Not your number? <a id="wrongNumber" href="https://wa.me/447831005961" target="_blank" rel="noopener">Tell us on WhatsApp</a> so we can reach you.</p>
               <p class="text-sm text-charcoal-light mb-5 hidden" id="photoNote"></p>
               <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
-                <a class="btn-wa col-span-2" id="successWa" href="https://wa.me/447831005961" target="_blank" rel="noopener">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></svg>
-                  Send to us on WhatsApp
-                </a>
-                <button type="button" class="btn-ghost" id="trackThis">Track this booking</button>
+                <button type="button" class="btn-primary" id="trackThis">Track this booking</button>
                 <button type="button" class="btn-ghost" id="bookAnother">Book another</button>
               </div>
             </div>
@@ -1736,24 +1739,14 @@
         $('photoNote').textContent = uploaded === state.photos.length ? `${uploaded} photo${uploaded > 1 ? 's' : ''} sent with your booking.` : 'Some photos didn’t upload — you can send them to us on WhatsApp.';
         $('photoNote').classList.remove('hidden');
       }
-      const m = methodChoices().find((c) => c.v === p.collection_mode);
+      // The team confirms from the admin app; showing the number lets the customer spot a typo.
+      $('successPhone').innerHTML = p.phone ? ` at <b>${esc(p.phone)}</b>` : '';
+      $('wrongNumber').href = JTForm.waLink(`Hi JT, my booking ${res.ref} has the wrong phone number. The right number is: `);
       $('successStep2').textContent = p.collection_mode === 'collection' && !isInbound(state.route)
         ? 'We arrange a collection day with you and weigh everything.'
         : p.collection_mode === 'delivery' ? 'When it lands we arrange delivery to your address.'
         : p.collection_mode === 'collection' ? 'When it lands we let you know it’s ready to collect.'
         : 'Bring or send your items to us — we weigh everything and confirm the price.';
-      const lines = [
-        'Hello Jallow Transporters, I just booked online.',
-        `Reference: ${res.ref}`,
-        `Name: ${p.contact_name}`,
-        `Service: ${p.mode === 'air' ? 'Air freight' : 'Sea container'} · ${state.route.label}`,
-        state.departure ? `Departure: ${fmtDate(state.departure.departure_date)}` : 'Departure: next available',
-        `Items: ${p.description}`,
-        p.est_kg ? `Estimated weight: ${p.est_kg} kg` : null,
-        m ? `Method: ${m.t.replace('’', "'")}` : null,
-        p.customer_no ? `Customer number: ${p.customer_no}` : null,
-      ].filter(Boolean);
-      $('successWa').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
       $('trackRef').value = res.ref;
       $('trackPhone').value = p.phone;
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
@@ -1846,8 +1839,8 @@
       $('trackAlert').classList.remove('show');
       const ref = $('trackRef').value.trim().toUpperCase();
       const phone = $('trackPhone').value.trim();
-      let ok = fieldError('trackRef', ref.length < 4);
-      ok = fieldError('trackPhone', digits(phone).length < 7) && ok;
+      let ok = JTForm.setError('trackRef', ref.length < 4 ? 'Please enter your booking reference, e.g. JT-7K2QAF.' : '');
+      ok = JTForm.setError('trackPhone', phone.replace(/\D/g, '').length < 7 ? 'Please enter the phone number you booked with.' : '') && ok;
       if (!ok) return;
       const btn = $('trackBtn'); btn.disabled = true; btn.classList.add('is-loading');
       try {
@@ -1866,7 +1859,7 @@
         btn.disabled = false; btn.classList.remove('is-loading');
       }
     });
-    ['trackRef', 'trackPhone'].forEach((id) => $(id).addEventListener('input', () => $(id).classList.remove('error')));
+    ['trackRef', 'trackPhone'].forEach((id) => $(id).addEventListener('input', () => JTForm.setError(id, '')));
 
     // ─────────────────────────── Start ─────────────────────────────
     (async () => {
