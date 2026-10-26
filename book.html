@@ -337,7 +337,7 @@
     .dep-option .meta { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-top: 0.35rem; color: #4A4A4A; font-size: 0.82rem; }
     .chip {
       display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 999px;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; background: #E4F4EC; color: #007A46;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; background: #E4F4EC; color: #007A46; white-space: nowrap;
     }
     .chip.warn { background: #FFF3E3; color: #A35A12; }
     .chip.muted { background: #F0EBE3; color: #6B7280; }
@@ -438,6 +438,18 @@
     .dep-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, #00A15C, #22C77E); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-out-expo); }
     .dep-card:hover { transform: translateY(-6px); box-shadow: 0 26px 50px -18px rgba(0, 161, 92, 0.25), 0 6px 18px -8px rgba(10, 30, 74, 0.1); border-color: rgba(0, 161, 92, 0.25); }
     .dep-card:hover::before { transform: scaleX(1); }
+    /* Departures always look balanced: 1 = one wide card, 2 = two, 3 = three, 4 = two by two,
+       more = rows of three with the last row centred. Phones: one per row. */
+    .dep-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+    .dep-grid > * { flex: 1 1 100%; min-width: 0; }
+    @media (min-width: 640px) { .dep-grid > * { flex: 0 1 calc((100% - 1.5rem) / 2); } }
+    @media (min-width: 1024px) { .dep-grid:not(.n-2):not(.n-4) > * { flex-basis: calc((100% - 3rem) / 3); } }
+    .dep-grid > .full { flex-basis: 100% !important; }
+    /* Just one departure: a wide card across the row instead of a lonely small one. */
+    @media (min-width: 768px) {
+      .dep-card.dep-wide { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto; align-items: center; column-gap: 2.25rem; padding: 1.6rem 1.9rem; }
+      .dep-card.dep-wide .dep-cta { flex-direction: column; align-items: flex-end; justify-content: center; margin-top: 0; padding-top: 0; gap: 0.7rem; }
+    }
     .dep-card .dates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
     .dep-card .date-box { background: #FAF7F2; border-radius: 0.75rem; padding: 0.6rem 0.75rem; }
     .dep-card .date-box p:first-child { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8F98; }
@@ -988,7 +1000,7 @@
             <button type="button" class="pill" role="radio" aria-checked="false" data-filter="sea">Sea</button>
           </div>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="depGrid">
+        <div class="dep-grid" id="depGrid">
           <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton hidden lg:block"></div>
         </div>
 
@@ -1272,7 +1284,7 @@
         state.schedule = schedule || [];
       } catch (e) {
         state.routes = []; state.schedule = [];
-        $('depGrid').innerHTML = `<div class="sm:col-span-2 lg:col-span-3 form-card text-center"><p class="text-navy font-bold mb-1">We couldn't load departures right now.</p><p class="text-charcoal-light text-sm">Please refresh the page or WhatsApp us on +44 7831 005961.</p></div>`;
+        $('depGrid').innerHTML = `<div class="full form-card text-center"><p class="text-navy font-bold mb-1">We couldn't load departures right now.</p><p class="text-charcoal-light text-sm">Please refresh the page or WhatsApp us on +44 7831 005961.</p></div>`;
         $('ratesBody').innerHTML = `<tr><td colspan="3" class="text-charcoal-light">Prices unavailable right now.</td></tr>`;
         return;
       }
@@ -1294,35 +1306,45 @@
     function renderDepartures() {
       const list = state.schedule.filter((s) => depFilter === 'all' || s.mode === depFilter);
       if (!list.length) {
-        $('depGrid').innerHTML = `<div class="sm:col-span-2 lg:col-span-3 form-card text-center py-10">
+        $('depGrid').innerHTML = `<div class="full form-card text-center py-10">
           <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#E4F4EC;color:#065C37;">${ICONS.air}</div>
           <p class="text-navy font-bold text-lg mb-1">No ${depFilter === 'all' ? '' : depFilter + ' '}departures listed right now</p>
           <p class="text-charcoal-light text-sm mb-5">Book anyway — we'll put you on the next ${depFilter === 'sea' ? 'container' : 'flight'} and confirm the date on WhatsApp.</p>
           <button type="button" class="btn-primary" data-go-book="">Book now <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
       } else {
-        $('depGrid').innerHTML = list.map((s) => `
-          <article class="dep-card">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="${s.mode === 'air' ? 'background:linear-gradient(135deg,#E4F4EC,#C3E8D5);color:#065C37' : 'background:rgba(10,30,74,0.1);color:#0A1E4A'}">${ICONS[s.mode] || ICONS.air}</div>
-                <div>
-                  <p class="text-[0.7rem] font-extrabold tracking-[0.14em] uppercase text-charcoal-light">${s.mode === 'air' ? 'Air freight' : 'Sea container'}</p>
-                  <h3 class="text-navy text-[1.15rem]">${esc(s.route_label || 'Route to be confirmed')}</h3>
+        // One departure gets a wide card across the row (see .dep-wide); the grid's class says how many there are.
+        const wide = list.length === 1;
+        $('depGrid').className = `dep-grid n-${list.length > 4 ? 'many' : list.length}`;
+        $('depGrid').innerHTML = list.map((s) => {
+          // The status label sits beside the route when there's room, otherwise just under it (the route stays on one line).
+          const head = `
+              <div class="flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="${s.mode === 'air' ? 'background:linear-gradient(135deg,#E4F4EC,#C3E8D5);color:#065C37' : 'background:rgba(10,30,74,0.1);color:#0A1E4A'}">${ICONS[s.mode] || ICONS.air}</div>
+                  <div class="min-w-0">
+                    <p class="text-[0.7rem] font-extrabold tracking-[0.14em] uppercase text-charcoal-light">${s.mode === 'air' ? 'Air freight' : 'Sea container'}</p>
+                    <h3 class="text-navy text-[1.15rem]">${esc(s.route_label || 'Route to be confirmed')}</h3>
+                  </div>
                 </div>
-              </div>
-              ${depStatus(s)}
-            </div>
-            <div class="dates">
-              <div class="date-box"><p>${s.mode === 'sea' ? 'Loading' : 'Departs'}</p><p>${fmtDate(s.departure_date)}</p></div>
-              <div class="date-box"><p>Book by</p><p>${fmtDate(s.cut_off)}</p></div>
-            </div>
-            ${s.expected_arrival ? `<p class="text-sm text-charcoal-light -mt-2">Expected to arrive around <strong class="text-navy">${fmtDate(s.expected_arrival)}</strong></p>` : ''}
-            ${s.public_note ? `<p class="text-sm text-charcoal-light -mt-2">${esc(s.public_note)}</p>` : ''}
-            <div class="flex items-end justify-between gap-3 mt-auto pt-1">
-              <p class="price">${s.rate_per_kg ? money(s.rate_per_kg, s.currency) + ' <small>/ kg</small>' : '<small style="font-size:0.95rem;color:#0A1E4A;font-weight:700;">Priced by our team</small>'}</p>
-              ${canBook(s) ? `<button type="button" class="btn-primary text-sm" style="padding:0.7rem 1.1rem;" data-go-book="${s.id}">Book <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>` : ''}
-            </div>
-          </article>`).join('');
+                ${depStatus(s)}
+              </div>`;
+          const notes = `
+              ${s.expected_arrival ? `<p class="text-sm text-charcoal-light ${wide ? '' : '-mt-2'}">Expected to arrive around <strong class="text-navy">${fmtDate(s.expected_arrival)}</strong></p>` : ''}
+              ${s.public_note ? `<p class="text-sm text-charcoal-light ${wide ? '' : '-mt-2'}">${esc(s.public_note)}</p>` : ''}`;
+          const dates = `
+              <div class="dates">
+                <div class="date-box"><p>${s.mode === 'sea' ? 'Loading' : 'Departs'}</p><p>${fmtDate(s.departure_date)}</p></div>
+                <div class="date-box"><p>Book by</p><p>${fmtDate(s.cut_off)}</p></div>
+              </div>`;
+          const cta = `
+              <div class="dep-cta flex items-end justify-between gap-3 mt-auto pt-1">
+                <p class="price">${s.rate_per_kg ? money(s.rate_per_kg, s.currency) + ' <small>/ kg</small>' : '<small style="font-size:0.95rem;color:#0A1E4A;font-weight:700;">Priced by our team</small>'}</p>
+                ${canBook(s) ? `<button type="button" class="btn-primary text-sm" style="padding:0.7rem 1.1rem;" data-go-book="${s.id}">Book <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>` : ''}
+              </div>`;
+          return wide
+            ? `<article class="dep-card dep-wide full"><div class="flex flex-col gap-3 min-w-0">${head}${notes}</div>${dates}${cta}</article>`
+            : `<article class="dep-card">${head}${dates}${notes}${cta}</article>`;
+        }).join('');
       }
       document.querySelectorAll('[data-go-book]').forEach((b) => b.addEventListener('click', () => {
         const dep = state.schedule.find((s) => s.id === b.dataset.goBook);
