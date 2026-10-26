@@ -1190,7 +1190,7 @@
       e.preventDefault();
       const msg = waInput.value.trim(); if (!msg) return;
       waTyping.style.display = 'flex';
-      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
     });
   </script>
 
@@ -1829,7 +1829,7 @@
         box.innerHTML = `<p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-charcoal-light mb-2">${esc(b.ref)}</p>
           <h3 class="text-navy text-2xl mb-2">This booking was cancelled</h3>
           <p class="text-charcoal-light mb-5">If that's not right, message us and we'll sort it out.</p>
-          <a class="btn-wa" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Message us on WhatsApp</a>`;
+          <a class="btn-wa" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Message us on WhatsApp</a>`;
         return;
       }
       const stage = stageOf(b);
@@ -1860,7 +1860,7 @@
             <div><p>Balance to pay</p><p style="color:${Number(b.balance) > 0 ? '#A35A12' : '#007A46'}">${Number(b.balance) > 0 ? money(b.balance, b.currency) : 'Paid in full'}</p></div>`
             : b.estimate ? `<div><p>Estimate</p><p>${money(b.estimate, b.currency)}</p></div>` : ''}
         </div>
-        <a class="btn-wa mt-6 w-full" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Ask about this booking</a>`;
+        <a class="btn-wa mt-6 w-full" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Ask about this booking</a>`;
     }
 
     $('trackForm').addEventListener('submit', async (e) => {

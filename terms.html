@@ -762,7 +762,7 @@
       e.preventDefault();
       const msg = waInput.value.trim(); if (!msg) return;
       waTyping.style.display = 'flex';
-      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
     });
   </script>
 </body>

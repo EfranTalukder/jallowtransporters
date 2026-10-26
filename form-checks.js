@@ -184,7 +184,7 @@
     }
   }
 
-  const waLink = (text) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  const waLink = (text) => `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(text)}`;
 
   // A message appearing under a box moves the buttons below it. If that happens between
   // pressing and releasing the mouse on "Continue", the click is lost — so while a press

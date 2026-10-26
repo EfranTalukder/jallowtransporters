@@ -1405,7 +1405,7 @@
       waTyping.style.display = 'flex';
       setTimeout(() => {
         waTyping.style.display = 'none';
-        window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+        window.open('https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(msg), '_blank');
         waInput.value = '';
       }, 800);
     });

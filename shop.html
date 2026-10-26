@@ -867,7 +867,7 @@
       e.preventDefault();
       const msg = waInput.value.trim(); if (!msg) return;
       waTyping.style.display = 'flex';
-      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
     });
   </script>
 
@@ -960,7 +960,7 @@
         ? `${list.length} product${list.length === 1 ? '' : 's'}${state.q ? ` matching “${state.q}”` : ''} · prices include our trip from Morocco`
         : 'Our next selection is on its way.';
       if (!state.products.length) {
-        $('grid').innerHTML = `<div class="col-span-full form-card text-center"><h3 class="text-navy text-xl mb-2">New products are coming soon</h3><p class="text-charcoal-light mb-5">Tell us what you'd like from Morocco and we'll bring it on our next trip.</p><a class="btn-wa" href="https://wa.me/${esc(state.settings.whatsapp || '447831005961')}?text=${encodeURIComponent('Hi JT, I would like to order from Morocco:')}" target="_blank" rel="noopener">WhatsApp us</a></div>`;
+        $('grid').innerHTML = `<div class="col-span-full form-card text-center"><h3 class="text-navy text-xl mb-2">New products are coming soon</h3><p class="text-charcoal-light mb-5">Tell us what you'd like from Morocco and we'll bring it on our next trip.</p><a class="btn-wa" href="https://api.whatsapp.com/send?phone=${esc(state.settings.whatsapp || '447831005961')}&text=${encodeURIComponent('Hi JT, I would like to order from Morocco:')}" target="_blank" rel="noopener">WhatsApp us</a></div>`;
         return;
       }
       if (!list.length) { $('grid').innerHTML = '<p class="col-span-full text-center text-charcoal-light py-10">Nothing matches — try another word or category.</p>'; return; }

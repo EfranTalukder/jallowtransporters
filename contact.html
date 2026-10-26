@@ -912,7 +912,7 @@
       e.preventDefault();
       const msg = waInput.value.trim(); if (!msg) return;
       waTyping.style.display = 'flex';
-      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
+      setTimeout(() => { waTyping.style.display = 'none'; window.open('https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(msg), '_blank'); waInput.value = ''; }, 800);
     });
 
     // Main Contact Form Logic
@@ -955,7 +955,7 @@
       waMessage += `\nMessage:\n${message.value.trim()}`;
 
       // Open WhatsApp in a new tab
-      const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+      const waUrl = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(waMessage)}`;
       
       // Artificial delay for premium feel
       setTimeout(() => {
