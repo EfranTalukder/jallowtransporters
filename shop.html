@@ -227,6 +227,10 @@
     .form-input.error, .form-textarea.error, .form-select.error { border-color: #C04B4F; background: #FDF4F4; }
     .form-input.error ~ .form-error, .form-textarea.error ~ .form-error, .form-select.error ~ .form-error { display: block; }
     .field-error-block .form-error { display: block; }
+    .form-fix { display: inline-block; margin: 0.4rem 0.4rem 0 0; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1.5px solid #00A15C; background: #FFFFFF; color: #007A46; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: transform 0.2s var(--spring), background-color 0.2s ease; }
+    .form-fix:hover { background: #E4F4EC; transform: translateY(-1px); }
+    .form-fix:active { transform: scale(0.97); }
+    .form-fix:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
     .btn-submit {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
       padding: 1.05rem 1.75rem;
@@ -867,6 +871,7 @@
     });
   </script>
 
+  <script src="/vendor/libphonenumber-max.js"></script>
   <script src="/form-checks.js"></script>
   <script>
     // ─────────────────────────────────────────────────────────────────────
@@ -1047,7 +1052,7 @@
       $('cartTitle').textContent = 'Your details';
       $('cartBody').innerHTML = `<form id="orderForm" class="space-y-4" novalidate>
           <div><label class="form-label" for="oName">Full name<span class="req">*</span></label><input class="form-input" id="oName" autocomplete="name" value="${esc(saved.name || '')}"><p class="form-error">Please enter your name.</p></div>
-          <div><label class="form-label" for="oPhone">Phone (WhatsApp)<span class="req">*</span></label><input class="form-input" id="oPhone" inputmode="tel" autocomplete="tel" placeholder="07…" value="${esc(saved.phone || '')}"><p class="form-error">Please enter a phone number we can WhatsApp.</p></div>
+          <div><label class="form-label" for="oPhone">Phone (WhatsApp)<span class="req">*</span></label><input class="form-input" id="oPhone" inputmode="tel" autocomplete="tel" placeholder="e.g. 07400 123456 or +212 612 345678" value="${esc(saved.phone || '')}"><p class="form-error">Please enter a phone number we can WhatsApp.</p></div>
           <div class="grid grid-cols-2 gap-3">
             <div><label class="form-label" for="oCity">Town / city</label><input class="form-input" id="oCity" autocomplete="address-level2" value="${esc(saved.city || '')}"></div>
             <div><label class="form-label" for="oEmail">Email<span class="opt">(optional)</span></label><input class="form-input" id="oEmail" type="email" autocomplete="email" value="${esc(saved.email || '')}"></div>
@@ -1105,7 +1110,7 @@
       $('orderErr').textContent = '';
       if (!ok) { const first = document.querySelector('#orderForm .error') || $('oConsent'); first.focus(); first.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
       if ($('oPost')) $('oPost').value = JTForm.formatPostcode($('oPost').value);
-      const me = { name: v('oName'), phone: v('oPhone'), city: v('oCity'), email: v('oEmail'), address: v('oAddress'), postcode: v('oPost') };
+      const me = { name: v('oName'), phone: JTForm.toIntl(v('oPhone')), city: v('oCity'), email: v('oEmail'), address: v('oAddress'), postcode: v('oPost') };
       try { localStorage.setItem('jt_gems_me', JSON.stringify(me)); } catch (_) { /* private mode */ }
       const L = lines();
       state.placing = true; $('placeBtn').classList.add('is-loading'); $('placeBtn').disabled = true;
@@ -1248,7 +1253,12 @@
       if (!ref || phone.replace(/\D/g, '').length < 7) { $('trackOut').innerHTML = '<p class="text-sm" style="color:#C04B4F">Enter your order number and phone.</p>'; return; }
       $('tBtn').classList.add('is-loading'); $('tBtn').disabled = true;
       try {
-        const { order: o } = await callFunction('shop-order', { action: 'track', ref, phone });
+        // The number as typed first, then with its country code (orders now save +44…, +220…).
+        let o = null;
+        for (const tryPhone of JTForm.phoneVariants(phone)) {
+          ({ order: o } = await callFunction('shop-order', { action: 'track', ref, phone: tryPhone }));
+          if (o) break;
+        }
         if (!o) { $('trackOut').innerHTML = '<p class="text-sm text-charcoal-light">We couldn\'t find that order. Check the number and the phone you ordered with, or WhatsApp us.</p>'; return; }
         const at = o.status === 'cancelled' ? -1 : T_STEPS.findIndex(([s]) => s === o.status);
         $('trackOut').innerHTML = `

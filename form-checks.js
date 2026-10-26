@@ -14,6 +14,54 @@
     else if (d.length === 10 && d.startsWith('7')) d = '44' + d;
     return d;
   }
+  // Every number is sent with its country code (+44 7400 123456), so the team's WhatsApp
+  // button opens the right chat. UK numbers can be typed the usual way (07400 123456); a
+  // number from anywhere else needs its code — and when the number itself shows which
+  // country it is from, the message offers it ready to use. Uses libphonenumber
+  // (/vendor/libphonenumber-max.js); if that didn't load, only the old length rules apply.
+  const LIKELY = ['GB', 'GM', 'SN', 'GN', 'SL', 'ML', 'GW', 'MR', 'MA', 'BD'];
+  const lib = () => window.libphonenumber;
+  const firstNumber = (v) => String(v || '').replace(/[,;|]/g, '/').split('/')[0].trim();
+  const hasCode = (v) => /^\s*\(?\s*(\+|00)/.test(v);   // "+220…", "00220…", "(+44) …"
+  const parse = (v, country) => {
+    try { return lib().parsePhoneNumberFromString(hasCode(v) ? v.trim().replace(/^\(?\s*00/, '+') : v, country); } catch (_) { return undefined; }
+  };
+  const isMobile = (p) => !!p && p.isValid() && ['MOBILE', 'FIXED_LINE_OR_MOBILE'].includes(p.getType());
+  let names;
+  function countryName(code) {
+    try { names = names || new Intl.DisplayNames(['en'], { type: 'region' }); return code === 'GB' ? 'UK' : names.of(code); } catch (_) { return code; }
+  }
+  // "Guinea (Conakry)" / "United Kingdom" → "GN" / "GB" (for routes); '' when unknown.
+  function countryCode(name) {
+    const want = String(name || '').replace(/\(.*\)/, '').trim().toLowerCase();
+    if (!want || !lib()) return '';
+    if (want === 'uk' || want === 'united kingdom') return 'GB';
+    try {
+      names = names || new Intl.DisplayNames(['en'], { type: 'region' });
+      return lib().getCountries().find((c) => names.of(c).toLowerCase() === want) || '';
+    } catch (_) { return ''; }
+  }
+  // Countries a number written without its code could be from, most likely first.
+  function phoneCountries(v, hints = []) {
+    if (!lib() || hasCode(v)) return [];
+    const order = [...new Set([...hints.filter(Boolean), ...LIKELY])];
+    return order.filter((c) => c !== 'GB' && isMobile(parse(v, c)));
+  }
+  // Without a code, only what a UK customer gives us counts as UK: a mobile, or a landline
+  // written with its 0 (a US "201 555 0123" is also a valid London number otherwise).
+  const isUkNumber = (p, typed) => !!p && p.isValid() && (p.getType() === 'MOBILE' || (p.getType() === 'FIXED_LINE' && /^\D*0/.test(typed)));
+  // The number as written, when we can tell for sure: with its code, or a UK number.
+  // ("220 771 2345" without the + could also be a US number, so that one gets asked about.)
+  function readNumber(one) {
+    if (hasCode(one)) { const p = parse(one); return p && p.isValid() ? p : undefined; }
+    const uk = parse(one, 'GB');
+    return isUkNumber(uk, one) ? uk : undefined;
+  }
+  // "+44 7400 123456" — or the number as typed when it can't be read.
+  function toIntl(v) {
+    const p = lib() && readNumber(firstNumber(v));
+    return p ? p.formatInternational() : String(v || '').trim();
+  }
   const letterCount = (v) => (String(v).match(/\p{L}/gu) || []).length;
   const UK_POSTCODE = /^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/;
   const compact = (v) => String(v || '').trim().toUpperCase().replace(/\s+/g, '');
@@ -27,14 +75,39 @@
       if (letterCount(v) < 2) return `Please enter ${what}, e.g. Fatou Jallow.`;
       return '';
     },
-    phone(v, { required = true } = {}) {
+    // When we can offer the corrected number, the message is a String with .fixes
+    // ([{ label, value }]) and setError shows them as buttons.
+    phone(v, { required = true, hints = [] } = {}) {
       v = String(v || '').trim();
       if (!v) return required ? 'Please enter a phone number we can WhatsApp or call.' : '';
       if (/\p{L}/u.test(v)) return 'A phone number can only have numbers, spaces and + — no letters.';
       const n = normPhone(v).length;
       if (n < 7) return 'This number looks too short. Please enter the full number, e.g. 07400 123456 or +220 771 2345.';
       if (n > 15) return 'This number looks too long. Please enter just one phone number.';
-      return '';
+      if (!lib()) return '';
+      const one = firstNumber(v);
+      if (readNumber(one)) return '';
+      if (hasCode(one)) {
+        const p = parse(one);
+        return p && p.country
+          ? `This doesn’t look like a ${countryName(p.country)} number (+${p.countryCallingCode}). Please check it.`
+          : 'Please check the country code at the start — it should look like +220 771 2345.';
+      }
+      const fits = phoneCountries(one, hints).slice(0, 3);
+      if (!fits.length) {
+        return /^0?7/.test(one.replace(/\D/g, ''))
+          ? 'This doesn’t look like a UK mobile number — it should have 11 digits, like 07400 123456. If it’s from another country, add its code at the start, e.g. +220.'
+          : 'Please add your country code at the start, e.g. +220 771 2345 for Gambia or +44 7400 123456 for the UK.';
+      }
+      const fixes = fits.map((c) => {
+        const value = parse(one, c).formatInternational();
+        return { label: fits.length === 1 ? `Use ${value}` : `${countryName(c)}: ${value}`, value };
+      });
+      const typedTheCode = fits.length === 1 && parse(one, fits[0]).number.slice(1) === one.replace(/\D/g, '');
+      const msg = typedTheCode ? 'Please put a + in front of your country code.'
+        : fits.length === 1 ? `Please add your country code at the start. Is this a ${countryName(fits[0])} number?`
+        : 'Please add your country code at the start. Which one is it?';
+      return Object.assign(new String(msg), { fixes });
     },
     email(v) {
       v = String(v || '').trim();
@@ -77,7 +150,23 @@
       el.insertAdjacentElement('afterend', p);
     }
     if (!p.id) p.id = `${el.id}-msg`;
-    if (msg) p.textContent = msg;
+    if (msg) {
+      p.textContent = msg;
+      // e.g. "Use +880 1718-074878": one tap puts the number right.
+      for (const fix of msg.fixes || []) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'form-fix';
+        b.textContent = fix.label;
+        b.addEventListener('click', () => {
+          el.value = fix.value;
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          setError(el, '');
+          el.focus();
+        });
+        p.append(' ', b);
+      }
+    }
     el.classList.toggle('error', !!msg);
     el.setAttribute('aria-invalid', msg ? 'true' : 'false');
     el.setAttribute('aria-describedby', p.id);
@@ -113,5 +202,14 @@
   addEventListener('pointercancel', release, true);
   const afterPress = (fn) => { if (pressing) queued.push(fn); else fn(); };
 
-  window.JTForm = { checks, normPhone, formatPostcode, setError, send, waLink, afterPress };
+  // Tracking: the number as typed, as +44…, and with the likely country code — bookings
+  // saved before country codes were asked for still match the number as typed.
+  function phoneVariants(v, hints = []) {
+    const one = firstNumber(v);
+    const all = [String(v || '').trim(), toIntl(v), ...phoneCountries(one, hints).slice(0, 2).map((c) => parse(one, c).formatInternational())];
+    const seen = new Set();
+    return all.filter((x) => x && !seen.has(normPhone(x)) && seen.add(normPhone(x)));
+  }
+
+  window.JTForm = { checks, normPhone, formatPostcode, setError, send, waLink, afterPress, toIntl, countryCode, phoneVariants };
 })();

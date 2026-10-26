@@ -227,6 +227,10 @@
     .form-input.error, .form-textarea.error, .form-select.error { border-color: #C04B4F; background: #FDF4F4; }
     .form-input.error ~ .form-error, .form-textarea.error ~ .form-error, .form-select.error ~ .form-error { display: block; }
     .field-error-block .form-error { display: block; }
+    .form-fix { display: inline-block; margin: 0.4rem 0.4rem 0 0; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1.5px solid #00A15C; background: #FFFFFF; color: #007A46; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: transform 0.2s var(--spring), background-color 0.2s ease; }
+    .form-fix:hover { background: #E4F4EC; transform: translateY(-1px); }
+    .form-fix:active { transform: scale(0.97); }
+    .form-fix:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
     .btn-submit {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
       padding: 1.05rem 1.75rem;
@@ -832,7 +836,7 @@
                   </div>
                   <div>
                     <label class="form-label" for="phone">Phone / WhatsApp <span class="req">*</span></label>
-                    <input type="tel" id="phone" class="form-input" autocomplete="tel" placeholder="e.g. 07400 123456">
+                    <input type="tel" id="phone" class="form-input" autocomplete="tel" placeholder="e.g. 07400 123456 or +220 771 2345">
                     <p class="form-error">Please enter a phone number we can reach you on.</p>
                   </div>
                 </div>
@@ -879,7 +883,7 @@
                   </div>
                   <div>
                     <label class="form-label" for="receiverPhone" id="receiverPhoneLabel">Receiver's phone <span class="opt">(optional)</span></label>
-                    <input type="tel" id="receiverPhone" class="form-input" placeholder="Phone number">
+                    <input type="tel" id="receiverPhone" class="form-input" autocomplete="off" placeholder="With country code, e.g. +220 771 2345">
                   </div>
                 </div>
                 <div class="mb-5 max-w-md">
@@ -1178,6 +1182,7 @@
     });
   </script>
 
+  <script src="/vendor/libphonenumber-max.js"></script>
   <script src="/form-checks.js"></script>
   <script>
     // ─────────────────────────────────────────────────────────────────────
@@ -1233,6 +1238,8 @@
     const daysUntil = (d) => d ? Math.round((new Date(d + 'T12:00:00') - new Date(new Date().toDateString() + ' 12:00:00')) / 86400000) : null;
     const isInbound = (route) => route && route.destination === 'United Kingdom';
     const fromUK = (route) => route && route.origin === 'United Kingdom';
+    // The route's countries, so a phone number without its code is matched to them first.
+    const routeCountries = () => state.route ? [state.route.origin, state.route.destination].map(JTForm.countryCode).filter((c) => c && c !== 'GB') : [];
 
     const ICONS = {
       air: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>',
@@ -1594,7 +1601,7 @@
       }
       if (step === 3) {
         e.contactName = checks.name(val('contactName'));
-        e.phone = checks.phone(val('phone'));
+        e.phone = checks.phone(val('phone'), { hints: routeCountries() });
         e.city = checks.town(val('city'));
         e.email = checks.email(val('email'));
         const need = needsAddress();
@@ -1606,7 +1613,7 @@
       if (step === 4) {
         const who = inbound ? 'the sender’s' : 'the receiver’s';
         e.receiverName = checks.name(val('receiverName'), { what: `${who} full name` });
-        e.receiverPhone = checks.phone(val('receiverPhone'), { required: false });
+        e.receiverPhone = checks.phone(val('receiverPhone'), { required: false, hints: routeCountries() });
         e.receiverCity = checks.town(val('receiverCity'), { required: false, what: `${who} town` });
       }
       return e;
@@ -1688,14 +1695,14 @@
         route_code: state.route.code,
         shipment_id: state.departure ? state.departure.id : null,
         contact_name: $('contactName').value.trim(),
-        phone: $('phone').value.trim(),
+        phone: JTForm.toIntl($('phone').value),
         email: $('email').value.trim(),
         city: $('city').value.trim(),
         address: $('address').value.trim(),
         postcode: (fromUK(state.route) || isInbound(state.route)) ? JTForm.formatPostcode($('postcode').value) : $('postcode').value.trim(),
         customer_no: $('customerNo').value.replace(/\s/g, ''),
         receiver_name: $('receiverName').value.trim(),
-        receiver_phone: $('receiverPhone').value.trim(),
+        receiver_phone: JTForm.toIntl($('receiverPhone').value),
         receiver_city: $('receiverCity').value.trim(),
         description: $('description').value.trim(),
         item_count: $('itemCount').value.trim(),
@@ -1844,7 +1851,12 @@
       if (!ok) return;
       const btn = $('trackBtn'); btn.disabled = true; btn.classList.add('is-loading');
       try {
-        const res = await callFunction('track-booking', { ref: ref.startsWith('JT-') ? ref : 'JT-' + ref.replace(/^JT/, ''), phone });
+        // The number as typed first, then with its country code (bookings now save +44…, +220…).
+        let res = { found: false };
+        for (const tryPhone of JTForm.phoneVariants(phone)) {
+          res = await callFunction('track-booking', { ref: ref.startsWith('JT-') ? ref : 'JT-' + ref.replace(/^JT/, ''), phone: tryPhone });
+          if (res.found) break;
+        }
         if (!res.found) {
           $('trackResult').classList.add('hidden');
           $('trackAlertText').textContent = "We couldn't find that booking. Check the reference and use the phone number you booked with.";
