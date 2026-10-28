@@ -23,7 +23,9 @@ const mimeTypes = {
 };
 
 const server = createServer(async (req, res) => {
-  const urlPath = req.url.split('?')[0];
+  let urlPath = req.url.split('?')[0];
+  // Same as the rewrites in vercel.json: the tracking page lives on the booking page.
+  if (urlPath === '/track') urlPath = '/book.html';
   let filePath = join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
 
   // If no extension, try adding .html (mimic Vercel cleanUrls)

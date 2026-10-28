@@ -549,6 +549,19 @@
     .info-mini div { background: #FAF7F2; border-radius: 0.75rem; padding: 0.65rem 0.8rem; }
     .info-mini p:first-child { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8F98; }
     .info-mini p:last-child { font-weight: 700; color: #0A1E4A; }
+    /* Tracking: prices and what's left to pay need the phone they ordered with (optional). */
+    #tRef::placeholder { text-transform: none; }
+    .unlock { margin-top: 1rem; padding: 1rem; border-radius: 1rem; background: #FAF7F2; border: 1px dashed #E2D9CB; }
+    .unlock .t { font-weight: 800; color: #0A1E4A; font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.45rem; }
+    .unlock .d { font-size: 0.85rem; color: #6B7280; margin: 0.2rem 0 0.75rem; }
+    .unlock form { display: flex; gap: 0.5rem; }
+    .unlock .form-input { padding-top: 0.7rem; padding-bottom: 0.7rem; background: #FFFFFF; }
+    .unlock button { flex-shrink: 0; padding: 0 1.1rem; border-radius: 0.75rem; background: #0A1E4A; color: #FFFFFF; font-weight: 700; font-size: 0.9rem; transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth); }
+    .unlock button:hover { background: #142D66; transform: translateY(-1px); }
+    .unlock button:active { transform: translateY(1px) scale(0.98); }
+    .unlock button:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .unlock button:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .unlock .err { font-size: 0.82rem; color: #C04B4F; margin-top: 0.5rem; }
     body.panel-open .wa-btn, body.panel-open .wa-popup { opacity: 0 !important; pointer-events: none !important; animation: none !important; }
   </style>
 </head>
@@ -702,13 +715,13 @@
         <div class="reveal">
           <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand mb-3">Already ordered?</p>
           <h2 class="text-navy text-[1.8rem] sm:text-[2.2rem] mb-3">Track your order</h2>
-          <p class="text-charcoal-light">Enter your order number (it starts with <b>MG-</b>) and the phone number you ordered with.</p>
+          <p class="text-charcoal-light">Type your order number (it starts with <b>MG-</b>). No phone number needed.</p>
+          <p class="text-sm text-charcoal-light mt-3">Sending air or sea cargo with us? <a class="font-bold text-brand-dark hover:underline focus-visible:underline" href="/track">Track a JT- booking here</a>.</p>
         </div>
         <div class="form-card reveal stagger-1">
-          <form id="trackForm" class="grid sm:grid-cols-2 gap-4" novalidate>
-            <div><label class="form-label" for="tRef">Order number</label><input class="form-input" id="tRef" placeholder="MG-7K2QAF" autocomplete="off" style="text-transform:uppercase"></div>
-            <div><label class="form-label" for="tPhone">Phone</label><input class="form-input" id="tPhone" inputmode="tel" placeholder="07…" autocomplete="tel"></div>
-            <div class="sm:col-span-2"><button class="btn-submit w-full" id="tBtn" type="submit"><span class="spinner"></span><span>Show my order</span></button></div>
+          <form id="trackForm" class="grid sm:grid-cols-[1fr_auto] gap-3 items-end" novalidate>
+            <div><label class="form-label" for="tRef">Order number</label><input class="form-input" id="tRef" placeholder="e.g. MG-4P8XNC" autocomplete="off" autocapitalize="characters" spellcheck="false" style="text-transform:uppercase"></div>
+            <button class="btn-submit w-full sm:w-auto" id="tBtn" type="submit"><span class="spinner"></span><span>Show my order</span></button>
           </form>
           <div id="trackOut" class="mt-5" aria-live="polite"></div>
         </div>
@@ -1150,7 +1163,7 @@
           </div>`;
         $('cartFoot').innerHTML = `<button class="btn-primary w-full" data-track>Track my order</button>
           <button class="btn-ghost w-full mt-2" data-close>Keep shopping</button>`;
-        $('tRef').value = res.ref; $('tPhone').value = me.phone;
+        $('tRef').value = res.ref; knownPhones[res.ref] = me.phone;
       } catch (e) {
         const hit = e.status === 400 && ORDER_FIELDS.find(([re]) => re.test(e.message));
         if (hit && hit[1] === 'oConsent') $('oConsentErr').style.display = 'block';
@@ -1246,28 +1259,72 @@
     let qt; $('q').addEventListener('input', (e) => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value; renderGrid(); }, 120); });
 
     // ── tracking ────────────────────────────────────────────────────────
+    // Just the order number. Prices and what's left to pay only with the phone they ordered with (optional).
+    // A JT- (cargo) reference goes to jallowtransporters.com/track, which shows both kinds.
     const T_STEPS = [['new', 'Received'], ['confirmed', 'Confirmed'], ['ready', 'Ready'], ['sent', 'On its way'], ['completed', 'Done']];
+    const knownPhones = {};
+    async function trackLookup(ref, phone) {
+      const tries = phone ? JTForm.phoneVariants(phone) : [null];
+      let res = { found: false };
+      for (const p of tries) {
+        const r = await JTForm.send(`${SUPABASE_URL}/rest/v1/rpc/track_reference`, {
+          method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_ref: ref, p_phone: p }),
+        }, 'order');
+        if (!r.ok) throw new Error("Tracking isn't working just now. Please try again in a minute, or WhatsApp us your order number.");
+        res = await r.json();
+        if (!res || res.error || !res.found || !p || res.phone_ok) break;
+      }
+      if (res && res.error === 'too_many') throw new Error('Too many tries. Please wait a few minutes and try again.');
+      return res || { found: false };
+    }
+    function showOrder(o) {
+      const at = o.status === 'cancelled' ? -1 : Math.max(0, T_STEPS.findIndex(([s]) => s === o.status));
+      const paidUp = Number(o.balance) <= 0.004;
+      $('trackOut').innerHTML = `
+        <div class="flex items-center justify-between flex-wrap gap-2"><p class="font-display font-extrabold text-navy text-lg">${esc(o.ref)}</p>
+          <span class="text-xs font-bold px-3 py-1 rounded-full ${o.status === 'cancelled' ? 'bg-[#FDF0F0] text-[#C04B4F]' : 'bg-[#E4F4EC] text-[#007A46]'}">${o.status === 'cancelled' ? 'Cancelled' : T_STEPS[at][1]}</span></div>
+        ${o.status !== 'cancelled' ? `<div class="t-status">${T_STEPS.map((_, i) => `<div class="${i <= at ? 'on' : ''}"></div>`).join('')}</div>` : ''}
+        <ul class="text-sm space-y-1 mb-3">${(o.items || []).map((i) => `<li class="flex justify-between gap-3"><span>${esc(qtyLabel(i.qty, i.unit))} ${esc(i.name)}</span>${o.phone_ok ? `<b class="text-navy">${money(i.line_total)}</b>` : ''}</li>`).join('')}</ul>
+        <div class="info-mini">
+          ${o.phone_ok ? `<div><p>Total</p><p>${money(o.total)}</p></div><div><p>${paidUp ? 'Paid' : 'Left to pay'}</p><p style="color:${paidUp ? '#007A46' : '#A35A12'}">${money(paidUp ? o.paid : o.balance)}</p></div>` : ''}
+          <div><p>Delivery</p><p>${o.delivery === 'post' ? 'UK post' : o.delivery === 'delivery' ? 'Delivered by us' : 'Collection (B12)'}</p></div><div><p>Ordered</p><p>${new Date(o.ordered_on).toLocaleDateString('en-GB')}</p></div></div>
+        ${o.phone_ok ? '' : `
+        <div class="unlock">
+          <p class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Prices &amp; what's left to pay</p>
+          <p class="d">Kept private. Add the phone number you ordered with to see them.</p>
+          <form id="unlockForm" novalidate><input type="tel" class="form-input" id="unlockPhone" placeholder="Your phone number" autocomplete="tel" aria-label="The phone number you ordered with"><button type="submit" id="unlockBtn">Show</button></form>
+          <p class="err hidden" id="unlockErr" role="alert"></p>
+        </div>`}`;
+      const form = $('unlockForm');
+      if (!form) return;
+      $('unlockPhone').addEventListener('input', () => $('unlockErr').classList.add('hidden'));
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const phone = $('unlockPhone').value.trim();
+        const err = (m) => { $('unlockErr').textContent = m; $('unlockErr').classList.remove('hidden'); };
+        if (phone.replace(/\D/g, '').length < 7) { err('Please enter the phone number you ordered with.'); return; }
+        $('unlockBtn').disabled = true; $('unlockBtn').textContent = '…';
+        try {
+          const res = await trackLookup(o.ref, phone);
+          if (res.found && res.phone_ok) { knownPhones[res.ref] = phone; showOrder(res); return; }
+          err("That number doesn't match this order. Use the one you ordered with, or WhatsApp us.");
+        } catch (ex) { err(ex.message); }
+        $('unlockBtn').disabled = false; $('unlockBtn').textContent = 'Show';
+      });
+    }
     $('trackForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const ref = $('tRef').value.trim().toUpperCase(), phone = $('tPhone').value.trim();
-      if (!ref || phone.replace(/\D/g, '').length < 7) { $('trackOut').innerHTML = '<p class="text-sm" style="color:#C04B4F">Enter your order number and phone.</p>'; return; }
+      const ref = $('tRef').value.trim().toUpperCase();
+      const plain = ref.replace(/[^A-Z0-9]/g, '');
+      if (plain.length < 6) { $('trackOut').innerHTML = '<p class="text-sm" style="color:#C04B4F">Enter your order number, e.g. MG-4P8XNC.</p>'; return; }
       $('tBtn').classList.add('is-loading'); $('tBtn').disabled = true;
       try {
-        // The number as typed first, then with its country code (orders now save +44…, +220…).
-        let o = null;
-        for (const tryPhone of JTForm.phoneVariants(phone)) {
-          ({ order: o } = await callFunction('shop-order', { action: 'track', ref, phone: tryPhone }));
-          if (o) break;
-        }
-        if (!o) { $('trackOut').innerHTML = '<p class="text-sm text-charcoal-light">We couldn\'t find that order. Check the number and the phone you ordered with, or WhatsApp us.</p>'; return; }
-        const at = o.status === 'cancelled' ? -1 : T_STEPS.findIndex(([s]) => s === o.status);
-        $('trackOut').innerHTML = `
-          <div class="flex items-center justify-between flex-wrap gap-2"><p class="font-display font-extrabold text-navy text-lg">${esc(o.ref)}</p>
-            <span class="text-xs font-bold px-3 py-1 rounded-full ${o.status === 'cancelled' ? 'bg-[#FDF0F0] text-[#C04B4F]' : 'bg-[#E4F4EC] text-[#007A46]'}">${o.status === 'cancelled' ? 'Cancelled' : T_STEPS[at][1]}</span></div>
-          ${o.status !== 'cancelled' ? `<div class="t-status">${T_STEPS.map((_, i) => `<div class="${i <= at ? 'on' : ''}"></div>`).join('')}</div>` : ''}
-          <ul class="text-sm space-y-1 mb-3">${(o.items || []).map((i) => `<li class="flex justify-between gap-3"><span>${esc(qtyLabel(i.qty, i.unit))} ${esc(i.name)}</span><b class="text-navy">${money(i.line_total)}</b></li>`).join('')}</ul>
-          <div class="info-mini"><div><p>Total</p><p>${money(o.total)}</p></div><div><p>${Number(o.balance) > 0.004 ? 'Left to pay' : 'Paid'}</p><p>${money(Number(o.balance) > 0.004 ? o.balance : o.paid)}</p></div>
-            <div><p>Delivery</p><p>${o.delivery === 'post' ? 'UK post' : o.delivery === 'delivery' ? 'Delivered by us' : 'Collection (B12)'}</p></div><div><p>Ordered</p><p>${new Date(o.ordered_on).toLocaleDateString('en-GB')}</p></div></div>`;
+        const o = await trackLookup(ref, knownPhones[ref] || null);
+        if (!o.found) { $('trackOut').innerHTML = '<p class="text-sm text-charcoal-light">We couldn\'t find that order. Check the number in your message from us (it starts with MG-), or WhatsApp us.</p>'; return; }
+        if (o.kind === 'cargo') { location.href = '/track?ref=' + encodeURIComponent(o.ref); return; }   // an air / sea cargo booking
+        $('tRef').value = o.ref;
+        showOrder(o);
       } catch (err) { $('trackOut').innerHTML = `<p class="text-sm" style="color:#C04B4F">${esc(err.message)}</p>`; }
       finally { $('tBtn').classList.remove('is-loading'); $('tBtn').disabled = false; }
     });
@@ -1297,7 +1354,7 @@
         $('grid').innerHTML = '<div class="col-span-full form-card text-center"><p class="text-charcoal-light mb-4">Please check your connection and try again.</p><button class="btn-primary" onclick="location.reload()">Try again</button></div>';
       }
     }
-    try { const last = JSON.parse(localStorage.getItem('jt_gems_last') || 'null'); if (last) { $('tRef').value = last.ref; $('tPhone').value = last.phone; } } catch (_) { /* private mode */ }
+    try { const last = JSON.parse(localStorage.getItem('jt_gems_last') || 'null'); if (last) { $('tRef').value = last.ref; knownPhones[String(last.ref).toUpperCase()] = last.phone; } } catch (_) { /* private mode */ }
     const tq = new URLSearchParams(location.search).get('track'); if (tq) $('tRef').value = tq.toUpperCase();
     const setNavH = () => document.documentElement.style.setProperty('--navh', ($('navbar').offsetHeight + 10) + 'px');
     setNavH(); window.addEventListener('resize', setNavH);

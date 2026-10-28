@@ -488,6 +488,27 @@
     .info-mini div { background: #FAF7F2; border-radius: 0.75rem; padding: 0.65rem 0.8rem; }
     .info-mini p:first-child { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8F98; }
     .info-mini p:last-child { font-weight: 700; color: #0A1E4A; }
+    /* Tracking: the two kinds of reference, and the private details (money) that need the phone. */
+    #trackRef::placeholder { text-transform: none; }
+    .ref-kinds { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .ref-kind { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem 0.55rem 0.55rem; border-radius: 0.9rem; background: #FFFFFF; border: 1px solid #F0EBE3; box-shadow: 0 10px 24px -18px rgba(10, 30, 74, 0.35); }
+    .ref-kind .ico { width: 32px; height: 32px; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; background: #E4F4EC; color: #065C37; flex-shrink: 0; }
+    .ref-kind p { font-size: 0.86rem; color: #4A4A4A; }
+    .ref-kind b { color: #0A1E4A; font-family: 'Montserrat', sans-serif; letter-spacing: -0.01em; margin-right: 0.15rem; }
+    .unlock { margin-top: 1.25rem; padding: 1rem; border-radius: 1rem; background: #FAF7F2; border: 1px dashed #E2D9CB; }
+    .unlock .t { font-weight: 800; color: #0A1E4A; font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.45rem; }
+    .unlock .d { font-size: 0.85rem; color: #6B7280; margin: 0.2rem 0 0.75rem; }
+    .unlock form { display: flex; gap: 0.5rem; }
+    .unlock .form-input { padding-top: 0.7rem; padding-bottom: 0.7rem; background: #FFFFFF; }
+    .unlock button { flex-shrink: 0; padding: 0 1.1rem; border-radius: 0.75rem; background: #0A1E4A; color: #FFFFFF; font-weight: 700; font-size: 0.9rem; transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth); }
+    .unlock button:hover { background: #142D66; transform: translateY(-1px); }
+    .unlock button:active { transform: translateY(1px) scale(0.98); }
+    .unlock button:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .unlock button:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .unlock .err { font-size: 0.82rem; color: #C04B4F; margin-top: 0.5rem; }
+    .order-items { margin-top: 1.25rem; border-top: 1px solid #F0EBE3; padding-top: 1rem; display: grid; gap: 0.4rem; font-size: 0.92rem; }
+    .order-items li { display: flex; justify-content: space-between; gap: 0.75rem; color: #4A4A4A; }
+    .order-items b { color: #0A1E4A; }
 
     /* WhatsApp */
     .wa-btn {
@@ -695,12 +716,12 @@
   <section class="page-hero">
     <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 text-center">
       <p class="hero-anim hero-anim-1 text-xs font-bold tracking-[0.22em] uppercase text-brand-bright mb-5">
-        <span class="hero-accent-line"></span>Book online
+        <span class="hero-accent-line"></span><span id="heroKicker">Book online</span>
       </p>
-      <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5">
+      <h1 class="hero-anim hero-anim-2 text-white text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.08] max-w-4xl mx-auto mb-5" id="heroTitle">
         Book your air or sea freight <span class="text-brand-bright">in two minutes.</span>
       </h1>
-      <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-2xl mx-auto">
+      <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-2xl mx-auto" id="heroSub">
         Pick a departure, tell us what you're sending and we'll confirm on WhatsApp.<br class="hidden sm:block"> No account needed.
       </p>
     </div>
@@ -720,7 +741,7 @@
         </button>
         <button class="tab-btn" role="tab" id="tab-track" aria-controls="panel-track" aria-selected="false" data-tab="track">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <span>Track a booking</span>
+          <span>Track a shipment</span>
         </button>
       </div>
 
@@ -1023,23 +1044,28 @@
       <section class="tab-panel mt-10" id="panel-track" role="tabpanel" aria-labelledby="tab-track" hidden>
         <div class="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-start">
           <div>
-            <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-dark mb-2">Track a booking</p>
+            <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-dark mb-2">Track a shipment or order</p>
             <h2 class="text-navy text-[1.9rem] sm:text-[2.4rem] mb-3">Where's my <span class="text-brand">shipment?</span></h2>
-            <p class="text-charcoal-light mb-6">Enter the reference we gave you (it starts with <strong class="text-navy">JT-</strong>) and the phone number you booked with.</p>
+            <p class="text-charcoal-light mb-4">Type the reference we gave you. No phone number or account needed.</p>
+            <div class="ref-kinds mb-6">
+              <div class="ref-kind">
+                <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+                <p><b>JT-</b> Air &amp; sea cargo</p>
+              </div>
+              <div class="ref-kind">
+                <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                <p><b>MG-</b> Moroccan Gems orders</p>
+              </div>
+            </div>
             <form class="form-card" id="trackForm" novalidate>
               <div class="alert" id="trackAlert" role="alert">
                 <svg class="flex-shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <span id="trackAlertText"></span>
               </div>
-              <div class="mb-5">
-                <label class="form-label" for="trackRef">Booking reference <span class="req">*</span></label>
-                <input type="text" id="trackRef" class="form-input uppercase" placeholder="JT-XXXXXX" autocomplete="off" autocapitalize="characters">
-                <p class="form-error">Please enter your booking reference.</p>
-              </div>
               <div class="mb-6">
-                <label class="form-label" for="trackPhone">Phone number <span class="req">*</span></label>
-                <input type="tel" id="trackPhone" class="form-input" placeholder="The number you booked with" autocomplete="tel">
-                <p class="form-error">Please enter your phone number.</p>
+                <label class="form-label" for="trackRef">Your reference <span class="req">*</span></label>
+                <input type="text" id="trackRef" class="form-input uppercase" placeholder="e.g. JT-7K2QAF or MG-4P8XNC" autocomplete="off" autocapitalize="characters" spellcheck="false">
+                <p class="form-error">Please enter your reference.</p>
               </div>
               <button type="submit" class="btn-submit w-full" id="trackBtn">
                 <span>Track booking</span>
@@ -1265,12 +1291,32 @@
 
     // ───────────────────────────── Tabs ─────────────────────────────
     const tabs = document.querySelectorAll('.tab-btn');
+    // The header above the tabs: booking, or tracking (jallowtransporters.com/track).
+    const HERO = {
+      book: { kicker: 'Book online', title: $('heroTitle').innerHTML, sub: $('heroSub').innerHTML, page: document.title },
+      track: {
+        kicker: 'Track online',
+        title: 'Track your cargo or <span class="text-brand-bright">shop order.</span>',
+        sub: 'Air &amp; sea cargo (JT-) and Moroccan Gems orders (MG-) in one place.<br class="hidden sm:block"> Just your reference — no phone or account needed.',
+        page: 'Track your shipment or order — Jallow Transporters',
+      },
+    };
     function showTab(name, push = true) {
       tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
       ['book', 'departures', 'track'].forEach((n) => { $('panel-' + n).hidden = n !== name; });
+      const h = HERO[name === 'track' ? 'track' : 'book'];
+      if ($('heroKicker').textContent !== h.kicker) {
+        $('heroKicker').textContent = h.kicker; $('heroTitle').innerHTML = h.title; $('heroSub').innerHTML = h.sub; document.title = h.page;
+      }
       if (push) {
+        // Tracking has its own short address: /track (and /track?ref=JT-…); the rest stay on /book.
         const url = new URL(location.href);
-        if (name === 'book') url.searchParams.delete('tab'); else url.searchParams.set('tab', name);
+        url.searchParams.delete('tab');
+        if (name === 'track') url.pathname = '/track';
+        else {
+          url.pathname = '/book'; url.searchParams.delete('ref');
+          if (name === 'departures') url.searchParams.set('tab', 'departures');
+        }
         history.replaceState(null, '', url);
       }
     }
@@ -1777,7 +1823,7 @@
         : p.collection_mode === 'collection' ? 'When it lands we let you know it’s ready to collect.'
         : 'Bring or send your items to us — we weigh everything and confirm the price.';
       $('trackRef').value = res.ref;
-      $('trackPhone').value = p.phone;
+      knownPhones[res.ref] = p.phone;   // so "Track this booking" shows their total and balance straight away
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
       window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
     }
@@ -1806,6 +1852,8 @@
     }
 
     // ─────────────────────────── Track ─────────────────────────────
+    // One box for air & sea cargo (JT-…) and JT Moroccan Gems orders (MG-…), with just the reference.
+    // Money and the customer number only show with the phone number they booked with (optional).
     const STAGES = [
       { t: 'Booking received', d: 'We have your booking and will confirm it shortly.' },
       { t: 'Confirmed', d: 'Your booking is confirmed with our team.' },
@@ -1813,98 +1861,209 @@
       { t: 'On the way', d: 'Your shipment has left.' },
       { t: 'Arrived', d: 'Ready for collection or delivery.' },
     ];
+    const SHOP_STAGES = [
+      ['new', 'Order received', 'We have your order and will confirm it on WhatsApp.'],
+      ['confirmed', 'Confirmed', 'Your order is confirmed.'],
+      ['ready', 'Ready', 'Your items are here and packed.'],
+      ['sent', 'On its way', 'Posted, or out for delivery to you.'],
+      ['completed', 'Done', 'Collected or delivered. Enjoy!'],
+    ];
+    const DELIVERY = { post: 'UK post', delivery: 'Delivered by us', collect: 'Collection (Birmingham B12)' };
+    const knownPhones = {};   // reference → the phone they booked with, when this device knows it
+    let shown = null;         // what's on screen: { ref, res }
+
     function stageOf(b) {
       if (b.collection_status === 'collected' || b.collection_status === 'delivered' || b.shipment_status === 'completed') return 5;
       if (b.shipment_status === 'arrived' || b.arrival_status === 'arrived') return 4;
       if (b.shipment_status === 'departed') return 3;
-      if (b.status === 'collected' || b.status === 'added') return b.status === 'added' && !b.kilos && !b.total ? 1 : 2;
+      if (b.status === 'collected' || b.status === 'added') return b.status === 'added' && !b.kilos && !b.priced ? 1 : 2;
       if (b.status === 'confirmed' || b.status === 'scheduled') return 1;
       return 0;
     }
-
-    function renderTrack(b) {
-      const box = $('trackResult');
-      box.classList.remove('hidden');
-      if (b.status === 'cancelled') {
-        box.innerHTML = `<p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-charcoal-light mb-2">${esc(b.ref)}</p>
-          <h3 class="text-navy text-2xl mb-2">This booking was cancelled</h3>
-          <p class="text-charcoal-light mb-5">If that's not right, message us and we'll sort it out.</p>
-          <a class="btn-wa" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Message us on WhatsApp</a>`;
-        return;
-      }
-      const stage = stageOf(b);
-      const done = stage >= 5;
-      box.innerHTML = `
-        <div class="flex items-start justify-between gap-4">
-          <div>
-            <p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-brand-dark mb-1">${esc(b.ref)}</p>
-            <h3 class="text-navy text-[1.5rem]">${done ? 'Completed — thank you!' : esc(STAGES[Math.min(stage, 4)].t)}</h3>
-            <p class="text-sm text-charcoal-light">${b.mode === 'air' ? 'Air freight' : 'Sea container'} · ${esc(b.route_label || '')}</p>
-          </div>
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#E4F4EC;color:#065C37;">${ICONS[b.mode] || ICONS.air}</div>
-        </div>
+    const qtyText = (q) => String(Number(q)).replace(/\.0+$/, '');
+    const qtyLabel = (q, unit) => unit === 'kg' ? `${qtyText(q)} kg` : unit === 'each' || !unit ? `${qtyText(q)} ×` : `${qtyText(q)} × ${unit}`;
+    const askLink = (ref, what) => `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(`Hello, about my ${what} ${ref}`)}`;
+    const timeline = (steps, stage, done) => `
         <div class="timeline">
-          ${STAGES.map((s, i) => `
+          ${steps.map((s, i) => `
             <div class="tl-step ${i < stage || done ? 'done' : i === stage ? 'current' : ''}">
               <div class="tl-dot">${i < stage || done ? ICONS.tick : `<span class="text-xs font-extrabold">${i + 1}</span>`}</div>
               <div><p class="t">${s.t}</p><p class="d">${s.d}</p></div>
             </div>`).join('')}
+        </div>`;
+    // The private part: shown with the phone, or a small box to add it.
+    const unlockBox = (title) => `
+        <div class="unlock">
+          <p class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>${title}</p>
+          <p class="d">Kept private. Add the phone number you booked with to see them.</p>
+          <form id="unlockForm" novalidate>
+            <input type="tel" class="form-input" id="unlockPhone" placeholder="Your phone number" autocomplete="tel" aria-label="The phone number you booked with">
+            <button type="submit" id="unlockBtn">Show</button>
+          </form>
+          <p class="err hidden" id="unlockErr" role="alert"></p>
+        </div>`;
+
+    function renderCargo(b) {
+      const what = 'booking';
+      if (b.status === 'cancelled') {
+        return `<p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-charcoal-light mb-2">${esc(b.ref)}</p>
+          <h3 class="text-navy text-2xl mb-2">This booking was cancelled</h3>
+          <p class="text-charcoal-light mb-5">If that's not right, message us and we'll sort it out.</p>
+          <a class="btn-wa" href="${askLink(b.ref, what)}" target="_blank" rel="noopener">Message us on WhatsApp</a>`;
+      }
+      const stage = stageOf(b);
+      const done = stage >= 5;
+      const money_ = b.phone_ok
+        ? `${b.customer_no ? `<div><p>Customer no.</p><p>${esc(b.customer_no)}</p></div>` : ''}
+           ${Number(b.total) > 0 ? `<div><p>Total</p><p>${money(b.total, b.currency)}</p></div>
+             <div><p>Balance to pay</p><p style="color:${Number(b.balance) > 0 ? '#A35A12' : '#007A46'}">${Number(b.balance) > 0 ? money(b.balance, b.currency) : 'Paid in full'}</p></div>`
+             : b.estimate ? `<div><p>Estimate</p><p>${money(b.estimate, b.currency)}</p></div>` : ''}`
+        : '';
+      return `
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-brand-dark mb-1">${esc(b.ref)}</p>
+            <h3 class="text-navy text-[1.5rem]">${done ? 'Completed — thank you!' : esc(STAGES[Math.min(stage, 4)].t)}</h3>
+            <p class="text-sm text-charcoal-light">${b.mode === 'air' ? 'Air freight' : b.mode === 'sea' ? 'Sea container' : 'Road'}${b.route_label ? ' · ' + esc(b.route_label) : ''}</p>
+          </div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#E4F4EC;color:#065C37;">${ICONS[b.mode] || ICONS.air}</div>
         </div>
+        ${timeline(STAGES, stage, done)}
         <div class="info-mini">
           <div><p>Booked</p><p>${fmtDate(b.booked_on)}</p></div>
           <div><p>${b.mode === 'sea' ? 'Loading' : 'Departure'}</p><p>${b.departure_date ? fmtDate(b.departure_date) : 'To be confirmed'}</p></div>
           ${b.expected_arrival ? `<div><p>Expected</p><p>${fmtDate(b.expected_arrival)}</p></div>` : ''}
-          ${b.customer_no ? `<div><p>Customer no.</p><p>${esc(b.customer_no)}</p></div>` : ''}
-          ${b.kilos ? `<div><p>Weight</p><p>${esc(b.kilos)} kg</p></div>` : ''}
-          ${b.total !== null && b.total !== undefined && Number(b.total) > 0 ? `<div><p>Total</p><p>${money(b.total, b.currency)}</p></div>
-            <div><p>Balance to pay</p><p style="color:${Number(b.balance) > 0 ? '#A35A12' : '#007A46'}">${Number(b.balance) > 0 ? money(b.balance, b.currency) : 'Paid in full'}</p></div>`
-            : b.estimate ? `<div><p>Estimate</p><p>${money(b.estimate, b.currency)}</p></div>` : ''}
+          ${b.kilos ? `<div><p>Weight</p><p>${esc(qtyText(b.kilos))} kg</p></div>` : ''}
+          ${money_}
         </div>
-        <a class="btn-wa mt-6 w-full" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, about my booking ' + b.ref)}" target="_blank" rel="noopener">Ask about this booking</a>`;
+        ${b.phone_ok ? '' : unlockBox('Total, balance &amp; customer number')}
+        <a class="btn-wa mt-6 w-full" href="${askLink(b.ref, what)}" target="_blank" rel="noopener">Ask about this booking</a>`;
+    }
+
+    function renderShop(o) {
+      const what = 'Moroccan Gems order';
+      const head = (title) => `
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-brand-dark mb-1">${esc(o.ref)}</p>
+            <h3 class="text-navy text-[1.5rem]">${title}</h3>
+            <p class="text-sm text-charcoal-light">JT Moroccan Gems order${o.trip_name ? ' · ' + esc(o.trip_name) : ''}</p>
+          </div>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#E4F4EC;color:#065C37;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        </div>`;
+      if (o.status === 'cancelled') {
+        return `${head('This order was cancelled')}
+          <p class="text-charcoal-light mt-3 mb-5">If that's not right, message us and we'll sort it out.</p>
+          <a class="btn-wa" href="${askLink(o.ref, what)}" target="_blank" rel="noopener">Message us on WhatsApp</a>`;
+      }
+      const at = Math.max(0, SHOP_STAGES.findIndex(([s]) => s === o.status));
+      const done = o.status === 'completed';
+      const items = o.items || [];
+      return `
+        ${head(done ? 'Done — thank you!' : esc(SHOP_STAGES[at][1]))}
+        ${timeline(SHOP_STAGES.map(([, t, d]) => ({ t, d })), at, done)}
+        ${items.length ? `<ul class="order-items">${items.map((i) => `<li><span>${esc(qtyLabel(i.qty, i.unit))} ${esc(i.name)}</span>${o.phone_ok ? `<b>${money(i.line_total)}</b>` : ''}</li>`).join('')}</ul>` : ''}
+        <div class="info-mini">
+          <div><p>Ordered</p><p>${fmtDate(o.ordered_on)}</p></div>
+          <div><p>Delivery</p><p>${esc(DELIVERY[o.delivery] || 'To be agreed')}</p></div>
+          ${o.trip_date ? `<div><p>Morocco trip</p><p>${fmtDate(o.trip_date)}</p></div>` : ''}
+          ${o.phone_ok ? `<div><p>Total</p><p>${money(o.total)}</p></div>
+            <div><p>${Number(o.balance) > 0.004 ? 'Left to pay' : 'Paid'}</p><p style="color:${Number(o.balance) > 0.004 ? '#A35A12' : '#007A46'}">${money(Number(o.balance) > 0.004 ? o.balance : o.paid)}</p></div>` : ''}
+        </div>
+        ${o.phone_ok ? '' : unlockBox('Prices &amp; what\'s left to pay')}
+        <a class="btn-wa mt-6 w-full" href="${askLink(o.ref, what)}" target="_blank" rel="noopener">Ask about this order</a>`;
+    }
+
+    function showResult(res) {
+      const box = $('trackResult');
+      box.innerHTML = res.kind === 'shop' ? renderShop(res) : renderCargo(res);
+      box.classList.remove('hidden');
+      shown = { ref: res.ref, res };
+      const form = $('unlockForm');
+      if (form) {
+        form.addEventListener('submit', unlock);
+        $('unlockPhone').addEventListener('input', () => $('unlockErr').classList.add('hidden'));
+      }
+    }
+
+    // Ask the database. With a phone: the number as typed first, then with its country code.
+    async function lookup(ref, phone) {
+      const tries = phone ? JTForm.phoneVariants(phone) : [null];
+      let res = { found: false };
+      for (const p of tries) {
+        const r = await JTForm.send(`${SUPABASE_URL}/rest/v1/rpc/track_reference`, {
+          method: 'POST',
+          headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_ref: ref, p_phone: p }),
+        }, 'tracking');
+        if (!r.ok) throw new Error("Tracking isn't working just now. Please try again in a minute, or WhatsApp us your reference.");
+        res = await r.json();
+        if (!res || res.error || !res.found || !p || res.phone_ok) break;
+      }
+      if (res && res.error === 'too_many') throw new Error('Too many tries. Please wait a few minutes and try again.');
+      return res || { found: false };
+    }
+
+    async function unlock(e) {
+      e.preventDefault();
+      const phone = $('unlockPhone').value.trim();
+      const err = (m) => { $('unlockErr').textContent = m; $('unlockErr').classList.remove('hidden'); };
+      if (phone.replace(/\D/g, '').length < 7) { err('Please enter the phone number you booked with.'); return; }
+      const btn = $('unlockBtn'); btn.disabled = true; btn.textContent = '…';
+      try {
+        const res = await lookup(shown.ref, phone);
+        if (res.found && res.phone_ok) { knownPhones[res.ref] = phone; showResult(res); }
+        else { btn.disabled = false; btn.textContent = 'Show'; err("That number doesn't match. Use the one you booked or ordered with, or WhatsApp us."); }
+      } catch (ex) { btn.disabled = false; btn.textContent = 'Show'; err(ex.message); }
     }
 
     $('trackForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       $('trackAlert').classList.remove('show');
       const ref = $('trackRef').value.trim().toUpperCase();
-      const phone = $('trackPhone').value.trim();
-      let ok = JTForm.setError('trackRef', ref.length < 4 ? 'Please enter your booking reference, e.g. JT-7K2QAF.' : '');
-      ok = JTForm.setError('trackPhone', phone.replace(/\D/g, '').length < 7 ? 'Please enter the phone number you booked with.' : '') && ok;
-      if (!ok) return;
+      const plain = ref.replace(/[^A-Z0-9]/g, '');
+      if (!JTForm.setError('trackRef', plain.length < 6 ? 'Please enter your reference, e.g. JT-7K2QAF or MG-4P8XNC.' : '')) return;
       const btn = $('trackBtn'); btn.disabled = true; btn.classList.add('is-loading');
       try {
-        // The number as typed first, then with its country code (bookings now save +44…, +220…).
-        let res = { found: false };
-        for (const tryPhone of JTForm.phoneVariants(phone)) {
-          res = await callFunction('track-booking', { ref: ref.startsWith('JT-') ? ref : 'JT-' + ref.replace(/^JT/, ''), phone: tryPhone });
-          if (res.found) break;
-        }
+        const remembered = knownPhones[ref] || knownPhones[/^(JT|MG)[A-Z0-9]{6}$/.test(plain) ? plain.slice(0, 2) + '-' + plain.slice(2) : ''] || null;
+        const res = await lookup(ref, remembered);
         if (!res.found) {
           $('trackResult').classList.add('hidden');
-          $('trackAlertText').textContent = "We couldn't find that booking. Check the reference and use the phone number you booked with.";
+          $('trackAlertText').textContent = "We couldn't find that reference. Check it against your message from us: cargo bookings start with JT-, Moroccan Gems orders with MG-.";
           $('trackAlert').classList.add('show');
         } else {
-          renderTrack(res.booking);
+          $('trackRef').value = res.ref;
+          showResult(res);
+          const url = new URL(location.href);
+          if (url.pathname === '/track') { url.searchParams.set('ref', res.ref); history.replaceState(null, '', url); }
           if (window.matchMedia('(max-width: 1023px)').matches) $('trackResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       } catch (err) {
+        $('trackResult').classList.add('hidden');
         $('trackAlertText').textContent = err.message; $('trackAlert').classList.add('show');
       } finally {
         btn.disabled = false; btn.classList.remove('is-loading');
       }
     });
-    ['trackRef', 'trackPhone'].forEach((id) => $(id).addEventListener('input', () => JTForm.setError(id, '')));
+    $('trackRef').addEventListener('input', () => { JTForm.setError('trackRef', ''); $('trackAlert').classList.remove('show'); });
 
     // ─────────────────────────── Start ─────────────────────────────
     (async () => {
       const params = new URLSearchParams(location.search);
       const tab = params.get('tab');
-      if (tab === 'track' || tab === 'departures') showTab(tab, false);
-      if (params.get('ref')) $('trackRef').value = params.get('ref').toUpperCase();
+      // jallowtransporters.com/track, or the old /book?tab=track (moved to /track).
+      const onTrack = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') === '/track' || tab === 'track';
+      if (onTrack) showTab('track', tab === 'track');
+      else if (tab === 'departures') showTab(tab, false);
+      // What this device booked or ordered last: its reference ready to track, and its phone for the money part.
       try {
-        const last = JSON.parse(localStorage.getItem('jt_last_booking') || 'null');
-        if (last && !$('trackRef').value) { $('trackRef').value = last.ref; $('trackPhone').value = last.phone; }
+        for (const key of ['jt_gems_last', 'jt_last_booking']) {
+          const last = JSON.parse(localStorage.getItem(key) || 'null');
+          if (last && last.ref) { knownPhones[String(last.ref).toUpperCase()] = last.phone; if (!params.get('ref')) $('trackRef').value = last.ref; }
+        }
       } catch (_) { /* ignore */ }
+      if (params.get('ref')) $('trackRef').value = params.get('ref').toUpperCase();
+      if (onTrack && params.get('ref')) $('trackForm').requestSubmit();
       $('depOptions').innerHTML = '';
       updateSummary();
       await loadData();
