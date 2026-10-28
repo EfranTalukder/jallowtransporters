@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>Invoice — Jallow Transporters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://efzmisktbzjjpwzfloka.supabase.co" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { DEFAULT: '#FAF7F2', dark: '#F0EBE3' },
+            charcoal: { DEFAULT: '#1E1E1E', light: '#4A4A4A' },
+            brand: { DEFAULT: '#00A15C', light: '#E4F4EC', dark: '#007A46', deep: '#065C37', bright: '#22C77E' },
+            navy: { DEFAULT: '#0A1E4A', dark: '#04102E' },
+          },
+          fontFamily: { display: ['Montserrat', 'system-ui', 'sans-serif'], body: ['Manrope', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Manrope', system-ui, sans-serif; background: #FAF7F2; color: #1E1E1E; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h1, h2, h3 { font-family: 'Montserrat', system-ui, sans-serif; letter-spacing: -0.03em; line-height: 1.15; font-weight: 800; color: #0A1E4A; }
+    :root { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+    .sheet { background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1.5rem; box-shadow: 0 30px 60px -32px rgba(10, 30, 74, 0.28), 0 2px 6px -2px rgba(10, 30, 74, 0.05); }
+    .label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8F98; }
+    .box { background: #FAF7F2; border-radius: 1rem; padding: 0.9rem 1rem; }
+    .lines { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .lines th { text-align: left; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8F98; padding: 0 0 0.6rem; border-bottom: 1px solid #F0EBE3; }
+    .lines td { padding: 0.8rem 0; border-bottom: 1px solid #F0EBE3; vertical-align: top; }
+    .lines .r { text-align: right; white-space: nowrap; padding-left: 1rem; }
+    .sum { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0; }
+    .status { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status.paid { background: #E4F4EC; color: #007A46; }
+    .status.part { background: #FDF3E4; color: #A35A12; }
+    .status.unpaid { background: #FDF0F0; color: #C04B4F; }
+    .status.tbc { background: #F0EBE3; color: #4A4A4A; }
+    .due.paid { color: #007A46; } .due.part, .due.unpaid { color: #A35A12; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.2rem; border-radius: 0.75rem; font-weight: 700; font-size: 0.92rem; cursor: pointer; border: 0;
+      transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth), box-shadow 0.3s var(--smooth); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(1px) scale(0.98); }
+    .btn:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    .btn-green { background: #00A15C; color: #FFFFFF; box-shadow: 0 10px 22px -12px rgba(0, 161, 92, 0.7); }
+    .btn-green:hover { background: #007A46; }
+    .btn-wa { background: #25D366; color: #FFFFFF; box-shadow: 0 10px 22px -12px rgba(37, 211, 102, 0.7); }
+    .btn-wa:hover { background: #1EBE5A; }
+    .btn-plain { background: #FFFFFF; color: #0A1E4A; border: 1px solid #F0EBE3; }
+    .btn-plain:hover { background: #FAF7F2; }
+
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body { background: #FFFFFF; }
+      .no-print { display: none !important; }
+      .sheet { border: 0; box-shadow: none; border-radius: 0; padding: 0 !important; }
+      main { padding: 0 !important; max-width: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div class="no-print flex flex-wrap items-center justify-between gap-3 mb-5">
+      <a href="/" class="flex items-center gap-2 text-sm font-semibold text-navy hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        jallowtransporters.com
+      </a>
+      <div class="flex flex-wrap gap-2" id="actions" hidden>
+        <button type="button" class="btn btn-green" id="printBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Save as PDF / Print
+        </button>
+        <a class="btn btn-wa" id="askBtn" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.43-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41z"/></svg>
+          Ask about it
+        </a>
+      </div>
+    </div>
+
+    <article class="sheet p-5 sm:p-10" id="sheet" aria-live="polite">
+      <p class="text-charcoal-light text-sm" id="loading">Loading your invoice…</p>
+    </article>
+    <p class="no-print text-center text-xs text-charcoal-light mt-5">Jallow Transporters Ltd · UK-headquartered in Birmingham</p>
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://efzmisktbzjjpwzfloka.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_uBiVOnVTOGhE-nZBM4P7ig_YtnbWHVw';
+    const WA_NUMBER = '447831005961';
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmtDate = (d) => d ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(String(d).slice(0, 10) + 'T12:00:00')) : '—';
+    const money = (v, cur = 'GBP') => {
+      const n = Number(v || 0);
+      try { return new Intl.NumberFormat('en-GB', { style: 'currency', currency: cur || 'GBP', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(n); }
+      catch (_) { return `${cur} ${n.toFixed(2)}`; }
+    };
+    const num = (v) => String(Number(v)).replace(/\.0+$/, '');
+    const METHOD = { cash: 'Cash', bank: 'Bank transfer', mobile: 'Mobile money', card: 'Card', other: 'Other' };
+    const MODE = { air: 'Air freight', sea: 'Sea freight', road: 'Road freight' };
+
+    function message(title, body) {
+      $('sheet').innerHTML = `<div class="text-center py-10">
+        <h1 class="text-2xl mb-2">${esc(title)}</h1>
+        <p class="text-charcoal-light mb-6">${esc(body)}</p>
+        <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, I need my invoice please.')}" target="_blank" rel="noopener">Message us on WhatsApp</a></div>`;
+    }
+
+    function render(inv) {
+      const cur = inv.currency || 'GBP';
+      const total = Number(inv.total || 0), paid = Number(inv.paid || 0), balance = Number(inv.balance || 0);
+      const state = total <= 0.004 ? 'tbc' : balance <= 0.004 ? 'paid' : paid > 0.004 ? 'part' : 'unpaid';
+      const STATUS = { paid: 'Paid', part: 'Part paid', unpaid: 'Unpaid', tbc: 'Price to be confirmed' };
+      const sh = inv.shipment || {}, c = inv.customer || {}, o = inv.other || {};
+      const inbound = sh.destination === 'United Kingdom';
+      const mode = MODE[sh.mode] || 'Freight';
+      // The freight line: kilos × price per kg, or the agreed price the team typed in.
+      const kgText = inv.kilos ? `${num(inv.kilos)} kg` : '';
+      const freight = inv.manual_total !== null && inv.manual_total !== undefined
+        ? { what: kgText ? `${kgText} · agreed price` : 'Agreed price', amount: Number(inv.manual_total) }
+        : inv.kilos && inv.rate ? { what: `${kgText} × ${money(inv.rate, cur)} per kg`, amount: Math.round(Number(inv.kilos) * Number(inv.rate) * 100) / 100 }
+        : { what: 'Price to be confirmed after weighing', amount: null };
+      const extras = Number(inv.extras || 0), discount = Number(inv.discount || 0);
+      const pays = inv.payments || [];
+      document.title = `Invoice ${inv.invoice_no} — Jallow Transporters`;
+      $('sheet').innerHTML = `
+        <header class="flex flex-col sm:flex-row sm:items-start justify-between gap-5 pb-6 border-b-[3px] border-brand">
+          <div>
+            <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="h-14 w-auto mb-3">
+            <p class="text-sm text-charcoal-light leading-relaxed"><b class="text-navy">Jallow Transporters Ltd</b><br>5 Ferndale Crescent, Highgate, <span class="whitespace-nowrap">Birmingham B12 0HF</span><br><span class="whitespace-nowrap">+44 7831 005961</span> · jallowtransporters.com</p>
+          </div>
+          <div class="sm:text-right">
+            <h1 class="text-[2rem] sm:text-[2.4rem]">Invoice</h1>
+            <p class="font-display font-extrabold text-navy text-lg tracking-tight">${esc(inv.invoice_no)}</p>
+            <p class="text-sm text-charcoal-light">${fmtDate(inv.date)}</p>
+            <span class="status ${state} mt-2" id="status">${STATUS[state]}</span>
+          </div>
+        </header>
+
+        <section class="grid sm:grid-cols-2 gap-3 mt-6">
+          <div class="box">
+            <p class="label mb-1">Customer${c.no ? ` · No. ${esc(c.no)}` : ''}</p>
+            <p class="font-bold text-navy">${esc(c.name || '—')}</p>
+            <p class="text-sm text-charcoal-light">${esc([c.phone, c.address, c.city, c.postcode].filter(Boolean).join(' · '))}</p>
+          </div>
+          <div class="box">
+            <p class="label mb-1">${inbound ? 'Sender' : 'Receiver'}</p>
+            <p class="font-bold text-navy">${esc(o.name || '—')}</p>
+            <p class="text-sm text-charcoal-light">${esc([o.phone, o.city].filter(Boolean).join(' · '))}</p>
+          </div>
+        </section>
+
+        <section class="box mt-3">
+          <p class="label mb-1">Shipment</p>
+          <p class="font-bold text-navy">${esc(mode)}${sh.route ? ' · ' + esc(sh.route) : ''}</p>
+          <p class="text-sm text-charcoal-light">${esc([sh.name, sh.departure ? (sh.mode === 'sea' ? 'Loading ' : 'Departs ') + fmtDate(sh.departure) : null, inv.booking_ref ? 'Booking ' + inv.booking_ref : null, inv.item_tag ? 'Tag ' + inv.item_tag : null].filter(Boolean).join(' · '))}</p>
+        </section>
+
+        <table class="lines mt-7">
+          <thead><tr><th>Description</th><th class="r">Amount</th></tr></thead>
+          <tbody>
+            <tr><td><p class="font-bold text-navy">${esc(mode)}</p><p class="text-sm text-charcoal-light">${esc(freight.what)}${inv.description ? ' · ' + esc(inv.description) : ''}</p></td>
+              <td class="r font-semibold">${freight.amount === null ? '—' : money(freight.amount, cur)}</td></tr>
+            ${extras ? `<tr><td>Extras</td><td class="r font-semibold">${money(extras, cur)}</td></tr>` : ''}
+            ${discount ? `<tr><td>Discount</td><td class="r font-semibold text-brand-dark">−${money(discount, cur)}</td></tr>` : ''}
+          </tbody>
+        </table>
+
+        <div class="sm:ml-auto sm:w-80 mt-4">
+          <div class="sum font-display font-extrabold text-navy text-lg"><span>Total</span><span>${total > 0.004 ? money(total, cur) : '—'}</span></div>
+          <div class="sum text-charcoal-light"><span>Paid</span><span>${money(paid, cur)}</span></div>
+          <div class="sum font-display font-extrabold text-xl border-t border-cream-dark mt-1 pt-2 due ${state}"><span>${state === 'paid' ? 'Paid in full' : 'Balance due'}</span><span>${state === 'paid' ? money(0, cur) : state === 'tbc' ? '—' : money(balance, cur)}</span></div>
+        </div>
+
+        ${pays.length ? `
+        <h2 class="text-base mt-8 mb-2">Payments received</h2>
+        <table class="lines">
+          <thead><tr><th>Date</th><th>Method</th><th class="r">Amount</th></tr></thead>
+          <tbody>${pays.map((p) => `<tr><td>${fmtDate(p.date)}</td><td>${esc(METHOD[p.method] || p.method || '')}</td>
+            <td class="r font-semibold">${p.currency && p.currency !== cur ? `${money(p.amount, p.currency)} <span class="text-charcoal-light font-normal">(${money(p.applied, cur)})</span>` : money(p.applied ?? p.amount, cur)}</td></tr>`).join('')}</tbody>
+        </table>` : ''}
+
+        <footer class="mt-9 pt-5 border-t border-cream-dark text-sm text-charcoal-light">
+          <p>Thank you for choosing Jallow Transporters. Questions about this invoice? WhatsApp us on <b class="text-navy whitespace-nowrap">+44 7831 005961</b>.</p>
+          <p class="mt-1">Booking guidelines: jallowtransporters.com/terms</p>
+        </footer>`;
+      $('askBtn').href = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(`Hello, about my invoice ${inv.invoice_no}`)}`;
+      $('actions').hidden = false;
+    }
+
+    $('printBtn').addEventListener('click', () => window.print());
+
+    (async () => {
+      const key = (new URLSearchParams(location.search).get('k') || '').trim().toLowerCase();
+      if (!/^[0-9a-f]{32}$/.test(key)) { message("This invoice link isn't complete", 'Please open the link exactly as we sent it, or ask us for your invoice on WhatsApp.'); return; }
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_invoice`, {
+          method: 'POST', headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_key: key }),
+        });
+        if (!res.ok) throw new Error('bad');
+        const inv = await res.json();
+        if (!inv) { message("We couldn't find this invoice", 'The link may be out of date. Ask us on WhatsApp and we\'ll send you a new one.'); return; }
+        render(inv);
+      } catch (_) {
+        message("We couldn't load your invoice", 'Please check your internet connection and try again, or ask us on WhatsApp.');
+      }
+    })();
+  </script>
+</body>
+
+</html>
