@@ -9,7 +9,7 @@
   <title>Invoice — Jallow Transporters</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://efzmisktbzjjpwzfloka.supabase.co" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -29,24 +29,63 @@
   </script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Manrope', system-ui, sans-serif; background: #FAF7F2; color: #1E1E1E; line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    h1, h2, h3 { font-family: 'Montserrat', system-ui, sans-serif; letter-spacing: -0.03em; line-height: 1.15; font-weight: 800; color: #0A1E4A; }
+    body { font-family: 'Manrope', system-ui, sans-serif; background: #F0EBE3; color: #1E1E1E; line-height: 1.55; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h1, h2, h3 { font-family: 'Montserrat', system-ui, sans-serif; letter-spacing: -0.03em; line-height: 1.12; font-weight: 800; color: #0A1E4A; }
     :root { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-    .sheet { background: #FFFFFF; border: 1px solid #F0EBE3; border-radius: 1.5rem; box-shadow: 0 30px 60px -32px rgba(10, 30, 74, 0.28), 0 2px 6px -2px rgba(10, 30, 74, 0.05); }
-    .label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8F98; }
-    .box { background: #FAF7F2; border-radius: 1rem; padding: 0.9rem 1rem; }
-    .lines { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-    .lines th { text-align: left; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8F98; padding: 0 0 0.6rem; border-bottom: 1px solid #F0EBE3; }
-    .lines td { padding: 0.8rem 0; border-bottom: 1px solid #F0EBE3; vertical-align: top; }
-    .lines .r { text-align: right; white-space: nowrap; padding-left: 1rem; }
-    .sum { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0; }
-    .status { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
-    .status.paid { background: #E4F4EC; color: #007A46; }
-    .status.part { background: #FDF3E4; color: #A35A12; }
-    .status.unpaid { background: #FDF0F0; color: #C04B4F; }
-    .status.tbc { background: #F0EBE3; color: #4A4A4A; }
-    .due.paid { color: #007A46; } .due.part, .due.unpaid { color: #A35A12; }
+    /* One A4 sheet per page: the invoice, the terms of service, the booking guidelines (sea). */
+    .page { position: relative; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 1.25rem; overflow: hidden;
+      box-shadow: 0 30px 60px -32px rgba(10, 30, 74, 0.32), 0 2px 6px -2px rgba(10, 30, 74, 0.06); }
+    .page + .page { margin-top: 1.5rem; }
+    .band { position: relative; background-color: #0A1E4A; color: #FFFFFF; padding: 1.6rem 2.25rem;
+      background-image: radial-gradient(circle at 0% 120%, rgba(0, 161, 92, 0.32), transparent 45%), radial-gradient(circle at 100% -20%, rgba(34, 199, 126, 0.16), transparent 42%); }
+    .band::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: linear-gradient(90deg, #00A15C, #22C77E); }
+    .band .name { font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: -0.02em; font-size: 1.45rem; line-height: 1.1; }
+    .band .service { color: #22C77E; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 0.3rem; }
+    .band .routes { color: rgba(255, 255, 255, 0.72); font-size: 0.72rem; letter-spacing: 0.04em; margin-top: 0.25rem; }
+    .band .contact { color: rgba(255, 255, 255, 0.8); font-size: 0.74rem; line-height: 1.6; text-align: right; }
+    .body { padding: 1.9rem 2.25rem 1.4rem; flex: 1; }
+    .foot { padding: 0.9rem 2.25rem 1.2rem; border-top: 1px solid #F0EBE3; margin: 0 2.25rem; padding-left: 0; padding-right: 0; display: flex; justify-content: space-between; gap: 1rem; font-size: 0.72rem; color: #8A8F98; }
+
+    .sec { margin-top: 1.6rem; }
+    .sec-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: #0A1E4A; }
+    .sec-title::after { content: ''; display: block; width: 2.25rem; height: 3px; border-radius: 3px; background: #00A15C; margin-top: 0.4rem; }
+    .label { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: #8A8F98; }
+    .val { font-weight: 700; color: #0A1E4A; font-size: 0.95rem; }
+    .boxgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.95rem 1.5rem; background: #FAF7F2; border-radius: 1rem; padding: 1.1rem 1.25rem; margin-top: 0.8rem; }
+    .boxgrid .wide { grid-column: 1 / -1; }
+
+    .items { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0.8rem; font-size: 0.92rem; }
+    .items th { background: #0A1E4A; color: #FFFFFF; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: left; padding: 0.7rem 0.9rem; }
+    .items th:first-child { border-top-left-radius: 0.7rem; } .items th:last-child { border-top-right-radius: 0.7rem; }
+    .items td { padding: 0.7rem 0.9rem; border-bottom: 1px solid #F0EBE3; vertical-align: top; }
+    .items tr.total td { background: #FAF7F2; font-weight: 800; color: #0A1E4A; border-bottom: 0; }
+    .items tr.total td:first-child { border-bottom-left-radius: 0.7rem; } .items tr.total td:last-child { border-bottom-right-radius: 0.7rem; }
+    .items .qty { width: 3.5rem; } .items .kg { width: 6.5rem; white-space: nowrap; }
+
+    .sumrow { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid #F0EBE3; font-size: 0.93rem; }
+    .sumrow .sub { display: block; font-size: 0.78rem; color: #8A8F98; }
+    .sumrow .amt { white-space: nowrap; font-weight: 600; }
+    .due { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: 0.9rem; }
+    .due .tag { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+    .due .big { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.35rem; letter-spacing: -0.02em; }
+    .due.unpaid { background: #FDF0F0; color: #B4383D; }
+    .due.part { background: #FDF3E4; color: #A35A12; }
+    .due.paid { background: #E4F4EC; color: #007A46; }
+    .due.tbc { background: #F0EBE3; color: #4A4A4A; }
+    .status { display: inline-flex; align-items: center; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status.paid { background: #E4F4EC; color: #007A46; } .status.part { background: #FDF3E4; color: #A35A12; }
+    .status.unpaid { background: #FDF0F0; color: #B4383D; } .status.tbc { background: #F0EBE3; color: #4A4A4A; }
+    .badge { background: #E4F4EC; border-radius: 1rem; padding: 0.85rem 1.1rem; text-align: right; min-width: 12.5rem; }
+    .badge .status.paid { background: #00A15C; color: #FFFFFF; }
+
+    .terms { list-style: none; margin-top: 1rem; display: grid; gap: 0.62rem; font-size: 0.88rem; color: #1E1E1E; }
+    .terms li { display: flex; gap: 0.8rem; align-items: flex-start; }
+    .terms .n { flex-shrink: 0; width: 1.45rem; height: 1.45rem; border-radius: 999px; background: #00A15C; color: #FFFFFF; font-size: 0.66rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 0.08rem; }
+    .guides .n { background: transparent; color: #00A15C; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; width: 1.9rem; justify-content: flex-start; }
+    .note { background: #FAF7F2; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: 1.3rem; }
+    .whats { background: #0A1E4A; color: #FFFFFF; border-radius: 1rem; padding: 1.2rem; text-align: center; margin-top: 1.5rem;
+      background-image: radial-gradient(circle at 0% 120%, rgba(0, 161, 92, 0.32), transparent 50%); }
 
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.2rem; border-radius: 0.75rem; font-weight: 700; font-size: 0.92rem; cursor: pointer; border: 0;
       transition: transform 0.3s var(--spring), background-color 0.3s var(--smooth), box-shadow 0.3s var(--smooth); }
@@ -57,21 +96,35 @@
     .btn-green:hover { background: #007A46; }
     .btn-wa { background: #25D366; color: #FFFFFF; box-shadow: 0 10px 22px -12px rgba(37, 211, 102, 0.7); }
     .btn-wa:hover { background: #1EBE5A; }
-    .btn-plain { background: #FFFFFF; color: #0A1E4A; border: 1px solid #F0EBE3; }
-    .btn-plain:hover { background: #FAF7F2; }
 
+    @media (max-width: 640px) {
+      .band { padding: 1.3rem 1.25rem; }
+      .band .contact { text-align: left; margin-top: 0.9rem; }
+      .body { padding: 1.4rem 1.25rem 1.1rem; }
+      .foot { margin: 0 1.25rem; flex-direction: column; gap: 0.2rem; }
+      .boxgrid { grid-template-columns: minmax(0, 1fr); }
+      .badge { text-align: left; min-width: 0; }
+      .items th, .items td { padding: 0.6rem 0.55rem; }
+    }
     @media print {
-      @page { size: A4; margin: 12mm; }
+      @page { size: A4; margin: 0; }
+      /* Everything is sized in rem, so a smaller base makes each part fit one A4 sheet like the owner's invoices. */
+      html { font-size: 10.5px; }
       body { background: #FFFFFF; }
       .no-print { display: none !important; }
-      .sheet { border: 0; box-shadow: none; border-radius: 0; padding: 0 !important; }
       main { padding: 0 !important; max-width: none !important; }
+      /* A sheet never cuts anything off: if it ever runs long, it carries on onto the next sheet. */
+      .page { width: 210mm; min-height: 296mm; border-radius: 0; box-shadow: none; overflow: visible; break-after: page; page-break-after: always; }
+      .page:last-child { break-after: auto; page-break-after: auto; }
+      .page + .page { margin-top: 0; }
+      .band, .body { padding-left: 14mm; padding-right: 14mm; }
+      .foot { margin-left: 14mm; margin-right: 14mm; }
     }
   </style>
 </head>
 
 <body>
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+  <main class="max-w-[52rem] mx-auto px-3 sm:px-6 py-5 sm:py-9">
     <div class="no-print flex flex-wrap items-center justify-between gap-3 mb-5">
       <a href="/" class="flex items-center gap-2 text-sm font-semibold text-navy hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -89,10 +142,9 @@
       </div>
     </div>
 
-    <article class="sheet p-5 sm:p-10" id="sheet" aria-live="polite">
-      <p class="text-charcoal-light text-sm" id="loading">Loading your invoice…</p>
-    </article>
-    <p class="no-print text-center text-xs text-charcoal-light mt-5">Jallow Transporters Ltd · UK-headquartered in Birmingham</p>
+    <div id="doc" aria-live="polite">
+      <div class="page"><div class="body"><p class="text-charcoal-light text-sm" id="loading">Loading your invoice…</p></div></div>
+    </div>
   </main>
 
   <script>
@@ -101,101 +153,189 @@
     const WA_NUMBER = '447831005961';
     const $ = (id) => document.getElementById(id);
     const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const fmtDate = (d) => d ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(String(d).slice(0, 10) + 'T12:00:00')) : '—';
+    const fmtDate = (d) => d ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(String(d).slice(0, 10) + 'T12:00:00')) : '—';
     const money = (v, cur = 'GBP') => {
       const n = Number(v || 0);
       try { return new Intl.NumberFormat('en-GB', { style: 'currency', currency: cur || 'GBP', maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(n); }
       catch (_) { return `${cur} ${n.toFixed(2)}`; }
     };
     const num = (v) => String(Number(v)).replace(/\.0+$/, '');
-    const METHOD = { cash: 'Cash', bank: 'Bank transfer', mobile: 'Mobile money', card: 'Card', other: 'Other' };
-    const MODE = { air: 'Air freight', sea: 'Sea freight', road: 'Road freight' };
+    const PAY = { cash: 'Cash', bank: 'Bank transfer', mobile: 'Mobile money', card: 'Card', other: 'Other' };
+    const METHOD = { collection: 'Collection', delivery: 'Delivery', dropoff: 'Drop-off', postal: 'Postal' };
+    const SERVICE = { air: 'Air freight', sea: 'Sea freight', road: 'Road freight' };
+    // Used until the owner's settings arrive (and if they're ever missing).
+    const DEFAULTS = { email: 'msjalow63@gmail.com', whatsapp: '07831 005961', admin1: '+220 5153507', admin2: '+220 2140116',
+      routes_line: 'UK - THE GAMBIA | UK - SPAIN | UK - GUINEA CONAKRY', terms_air: [], terms_sea: [], guidelines: [], acknowledgement: '' };
 
     function message(title, body) {
-      $('sheet').innerHTML = `<div class="text-center py-10">
+      $('doc').innerHTML = `<div class="page"><div class="body text-center py-12">
         <h1 class="text-2xl mb-2">${esc(title)}</h1>
         <p class="text-charcoal-light mb-6">${esc(body)}</p>
-        <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, I need my invoice please.')}" target="_blank" rel="noopener">Message us on WhatsApp</a></div>`;
+        <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent('Hello, I need my invoice please.')}" target="_blank" rel="noopener">Message us on WhatsApp</a></div></div>`;
+    }
+
+    // "3 barrels, 1 fridge" → [3 · barrels] [1 · fridge]; anything else is one line of 1.
+    function itemLines(description, fallbackQty) {
+      const parts = String(description || '').split(/\n|;|,(?![^(]*\))/).map((s) => s.trim()).filter(Boolean);
+      if (!parts.length) return [{ qty: fallbackQty || 1, what: 'Freight' }];
+      if (parts.length === 1 && fallbackQty && !/^\d/.test(parts[0])) return [{ qty: fallbackQty, what: parts[0] }];
+      return parts.map((p) => { const m = p.match(/^(\d+)\s*(?:x|×|pcs?|pieces?)?\s+(.+)$/i); return m ? { qty: Number(m[1]), what: m[2] } : { qty: 1, what: p }; });
     }
 
     function render(inv) {
+      const S = { ...DEFAULTS, ...(inv.settings || {}) };
       const cur = inv.currency || 'GBP';
+      const sh = inv.shipment || {}, c = inv.customer || {}, o = inv.other || {};
+      const isAir = sh.mode === 'air';
+      const service = SERVICE[sh.mode] || 'Freight';
       const total = Number(inv.total || 0), paid = Number(inv.paid || 0), balance = Number(inv.balance || 0);
       const state = total <= 0.004 ? 'tbc' : balance <= 0.004 ? 'paid' : paid > 0.004 ? 'part' : 'unpaid';
-      const STATUS = { paid: 'Paid', part: 'Part paid', unpaid: 'Unpaid', tbc: 'Price to be confirmed' };
-      const sh = inv.shipment || {}, c = inv.customer || {}, o = inv.other || {};
+      const STATUS = { paid: 'Paid in full', part: 'Part paid', unpaid: 'Payment outstanding', tbc: 'Price to be confirmed' };
       const inbound = sh.destination === 'United Kingdom';
-      const mode = MODE[sh.mode] || 'Freight';
-      // The freight line: kilos × price per kg, or the agreed price the team typed in.
-      const kgText = inv.kilos ? `${num(inv.kilos)} kg` : '';
+      const route = sh.origin && sh.destination ? `${sh.origin} to ${sh.destination}` : (sh.route || '—');
+      const method = inv.method ? (METHOD[String(inv.method).toLowerCase()] || inv.method) : null;
+      const address = [c.address, c.city, c.postcode].filter(Boolean).join(', ');
+      const lines = itemLines(inv.description, inv.item_count);
+      const qtyTotal = lines.reduce((s, l) => s + l.qty, 0);
+      const kg = inv.kilos ? `${num(inv.kilos)} kg` : '-';
       const freight = inv.manual_total !== null && inv.manual_total !== undefined
-        ? { what: kgText ? `${kgText} · agreed price` : 'Agreed price', amount: Number(inv.manual_total) }
-        : inv.kilos && inv.rate ? { what: `${kgText} × ${money(inv.rate, cur)} per kg`, amount: Math.round(Number(inv.kilos) * Number(inv.rate) * 100) / 100 }
-        : { what: 'Price to be confirmed after weighing', amount: null };
+        ? { label: 'Freight · agreed price', sub: inv.kilos ? `${num(inv.kilos)} kg` : '', amount: Number(inv.manual_total) }
+        : inv.kilos && inv.rate ? { label: 'Freight', sub: `${num(inv.kilos)} kg × ${money(inv.rate, cur)} per kg`, amount: Math.round(Number(inv.kilos) * Number(inv.rate) * 100) / 100 }
+        : { label: 'Freight', sub: 'Price confirmed after weighing', amount: null };
       const extras = Number(inv.extras || 0), discount = Number(inv.discount || 0);
       const pays = inv.payments || [];
-      document.title = `Invoice ${inv.invoice_no} — Jallow Transporters`;
-      $('sheet').innerHTML = `
-        <header class="flex flex-col sm:flex-row sm:items-start justify-between gap-5 pb-6 border-b-[3px] border-brand">
-          <div>
-            <img src="/brand_assets/jt-logo-2026.png" alt="Jallow Transporters" class="h-14 w-auto mb-3">
-            <p class="text-sm text-charcoal-light leading-relaxed"><b class="text-navy">Jallow Transporters Ltd</b><br>5 Ferndale Crescent, Highgate, <span class="whitespace-nowrap">Birmingham B12 0HF</span><br><span class="whitespace-nowrap">+44 7831 005961</span> · jallowtransporters.com</p>
+      const bank = isAir ? S.bank_air : S.bank_sea;
+      const terms = isAir ? S.terms_air : S.terms_sea;
+      const guides = isAir ? [] : (S.guidelines || []);
+      const pageCount = 1 + (terms.length ? 1 : 0) + (guides.length ? 1 : 0);
+      const band = (n) => `
+        <header class="band">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-6">
+            <div class="flex items-center gap-4">
+              <img src="/brand_assets/jt-logo-2026-light.png" alt="Jallow Transporters" class="h-[4.25rem] w-[4.25rem] flex-shrink-0">
+              <div>
+                <p class="name">JALLOW TRANSPORTERS</p>
+                <p class="service">${esc(service)} &amp; Logistics</p>
+                <p class="routes">${esc(S.routes_line)}</p>
+              </div>
+            </div>
+            <div class="contact">
+              jallowtransporters.com${S.email ? `<br>${esc(S.email)}` : ''}
+              <br>WhatsApp: ${esc(S.whatsapp)}
+              ${S.admin1 ? `<br>Admin 1: ${esc(S.admin1)}` : ''}${S.admin2 ? `<br>Admin 2: ${esc(S.admin2)}` : ''}
+            </div>
           </div>
-          <div class="sm:text-right">
-            <h1 class="text-[2rem] sm:text-[2.4rem]">Invoice</h1>
-            <p class="font-display font-extrabold text-navy text-lg tracking-tight">${esc(inv.invoice_no)}</p>
-            <p class="text-sm text-charcoal-light">${fmtDate(inv.date)}</p>
-            <span class="status ${state} mt-2" id="status">${STATUS[state]}</span>
+        </header>`;
+      const foot = (n) => `<footer class="foot"><span>Jallow Transporters Ltd &nbsp;|&nbsp; jallowtransporters.com &nbsp;|&nbsp; WhatsApp ${esc(S.whatsapp)}</span><span>Page ${n} of ${pageCount}</span></footer>`;
+      const field = (label, value, wide) => value ? `<div class="${wide ? 'wide' : ''}"><p class="label">${label}</p><p class="val">${esc(value)}</p></div>` : '';
+
+      const page1 = `
+        <section class="page" id="page1">
+          ${band(1)}
+          <div class="body">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div>
+                <h1 class="text-[1.7rem] sm:text-[2.15rem] uppercase">${esc(service)} invoice</h1>
+                <p class="text-sm text-charcoal-light mt-1">Professional freight documentation for your shipment</p>
+              </div>
+              <div class="badge">
+                <p class="label" style="color:#007A46">Invoice</p>
+                <p class="font-display font-extrabold text-navy text-lg leading-tight">${esc(inv.invoice_no)}</p>
+                ${c.no ? `<p class="text-sm font-bold text-brand-deep">Customer No. ${esc(c.no)}</p>` : ''}
+                <span class="status ${state} mt-2" id="status">${STATUS[state]}</span>
+              </div>
+            </div>
+
+            <div class="sec">
+              <h2 class="sec-title">Customer &amp; booking details</h2>
+              <div class="boxgrid">
+                ${field('Customer', c.name || '—')}
+                ${field('Date', fmtDate(inv.date))}
+                ${field('Route', route)}
+                ${field('Service method', method)}
+                ${field('Contact number', c.phone)}
+                ${field('Customer number', c.no)}
+                ${field(inbound ? 'Sender' : 'Receiver', [o.name, o.phone].filter(Boolean).join(' · '))}
+                ${field(isAir ? 'Flight' : sh.mode === 'sea' ? 'Container' : 'Shipment', [sh.name, sh.departure ? (sh.mode === 'sea' ? 'loading ' : 'departs ') + fmtDate(sh.departure) : null].filter(Boolean).join(' · '))}
+                ${inv.booking_ref || inv.item_tag ? field('Booking', [inv.booking_ref, inv.item_tag ? 'Tag ' + inv.item_tag : null].filter(Boolean).join(' · ')) : ''}
+                ${field(method === 'Delivery' || inbound ? 'Delivery address' : 'Address', address, true)}
+              </div>
+            </div>
+
+            <div class="sec">
+              <h2 class="sec-title">Shipment details</h2>
+              <table class="items">
+                <thead><tr><th class="qty">Qty</th><th>Item description</th><th class="kg">Weight</th></tr></thead>
+                <tbody>
+                  ${lines.map((l) => `<tr><td class="qty">${esc(l.qty)}</td><td>${esc(l.what)}</td><td class="kg">${lines.length === 1 ? esc(kg) : '-'}</td></tr>`).join('')}
+                  <tr class="total"><td class="qty">${esc(qtyTotal)}</td><td>Total</td><td class="kg">${esc(kg)}</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="sec">
+              <h2 class="sec-title">Payment summary</h2>
+              <div class="mt-2">
+                <div class="sumrow"><span>${esc(freight.label)}${freight.sub ? `<span class="sub">${esc(freight.sub)}</span>` : ''}</span><span class="amt">${freight.amount === null ? '—' : money(freight.amount, cur)}</span></div>
+                ${extras ? `<div class="sumrow"><span>Extras</span><span class="amt">${money(extras, cur)}</span></div>` : ''}
+                ${discount ? `<div class="sumrow"><span>Discount</span><span class="amt text-brand-dark">−${money(discount, cur)}</span></div>` : ''}
+                <div class="sumrow font-bold text-navy"><span>Total freight</span><span class="amt">${total > 0.004 ? money(total, cur) : '—'}</span></div>
+                <div class="sumrow"><span>${pays.length ? 'Amount paid' : 'Deposit paid'}${pays.length ? `<span class="sub">${pays.map((p) => `${fmtDate(p.date)} · ${esc(PAY[p.method] || p.method || '')} · ${p.currency && p.currency !== cur ? `${money(p.amount, p.currency)} (${money(p.applied, cur)})` : money(p.applied ?? p.amount, cur)}`).join('<br>')}</span>` : ''}</span><span class="amt">${money(paid, cur)}</span></div>
+              </div>
+              <div class="due ${state}">
+                <div><p class="tag">${STATUS[state]}</p><p class="big">${state === 'paid' ? 'Nothing to pay' : 'Balance due'}</p></div>
+                <p class="big" id="dueAmount">${state === 'tbc' ? '—' : money(Math.max(balance, 0), cur)}</p>
+              </div>
+            </div>
+
+            ${bank && (bank.account_no || bank.holder) ? `
+            <div class="sec">
+              <h2 class="sec-title">Bank details for payment</h2>
+              <div class="boxgrid">
+                ${field('Account name', bank.holder)}
+                ${field('Bank', bank.bank)}
+                ${field('Sort code', bank.sort_code)}
+                ${field('Account number', bank.account_no)}
+              </div>
+            </div>` : ''}
+            ${terms.length ? `<p class="text-xs italic text-charcoal-light mt-4">Payment of a deposit or booking of a shipment confirms acceptance of the Terms of Service on page 2.</p>` : ''}
           </div>
-        </header>
+          ${foot(1)}
+        </section>`;
 
-        <section class="grid sm:grid-cols-2 gap-3 mt-6">
-          <div class="box">
-            <p class="label mb-1">Customer${c.no ? ` · No. ${esc(c.no)}` : ''}</p>
-            <p class="font-bold text-navy">${esc(c.name || '—')}</p>
-            <p class="text-sm text-charcoal-light">${esc([c.phone, c.address, c.city, c.postcode].filter(Boolean).join(' · '))}</p>
+      const page2 = terms.length ? `
+        <section class="page">
+          ${band(2)}
+          <div class="body">
+            <h1 class="text-[1.7rem] sm:text-[2.15rem] uppercase">Terms of service</h1>
+            <p class="text-sm text-charcoal-light mt-1">${esc(service)} · ${esc(sh.route || route)}</p>
+            <div class="sec">
+              <h2 class="sec-title">Customer care commitment</h2>
+              <ol class="terms">${terms.map((t, i) => `<li><span class="n">${i + 1}</span><span>${esc(t)}</span></li>`).join('')}</ol>
+            </div>
+            ${S.acknowledgement ? `<div class="note"><p class="sec-title" style="font-size:0.72rem">Customer acknowledgement</p><p class="text-sm text-navy mt-1">${esc(S.acknowledgement)}</p></div>` : ''}
           </div>
-          <div class="box">
-            <p class="label mb-1">${inbound ? 'Sender' : 'Receiver'}</p>
-            <p class="font-bold text-navy">${esc(o.name || '—')}</p>
-            <p class="text-sm text-charcoal-light">${esc([o.phone, o.city].filter(Boolean).join(' · '))}</p>
+          ${foot(2)}
+        </section>` : '';
+
+      const page3 = guides.length ? `
+        <section class="page">
+          ${band(3)}
+          <div class="body">
+            <h1 class="text-[1.7rem] sm:text-[2.15rem] uppercase">Booking guidelines</h1>
+            <p class="text-sm text-charcoal-light mt-1">Please follow these steps to help us handle your freight safely and efficiently. InshaAllah.</p>
+            <ol class="terms guides mt-5">${guides.map((t, i) => `<li><span class="n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span></li>`).join('')}</ol>
+            <div class="whats">
+              <p class="text-xs font-extrabold tracking-[0.16em] uppercase text-brand-bright">All bookings via WhatsApp</p>
+              <p class="font-display font-black text-2xl mt-1">${esc(S.whatsapp)}</p>
+              <p class="text-sm text-white/75 mt-1">Send item photos and your collection address when booking.</p>
+            </div>
           </div>
-        </section>
+          ${foot(3)}
+        </section>` : '';
 
-        <section class="box mt-3">
-          <p class="label mb-1">Shipment</p>
-          <p class="font-bold text-navy">${esc(mode)}${sh.route ? ' · ' + esc(sh.route) : ''}</p>
-          <p class="text-sm text-charcoal-light">${esc([sh.name, sh.departure ? (sh.mode === 'sea' ? 'Loading ' : 'Departs ') + fmtDate(sh.departure) : null, inv.booking_ref ? 'Booking ' + inv.booking_ref : null, inv.item_tag ? 'Tag ' + inv.item_tag : null].filter(Boolean).join(' · '))}</p>
-        </section>
-
-        <table class="lines mt-7">
-          <thead><tr><th>Description</th><th class="r">Amount</th></tr></thead>
-          <tbody>
-            <tr><td><p class="font-bold text-navy">${esc(mode)}</p><p class="text-sm text-charcoal-light">${esc(freight.what)}${inv.description ? ' · ' + esc(inv.description) : ''}</p></td>
-              <td class="r font-semibold">${freight.amount === null ? '—' : money(freight.amount, cur)}</td></tr>
-            ${extras ? `<tr><td>Extras</td><td class="r font-semibold">${money(extras, cur)}</td></tr>` : ''}
-            ${discount ? `<tr><td>Discount</td><td class="r font-semibold text-brand-dark">−${money(discount, cur)}</td></tr>` : ''}
-          </tbody>
-        </table>
-
-        <div class="sm:ml-auto sm:w-80 mt-4">
-          <div class="sum font-display font-extrabold text-navy text-lg"><span>Total</span><span>${total > 0.004 ? money(total, cur) : '—'}</span></div>
-          <div class="sum text-charcoal-light"><span>Paid</span><span>${money(paid, cur)}</span></div>
-          <div class="sum font-display font-extrabold text-xl border-t border-cream-dark mt-1 pt-2 due ${state}"><span>${state === 'paid' ? 'Paid in full' : 'Balance due'}</span><span>${state === 'paid' ? money(0, cur) : state === 'tbc' ? '—' : money(balance, cur)}</span></div>
-        </div>
-
-        ${pays.length ? `
-        <h2 class="text-base mt-8 mb-2">Payments received</h2>
-        <table class="lines">
-          <thead><tr><th>Date</th><th>Method</th><th class="r">Amount</th></tr></thead>
-          <tbody>${pays.map((p) => `<tr><td>${fmtDate(p.date)}</td><td>${esc(METHOD[p.method] || p.method || '')}</td>
-            <td class="r font-semibold">${p.currency && p.currency !== cur ? `${money(p.amount, p.currency)} <span class="text-charcoal-light font-normal">(${money(p.applied, cur)})</span>` : money(p.applied ?? p.amount, cur)}</td></tr>`).join('')}</tbody>
-        </table>` : ''}
-
-        <footer class="mt-9 pt-5 border-t border-cream-dark text-sm text-charcoal-light">
-          <p>Thank you for choosing Jallow Transporters. Questions about this invoice? WhatsApp us on <b class="text-navy whitespace-nowrap">+44 7831 005961</b>.</p>
-          <p class="mt-1">Booking guidelines: jallowtransporters.com/terms</p>
-        </footer>`;
+      document.title = `${service} invoice ${inv.invoice_no} — Jallow Transporters`;
+      $('doc').innerHTML = page1 + page2 + page3;
       $('askBtn').href = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(`Hello, about my invoice ${inv.invoice_no}`)}`;
       $('actions').hidden = false;
     }
