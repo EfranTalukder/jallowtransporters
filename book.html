@@ -961,7 +961,7 @@
               <ol class="next-list">
                 <li><span class="n">1</span><span>Our team checks your booking and messages you on WhatsApp<span id="successPhone"></span> to confirm it — usually within the hour during UK business hours.</span></li>
                 <li><span class="n">2</span><span id="successStep2">We arrange the collection or drop-off with you and weigh everything.</span></li>
-                <li><span class="n">3</span><span>Track it any time on this page with your reference and phone number.</span></li>
+                <li><span class="n">3</span><span>Track it any time on our <b>Track</b> page with your reference.</span></li>
               </ol>
               <p class="wrong-no">Not your number? <a id="wrongNumber" href="https://wa.me/447831005961" target="_blank" rel="noopener">Tell us on WhatsApp</a> so we can reach you.</p>
               <p class="text-sm text-charcoal-light mb-5 hidden" id="photoNote"></p>
@@ -1341,9 +1341,9 @@
       const list = state.schedule.filter((s) => depFilter === 'all' || s.mode === depFilter);
       if (!list.length) {
         $('depGrid').innerHTML = `<div class="full form-card text-center py-10">
-          <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#E4F4EC;color:#065C37;">${ICONS.air}</div>
-          <p class="text-navy font-bold text-lg mb-1">No ${depFilter === 'all' ? '' : depFilter + ' '}departures listed right now</p>
-          <p class="text-charcoal-light text-sm mb-5">Book anyway — we'll put you on the next ${depFilter === 'sea' ? 'container' : 'flight'} and confirm the date on WhatsApp.</p>
+          <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#E4F4EC;color:#065C37;">${depFilter === 'sea' ? ICONS.sea : ICONS.air}</div>
+          <p class="text-navy font-bold text-lg mb-1">Book your space on the next ${depFilter === 'sea' ? 'container' : depFilter === 'air' ? 'flight' : 'flight or container'}</p>
+          <p class="text-charcoal-light text-sm mb-5">New dates are added here as soon as they're set. Book now and we'll put you on the next one, then confirm the date with you on WhatsApp.</p>
           <button type="button" class="btn-primary" data-go-book="">Book now <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
       } else {
         // One departure gets a wide card across the row (see .dep-wide); the grid's class says how many there are.
@@ -1451,11 +1451,16 @@
           </span>
           <span class="tick">${ICONS.tick}</span>
         </button>`);
+      // No dates on the website for this route yet: lead with what happens (they're put on the next one), not with what's missing.
+      const kind = state.route.mode === 'sea' ? 'container' : state.route.mode === 'air' ? 'flight' : 'departure';
+      const to = state.route.destination === 'United Kingdom' ? 'the UK' : state.route.destination;
       opts.push(`
         <button type="button" class="choice navy" role="radio" aria-checked="${!state.departure}" data-dep="">
-          <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          <span><span class="title block">${deps.length ? 'Not sure yet' : 'Next available'}</span>
-          <span class="sub block">${deps.length ? "We'll put you on the best departure." : "No dates are listed yet — we'll confirm the next one with you."}</span></span>
+          <span class="ico">${deps.length
+            ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
+            : ICONS[state.route.mode] || ICONS.air}</span>
+          <span><span class="title block">${deps.length ? 'Not sure yet' : `Next available ${kind}`}</span>
+          <span class="sub block">${deps.length ? "We'll put you on the best departure." : `Book now and we'll put you on the next ${kind}${to ? ' to ' + esc(to) : ''}, then confirm the date with you on WhatsApp.`}</span></span>
           <span class="tick">${ICONS.tick}</span>
         </button>`);
       $('depOptions').innerHTML = opts.join('');
