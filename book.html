@@ -836,6 +836,12 @@
                 <div class="choice-grid sm:grid-cols-3 mb-2" id="methodOptions" role="radiogroup" aria-label="Collection method"></div>
                 <div class="field-error-block hidden" id="methodError"><p class="form-error">Please choose one.</p></div>
 
+                <!-- Out of the UK, on routes with a delivery fee: how the receiver gets it. -->
+                <div class="hidden" id="receiverBlock">
+                  <p class="form-label mt-6">At the other end <span class="req">*</span></p>
+                  <div class="choice-grid sm:grid-cols-2 mb-2" id="receiverOptions" role="radiogroup" aria-label="How the receiver gets it"></div>
+                </div>
+
                 <div class="grid sm:grid-cols-2 gap-5 mt-5">
                   <div>
                     <label class="form-label" for="prefDate" id="prefDateLabel">Preferred date <span class="opt">(optional)</span></label>
@@ -1223,6 +1229,7 @@
     const $ = (id) => document.getElementById(id);
     const state = {
       mode: null, route: null, departure: null, method: null, step: 1,
+      receiverDelivery: false,   // out of the UK: deliver to the receiver's door (route has a delivery fee)
       routes: [], schedule: [], photos: [], submitting: false,
     };
 
@@ -1402,7 +1409,7 @@
       $('ratesBody').innerHTML = state.routes.map((r) => `
         <tr><td class="font-semibold text-navy">${esc(r.label)}<span class="rate-service">${r.mode === 'air' ? 'Air freight' : 'Sea container'}</span></td>
         <td class="text-charcoal-light">${r.mode === 'air' ? 'Air freight' : 'Sea container'}</td>
-        <td>${r.rate ? money(r.rate, r.currency) + ' / kg' : '<span class="font-semibold text-charcoal-light">On request</span>'}</td></tr>`).join('');
+        <td>${r.rate ? money(r.rate, r.currency) + ' / kg' : '<span class="font-semibold text-charcoal-light">On request</span>'}${Number(r.delivery_fee) > 0 ? `<span class="block text-xs text-charcoal-light">Delivery to the door ${money(r.delivery_fee, r.currency)}</span>` : ''}</td></tr>`).join('');
     }
 
     // ─────────────────────────── Step 1 ────────────────────────────
@@ -1430,6 +1437,7 @@
     }
 
     function chooseRoute(code) {
+      if (state.route?.code !== code) state.receiverDelivery = false;
       state.route = state.routes.find((r) => r.code === code) || null;
       if (state.departure && state.departure.route_code !== code) state.departure = null;
       document.querySelectorAll('[data-route]').forEach((x) => x.setAttribute('aria-checked', String(x.dataset.route === code)));
@@ -1474,11 +1482,17 @@
     }
 
     // ─────────────────────────── Step 2 ────────────────────────────
+    // The route's delivery fee (admin: Settings → Routes & prices), or null when it has none.
+    const deliveryFee = () => (state.route && Number(state.route.delivery_fee) > 0 ? Number(state.route.delivery_fee) : null);
+    const feeText = () => money(deliveryFee(), state.route.currency);
+    // Delivery to the door: "Deliver to me" into the UK, or "Deliver to the receiver" out of the UK.
+    const wantsDelivery = () => (isInbound(state.route) ? state.method === 'delivery' : !!deliveryFee() && state.receiverDelivery);
+
     function methodChoices() {
       if (isInbound(state.route)) {
         return [
           { v: 'collection', t: 'I’ll collect it', s: 'Pick up from our UK office when it lands.', i: ICONS.store },
-          { v: 'delivery', t: 'Deliver to me', s: 'We deliver to your UK address.', i: ICONS.home },
+          { v: 'delivery', t: 'Deliver to me', s: deliveryFee() ? `We deliver to your UK address — ${feeText()} extra.` : 'We deliver to your UK address.', i: ICONS.home },
         ];
       }
       return [
@@ -1507,6 +1521,30 @@
       }));
       $('prefDateLabel').innerHTML = (isInbound(state.route) ? 'Preferred date' : state.method === 'collection' ? 'Preferred collection date' : 'Preferred date')
         + ' <span class="opt">(optional)</span>';
+      renderReceiver();
+    }
+
+    // Out of the UK on a route with a delivery fee: the receiver collects (free) or we deliver to them.
+    function renderReceiver() {
+      const show = !!state.route && !isInbound(state.route) && !!deliveryFee();
+      $('receiverBlock').classList.toggle('hidden', !show);
+      if (!show) { state.receiverDelivery = false; $('receiverOptions').innerHTML = ''; return; }
+      const where = state.route.destination || 'the other end';
+      const choices = [
+        { v: false, t: 'Receiver collects it', s: `From our office in ${where} — no extra cost.`, i: ICONS.store },
+        { v: true, t: 'Deliver to the receiver', s: `To their address in ${where} — ${feeText()} extra.`, i: ICONS.home },
+      ];
+      $('receiverOptions').innerHTML = choices.map((c) => `
+        <button type="button" class="choice stack" role="radio" aria-checked="${state.receiverDelivery === c.v}" data-receiver="${c.v}">
+          <span class="ico">${c.i}</span>
+          <span><span class="title block">${c.t}</span><span class="sub block">${c.s}</span></span>
+          <span class="tick">${ICONS.tick}</span>
+        </button>`).join('');
+      document.querySelectorAll('[data-receiver]').forEach((b) => b.addEventListener('click', () => {
+        state.receiverDelivery = b.dataset.receiver === 'true';
+        document.querySelectorAll('[data-receiver]').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+        updateSummary();
+      }));
     }
 
     const needsAddress = () => state.method === 'collection' && !isInbound(state.route) || state.method === 'delivery';
@@ -1547,7 +1585,9 @@
       const kg = parseFloat($('estKg').value);
       const r = currentRate();
       if (!r || !(kg > 0)) return null;
-      return { value: Math.round(kg * r.rate * 100) / 100, currency: r.currency, kg, rate: r.rate };
+      // Same sum as the database (create_website_booking): kilos × rate, rounded, plus delivery.
+      const fee = wantsDelivery() ? deliveryFee() : null;
+      return { value: Math.round(kg * r.rate * 100) / 100 + (fee || 0), currency: r.currency, kg, rate: r.rate, fee };
     }
 
     function updateSummary() {
@@ -1557,26 +1597,28 @@
       const kg = parseFloat($('estKg').value);
       $('sumKg').textContent = state.mode === 'air' && kg > 0 ? `${kg} kg` : state.mode === 'sea' ? 'Not needed' : '—';
       const m = methodChoices().find((c) => c.v === state.method);
-      $('sumMethod').textContent = m ? m.t.replace('’', "'") : '—';
+      $('sumMethod').textContent = m ? m.t.replace('’', "'") + (!isInbound(state.route) && wantsDelivery() ? ' · delivered to receiver' : '') : '—';
+      const feeNote = wantsDelivery() ? ` + ${feeText()} delivery` : '';
       const est = estimate();
       const r = currentRate();
       const sum = $('sumEstimate');
       sum.classList.toggle('placeholder', !est);
       if (state.mode === 'sea') {
         sum.textContent = 'Priced by our team';
-        $('sumEstimateNote').textContent = 'We price sea freight by item and confirm on WhatsApp.';
+        $('sumEstimateNote').textContent = 'We price sea freight by item and confirm on WhatsApp.' + (feeNote ? ` Delivery to the door: ${feeText()}.` : '');
       } else if (est) {
         sum.textContent = money(est.value, est.currency);
-        $('sumEstimateNote').textContent = `${est.kg} kg × ${money(est.rate, est.currency)}/kg. Final price confirmed after weighing.`;
+        $('sumEstimateNote').textContent = `${est.kg} kg × ${money(est.rate, est.currency)}/kg${feeNote}. Final price confirmed after weighing.`;
       } else if (r) {
         sum.textContent = `${money(r.rate, r.currency)} per kg`;
-        $('sumEstimateNote').textContent = 'Add an estimated weight to see your price.';
+        $('sumEstimateNote').textContent = 'Add an estimated weight to see your price.' + (feeNote ? ` Delivery to the door: ${feeText()}.` : '');
       } else {
         sum.textContent = state.route ? 'Priced by our team' : 'Choose a route';
         $('sumEstimateNote').textContent = state.route ? "We'll confirm the price on WhatsApp." : 'Final price is confirmed after weighing.';
       }
       $('estimateStrip').classList.toggle('hidden', !est);
       if (est) $('estimateStripValue').textContent = money(est.value, est.currency);
+      $('estimateStripLabel').textContent = est && est.fee ? 'Estimated price (with delivery)' : 'Estimated price';
     }
 
     // Photos: shrink big phone photos before upload (max 1600px, JPEG).
@@ -1771,6 +1813,7 @@
         item_count: $('itemCount').value.trim(),
         est_kg: state.mode === 'air' ? $('estKg').value.trim() : '',
         collection_mode: state.method,
+        delivery_requested: wantsDelivery(),
         preferred_date: $('prefDate').value,
         notes: $('notes').value.trim(),
         consent: $('consent').checked,
@@ -1817,6 +1860,7 @@
         : p.collection_mode === 'delivery' ? 'When it lands we arrange delivery to your address.'
         : p.collection_mode === 'collection' ? 'When it lands we let you know it’s ready to collect.'
         : 'Bring or send your items to us — we weigh everything and confirm the price.';
+      if (p.delivery_requested && !isInbound(state.route)) $('successStep2').textContent += ' When it lands we deliver it to the receiver.';
       $('trackRef').value = res.ref;
       knownPhones[res.ref] = p.phone;   // so "Track this booking" shows their total and balance straight away
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
@@ -1831,7 +1875,7 @@
     $('trackThis').addEventListener('click', () => { showTab('track'); $('trackForm').requestSubmit(); });
     $('bookAnother').addEventListener('click', () => {
       $('bookForm').reset(); state.photos.forEach((p) => URL.revokeObjectURL(p.url)); state.photos = []; renderThumbs();
-      state.method = null; $('bookForm').classList.remove('hidden'); $('successWrap').classList.remove('show');
+      state.method = null; state.receiverDelivery = false; $('bookForm').classList.remove('hidden'); $('successWrap').classList.remove('show');
       $('successEstimate').classList.add('hidden'); $('photoNote').classList.add('hidden');
       setStep(1); updateSummary();
     });
