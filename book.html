@@ -479,9 +479,11 @@
     .tl-step.done::before { background: #00A15C; }
     .tl-dot { position: relative; z-index: 1; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #F0EBE3; color: #9AA0A8; }
     .tl-step.done .tl-dot { background: #00A15C; color: #FFFFFF; }
-    .tl-step.current .tl-dot { background: #FFFFFF; color: #00A15C; box-shadow: 0 0 0 3px #00A15C, 0 10px 20px -8px rgba(0, 161, 92, 0.6); }
+    .tl-step.now::before { background: #F0EBE3; }
+    .tl-step.now .tl-dot { box-shadow: 0 0 0 4px #CDEEDD, 0 10px 20px -8px rgba(0, 161, 92, 0.6); }
+    .tl-now { display: inline-block; margin-left: 0.5rem; padding: 0.1rem 0.5rem; border-radius: 999px; background: #E4F4EC; color: #007A46; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: 0.15em; }
     .tl-step .t { font-weight: 800; color: #0A1E4A; font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
-    .tl-step:not(.done):not(.current) .t { color: #9AA0A8; }
+    .tl-step:not(.done) .t { color: #9AA0A8; }
     .tl-step .d { font-size: 0.85rem; color: #6B7280; }
 
     .info-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1.25rem; }
@@ -1847,13 +1849,24 @@
     // ─────────────────────────── Track ─────────────────────────────
     // One box for air & sea cargo (JT-…) and JT Moroccan Gems orders (MG-…), with just the reference.
     // Money and the customer number only show with the phone number they booked with (optional).
-    const STAGES = [
-      { t: 'Booking received', d: 'We have your booking and will confirm it shortly.' },
-      { t: 'Confirmed', d: 'Your booking is confirmed with our team.' },
-      { t: 'Collected / received', d: 'Your items are with us.' },
-      { t: 'On the way', d: 'Your shipment has left.' },
-      { t: 'Arrived', d: 'Ready for collection or delivery.' },
-    ];
+    // Cargo steps, in the admin app's order: booking New → Confirmed → In a shipment, then the flight or
+    // container's own status (Departed → Arrived → Completed). Each step's text says what we know at that point.
+    function cargoSteps(b, stage) {
+      const unit = b.mode === 'sea' ? 'container' : b.mode === 'road' ? 'shipment' : 'flight';
+      const dep = shipDates(b).departure;
+      const at = (i) => i <= stage;
+      return [
+        { t: 'Booking received', d: stage === 0 ? 'We have your booking and will confirm it shortly.' : 'We have your booking.' },
+        { t: 'Confirmed', d: !at(1) ? 'Our team confirms your booking.' : b.status === 'collected' ? 'Confirmed — your items are with us.' : 'Your booking is confirmed with our team.' },
+        { t: b.mode === 'sea' ? 'Booked in a container' : `Booked on a ${unit}`,
+          d: !at(2) ? `We put you on the next ${unit} and tell you the date.`
+            : dep ? `On the ${unit} ${b.mode === 'sea' ? 'loading' : 'leaving'} ${fmtDate(dep)}.` : `We'll confirm the date with you on WhatsApp.` },
+        { t: 'On the way', d: !at(3) ? `The ${unit} leaves with your items.`
+            : `Left${dep ? ' ' + fmtDate(dep) : ''}${b.expected_arrival && !at(4) ? ` · expected ${fmtDate(b.expected_arrival)}` : ''}.` },
+        { t: 'Arrived', d: at(4) ? `Arrived${b.arrived_on ? ' ' + fmtDate(b.arrived_on) : ''}. Ready for collection or delivery.` : 'Ready for collection or delivery.' },
+        { t: 'Collected / delivered', d: at(5) ? 'Handed over to you. Thank you for sending with us!' : 'Handed over to you.' },
+      ];
+    }
     const SHOP_STAGES = [
       ['new', 'Order received', 'We have your order and will confirm it on WhatsApp.'],
       ['confirmed', 'Confirmed', 'Your order is confirmed.'],
@@ -1865,23 +1878,38 @@
     const knownPhones = {};   // reference → the phone they booked with, when this device knows it
     let shown = null;         // what's on screen: { ref, res }
 
+    // On a flight / container = "In a shipment" in the admin app (a row on that flight's sheet).
+    const onBoard = (b) => b.status === 'added' && !!b.shipment_status && b.shipment_status !== 'cancelled';
+    // The dates to show: the flight they're on, or the one they asked for while it's still to leave.
+    function shipDates(b) {
+      const ok = onBoard(b) || ['draft', 'open', 'closed'].includes(b.shipment_status);
+      return { departure: ok ? b.departure_date : null, expected: ok ? b.expected_arrival : null };
+    }
+    // The last step reached (index into cargoSteps). The row's arrival / collection notes are typed freely
+    // by the team ("ARRIVED", "Collected 02/07/2026", "DELIVERED", "Dropped off"…), so read them loosely, and
+    // only once the flight has left — before that, "collected" means we picked the items up.
     function stageOf(b) {
-      if (b.collection_status === 'collected' || b.collection_status === 'delivered' || b.shipment_status === 'completed') return 5;
-      if (b.shipment_status === 'arrived' || b.arrival_status === 'arrived') return 4;
-      if (b.shipment_status === 'departed') return 3;
-      if (b.status === 'collected' || b.status === 'added') return b.status === 'added' && !b.kilos && !b.priced ? 1 : 2;
-      if (b.status === 'confirmed' || b.status === 'scheduled') return 1;
-      return 0;
+      if (!onBoard(b)) return b.status === 'confirmed' || b.status === 'scheduled' || b.status === 'collected' || b.status === 'added' ? 1 : 0;
+      const s = b.shipment_status;
+      const note = (v) => String(v || '').trim().toLowerCase();
+      const arr = note(b.arrival_status), coll = note(b.collection_status);
+      const left = ['departed', 'arrived', 'completed'].includes(s);
+      const arrived = s === 'arrived' || s === 'completed' || (left && /^(arriv|collected|delivered)/.test(arr));
+      if (s === 'completed' || (arrived && (/^(collected|delivered|dropped)/.test(coll) || /^(collected|delivered)/.test(arr)))) return 5;
+      if (arrived) return 4;
+      if (left) return 3;
+      return 2;
     }
     const qtyText = (q) => String(Number(q)).replace(/\.0+$/, '');
     const qtyLabel = (q, unit) => unit === 'kg' ? `${qtyText(q)} kg` : unit === 'each' || !unit ? `${qtyText(q)} ×` : `${qtyText(q)} × ${unit}`;
     const askLink = (ref, what) => `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(`Hello, about my ${what} ${ref}`)}`;
+    // stage = the last step reached: it and every step before it are ticked; it's also marked "now".
     const timeline = (steps, stage, done) => `
         <div class="timeline">
           ${steps.map((s, i) => `
-            <div class="tl-step ${i < stage || done ? 'done' : i === stage ? 'current' : ''}">
-              <div class="tl-dot">${i < stage || done ? ICONS.tick : `<span class="text-xs font-extrabold">${i + 1}</span>`}</div>
-              <div><p class="t">${s.t}</p><p class="d">${s.d}</p></div>
+            <div class="tl-step ${i <= stage || done ? 'done' : ''} ${i === stage && !done ? 'now' : ''}"${i === stage && !done ? ' aria-current="step"' : ''}>
+              <div class="tl-dot">${i <= stage || done ? ICONS.tick : `<span class="text-xs font-extrabold">${i + 1}</span>`}</div>
+              <div><p class="t">${s.t}${i === stage && !done ? '<span class="tl-now">Now</span>' : ''}</p><p class="d">${s.d}</p></div>
             </div>`).join('')}
         </div>`;
     // The private part: shown with the phone, or a small box to add it.
@@ -1906,6 +1934,8 @@
       }
       const stage = stageOf(b);
       const done = stage >= 5;
+      const steps = cargoSteps(b, stage);
+      const dates = shipDates(b);
       const money_ = b.phone_ok
         ? `${b.customer_no ? `<div><p>Customer no.</p><p>${esc(b.customer_no)}</p></div>` : ''}
            ${Number(b.total) > 0 ? `<div><p>Total</p><p>${money(b.total, b.currency)}</p></div>
@@ -1916,16 +1946,16 @@
         <div class="flex items-start justify-between gap-4">
           <div>
             <p class="text-[0.72rem] tracking-[0.2em] uppercase font-bold text-brand-dark mb-1">${esc(b.ref)}</p>
-            <h3 class="text-navy text-[1.5rem]">${done ? 'Completed — thank you!' : esc(STAGES[Math.min(stage, 4)].t)}</h3>
+            <h3 class="text-navy text-[1.5rem]">${done ? 'Completed — thank you!' : esc(steps[stage].t)}</h3>
             <p class="text-sm text-charcoal-light">${b.mode === 'air' ? 'Air freight' : b.mode === 'sea' ? 'Sea container' : 'Road'}${b.route_label ? ' · ' + esc(b.route_label) : ''}</p>
           </div>
           <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#E4F4EC;color:#065C37;">${ICONS[b.mode] || ICONS.air}</div>
         </div>
-        ${timeline(STAGES, stage, done)}
+        ${timeline(steps, stage, done)}
         <div class="info-mini">
           <div><p>Booked</p><p>${fmtDate(b.booked_on)}</p></div>
-          <div><p>${b.mode === 'sea' ? 'Loading' : 'Departure'}</p><p>${b.departure_date ? fmtDate(b.departure_date) : 'To be confirmed'}</p></div>
-          ${b.expected_arrival ? `<div><p>Expected</p><p>${fmtDate(b.expected_arrival)}</p></div>` : ''}
+          <div><p>${b.mode === 'sea' ? 'Loading' : 'Departure'}</p><p>${dates.departure ? fmtDate(dates.departure) : 'To be confirmed'}</p></div>
+          ${b.arrived_on && stage >= 4 ? `<div><p>Arrived</p><p>${fmtDate(b.arrived_on)}</p></div>` : dates.expected && stage < 4 ? `<div><p>Expected</p><p>${fmtDate(dates.expected)}</p></div>` : ''}
           ${b.kilos ? `<div><p>Weight</p><p>${esc(qtyText(b.kilos))} kg</p></div>` : ''}
           ${money_}
         </div>
