@@ -33,7 +33,7 @@
     h1, h2, h3 { font-family: 'Montserrat', system-ui, sans-serif; letter-spacing: -0.03em; line-height: 1.12; font-weight: 800; color: #0A1E4A; }
     :root { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-    /* One A4 sheet per page: the invoice, the terms of service, the booking guidelines (sea). */
+    /* One A4 sheet per page: the invoice, the terms of service, the booking rules (air) or guidelines (sea / road). */
     .page { position: relative; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 1.25rem; overflow: hidden;
       box-shadow: 0 30px 60px -32px rgba(10, 30, 74, 0.32), 0 2px 6px -2px rgba(10, 30, 74, 0.06); }
     .page + .page { margin-top: 1.5rem; }
@@ -218,7 +218,8 @@
       const pays = inv.payments || [];
       const bank = isAir ? S.bank_air : S.bank_sea;
       const terms = isAir ? S.terms_air : S.terms_sea;
-      const guides = isAir ? [] : (S.guidelines || []);
+      // Page 3: the booking rules — air freight booking (air), or the shipment booking guidelines (sea and road).
+      const guides = (isAir ? S.guidelines_air : S.guidelines) || [];
       const pageCount = 1 + (terms.length ? 1 : 0) + (guides.length ? 1 : 0);
       // Page 1: the company and its contacts on the left; "Invoice", number, date and paid / unpaid on the right.
       // Pages 2–3: a slim top with the company and the invoice number.
@@ -345,7 +346,7 @@
         <section class="page">
           ${band(3)}
           <div class="body">
-            <h1 class="text-[1.7rem] sm:text-[2.15rem] uppercase">Booking guidelines</h1>
+            <h1 class="text-[1.7rem] sm:text-[2.15rem] uppercase">${isAir ? 'Air freight booking' : 'Booking guidelines'}</h1>
             <p class="text-sm text-charcoal-light mt-1">Please follow these steps to help us handle your freight safely and efficiently. InshaAllah.</p>
             <ol class="terms guides mt-5">${guides.map((t, i) => `<li><span class="n">${String(i + 1).padStart(2, '0')}</span><span>${esc(t)}</span></li>`).join('')}</ol>
             <div class="whats">

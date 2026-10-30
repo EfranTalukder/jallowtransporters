@@ -207,6 +207,12 @@
     .term-card .term-body p {
       color: #4A4A4A; font-size: 0.95rem; line-height: 1.65;
     }
+    /* Section headings the booking page and WhatsApp messages link to (/terms#shipment, /terms#air). */
+    .terms-section { scroll-margin-top: 110px; }
+    .jump-links a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s var(--smooth); }
+    .jump-links a:hover { color: #0A1E4A; }
+    .jump-links a:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; border-radius: 4px; }
+    .jump-links a:active { color: #065C37; }
 
     .info-box {
       background: linear-gradient(135deg, #E4F4EC 0%, #FFFFFF 100%);
@@ -445,8 +451,8 @@
         Clear terms so there are <span class="text-brand-bright">no surprises later.</span>
       </h1>
       <p class="hero-anim hero-anim-3 text-white/75 text-base sm:text-lg max-w-3xl mx-auto">
-        Please read these guidelines before booking a shipment. They cover packing, liability,
-        deposits, claims, and how we handle storage and payment at port.
+        Please read these guidelines before booking. They cover packing, liability,
+        deposits, claims, and how we handle storage and payment — for shipments and for air freight.
       </p>
     </div>
   </section>
@@ -468,12 +474,19 @@
           </p>
         </div>
       </div>
+      <p class="jump-links text-sm text-charcoal-light mt-6 text-center">
+        Go to: <a href="#shipment">Shipment booking guidelines</a> · <a href="#air">Air freight booking</a>
+      </p>
     </div>
   </section>
 
-  <!-- ═════ TERMS ═════ -->
-  <section class="pb-20 lg:pb-28">
+  <!-- ═════ SHIPMENT (SEA / ROAD) BOOKING GUIDELINES ═════ -->
+  <section class="pb-16 lg:pb-20">
     <div class="max-w-4xl mx-auto px-5 lg:px-8 space-y-4">
+      <div class="terms-section mb-2" id="shipment">
+        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-dark mb-2">Sea containers, barrels &amp; road</p>
+        <h2 class="text-navy text-[1.6rem] lg:text-[2rem]">Shipment booking guidelines</h2>
+      </div>
 
       <article class="term-card reveal stagger-1">
         <div class="term-num">01</div>
@@ -560,6 +573,97 @@
         <div class="term-body">
           <h3>Payments due on container arrival, not after clearance</h3>
           <p>All outstanding balances must be cleared on arrival of the container at the destination port. Payment cannot be deferred until after customs clearance.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-6">
+        <div class="term-num">12</div>
+        <div class="term-body">
+          <h3>Prohibited items</h3>
+          <p>Drugs, alcohol, intoxicants, marabout stuff, hair extensions and skin-bleaching products are not allowed.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═════ AIR FREIGHT BOOKING ═════ -->
+  <section class="pb-20 lg:pb-28">
+    <div class="max-w-4xl mx-auto px-5 lg:px-8 space-y-4">
+      <div class="terms-section mb-2" id="air">
+        <p class="text-[0.72rem] tracking-[0.22em] uppercase font-bold text-brand-dark mb-2">In sha Allah</p>
+        <h2 class="text-navy text-[1.6rem] lg:text-[2rem]">Air freight booking</h2>
+      </div>
+
+      <article class="term-card reveal stagger-1">
+        <div class="term-num">01</div>
+        <div class="term-body">
+          <h3>Packages are inspected by customs</h3>
+          <p>All freight packages are subject to inspection due to customs control.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-2">
+        <div class="term-num">02</div>
+        <div class="term-body">
+          <h3>Pay before departure</h3>
+          <p>Payment must be made before departure.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-3">
+        <div class="term-num">03</div>
+        <div class="term-body">
+          <h3>Payments in Gambia</h3>
+          <p>All payments to be made in Gambia.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-4">
+        <div class="term-num">04</div>
+        <div class="term-body">
+          <h3>Items not allowed</h3>
+          <p>No skin-lightening items, marabout stuff or hair extensions are allowed.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-5">
+        <div class="term-num">05</div>
+        <div class="term-body">
+          <h3>Illegal or prohibited items</h3>
+          <p>Illegal or prohibited items are not allowed — customers are fully liable if any are found.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-6">
+        <div class="term-num">06</div>
+        <div class="term-body">
+          <h3>Maximum claim of £100</h3>
+          <p>Claims for any loss or damage can't exceed <strong class="text-navy">£100</strong>.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-1">
+        <div class="term-num">07</div>
+        <div class="term-body">
+          <h3>No claims for delays</h3>
+          <p>Claims cannot be made for any delay of air cargo / freight consignments, as airlines never guarantee arrival — times are estimates only.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-2">
+        <div class="term-num">08</div>
+        <div class="term-body">
+          <h3>Storage after 3 days</h3>
+          <p>Storage charges apply: <strong class="text-navy">£3 per day</strong> after 3 days from arrival.</p>
+        </div>
+      </article>
+
+      <article class="term-card reveal stagger-3">
+        <div class="term-num">09</div>
+        <div class="term-body">
+          <h3>No pack and wrap, no liability</h3>
+          <p>Goods that aren't packed and wrapped are carried at the customer's own risk.</p>
         </div>
       </article>
 

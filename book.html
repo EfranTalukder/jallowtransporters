@@ -394,6 +394,10 @@
     .check-row input { width: 20px; height: 20px; margin-top: 0.15rem; accent-color: #00A15C; cursor: pointer; flex-shrink: 0; }
     .check-row a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
     .check-row a:hover { color: #065C37; }
+    .check-row a:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; border-radius: 3px; }
+    /* The booking rules for the chosen service, above the "I've read" tick box. */
+    .guides-list { list-style: decimal; padding-left: 1.35rem; display: grid; gap: 0.35rem; font-size: 0.9rem; line-height: 1.5; color: #4A4A4A; }
+    .guides-list li::marker { color: #007A46; font-weight: 700; }
 
     .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
@@ -930,9 +934,13 @@
                   <label class="form-label" for="notes">Anything else? <span class="opt">(optional)</span></label>
                   <textarea id="notes" class="form-textarea" style="min-height: 90px;" placeholder="Best time to call, access notes, empty barrels needed…"></textarea>
                 </div>
+                <div class="mb-5 pt-5 border-t border-[#F0EBE3]" id="guidesBox">
+                  <p class="form-label" id="guidesTitle">Booking guidelines</p>
+                  <ol class="guides-list" id="guidesList"></ol>
+                </div>
                 <label class="check-row mb-2" for="consent">
                   <input type="checkbox" id="consent">
-                  <span>I've read the <a href="/terms.html" target="_blank" rel="noopener">Booking Guidelines</a> and I'm happy for Jallow Transporters to contact me about this booking. We never share your details.</span>
+                  <span>I've read the <a href="/terms#shipment" id="consentLink" target="_blank" rel="noopener">Booking Guidelines</a> and I'm happy for Jallow Transporters to contact me about this booking. We never share your details.</span>
                 </label>
                 <div class="field-error-block hidden" id="consentError"><p class="form-error">Please tick to confirm you've read the Booking Guidelines.</p></div>
               </div>
@@ -1322,6 +1330,8 @@
     // ───────────────────────────── Data ─────────────────────────────
     async function loadData() {
       try {
+        // The booking rules come from the admin app (Settings → Invoices); if they can't load, the built-in copy is used.
+        rpc('get_booking_guidelines').then((g) => { if (g && (g.air || g.sea)) { state.guides = g; renderGuides(); } }).catch(() => {});
         const [routes, schedule] = await Promise.all([rpc('get_public_rates'), rpc('get_public_schedule')]);
         state.routes = routes || [];
         state.schedule = schedule || [];
@@ -1653,6 +1663,44 @@
     }
 
     // ───────────────────────── Navigation ──────────────────────────
+    // Booking rules for the chosen service: air freight booking, or the shipment (sea / road) guidelines.
+    // Same lists as the invoices; this copy is only used if the live ones can't be loaded.
+    const GUIDES_FALLBACK = {
+      sea: [
+        'Pack, seal, wrap and protect all freight before collection.',
+        'Minor scratches and dents are not covered.',
+        'Where goods are not protected, liability cannot be accepted.',
+        'Send clear pictures of all goods before collection.',
+        'Send the full address where the goods are to be collected.',
+        'A £3 daily storage charge applies when freight is not collected within 10 days of arrival at the port.',
+        "Label every item clearly with the sender's and recipient's contact details.",
+        'A minimum deposit is required for every booking.',
+        'The maximum claim for loss or damage is £200 and resolution may take up to one year.',
+        'We do not accept responsibility for glass or screens, including televisions. If damaged, only the related shipping fee will be refunded.',
+        'The payment deadline is the arrival of the shipment, not completion of customs clearance.',
+        'Drugs, alcohol, intoxicants, marabout items, hair extensions and skin-bleaching products are not allowed.',
+      ],
+      air: [
+        'All freight packages are subject to inspection due to customs control.',
+        'Payment must be made before departure.',
+        'All payments to be made in Gambia.',
+        'No skin-lightening items, marabout stuff or hair extensions are allowed.',
+        'Illegal or prohibited items are not allowed — customers are fully liable if any are found.',
+        "Claims for any loss or damage can't exceed £100.",
+        'Claims cannot be made for any delay of air cargo / freight consignments, as airlines never guarantee arrival — times are estimates only.',
+        'Storage charges apply: £3 per day after 3 days from arrival.',
+        'No pack and wrap, no liability.',
+      ],
+    };
+    function renderGuides() {
+      const air = state.mode === 'air';
+      const live = state.guides && state.guides[air ? 'air' : 'sea'];
+      const list = Array.isArray(live) && live.length ? live : GUIDES_FALLBACK[air ? 'air' : 'sea'];
+      $('guidesTitle').textContent = air ? 'Air freight booking — please read' : 'Shipment booking guidelines — please read';
+      $('guidesList').innerHTML = list.map((g) => `<li>${esc(g)}</li>`).join('');
+      $('consentLink').href = `/terms#${air ? 'air' : 'shipment'}`;
+    }
+
     function setStep(n) {
       state.step = n;
       document.querySelectorAll('.step-panel').forEach((p) => { p.hidden = Number(p.dataset.step) !== n; });
@@ -1664,6 +1712,7 @@
       $('nextText').textContent = n === 4 ? 'Send booking' : 'Continue';
       hideAlert();
       if (n === 2) renderMethods();
+      if (n === 4) renderGuides();
       const top = $('bookCard').getBoundingClientRect().top + window.scrollY - 110;
       if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
     }
