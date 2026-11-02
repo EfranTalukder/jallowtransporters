@@ -1,0 +1,7 @@
+# Files that are only for building and checking the site on this computer — not published.
+CLAUDE.md
+*.mjs
+_logo-compare.html
+logo3.png
+brand_assets/process_logo.py
+temporary screenshots

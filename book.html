@@ -1868,6 +1868,7 @@
         consent: $('consent').checked,
         website: $('website').value,
         started_at: startedAt,
+        fill_ms: Date.now() - startedAt,   // timed on this device, so a wrong clock can't make it look like spam
         photos: state.photos.map((p) => ({ type: p.blob.type || 'image/jpeg' })),
       };
       try {
