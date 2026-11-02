@@ -1362,7 +1362,7 @@
         $('depGrid').innerHTML = `<div class="full form-card text-center py-10">
           <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#E4F4EC;color:#065C37;">${depFilter === 'sea' ? ICONS.sea : ICONS.air}</div>
           <p class="text-navy font-bold text-lg mb-1">Book your space on the next ${depFilter === 'sea' ? 'container' : depFilter === 'air' ? 'flight' : 'flight or container'}</p>
-          <p class="text-charcoal-light text-sm mb-5">New dates are added here as soon as they're set. Book now and we'll put you on the next one, then confirm the date with you on WhatsApp.</p>
+          <p class="text-charcoal-light text-sm mb-5">Book now and we'll put you on the next one, then confirm the date with you on WhatsApp.</p>
           <button type="button" class="btn-primary" data-go-book="">Book now <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>`;
       } else {
         // One departure gets a wide card across the row (see .dep-wide); the grid's class says how many there are.
