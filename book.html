@@ -922,8 +922,9 @@
                     <p class="form-error">Please enter a name.</p>
                   </div>
                   <div>
-                    <label class="form-label" for="receiverPhone" id="receiverPhoneLabel">Receiver's phone <span class="opt">(optional)</span></label>
+                    <label class="form-label" for="receiverPhone" id="receiverPhoneLabel">Receiver's phone <span class="req">*</span></label>
                     <input type="tel" id="receiverPhone" class="form-input" autocomplete="off" placeholder="With country code, e.g. +220 771 2345">
+                    <p class="form-error">Please enter the receiver's phone number.</p>
                   </div>
                 </div>
                 <div class="mb-5 max-w-md">
@@ -1576,7 +1577,7 @@
       $('otherSub').textContent = inbound ? 'So our team can collect it from them.' : 'So our team at the other end can hand it over.';
       $('step4label').textContent = inbound ? 'Sender' : 'Receiver';
       $('receiverNameLabel').innerHTML = (inbound ? "Sender's name" : "Receiver's name") + ' <span class="req">*</span>';
-      $('receiverPhoneLabel').innerHTML = (inbound ? "Sender's phone" : "Receiver's phone") + ' <span class="opt">(optional)</span>';
+      $('receiverPhoneLabel').innerHTML = (inbound ? "Sender's phone" : "Receiver's phone") + ' <span class="req">*</span>';
       $('receiverCityLabel').innerHTML = (inbound ? "Sender's town" : "Receiver's town") + ' <span class="opt">(optional)</span>';
       $('receiverCity').placeholder = state.route ? `e.g. a town in ${inbound ? state.route.origin : state.route.destination}` : 'Town';
       applyAddressRequirement();
@@ -1767,7 +1768,7 @@
       if (step === 4) {
         const who = inbound ? 'the sender’s' : 'the receiver’s';
         e.receiverName = checks.name(val('receiverName'), { what: `${who} full name` });
-        e.receiverPhone = checks.phone(val('receiverPhone'), { required: false, hints: routeCountries() });
+        e.receiverPhone = checks.phone(val('receiverPhone'), { hints: routeCountries(), what: `${who} phone number` });
         e.receiverCity = checks.town(val('receiverCity'), { required: false, what: `${who} town` });
       }
       return e;
@@ -1804,6 +1805,7 @@
 
     // A problem the server found goes back to the box it belongs to.
     const SERVER_FIELDS = [
+      [/(receiver|sender).{0,4}s (mobile|phone|number)/i, 4, 'receiverPhone'], [/(receiver|sender).{0,4}s name/i, 4, 'receiverName'],
       [/name/i, 3, 'contactName'], [/phone/i, 3, 'phone'], [/weight|kilo/i, 2, 'estKg'],
       [/guidelines/i, 4, 'consent'], [/route|air or sea|departure/i, 1, null],
     ];

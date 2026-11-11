@@ -77,9 +77,9 @@
     },
     // When we can offer the corrected number, the message is a String with .fixes
     // ([{ label, value }]) and setError shows them as buttons.
-    phone(v, { required = true, hints = [] } = {}) {
+    phone(v, { required = true, hints = [], what = '' } = {}) {
       v = String(v || '').trim();
-      if (!v) return required ? 'Please enter a phone number we can WhatsApp or call.' : '';
+      if (!v) return !required ? '' : what ? `Please enter ${what}.` : 'Please enter a phone number we can WhatsApp or call.';
       if (/\p{L}/u.test(v)) return 'A phone number can only have numbers, spaces and + — no letters.';
       const n = normPhone(v).length;
       if (n < 7) return 'This number looks too short. Please enter the full number, e.g. 07400 123456 or +220 771 2345.';
