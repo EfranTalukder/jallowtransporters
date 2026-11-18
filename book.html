@@ -426,6 +426,14 @@
     .next-list { text-align: left; max-width: 30rem; margin: 0 auto 1.75rem; display: grid; gap: 0.8rem; }
     .next-list li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.92rem; color: #4A4A4A; }
     .next-list b { color: #0A1E4A; }
+    .next-list a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s var(--smooth); }
+    .next-list a:hover { color: #065C37; }
+    .next-list a:active { opacity: 0.7; }
+    .next-list a:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; border-radius: 3px; }
+    .handover-addr { display: block; margin: 0.35rem 0 0.5rem; padding-left: 0.75rem; border-left: 3px solid #00A15C; color: #0A1E4A; font-weight: 700; line-height: 1.5; }
+    .handover-steps { display: grid; gap: 0.25rem; }
+    .handover-steps span { padding-left: 0.9rem; text-indent: -0.9rem; }
+    .handover-steps span::before { content: '•'; display: inline-block; width: 0.9rem; text-indent: 0; color: #00A15C; font-weight: 800; }
     .wrong-no { max-width: 30rem; margin: -0.75rem auto 1.5rem; text-align: left; padding-left: calc(26px + 0.8rem); font-size: 0.82rem; color: #6B7280; }
     .wrong-no a { color: #007A46; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s var(--smooth); }
     .wrong-no a:hover { color: #065C37; }
@@ -1351,7 +1359,9 @@
     async function loadData() {
       try {
         // The booking rules come from the admin app (Settings → Invoices); if they can't load, the built-in copy is used.
-        rpc('get_booking_guidelines').then((g) => { if (g && (g.air || g.sea)) { state.guides = g; renderGuides(); } }).catch(() => {});
+        rpc('get_booking_guidelines').then((g) => {
+          if (g && (g.air || g.sea)) { state.guides = g; renderGuides(); if (state.route) renderMethods(); }
+        }).catch(() => {});
         const [routes, schedule] = await Promise.all([rpc('get_public_rates'), rpc('get_public_schedule')]);
         state.routes = routes || [];
         state.schedule = schedule || [];
@@ -1518,11 +1528,61 @@
     // Delivery to the door: "Deliver to me" into the UK, or "Deliver to the receiver" out of the UK.
     const wantsDelivery = () => (isInbound(state.route) ? state.method === 'delivery' : !!deliveryFee() && state.receiverDelivery);
 
+    // Air freight from the UK has its own posting address and drop-off point (admin: Settings → Invoices).
+    // This copy is only used if the live one can't be loaded.
+    const AIR_HANDOVER_FALLBACK = {
+      post_address: 'Your name, c/o Jallow Transporters Ltd\n31 Streatham Place\nMilton Keynes, England\nMK13 8RH',
+      post_steps: [
+        'Write your name, return address and phone number on the parcel.',
+        "Write the receiver's name and phone number on it too.",
+        'Send us photos of the parcel inside and out, and your proof of postage, on WhatsApp.',
+      ],
+      post_contact_name: 'Momodou Salieu Jallow',
+      post_contact_phone: '07831005961',
+      dropoff_name: 'Gentle',
+      dropoff_phone: '07424254744',
+      dropoff_address: '15 Anne Road, B66 2NZ',
+    };
+    const airHandover = (route) => {
+      if (!route || route.mode !== 'air' || !fromUK(route)) return null;
+      const live = state.guides && state.guides.air_handover;
+      return live && (live.post_address || live.dropoff_address) ? { ...AIR_HANDOVER_FALLBACK, ...live } : AIR_HANDOVER_FALLBACK;
+    };
+    const postcodeOf = (text) => ((text || '').match(/\b[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}\b/i) || [''])[0].toUpperCase();
+    const telLink = (phone) => `<a href="tel:${esc(String(phone).replace(/[^\d+]/g, ''))}">${esc(phone)}</a>`;
+    const lines = (text) => String(text || '').split('\n').map((l) => l.trim()).filter(Boolean);
+
+    /** "What happens next" step 2 for air freight from the UK, posted or dropped off: the address and what to do. */
+    function airHandoverHtml(h, method, ref) {
+      if (method === 'postal') {
+        const steps = (Array.isArray(h.post_steps) ? h.post_steps : []).map((s) => esc(s).replace(/\bon WhatsApp\b/,
+          `<a href="${JTForm.waLink(`Hi JT, here are the photos and proof of postage for my booking ${ref}.`)}" target="_blank" rel="noopener">on WhatsApp</a>`));
+        return `Post your parcel to:<span class="handover-addr">${lines(h.post_address).map(esc).join('<br>')}</span>`
+          + (steps.length ? `<span class="handover-steps">${steps.map((s) => `<span>${s}</span>`).join('')}</span>` : '')
+          + (h.post_contact_phone ? `<span class="block mt-2">Bringing it in person? Please call ${esc(h.post_contact_name || 'us')} on ${telLink(h.post_contact_phone)} before setting off.</span>` : '');
+      }
+      return `Drop your parcel off at:<span class="handover-addr">${h.dropoff_name ? esc(h.dropoff_name) + '<br>' : ''}${lines(h.dropoff_address).map(esc).join('<br>')}</span>`
+        + (h.dropoff_phone ? `Please call ${esc(h.dropoff_name || 'us')} on ${telLink(h.dropoff_phone)} before setting off.` : '');
+    }
+
     function methodChoices() {
       if (isInbound(state.route)) {
         return [
           { v: 'collection', t: 'I’ll collect it', s: 'Pick up from our UK office when it lands.', i: ICONS.store },
           { v: 'delivery', t: 'Deliver to me', s: deliveryFee() ? `We deliver to your UK address — ${feeText()} extra.` : 'We deliver to your UK address.', i: ICONS.home },
+        ];
+      }
+      const air = airHandover(state.route);
+      if (air) {
+        const pc = postcodeOf(air.post_address);
+        // The town: the address line before the postcode ("Milton Keynes, England" → "Milton Keynes").
+        const addr = lines(air.post_address);
+        const pcAt = addr.findIndex((l) => pc && l.toUpperCase().includes(pc));
+        const town = pcAt > 0 ? addr[pcAt - 1].replace(/,\s*(England|UK|United Kingdom)$/i, '') : '';
+        return [
+          { v: 'collection', t: 'Collect from me', s: 'We pick it up from your address.', i: ICONS.truck },
+          { v: 'dropoff', t: 'I’ll drop it off', s: `At ${esc(air.dropoff_address.split('\n')[0])} — please call ${esc(air.dropoff_name || 'us')} first.`, i: ICONS.store },
+          { v: 'postal', t: 'I’ll post it', s: pc ? `By post or courier to ${town && !/\d/.test(town) ? esc(town) + ' ' : ''}(${esc(pc)}).` : 'Send it to our office by post or courier.', i: ICONS.mail },
         ];
       }
       return [
@@ -1931,7 +1991,9 @@
         : p.collection_mode === 'delivery' ? 'When it lands we arrange delivery to your address.'
         : p.collection_mode === 'collection' ? 'When it lands we let you know it’s ready to collect.'
         : 'Bring or send your items to us — we weigh everything and confirm the price.';
-      if (p.delivery_requested && !isInbound(state.route)) $('successStep2').textContent += ' When it lands we deliver it to the receiver.';
+      const air = (p.collection_mode === 'postal' || p.collection_mode === 'dropoff') && airHandover(state.route);
+      if (air) $('successStep2').innerHTML = airHandoverHtml(air, p.collection_mode, res.ref);
+      if (p.delivery_requested && !isInbound(state.route)) $('successStep2').append(' When it lands we deliver it to the receiver.');
       $('trackRef').value = res.ref;
       knownPhones[res.ref] = p.phone;   // so "Track this booking" shows their total and balance straight away
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
