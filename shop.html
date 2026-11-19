@@ -335,6 +335,8 @@
     .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
     .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
     .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu.open a:nth-child(7) { transition-delay: 0.34s; }
+    .mobile-menu.open a:nth-child(8) { transition-delay: 0.38s; }
     .mobile-menu a:hover, .mobile-menu a.active { color: #00A15C; }
     .mobile-menu .top-bar a {
       color: rgba(255, 255, 255, 0.85); font-family: inherit; font-weight: 500; font-size: inherit;
@@ -600,6 +602,7 @@
         <a href="/shop.html" class="nav-link">Shop</a>
         <a href="/terms.html" class="nav-link">Terms</a>
         <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/collections" class="nav-link">Collections</a>
         <a href="/track" class="nav-link">Track</a>
         <a href="/book.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
           Book Now
@@ -645,6 +648,7 @@
         <a href="/about.html">About</a>
         <a href="/book.html">Book</a>
         <a href="/track">Track</a>
+        <a href="/collections">Collections</a>
         <a href="/shop.html">Shop</a>
         <a href="/contact.html">Contact</a>
         <a href="/terms.html">Terms</a>
@@ -699,6 +703,7 @@
           <div class="skel" style="aspect-ratio:4/6.2"></div><div class="skel" style="aspect-ratio:4/6.2"></div>
           <div class="skel" style="aspect-ratio:4/6.2"></div><div class="skel hidden md:block" style="aspect-ratio:4/6.2"></div>
         </div>
+        <p class="hidden text-sm text-charcoal-light text-center mt-8" id="askMore">Want any other Moroccan product? <a class="font-bold text-brand-dark hover:underline focus-visible:underline" id="askMoreLink" href="https://api.whatsapp.com/send?phone=447831005961" target="_blank" rel="noopener">Tell us on WhatsApp</a> and we'll bring it as a pre-order on our next trip.</p>
       </section>
 
       <section class="mt-20">
@@ -778,6 +783,7 @@
             <li><a href="/#services">Services</a></li>
             <li><a href="/#routes">Our Routes</a></li>
             <li><a href="/book.html">Book Freight</a></li>
+            <li><a href="/collections">Collection List</a></li>
             <li><a href="/shop.html">Moroccan Gems Shop</a></li>
             <li><a href="/terms.html">Booking Guidelines</a></li>
             <li><a href="/contact.html">Contact</a></li>
@@ -974,6 +980,8 @@
       $('gridSub').textContent = state.products.length
         ? `${list.length} product${list.length === 1 ? '' : 's'}${state.q ? ` matching “${state.q}”` : ''} · prices include our trip from Morocco`
         : 'Our next selection is on its way.';
+      $('askMore').classList.toggle('hidden', !state.products.length);
+      $('askMoreLink').href = `https://api.whatsapp.com/send?phone=${encodeURIComponent(state.settings.whatsapp || '447831005961')}&text=${encodeURIComponent('Hi JT, I would like to pre-order from Morocco:')}`;
       if (!state.products.length) {
         $('grid').innerHTML = `<div class="col-span-full form-card text-center"><h3 class="text-navy text-xl mb-2">New products are coming soon</h3><p class="text-charcoal-light mb-5">Tell us what you'd like from Morocco and we'll bring it on our next trip.</p><a class="btn-wa" href="https://api.whatsapp.com/send?phone=${esc(state.settings.whatsapp || '447831005961')}&text=${encodeURIComponent('Hi JT, I would like to order from Morocco:')}" target="_blank" rel="noopener">WhatsApp us</a></div>`;
         return;
