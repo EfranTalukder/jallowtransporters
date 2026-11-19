@@ -387,6 +387,16 @@
     .mobile-menu.open a:nth-child(4) { transition-delay: 0.22s; }
     .mobile-menu.open a:nth-child(5) { transition-delay: 0.26s; }
     .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    .mobile-menu.open a:nth-child(7) { transition-delay: 0.34s; }
+    .mobile-menu.open a:nth-child(8) { transition-delay: 0.38s; }
+    /* Phone menu: all 8 links fit on every phone — tighter lines, and smaller words on short screens. */
+    .mobile-menu .gap-6 > a { line-height: 1.2; }
+    .mobile-menu .gap-6 { gap: 1.75rem; }
+    @media (max-height: 800px) {
+      .mobile-menu > .flex-1 { margin-top: 0; }
+      .mobile-menu .gap-6 { gap: 1.05rem; margin-bottom: 2.5rem; }
+      .mobile-menu .gap-6 > a { font-size: 1.8rem; }
+    }
     .mobile-menu a:hover, .mobile-menu a.active { color: #00A15C; }
     /* Utility bar inside the menu keeps its own compact styling */
     .mobile-menu .top-bar a {
@@ -455,6 +465,7 @@
         <a href="/shop.html" class="nav-link">Shop</a>
         <a href="/terms.html" class="nav-link">Terms</a>
         <a href="/contact.html" class="nav-link active">Contact</a>
+        <a href="/collections" class="nav-link">Collections</a>
         <a href="/track" class="nav-link">Track</a>
         <a href="/book.html" class="btn-primary text-sm" style="padding: 0.65rem 1.25rem;">
           Book Now
@@ -500,6 +511,7 @@
         <a href="/about.html">About</a>
         <a href="/book.html">Book</a>
         <a href="/track">Track</a>
+        <a href="/collections">Collections</a>
         <a href="/shop.html">Shop</a>
         <a href="/contact.html" class="active">Contact</a>
         <a href="/terms.html">Terms</a>
@@ -803,6 +815,7 @@
             <li><a href="/#services">Services</a></li>
             <li><a href="/#routes">Our Routes</a></li>
             <li><a href="/book.html">Book Freight</a></li>
+            <li><a href="/collections">Collection List</a></li>
             <li><a href="/shop.html">Moroccan Gems Shop</a></li>
             <li><a href="/terms.html">Booking Guidelines</a></li>
             <li><a href="/contact.html">Contact</a></li>
