@@ -540,6 +540,34 @@
     .cust-back:hover { opacity: 0.8; }
     .cust-back:active { transform: translateX(-2px); }
     .cust-back:focus-visible { outline: 2px solid #00A15C; outline-offset: 3px; }
+    /* My shipments: what this phone booked, ordered or saved (app-shell.js keeps the list) */
+    .my-ship { margin-top: 2rem; }
+    .my-ship-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
+    .my-ship-head h3 { color: #0A1E4A; font-size: 1.25rem; }
+    .my-ship-head p { font-size: 0.8rem; color: #8A8F98; }
+    .my-ship .cust-list { margin-top: 0.85rem; }
+    .my-item { position: relative; }
+    .my-item .cust-item { padding-right: 3.25rem; background: #FFFFFF; border-color: #ECE6DC; }
+    .my-item .cust-item:hover { background: #FFFFFF; border-color: rgba(0, 161, 92, 0.4); }
+    .my-item.is-open .cust-item { border-color: #00A15C; box-shadow: 0 0 0 1px #00A15C inset; }
+    .my-item .s.wait { color: #9AA0A8; }
+    .my-remove { position: absolute; top: 50%; right: 0.55rem; transform: translateY(-50%); width: 2.25rem; height: 2.25rem; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; color: #8A8F98; transition: transform 0.25s var(--spring), color 0.2s ease, background-color 0.2s ease; }
+    .my-remove:hover { color: #C04B4F; background: #FBEEEE; }
+    .my-remove:active { transform: translateY(-50%) scale(0.9); }
+    .my-remove:focus-visible { outline: 2px solid #00A15C; outline-offset: 1px; }
+    .my-undo { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 1rem; border-radius: 1rem; border: 1px dashed #E2D9CB; font-size: 0.88rem; color: #6B7280; }
+    .my-undo button { font-weight: 800; color: #007A46; border-radius: 0.4rem; padding: 0.15rem 0.4rem; transition: transform 0.2s var(--spring), background-color 0.2s ease; }
+    .my-undo button:hover { background: #E4F4EC; }
+    .my-undo button:active { transform: scale(0.95); }
+    .my-undo button:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .save-ship { margin-top: 0.75rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem 1rem; border-radius: 0.75rem; border: 1.5px solid #0A1E4A; color: #0A1E4A; font-weight: 700; font-size: 0.95rem; background: #FFFFFF; transition: transform 0.3s var(--spring), background-color 0.25s var(--smooth), border-color 0.25s var(--smooth), color 0.25s var(--smooth); }
+    .save-ship:hover { background: #F4F6FA; transform: translateY(-1px); }
+    .save-ship:active { transform: translateY(1px) scale(0.99); }
+    .save-ship:focus-visible { outline: 3px solid #00A15C; outline-offset: 2px; }
+    .save-ship[aria-pressed="true"] { border-color: #00A15C; color: #007A46; background: #E4F4EC; }
+    .save-ship .on { display: none; }
+    .save-ship[aria-pressed="true"] .on { display: inline; }
+    .save-ship[aria-pressed="true"] .off { display: none; }
 
     /* WhatsApp */
     .wa-btn {
@@ -662,6 +690,7 @@
       .btn-primary .btn-arrow { width: 14px; height: 14px; }
     }
   </style>
+  <script src="/app-shell.js"></script>
 </head>
 
 <body>
@@ -1123,6 +1152,13 @@
                 <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
             </form>
+            <section class="my-ship" id="myShip" aria-labelledby="myShipTitle" hidden>
+              <div class="my-ship-head">
+                <h3 id="myShipTitle">My shipments</h3>
+                <p>Saved on this device</p>
+              </div>
+              <div class="cust-list" id="myShipList"></div>
+            </section>
           </div>
           <div id="trackResult" class="form-card hidden" aria-live="polite"></div>
         </div>
@@ -1375,6 +1411,7 @@
         }
         history.replaceState(null, '', url);
       }
+      if (name === 'track') myShipShown();
     }
     tabs.forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab)));
 
@@ -2020,6 +2057,7 @@
       $('trackRef').value = res.ref;
       knownPhones[res.ref] = p.phone;   // so "Track this booking" shows their total and balance straight away
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
+      if (window.JTSaved) window.JTSaved.add(res.ref, p.phone);   // My shipments on the Track tab
       window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
     }
 
@@ -2177,7 +2215,8 @@
         </div>
         ${maerskLink(b, stage)}
         ${b.phone_ok ? '' : unlockBox('Total, balance &amp; customer number')}
-        <a class="btn-wa mt-6 w-full" href="${askLink(b.ref, what)}" target="_blank" rel="noopener">Ask about this booking</a>`;
+        <a class="btn-wa mt-6 w-full" href="${askLink(b.ref, what)}" target="_blank" rel="noopener">Ask about this booking</a>
+        ${saveBtn(b.ref)}`;
     }
 
     function renderShop(o) {
@@ -2211,7 +2250,8 @@
             <div><p>${Number(o.balance) > 0.004 ? 'Left to pay' : 'Paid'}</p><p style="color:${Number(o.balance) > 0.004 ? '#A35A12' : '#007A46'}">${money(Number(o.balance) > 0.004 ? o.balance : o.paid)}</p></div>` : ''}
         </div>
         ${o.phone_ok ? '' : unlockBox('Prices &amp; what\'s left to pay')}
-        <a class="btn-wa mt-6 w-full" href="${askLink(o.ref, what)}" target="_blank" rel="noopener">Ask about this order</a>`;
+        <a class="btn-wa mt-6 w-full" href="${askLink(o.ref, what)}" target="_blank" rel="noopener">Ask about this order</a>
+        ${saveBtn(o.ref)}`;
     }
 
     // A customer number (with their phone): the shipments still going, newest first. One line each;
@@ -2350,6 +2390,7 @@
         } else {
           if (res.kind !== 'customer') $('trackRef').value = res.ref;
           showResult(res);
+          if (res.kind !== 'customer') { putStatus(res.ref, res); if (ref !== res.ref) putStatus(ref, res); markOpen([ref, res.ref]); }
           // A customer number isn't put in the address (it needs the phone anyway).
           if (url.pathname === '/track') { if (res.kind === 'customer') url.searchParams.delete('ref'); else url.searchParams.set('ref', res.ref); history.replaceState(null, '', url); }
           if (window.matchMedia('(max-width: 1023px)').matches) $('trackResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2378,6 +2419,187 @@
       wrap.hidden = !show;
       if (show && !$('trackPhone').value && devicePhone) $('trackPhone').value = devicePhone;
       if (!show) JTForm.setError('trackPhone', '');
+    }
+
+    // ─────────────────────────── My shipments ─────────────────────────────
+    // What this phone booked, ordered or saved (window.JTSaved in /app-shell.js keeps the list on the phone).
+    // Each line shows its step, checked with track_reference without the phone (the step needs no phone),
+    // at most once every 3 minutes per reference, and only while the Track tab is open.
+    const SAVED = window.JTSaved || null;
+    const MY_TTL = 3 * 60 * 1000;
+    const MY_MAX_CHECK = 12;
+    const ICON_SAVE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+    const ICON_SAVED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+    const ICON_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    const myCache = (() => { try { return JSON.parse(sessionStorage.getItem('jt_my_status') || '{}') || {}; } catch (_) { return {}; } })();
+    const undoRows = new Map();   // reference → { item, idx, until } for the "Removed · Undo" line
+    let myOpen = [];              // the references whose result is on screen (their line is outlined)
+    let myVisible = false;        // the Track tab has been shown, so the steps may be checked
+    let myBusy = false;
+
+    function saveBtn(ref) {
+      if (!SAVED || !SAVED.valid(ref)) return '';
+      return `<button type="button" class="save-ship" data-save-ref="${esc(ref)}" aria-pressed="${SAVED.has(ref)}">
+          <span class="off">${ICON_SAVE}</span><span class="on">${ICON_SAVED}</span>
+          <span class="off">Save to My shipments</span><span class="on">Saved to My shipments</span>
+        </button>`;
+    }
+    function syncSaveBtns() {
+      if (!SAVED) return;
+      document.querySelectorAll('[data-save-ref]').forEach((b) => b.setAttribute('aria-pressed', String(SAVED.has(b.dataset.saveRef))));
+    }
+    // The result on screen for this reference (a customer number shows several).
+    function resFor(ref) {
+      const r = shown && shown.res;
+      if (!r) return null;
+      if (r.kind === 'customer') return (r.items || []).find((b) => b.ref === ref) || null;
+      return r.ref === ref ? r : null;
+    }
+    function statusOf(res) {
+      if (!res || (!res.found && !res.kind)) return { s: 'Not found', m: 'Check the reference with us, or remove it.' };
+      if (res.kind === 'shop') {
+        const at = Math.max(0, SHOP_STAGES.findIndex(([s]) => s === res.status));
+        return { s: res.status === 'cancelled' ? 'Cancelled' : res.status === 'completed' ? 'Done' : SHOP_STAGES[at][1], m: `Moroccan Gems order${res.trip_name ? ' · ' + res.trip_name : ''}` };
+      }
+      const where = `${modeName(res.mode)}${res.route_label ? ' · ' + res.route_label : ''}`;
+      if (res.status === 'cancelled') return { s: 'Cancelled', m: where };
+      const stage = stageOf(res);
+      const dep = shipDates(res).departure;
+      return {
+        s: stage >= 5 ? 'Collected / delivered' : cargoSteps(res, stage)[stage].t,
+        m: [where, dep && stage < 4 ? `${res.mode === 'sea' ? 'Loading' : 'Departure'} ${fmtDate(dep)}` : ''].filter(Boolean).join(' · '),
+      };
+    }
+    function putStatus(ref, res) {
+      if (!ref) return;
+      myCache[ref] = { t: Date.now(), ...statusOf(res) };
+      try { sessionStorage.setItem('jt_my_status', JSON.stringify(myCache)); } catch (_) { /* private mode */ }
+      paintMy(ref);
+    }
+    function myRow(x, i) {
+      // Only the newest MY_MAX_CHECK are checked on each visit; older ones show their step when tapped.
+      const st = myCache[x.ref] || (i >= MY_MAX_CHECK ? { s: 'Tap to see where it is', m: '' } : null);
+      const open = myOpen.includes(x.ref);
+      return `
+          <div class="my-item${open ? ' is-open' : ''}" data-ref="${esc(x.ref)}">
+            <button type="button" class="cust-item" data-open="${esc(x.ref)}"${open ? ' aria-current="true"' : ''}>
+              <span class="flex-1 min-w-0">
+                <span class="r block">${esc(x.ref)}</span>
+                <span class="s block${st ? '' : ' wait'}">${st ? esc(st.s) : 'Checking…'}</span>
+                <span class="m block">${st && st.m ? esc(st.m) : ''}</span>
+              </span>
+            </button>
+            <button type="button" class="my-remove" data-remove="${esc(x.ref)}" aria-label="Remove ${esc(x.ref)} from My shipments">${ICON_X}</button>
+          </div>`;
+    }
+    const undoRow = (ref) => `
+          <div class="my-undo" data-undo-row="${esc(ref)}">
+            <span>${esc(ref)} removed</span>
+            <button type="button" data-undo="${esc(ref)}">Undo</button>
+          </div>`;
+    function renderMy() {
+      if (!SAVED) return;
+      const now = Date.now();
+      for (const [r, u] of undoRows) if (u.until <= now) undoRows.delete(r);
+      const rows = SAVED.list().map((x, i) => ({ ref: x.ref, html: myRow(x, i) }));
+      [...undoRows.entries()].sort((a, b) => a[1].idx - b[1].idx)
+        .forEach(([r, u]) => rows.splice(Math.min(u.idx, rows.length), 0, { ref: r, html: undoRow(r) }));
+      $('myShip').hidden = !rows.length;
+      $('myShipList').innerHTML = rows.map((r) => r.html).join('');
+    }
+    // Update one line in place (no full redraw, so focus and taps aren't lost).
+    function paintMy(ref) {
+      const row = document.querySelector(`#myShipList .my-item[data-ref="${CSS.escape(ref)}"]`);
+      const st = myCache[ref];
+      if (!row || !st) return;
+      const s = row.querySelector('.s');
+      s.textContent = st.s; s.classList.remove('wait');
+      row.querySelector('.m').textContent = st.m || '';
+    }
+    function markOpen(refs) {
+      myOpen = refs.filter(Boolean);
+      document.querySelectorAll('#myShipList .my-item').forEach((row) => {
+        const on = myOpen.includes(row.dataset.ref);
+        row.classList.toggle('is-open', on);
+        const b = row.querySelector('.cust-item');
+        if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+      });
+    }
+    async function refreshMy() {
+      if (!SAVED || !myVisible || myBusy) return;
+      myBusy = true;
+      try {
+        for (const x of SAVED.list().slice(0, MY_MAX_CHECK)) {
+          const c = myCache[x.ref];
+          if (c && Date.now() - c.t < MY_TTL) { paintMy(x.ref); continue; }
+          try {
+            putStatus(x.ref, await lookup(x.ref, null));
+          } catch (err) {
+            // Too many tries or no connection: say so on this line and every line not checked yet, and stop
+            // (the rest would fail the same way). They are tried again when the list is next shown, from a minute on.
+            const later = { t: Date.now() - MY_TTL + 60 * 1000, s: "Couldn't check just now", m: 'Tap to see it' };
+            for (const y of SAVED.list()) {
+              const cy = myCache[y.ref];
+              if (y.ref === x.ref || !cy || Date.now() - cy.t >= MY_TTL) { myCache[y.ref] = { ...later }; paintMy(y.ref); }
+            }
+            break;
+          }
+        }
+      } finally { myBusy = false; }
+    }
+    function myShipShown() { myVisible = true; renderMy(); refreshMy(); }
+
+    if (SAVED) {
+      // A saved phone number lets "Track" show the money part straight away, as for the phone's own booking.
+      const learnPhones = (list) => list.forEach((x) => { if (x.phone && !knownPhones[x.ref]) knownPhones[x.ref] = x.phone; });
+      learnPhones(SAVED.list());
+      SAVED.ready.then((list) => { learnPhones(list); renderMy(); refreshMy(); });
+      SAVED.onChange((list) => { learnPhones(list); renderMy(); refreshMy(); syncSaveBtns(); });
+
+      $('myShipList').addEventListener('click', (e) => {
+        const open = e.target.closest('[data-open]');
+        const remove = e.target.closest('[data-remove]');
+        const undo = e.target.closest('[data-undo]');
+        if (open) {
+          const ref = open.dataset.open;
+          $('trackRef').value = ref;
+          JTForm.setError('trackRef', ''); $('trackAlert').classList.remove('show'); syncPhoneBox();
+          markOpen([ref]);
+          $('trackForm').requestSubmit();
+        } else if (remove) {
+          const ref = remove.dataset.remove;
+          const idx = SAVED.list().findIndex((x) => x.ref === ref);
+          const item = SAVED.remove(ref);          // redraws through onChange
+          if (item) {
+            undoRows.set(ref, { item, idx, until: Date.now() + 6000 });
+            renderMy();
+            document.querySelector(`[data-undo="${CSS.escape(ref)}"]`)?.focus({ preventScroll: true });
+            setTimeout(() => { if (undoRows.has(ref) && undoRows.get(ref).until <= Date.now()) renderMy(); }, 6100);
+          }
+        } else if (undo) {
+          const ref = undo.dataset.undo;
+          const u = undoRows.get(ref);
+          undoRows.delete(ref);
+          if (u) SAVED.restore(u.item); else renderMy();
+          document.querySelector(`#myShipList [data-open="${CSS.escape(ref)}"]`)?.focus({ preventScroll: true });
+        }
+      });
+      $('trackResult').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-save-ref]');
+        if (!b) return;
+        const ref = b.dataset.saveRef;
+        if (SAVED.has(ref)) SAVED.remove(ref);
+        else {
+          const phone = knownPhones[ref] || (shown && shown.res && shown.res.kind === 'customer' ? $('trackPhone').value.trim() : '') || null;
+          SAVED.add(ref, phone);
+          const r = resFor(ref);
+          if (r) putStatus(ref, r);
+          markOpen([ref]);
+        }
+        syncSaveBtns();
+      });
+      // Typing another reference: the outlined line no longer matches what's on screen.
+      $('trackRef').addEventListener('input', () => markOpen([]));
     }
 
     // ─────────────────────────── Start ─────────────────────────────

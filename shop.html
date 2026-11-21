@@ -574,6 +574,7 @@
     .unlock .err { font-size: 0.82rem; color: #C04B4F; margin-top: 0.5rem; }
     body.panel-open .wa-btn, body.panel-open .wa-popup { opacity: 0 !important; pointer-events: none !important; animation: none !important; }
   </style>
+  <script src="/app-shell.js"></script>
 </head>
 
 <body>
@@ -1153,6 +1154,7 @@
           items: L.map((l) => ({ product_id: l.id, qty: l.qty })),
         });
         try { localStorage.setItem('jt_gems_last', JSON.stringify({ ref: res.ref, phone: me.phone })); } catch (_) { /* private mode */ }
+        if (window.JTSaved) window.JTSaved.add(res.ref, me.phone);   // My shipments on /track
         state.cart = []; saveCart(); refreshActions(); updateCount(false);
         state.step = 'done';
         $('cartTitle').textContent = 'Order placed'; $('cartSub').textContent = '';

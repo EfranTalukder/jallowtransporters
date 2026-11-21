@@ -35,6 +35,10 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    /* The blocks that slide in from the right (.reveal-right) start 40px past the edge; without this, phones
+       zoom the whole page out a little while it loads (390px phone → 410px page). clip (not hidden) so the
+       section doesn't become its own scroll box. */
+    section:has(.reveal-right) { overflow-x: clip; }
     body {
       font-family: 'Manrope', system-ui, sans-serif;
       background: #FAF7F2; color: #1E1E1E; line-height: 1.7; overflow-x: hidden;
@@ -374,6 +378,7 @@
       .btn-outline svg { width: 14px; height: 14px; }
     }
   </style>
+  <script src="/app-shell.js"></script>
 </head>
 
 <body>
