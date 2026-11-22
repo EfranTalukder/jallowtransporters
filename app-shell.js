@@ -98,6 +98,85 @@
     onChange(fn) { listeners.add(fn); return () => listeners.delete(fn); },
   };
 
+  // ─────────────────────────── Shipment notifications (phone app only) ───────────────────────────
+  // window.JTPush: available() / state() → 'granted' | 'prompt' | 'denied' | 'unavailable' / enable().
+  // With notifications on, the phone's push token and its My shipments list go to the database
+  // (app_push_sync, migration 0028); the team's changes then send "confirmed / left / arrived / ready" to it.
+  const SUPABASE_URL = 'https://efzmisktbzjjpwzfloka.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_uBiVOnVTOGhE-nZBM4P7ig_YtnbWHVw';
+  const SITE = 'https://www.jallowtransporters.com/';
+  const pushOk = inApp && hasNative('PushNotifications') && typeof cap.addListener === 'function';
+  const platform = pushOk && typeof cap.getPlatform === 'function' ? cap.getPlatform() : '';
+  const toState = (r) => { const v = r && r.receive; return v === 'granted' ? 'granted' : v === 'denied' ? 'denied' : v ? 'prompt' : 'unavailable'; };
+  let pushToken = null;
+  let syncTimer = null;
+  const pushListeners = new Set();
+  const pushEmit = () => pushListeners.forEach((fn) => { try { fn(); } catch (_) { /* page bug */ } });
+
+  async function pushState() {
+    if (!pushOk) return 'unavailable';
+    try { return toState(await native('PushNotifications', 'checkPermissions')); } catch (_) { return 'unavailable'; }
+  }
+  // Tell the database what this phone follows — only when the token or the list changed (or once a day).
+  async function syncFollows() {
+    if (!pushToken || (platform !== 'android' && platform !== 'ios')) return;
+    const refs = read().map((x) => x.ref).slice(0, 20);
+    const sig = pushToken + '|' + refs.join(',');
+    let last = null;
+    try { last = JSON.parse((ls && ls.getItem('jt_push_synced')) || 'null'); } catch (_) { /* ignore */ }
+    if (last && last.sig === sig && Date.now() - last.at < 24 * 3600 * 1000) return;
+    try {
+      const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/app_push_sync`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_token: pushToken, p_platform: platform, p_refs: refs }),
+      });
+      const j = r.ok ? await r.json() : null;
+      if (j && j.ok) { try { if (ls) ls.setItem('jt_push_synced', JSON.stringify({ sig, at: Date.now() })); } catch (_) { /* ignore */ } }
+    } catch (_) { /* offline: tried again on the next change or visit */ }
+  }
+  const scheduleSync = () => { clearTimeout(syncTimer); syncTimer = setTimeout(syncFollows, 700); };
+  async function startPush(ask) {
+    let st = await pushState();
+    if (st === 'prompt' && ask) {
+      try { st = toState(await native('PushNotifications', 'requestPermissions')); } catch (_) { /* ignore */ }
+    }
+    if (st === 'granted') {
+      if (platform === 'android') {
+        await native('PushNotifications', 'createChannel', {
+          id: 'shipments', name: 'Shipment updates', description: 'When your booking is confirmed, leaves and arrives',
+          importance: 4, visibility: 1, vibration: true,
+        }).catch(() => {});
+      }
+      await native('PushNotifications', 'register').catch(() => {});
+    }
+    pushEmit();
+    return st;
+  }
+  if (pushOk) {
+    cap.addListener('PushNotifications', 'registration', (t) => { if (t && t.value) { pushToken = String(t.value); scheduleSync(); } });
+    cap.addListener('PushNotifications', 'registrationError', () => { /* no token: nothing to sync */ });
+    // Tapped a notification → its tracking page (only our own site's addresses).
+    cap.addListener('PushNotifications', 'pushNotificationActionPerformed', (a) => {
+      const url = a && a.notification && a.notification.data && a.notification.data.url;
+      if (typeof url === 'string' && url.startsWith(SITE)) location.href = url;
+    });
+    // Arrived while the app is open: the phone shows it itself (capacitor.config presentationOptions);
+    // the Track page refreshes that shipment's line ('jt-push' event).
+    cap.addListener('PushNotifications', 'pushNotificationReceived', (n) => {
+      try { window.dispatchEvent(new CustomEvent('jt-push', { detail: n })); } catch (_) { /* ignore */ }
+    });
+    // Already allowed: register on every start (the token can change), and keep the list in step.
+    ready.then(() => pushState()).then((st) => { if (st === 'granted') startPush(false); });
+    listeners.add(scheduleSync);
+  }
+  window.JTPush = {
+    available: () => pushOk,
+    state: pushState,
+    enable: () => startPush(true),
+    onChange(fn) { pushListeners.add(fn); return () => pushListeners.delete(fn); },
+  };
+
   if (!inApp) return;
 
   // ─────────────────────────── Phone app only ───────────────────────────

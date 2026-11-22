@@ -560,6 +560,12 @@
     .my-undo button:hover { background: #E4F4EC; }
     .my-undo button:active { transform: scale(0.95); }
     .my-undo button:focus-visible { outline: 2px solid #00A15C; outline-offset: 2px; }
+    .my-push { margin-top: 0.85rem; font-size: 0.88rem; color: #6B7280; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+    .my-push button { font-weight: 800; color: #FFFFFF; background: #00A15C; border-radius: 0.6rem; padding: 0.45rem 0.9rem; font-size: 0.85rem; transition: transform 0.2s var(--spring), background-color 0.2s ease; }
+    .my-push button:hover { background: #007A46; }
+    .my-push button:active { transform: scale(0.96); }
+    .my-push button:focus-visible { outline: 2px solid #0A1E4A; outline-offset: 2px; }
+    .my-push button:disabled { opacity: 0.6; }
     .save-ship { margin-top: 0.75rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem 1rem; border-radius: 0.75rem; border: 1.5px solid #0A1E4A; color: #0A1E4A; font-weight: 700; font-size: 0.95rem; background: #FFFFFF; transition: transform 0.3s var(--spring), background-color 0.25s var(--smooth), border-color 0.25s var(--smooth), color 0.25s var(--smooth); }
     .save-ship:hover { background: #F4F6FA; transform: translateY(-1px); }
     .save-ship:active { transform: translateY(1px) scale(0.99); }
@@ -1158,6 +1164,8 @@
                 <p>Saved on this device</p>
               </div>
               <div class="cust-list" id="myShipList"></div>
+              <!-- In the phone app only: shipment notifications (app-shell.js → window.JTPush) -->
+              <p class="my-push" id="myPush" hidden></p>
             </section>
           </div>
           <div id="trackResult" class="form-card hidden" aria-live="polite"></div>
@@ -2058,6 +2066,8 @@
       knownPhones[res.ref] = p.phone;   // so "Track this booking" shows their total and balance straight away
       try { localStorage.setItem('jt_last_booking', JSON.stringify({ ref: res.ref, phone: p.phone })); } catch (_) { /* private mode */ }
       if (window.JTSaved) window.JTSaved.add(res.ref, p.phone);   // My shipments on the Track tab
+      // In the phone app: ask now (the phone shows its own question once) so they hear when it's confirmed.
+      if (window.JTPush && window.JTPush.available()) window.JTPush.enable().catch(() => {});
       window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
     }
 
@@ -2506,7 +2516,36 @@
         .forEach(([r, u]) => rows.splice(Math.min(u.idx, rows.length), 0, { ref: r, html: undoRow(r) }));
       $('myShip').hidden = !rows.length;
       $('myShipList').innerHTML = rows.map((r) => r.html).join('');
+      renderPush();
     }
+    // The line under the list (phone app only): turn notifications on, or what to do if they're off.
+    let pushBusy = false;
+    async function renderPush() {
+      const el = $('myPush');
+      const P = window.JTPush;
+      if (!el || !P || !P.available() || !SAVED || !SAVED.list().length) { if (el) el.hidden = true; return; }
+      const st = await P.state();
+      if (st === 'granted') el.textContent = "You'll get a notification when these are confirmed, leave and arrive.";
+      else if (st === 'denied') el.textContent = "Notifications are off for this app. To hear when these move, turn them on in your phone's Settings.";
+      else if (st === 'prompt') {
+        el.innerHTML = '<span>Get a notification when these are confirmed, leave and arrive.</span><button type="button" id="pushOn">Turn on</button>';
+        $('pushOn').addEventListener('click', async () => {
+          if (pushBusy) return;
+          pushBusy = true; $('pushOn').disabled = true;
+          try { await P.enable(); } finally { pushBusy = false; renderPush(); }
+        });
+      } else { el.hidden = true; return; }
+      el.hidden = false;
+    }
+    if (window.JTPush) window.JTPush.onChange(renderPush);
+    // A notification while this page is open: check that shipment's step again straight away.
+    window.addEventListener('jt-push', (e) => {
+      const ref = e && e.detail && e.detail.data && String(e.detail.data.ref || '').toUpperCase();
+      if (!ref || !myCache[ref]) return;
+      delete myCache[ref];
+      try { sessionStorage.setItem('jt_my_status', JSON.stringify(myCache)); } catch (_) { /* private mode */ }
+      refreshMy();
+    });
     // Update one line in place (no full redraw, so focus and taps aren't lost).
     function paintMy(ref) {
       const row = document.querySelector(`#myShipList .my-item[data-ref="${CSS.escape(ref)}"]`);

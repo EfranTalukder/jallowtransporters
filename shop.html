@@ -1155,6 +1155,7 @@
         });
         try { localStorage.setItem('jt_gems_last', JSON.stringify({ ref: res.ref, phone: me.phone })); } catch (_) { /* private mode */ }
         if (window.JTSaved) window.JTSaved.add(res.ref, me.phone);   // My shipments on /track
+        if (window.JTPush && window.JTPush.available()) window.JTPush.enable().catch(() => {});   // phone app: hear when it's ready
         state.cart = []; saveCart(); refreshActions(); updateCount(false);
         state.step = 'done';
         $('cartTitle').textContent = 'Order placed'; $('cartSub').textContent = '';
