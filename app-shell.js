@@ -107,7 +107,19 @@
   // status bar, the notch and the home bar.
   const vp = document.querySelector('meta[name="viewport"]');
   if (vp && !/viewport-fit/.test(vp.content)) vp.content += ', viewport-fit=cover';
-  native('SystemBars', 'setStyle', { style: 'DARK' }).catch(() => {});   // white status-bar text on the navy top
+  // Status-bar icon colour depends on what is behind them. Newer Android WebViews (Chrome 140+) and iPhones let the
+  // page run under the status bar: our navy strip is there → white icons ('DARK' style). Older Android WebViews keep
+  // the page below the status bar on the app's white background (env() insets are 0, the strip is 0px tall) →
+  // dark icons ('LIGHT'). The bottom bar always sits on white (the menu bar or the app background) → dark icons.
+  let lastStyle = '';
+  function styleBars() {
+    const strip = document.querySelector('.jt-status');
+    const style = strip && strip.getBoundingClientRect().height > 0 ? 'DARK' : 'LIGHT';
+    if (style === lastStyle) return;
+    lastStyle = style;
+    native('SystemBars', 'setStyle', { style, bar: 'StatusBar' }).catch(() => {});
+    native('SystemBars', 'setStyle', { style: 'LIGHT', bar: 'NavigationBar' }).catch(() => {});
+  }
 
   const css = `
   :root.jt-app {
@@ -191,6 +203,11 @@
       </a>`).join('');
     document.body.append(status, bar);
     mark();
+    // Capacitor fills in the safe-area values a moment after load, and they change on rotation.
+    styleBars();
+    setTimeout(styleBars, 400);
+    setTimeout(styleBars, 1500);
+    window.addEventListener('resize', styleBars);
   }
   function mark() {
     const now = where();
