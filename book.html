@@ -321,6 +321,16 @@
     .choice[aria-checked="true"] .tick { background: #00A15C; border-color: #00A15C; color: #FFFFFF; }
     .choice.stack { flex-direction: column; gap: 0.6rem; padding-right: 1.1rem; }
     @media (max-width: 640px) { .choice.stack { flex-direction: row; padding-right: 2.6rem; } }
+    /* Tick boxes (choose one, both or none): square ticks instead of round ones. */
+    .choice.multi .tick { border-radius: 7px; }
+    .pack-note {
+      display: flex; align-items: flex-start; gap: 0.55rem; margin-top: 0.85rem;
+      color: #065C37; font-size: 0.88rem; font-weight: 600; line-height: 1.5;
+      animation: packIn 0.45s var(--spring) both;
+    }
+    .pack-note[hidden] { display: none; }
+    .pack-note svg { flex-shrink: 0; margin-top: 0.15rem; }
+    @keyframes packIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
     .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .pill {
@@ -923,6 +933,38 @@
                   <div class="choice-grid sm:grid-cols-2 mb-2" id="receiverOptions" role="radiogroup" aria-label="How the receiver gets it"></div>
                 </div>
 
+                <!-- UK → Gambia / Guinea only: buy a shipping barrel or box (optional, priced on WhatsApp). -->
+                <div class="hidden" id="packBlock">
+                  <p class="form-label mt-6" id="packLabel">Need a barrel or box? <span class="opt">(optional)</span></p>
+                  <p class="form-hint -mt-1 mb-3">We sell strong shipping barrels and boxes for this route. Tick one or both — or skip this if you have your own.</p>
+                  <div class="choice-grid sm:grid-cols-2" role="group" aria-labelledby="packLabel">
+                    <button type="button" class="choice multi" role="checkbox" aria-checked="false" data-pack="barrel">
+                      <span class="ico">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="7.5" ry="2.5"/><path d="M4.5 5v14c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5V5"/><path d="M4.5 9.7c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/><path d="M4.5 14.4c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/></svg>
+                      </span>
+                      <span>
+                        <span class="title block">A barrel</span>
+                        <span class="sub block">Strong, sealable drum — ideal for food, clothes and household goods.</span>
+                      </span>
+                      <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    </button>
+                    <button type="button" class="choice multi" role="checkbox" aria-checked="false" data-pack="box">
+                      <span class="ico">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
+                      </span>
+                      <span>
+                        <span class="title block">A box</span>
+                        <span class="sub block">Sturdy shipping box — ideal for parcels, shoes and smaller items.</span>
+                      </span>
+                      <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    </button>
+                  </div>
+                  <p class="pack-note" id="packNote" aria-live="polite" hidden>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    <span id="packNoteText"></span>
+                  </p>
+                </div>
+
                 <div class="grid sm:grid-cols-2 gap-5 mt-5">
                   <div>
                     <label class="form-label" for="prefDate" id="prefDateLabel">Preferred date <span class="opt">(optional)</span></label>
@@ -1053,7 +1095,7 @@
               </div>
               <p class="text-sm text-brand-deep font-semibold mb-5 hidden" id="successEstimate"></p>
               <ol class="next-list">
-                <li><span class="n">1</span><span>Our team checks your booking and messages you on WhatsApp<span id="successPhone"></span> to confirm it — usually within the hour during UK business hours.</span></li>
+                <li><span class="n">1</span><span>Our team checks your booking and messages you on WhatsApp<span id="successPhone"></span> to confirm it<span id="successPack"></span> — usually within the hour during UK business hours.</span></li>
                 <li><span class="n">2</span><span id="successStep2">We arrange the collection or drop-off with you and weigh everything.</span></li>
                 <li><span class="n">3</span><span>Track it any time on our <b>Track</b> page with your reference.</span></li>
               </ol>
@@ -1075,6 +1117,7 @@
                 <div class="summary-row"><span>Route</span><span id="sumRoute">—</span></div>
                 <div class="summary-row"><span>Departure</span><span id="sumDep">Next available</span></div>
                 <div class="summary-row"><span>Weight</span><span id="sumKg">—</span></div>
+                <div class="summary-row hidden" id="sumPackRow"><span>Barrel / box</span><span id="sumPack">—</span></div>
                 <div class="summary-row" style="border-bottom: 0;"><span>Method</span><span id="sumMethod">—</span></div>
                 <div class="mt-4 pt-5 border-t border-white/10">
                   <p class="text-white/60 text-sm mb-1" id="sumEstimateLabel">Estimated price</p>
@@ -1333,6 +1376,7 @@
     const state = {
       mode: null, route: null, departure: null, method: null, step: 1,
       receiverDelivery: false,   // out of the UK: deliver to the receiver's door (route has a delivery fee)
+      pack: { barrel: false, box: false },   // UK → Gambia / Guinea: wants to buy a barrel and/or a box
       routes: [], schedule: [], photos: [], submitting: false,
     };
 
@@ -1680,7 +1724,35 @@
       $('prefDateLabel').innerHTML = (isInbound(state.route) ? 'Preferred date' : state.method === 'collection' ? 'Preferred collection date' : 'Preferred date')
         + ' <span class="opt">(optional)</span>';
       renderReceiver();
+      renderPack();
     }
+
+    // Barrel / box: offered only from the UK to The Gambia and to Guinea (same rule as the database,
+    // private.offers_packaging). Optional; the team agrees the size and price on WhatsApp.
+    const offersPack = (route) => !!route && fromUK(route)
+      && ['the gambia', 'gambia', 'guinea', 'guinea (conakry)', 'guinea conakry', 'guinea-conakry'].includes(String(route.destination || '').trim().toLowerCase());
+    /** 'barrel' | 'box' | 'both' | null — what goes to the server. */
+    const packValue = () => (!offersPack(state.route) ? null
+      : state.pack.barrel && state.pack.box ? 'both' : state.pack.barrel ? 'barrel' : state.pack.box ? 'box' : null);
+    const PACK_WORDS = { barrel: 'barrel', box: 'box', both: 'barrel and box' };
+    function renderPack() {
+      const show = offersPack(state.route);
+      $('packBlock').classList.toggle('hidden', !show);
+      if (!show) state.pack = { barrel: false, box: false };
+      document.querySelectorAll('[data-pack]').forEach((b) => b.setAttribute('aria-checked', String(!!state.pack[b.dataset.pack])));
+      const v = packValue();
+      $('packNote').hidden = !v;
+      if (v) {
+        $('packNoteText').textContent = v === 'both'
+          ? 'Our team will message you on WhatsApp to help you choose the right barrel and box sizes, and agree the prices.'
+          : `Our team will message you on WhatsApp to help you choose the right ${v} size, and agree the price.`;
+      }
+    }
+    document.querySelectorAll('[data-pack]').forEach((b) => b.addEventListener('click', () => {
+      state.pack[b.dataset.pack] = !state.pack[b.dataset.pack];
+      renderPack();
+      updateSummary();
+    }));
 
     // Out of the UK on a route with a delivery fee: the receiver collects (free) or we deliver to them.
     function renderReceiver() {
@@ -1757,6 +1829,9 @@
       const m = methodChoices().find((c) => c.v === state.method);
       $('sumMethod').textContent = m ? m.t.replace('’', "'") + (!isInbound(state.route) && wantsDelivery() ? ' · delivered to receiver' : '') : '—';
       const feeNote = wantsDelivery() ? ` + ${feeText()} delivery` : '';
+      const pack = packValue();
+      $('sumPackRow').classList.toggle('hidden', !pack);
+      $('sumPack').textContent = pack === 'both' ? 'Barrel + box' : pack === 'barrel' ? 'Barrel' : pack === 'box' ? 'Box' : '—';
       const est = estimate();
       const r = currentRate();
       const sum = $('sumEstimate');
@@ -1774,6 +1849,7 @@
         sum.textContent = state.route ? 'Priced by our team' : 'Choose a route';
         $('sumEstimateNote').textContent = state.route ? "We'll confirm the price on WhatsApp." : 'Final price is confirmed after weighing.';
       }
+      if (pack) $('sumEstimateNote').textContent += ` ${pack === 'both' ? 'Barrel and box' : pack === 'barrel' ? 'Barrel' : 'Box'} priced separately by our team.`;
       $('estimateStrip').classList.toggle('hidden', !est);
       if (est) $('estimateStripValue').textContent = money(est.value, est.currency);
       $('estimateStripLabel').textContent = est && est.fee ? 'Estimated price (with delivery)' : 'Estimated price';
@@ -1976,6 +2052,7 @@
         `Items: ${p.description}${p.est_kg ? ` · about ${p.est_kg} kg` : ''}`,
         `Name: ${p.contact_name} · Phone: ${p.phone} · ${p.city}`,
         p.receiver_name ? `${isInbound(state.route) ? 'Sender' : 'Receiver'}: ${p.receiver_name}${p.receiver_phone ? ` (${p.receiver_phone})` : ''}` : '',
+        p.packaging ? `I'd also like to buy a ${PACK_WORDS[p.packaging]}.` : '',
       ].filter(Boolean).join('\n');
     }
 
@@ -2012,6 +2089,7 @@
         est_kg: state.mode === 'air' ? $('estKg').value.trim() : '',
         collection_mode: state.method,
         delivery_requested: wantsDelivery(),
+        packaging: packValue(),
         preferred_date: $('prefDate').value,
         notes: $('notes').value.trim(),
         consent: $('consent').checked,
@@ -2053,6 +2131,8 @@
       }
       // The team confirms from the admin app; showing the number lets the customer spot a typo.
       $('successPhone').innerHTML = p.phone ? ` at <b>${esc(p.phone)}</b>` : '';
+      // Barrel / box: the same message agrees its size and price.
+      $('successPack').innerHTML = p.packaging ? `, and to agree the size and price of your <b>${esc(PACK_WORDS[p.packaging])}</b>` : '';
       $('wrongNumber').href = JTForm.waLink(`Hi JT, my booking ${res.ref} has the wrong phone number. The right number is: `);
       $('successStep2').textContent = p.collection_mode === 'collection' && !isInbound(state.route)
         ? 'We arrange a collection day with you and weigh everything.'
@@ -2079,7 +2159,8 @@
     $('trackThis').addEventListener('click', () => { showTab('track'); $('trackForm').requestSubmit(); });
     $('bookAnother').addEventListener('click', () => {
       $('bookForm').reset(); state.photos.forEach((p) => URL.revokeObjectURL(p.url)); state.photos = []; renderThumbs();
-      state.method = null; state.receiverDelivery = false; $('bookForm').classList.remove('hidden'); $('successWrap').classList.remove('show');
+      state.method = null; state.receiverDelivery = false; state.pack = { barrel: false, box: false }; renderPack();
+      $('bookForm').classList.remove('hidden'); $('successWrap').classList.remove('show');
       $('successEstimate').classList.add('hidden'); $('photoNote').classList.add('hidden');
       setStep(1); updateSummary();
     });
