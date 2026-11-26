@@ -1373,6 +1373,12 @@
     const startedAt = Date.now();
 
     const $ = (id) => document.getElementById(id);
+    // Room to leave above the booking card when scrolling to it: 110px on the website; in the phone app the contact
+    // bar is pinned too, so the pinned header is taller.
+    const headerGap = () => {
+      const nav = $('navbar');
+      return nav ? Math.max(110, nav.offsetHeight + (parseFloat(getComputedStyle(nav).top) || 0) + 16) : 110;
+    };
     const state = {
       mode: null, route: null, departure: null, method: null, step: 1,
       receiverDelivery: false,   // out of the UK: deliver to the receiver's door (route has a delivery fee)
@@ -1546,7 +1552,7 @@
         if (dep) preselect(dep.mode, dep.route_code, dep.id);
         else if (depFilter !== 'all') preselect(depFilter, null, null);
         showTab('book');
-        window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
+        window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - headerGap(), behavior: 'smooth' });
       }));
     }
 
@@ -1937,7 +1943,7 @@
       hideAlert();
       if (n === 2) renderMethods();
       if (n === 4) renderGuides();
-      const top = $('bookCard').getBoundingClientRect().top + window.scrollY - 110;
+      const top = $('bookCard').getBoundingClientRect().top + window.scrollY - headerGap();
       if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
     }
 
@@ -2148,7 +2154,7 @@
       if (window.JTSaved) window.JTSaved.add(res.ref, p.phone);   // My shipments on the Track tab
       // In the phone app: ask now (the phone shows its own question once) so they hear when it's confirmed.
       if (window.JTPush && window.JTPush.available()) window.JTPush.enable().catch(() => {});
-      window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
+      window.scrollTo({ top: $('bookCard').getBoundingClientRect().top + window.scrollY - headerGap(), behavior: 'smooth' });
     }
 
     $('copyRef').addEventListener('click', async () => {

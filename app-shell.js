@@ -207,7 +207,14 @@
     --jt-bar: 60px;
   }
   .jt-app body { padding-top: var(--jt-st); padding-bottom: calc(var(--jt-bar) + var(--jt-sb)); }
-  .jt-app .nav-bar { top: var(--jt-st); }
+  /* The phone number and social links stay pinned at the top in the app (on the website they scroll away),
+     with the menu bar pinned right under them. --jt-tb / --jt-nav are their measured heights. */
+  .jt-app #top-bar { position: sticky; top: var(--jt-st); }
+  .jt-app .nav-bar { top: calc(var(--jt-st) + var(--jt-tb, 0px)); }
+  :root.jt-app { scroll-padding-top: calc(var(--jt-st) + var(--jt-tb, 0px) + var(--jt-nav, 72px) + 12px); }
+  .jt-app .terms-section, .jt-app .policy section { scroll-margin-top: 0; }
+  .jt-app .shopbar { top: calc(var(--jt-st) + var(--jt-tb, 0px) + var(--navh, 78px)); }
+  .jt-app .lg\\:top-28 { top: calc(var(--jt-st) + var(--jt-tb, 0px) + var(--jt-nav, 72px) + 16px); }
   .jt-status { position: fixed; top: 0; left: 0; right: 0; height: var(--jt-st); background: #0A1E4A; z-index: 9996; pointer-events: none; }
   .jt-app .mobile-menu { padding-top: calc(1.5rem + var(--jt-st)); padding-bottom: calc(var(--jt-bar) + var(--jt-sb)); }
   /* The bottom menu already has Home, Book, Track and Shop, so the ☰ menu keeps the other pages. */
@@ -282,6 +289,19 @@
       </a>`).join('');
     document.body.append(status, bar);
     mark();
+    // Heights of the pinned contact bar and menu bar (they change when fonts load or the phone rotates).
+    const measure = () => {
+      const tb = document.getElementById('top-bar');
+      const nav = document.getElementById('navbar');
+      root.style.setProperty('--jt-tb', (tb ? tb.offsetHeight : 0) + 'px');
+      if (nav) root.style.setProperty('--jt-nav', nav.offsetHeight + 'px');
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(measure);
+      ['top-bar', 'navbar'].forEach((id) => { const el = document.getElementById(id); if (el) ro.observe(el); });
+    }
     // Capacitor fills in the safe-area values a moment after load, and they change on rotation.
     styleBars();
     setTimeout(styleBars, 400);

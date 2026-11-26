@@ -1265,7 +1265,7 @@
       else if (el.dataset.cat) { state.cat = el.dataset.cat; renderCats(); renderGrid(); }
       else if (el.hasAttribute('data-track')) {   // after ordering: close the basket and show the order's status
         closeAll();
-        window.scrollTo({ top: $('track').getBoundingClientRect().top + window.scrollY - $('navbar').offsetHeight - 16, behavior: 'smooth' });
+        window.scrollTo({ top: $('track').getBoundingClientRect().top + window.scrollY - $('navbar').offsetHeight - (parseFloat(getComputedStyle($('navbar')).top) || 0) - 16, behavior: 'smooth' });
         $('trackForm').requestSubmit();
       }
     });
