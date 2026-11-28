@@ -175,6 +175,8 @@
     const PAY = { cash: 'Cash', bank: 'Bank transfer', mobile: 'Mobile money', card: 'Card', other: 'Other' };
     const METHOD = { collection: 'Collection', delivery: 'Delivery', dropoff: 'Drop-off', postal: 'Postal' };
     const SERVICE = { air: 'Air freight', sea: 'Sea freight', road: 'Road freight' };
+    // Route country names that mean Guinea (Conakry) — never Guinea-Bissau or Equatorial Guinea.
+    const GUINEA = ['guinea', 'guinea (conakry)', 'guinea conakry', 'guinea-conakry'];
     // Used until the owner's settings arrive (and if they're ever missing).
     const DEFAULTS = { email: 'msjalow63@gmail.com', whatsapp: '07831 005961', admin1: '+220 5153507', admin2: '+220 2140116',
       routes_line: 'UK - THE GAMBIA | UK - SPAIN | UK - GUINEA CONAKRY', terms_air: [], terms_sea: [], guidelines: [], acknowledgement: '' };
@@ -216,7 +218,10 @@
         : { label: 'Freight', sub: 'Price confirmed after weighing', amount: null };
       const extras = Number(inv.extras || 0), discount = Number(inv.discount || 0);
       const pays = inv.payments || [];
-      const bank = isAir ? S.bank_air : S.bank_sea;
+      // Guinea (Conakry) — to or from, air or sea — is paid into its own account when Settings → Invoices has one.
+      const isGuinea = [sh.origin, sh.destination].some((x) => GUINEA.includes(String(x || '').trim().toLowerCase()));
+      const hasBank = (b) => !!(b && (b.account_no || b.holder));
+      const bank = isGuinea && hasBank(S.bank_guinea) ? S.bank_guinea : isAir ? S.bank_air : S.bank_sea;
       const terms = isAir ? S.terms_air : S.terms_sea;
       // Page 3: the booking rules — air freight booking (air), or the shipment booking guidelines (sea and road).
       const guides = (isAir ? S.guidelines_air : S.guidelines) || [];
